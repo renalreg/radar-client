@@ -3,17 +3,17 @@
 
   var app = angular.module('radar.patients.navigation');
 
-  app.directive('diseaseGroupNavigation', function(patientFeatures, _) {
+  app.directive('cohortNavigation', function(patientFeatures, _) {
     return {
       scope: {
         patient: '=',
-        diseaseGroup: '='
+        cohort: '='
       },
-      templateUrl: 'app/patients/navigation/disease-group-navigation.html',
+      templateUrl: 'app/patients/navigation/cohort-navigation.html',
       link: function(scope) {
         scope.items = [];
 
-        var features = scope.diseaseGroup.features;
+        var features = scope.cohort.features;
         _.sortBy(features, 'weight');
 
         _.forEach(features, function(x) {

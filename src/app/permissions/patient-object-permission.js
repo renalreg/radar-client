@@ -16,20 +16,20 @@
       var user = session.user;
 
       var patient = this.patient;
-      var patientUnitIds = _.map(patient.units, function(unit) {
-        return unit.unit.id;
+      var patientOrganisationIds = _.map(patient.organisations, function(organisation) {
+        return organisation.organisation.id;
       });
 
-      if (user.isAdmin && patientUnitIds.length > 0) {
+      if (user.isAdmin && patientOrganisationIds.length > 0) {
         return true;
       }
 
-      var userUnits = user.units;
+      var userOrganisations = user.organisations;
 
-      for (var i = 0; i < userUnits.length; i++) {
-        var userUnit = userUnits[i];
+      for (var i = 0; i < userOrganisations.length; i++) {
+        var userOrganisation = userOrganisations[i];
 
-        if (_.indexOf(patientUnitIds, userUnit.unit.id) >= 0 && userUnit.hasEditPatientPermission) {
+        if (_.indexOf(patientOrganisationIds, userOrganisation.organisation.id) >= 0 && userOrganisation.hasEditPatientPermission) {
           return true;
         }
       }
