@@ -149,6 +149,10 @@ gulp.task('images', gulp.parallel('images-jquery-ui', function() {
     .pipe(gulp.dest('dist/images'));
 }));
 
+gulp.task('ie', function() {
+  return gulp.src('src/ie.html').pipe(gulp.dest('dist'));
+});
+
 gulp.task('size', function() {
   return gulp.src('dist/**/*')
     .pipe(size({showFiles: true}));
@@ -160,7 +164,7 @@ gulp.task('build:dist', gulp.series(
   'clean',
   gulp.parallel('js', 'sass', 'templates'),
   'inject',
-  gulp.parallel('html', 'fonts', 'images'),
+  gulp.parallel('html', 'fonts', 'images', 'ie'),
   'size'
 ));
 
