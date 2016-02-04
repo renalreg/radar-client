@@ -74,6 +74,7 @@
       }
 
       function search() {
+        proxy.page = 1;
         var proxyParams = proxy.getParams();
         var params = angular.extend({}, proxyParams, filtersToParams($scope.filters));
 

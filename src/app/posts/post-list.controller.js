@@ -20,6 +20,7 @@
       $scope.proxy = proxy;
 
       function search() {
+        proxy.page = 1;
         var params = proxy.getParams();
         params.sort = '-publishedDate';
 
