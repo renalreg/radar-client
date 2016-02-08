@@ -23,12 +23,12 @@
         }
       });
 
-      self.load(store.findFirst('renal-diagnoses', {patient: $scope.patient.id})).then(function() {
+      self.load(store.findFirst('renal-progressions', {patient: $scope.patient.id})).then(function() {
         self.view();
       });
 
       $scope.create = function() {
-        var item = store.create('renal-diagnoses', {patient: $scope.patient.id});
+        var item = store.create('renal-progressions', {patient: $scope.patient.id});
         self.edit(item);
       };
     }
