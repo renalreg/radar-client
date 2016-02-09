@@ -18,7 +18,7 @@
 
       <tr>
         <th>Symptoms Date</th>
-        <td>{{item.symptomsDate | dateFormat}} <span ng-if="item.symptomsAge">({{item.symptomsAge | ageFormat}})</span></td>
+        <td>{{item.symptomsDate | dateFormat}} <span ng-if="item.symptomsDate">({{item.symptomsAge | ageFormat}})</span></td>
       </tr>
 
       <tr>
@@ -28,7 +28,7 @@
 
       <tr>
         <th>To Date</th>
-        <td>{{item.toDate | dateFormat}} <span ng-if="item.toAge">({{item.toAge | ageFormat}})</span></td>
+        <td>{{item.toDate | dateFormat}} <span ng-if="item.toDate">({{item.toAge | ageFormat}})</span></td>
       </tr>
 
       <tr>
