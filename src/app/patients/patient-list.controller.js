@@ -23,7 +23,7 @@
       $scope.filters = angular.copy(DEFAULT_FILTERS);
 
       var proxy = new ListHelperProxy(update, {
-        perPage: 1,
+        perPage: 50,
         sortBy: 'id',
         reverse: true
       });
