@@ -14,13 +14,12 @@
 
       $injector.invoke(ListController, self, {$scope: $scope});
 
-      var proxy = new ListHelperProxy(search, {perPage: 3});
+      var proxy = new ListHelperProxy(update, {perPage: 3});
       proxy.load();
 
       $scope.proxy = proxy;
 
-      function search() {
-        proxy.page = 1;
+      function update() {
         var params = proxy.getParams();
         params.sort = '-publishedDate';
 
@@ -29,6 +28,11 @@
           proxy.setCount(data.pagination.count);
           return data.data;
         }));
+      }
+
+      function search() {
+        proxy.page = 1;
+        update();
       }
     }
 

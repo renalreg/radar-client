@@ -17,7 +17,7 @@
 
       $scope.filters = angular.copy(DEFAULT_FILTERS);
 
-      var proxy = new ListHelperProxy(search, {perPage: 50});
+      var proxy = new ListHelperProxy(update, {perPage: 50});
       proxy.load();
 
       $scope.proxy = proxy;
@@ -53,8 +53,7 @@
         return params;
       }
 
-      function search() {
-        proxy.page = 1;
+      function update() {
         var proxyParams = proxy.getParams();
         var params = angular.extend({}, proxyParams, filtersToParams($scope.filters));
 
@@ -64,6 +63,11 @@
           $scope.count = data.pagination.count;
           return data.data;
         }));
+      }
+
+      function search() {
+        proxy.page = 1;
+        update();
       }
 
       function clear() {

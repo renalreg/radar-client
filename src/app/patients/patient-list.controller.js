@@ -22,8 +22,8 @@
 
       $scope.filters = angular.copy(DEFAULT_FILTERS);
 
-      var proxy = new ListHelperProxy(search, {
-        perPage: 50,
+      var proxy = new ListHelperProxy(update, {
+        perPage: 1,
         sortBy: 'id',
         reverse: true
       });
@@ -73,8 +73,7 @@
         return params;
       }
 
-      function search() {
-        proxy.page = 1;
+      function update() {
         var proxyParams = proxy.getParams();
         var params = angular.extend({}, proxyParams, filtersToParams($scope.filters));
 
@@ -87,6 +86,11 @@
           }),
           genderPromise
         ]));
+      }
+
+      function search() {
+        proxy.page = 1;
+        update();
       }
 
       function clear() {

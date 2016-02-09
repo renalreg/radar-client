@@ -16,7 +16,7 @@
 
       $scope.filters = {};
 
-      var proxy = new ListHelperProxy(search, {
+      var proxy = new ListHelperProxy(update, {
         perPage: 100,
         sortBy: 'date',
         reverse: true
@@ -28,8 +28,7 @@
       $scope.clear = clear;
       $scope.count = 0;
 
-      function search() {
-        proxy.page = 1;
+      function update() {
         var proxyParams = proxy.getParams();
         var params = angular.extend({}, proxyParams, $scope.filters);
 
@@ -39,6 +38,11 @@
           $scope.count = data.pagination.count;
           return data.data;
         }));
+      }
+
+      function search() {
+        proxy.page = 1;
+        update();
       }
 
       function clear() {
