@@ -42,7 +42,7 @@
 
       function search() {
         proxy.page = 1;
-        update();
+        return update();
       }
 
       function clear() {

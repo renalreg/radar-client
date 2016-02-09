@@ -23,7 +23,7 @@
         var params = proxy.getParams();
         params.sort = '-publishedDate';
 
-        self.load(store.findMany('posts', params, true).then(function(data) {
+        return self.load(store.findMany('posts', params, true).then(function(data) {
           proxy.setItems(data.data);
           proxy.setCount(data.pagination.count);
           return data.data;
