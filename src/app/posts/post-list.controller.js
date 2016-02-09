@@ -29,11 +29,6 @@
           return data.data;
         }));
       }
-
-      function search() {
-        proxy.page = 1;
-        update();
-      }
     }
 
     PostListController.$inject = ['$scope'];
