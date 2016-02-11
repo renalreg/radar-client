@@ -69,9 +69,10 @@
 
         adapter.post('/logout')['finally'](function() {
           loggingOut = false;
-          session.logout(forced);
           deferred.resolve();
         });
+
+        session.logout(forced);
       } else {
         deferred.resolve();
       }

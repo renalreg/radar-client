@@ -22,9 +22,9 @@
     var logoutTimeout = null;
     var logoutNotification = null;
 
-    session.on('login', extend);
-    session.on('refresh', extend);
-    session.on('logout', cancel);
+    session.on('login', login);
+    session.on('refresh', refresh);
+    session.on('logout', logout);
 
     return {
       init: init
@@ -34,6 +34,23 @@
       adapter.get('/environment').then(function(response) {
         sessionTimeout = response.data.sessionTimeout;
       });
+    }
+
+    function login() {
+      if (logoutNotification !== null) {
+        logoutNotification.remove();
+        logoutNotification = null;
+      }
+
+      extend();
+    }
+
+    function refresh() {
+      extend();
+    }
+
+    function logout() {
+      cancel();
     }
 
     function extend() {
@@ -78,11 +95,6 @@
       if (logoutTimeout !== null) {
         $timeout.cancel(logoutTimeout);
         logoutTimeout = null;
-      }
-
-      if (logoutNotification !== null) {
-        logoutNotification.remove();
-        logoutNotification = null;
       }
     }
   }
