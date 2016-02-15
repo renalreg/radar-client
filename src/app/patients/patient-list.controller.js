@@ -9,6 +9,8 @@
     ListHelperProxy,
     firstPromise,
     store,
+    hasPermission,
+    session,
     _
   ) {
     var DEFAULT_FILTERS = {
@@ -17,6 +19,8 @@
 
     function PatientListController($scope) {
       var self = this;
+
+      $scope.viewDemographicsPermission = hasPermission(session.user, 'VIEW_DEMOGRAPHICS');
 
       $injector.invoke(ListController, self, {$scope: $scope});
 
@@ -111,6 +115,8 @@
     'ListHelperProxy',
     'firstPromise',
     'store',
+    'hasPermission',
+    'session',
     '_'
   ];
 

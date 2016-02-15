@@ -14,7 +14,7 @@
 
         <table class="table table-condensed table-striped" ng-if="items.length">
           <thead>
-            <tr>
+            <tr ng-if="viewDemographicsPermission">
               <td colspan="8" toggle-demographics></td>
             </tr>
 

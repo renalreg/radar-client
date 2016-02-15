@@ -3,9 +3,13 @@
 
   var app = angular.module('radar.patients');
 
-  app.factory('toggleDemographicsService', ['_', function(_) {
+  app.factory('toggleDemographicsService', ['_', 'session', function(_, session) {
     var visible = true;
     var callbacks = [];
+
+    session.on('login', function() {
+      visible = true;
+    });
 
     return {
       toggle: toggle,
@@ -50,8 +54,6 @@
     }
 
     function broadcast() {
-      console.log(visible);
-
       _.forEach(callbacks, function(callback) {
         callback(visible);
       });
