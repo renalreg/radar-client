@@ -11,8 +11,6 @@
         toggleDemographicsService.listen(update);
 
         function update(visible) {
-          console.log('visible = ', visible);
-
           if (visible) {
             element.removeClass('if-demographics-visible');
           } else {

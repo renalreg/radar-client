@@ -13,8 +13,6 @@
         });
 
         function update(hidden) {
-          console.log('hidden = ', hidden);
-
           if (hidden) {
             element.removeClass('if-demographics-hidden');
           } else {
