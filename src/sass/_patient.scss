@@ -16,29 +16,29 @@
       margin-bottom: 5px;
     }
 
-    li.info {
+    li.info, li.toggle-demographics {
       // Padding to match patient name height
       padding: 4px 0;
     }
 
-    li.info > span {
-      display: block;
-      border: 1px solid #333;
-      border-radius: 2px;
-      @include clearfix;
-    }
-
     li.info {
+      > span {
+        display: block;
+        border: 1px solid #333;
+        border-radius: 2px;
+        @include clearfix;
+      }
+
       .key, .value {
         display: block;
         float: left;
         padding: 3px 5px;
       }
-    }
 
-    li.info .key {
-      color: #FFF;
-      background-color: #333;
+      .key {
+        color: #FFF;
+        background-color: #333;
+      }
     }
 
     li.name {
@@ -47,6 +47,22 @@
         font-size: 24px;
         text-decoration: none;
         color: #333;
+      }
+    }
+
+    li.toggle-demographics {
+      float: right;
+      display: block;
+      margin-left: 20px;
+      margin-right: 0;
+
+      > a {
+        display: block;
+        border: 1px solid #333;
+        border-radius: 2px;
+        color: #FFF;
+        background-color: #333;
+        padding: 3px 5px;
       }
     }
   }
@@ -93,4 +109,8 @@
       font-weight: bold;
     }
   }
+}
+
+.if-demographics-hidden, .if-demographics-visible {
+  display: none;
 }

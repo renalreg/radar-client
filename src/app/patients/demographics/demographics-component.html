@@ -11,19 +11,28 @@
         <td>{{item.getSource()}}</td>
       </tr>
 
-      <tr ng-if="item.firstName">
+      <tr ng-if="item.firstName !== undefined">
         <th>First Name</th>
-        <td>{{item.firstName | missing}}</td>
+        <td>
+          <span if-demographics-visible>{{item.firstName | missing}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
-      <tr ng-if="item.lastName">
+      <tr ng-if="item.lastName !== undefined">
         <th>Last Name</th>
-        <td>{{item.lastName | missing}}</td>
+        <td>
+          <span if-demographics-visible>{{item.lastName | missing}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr ng-if="item.dateOfBirth !== undefined">
         <th>Date of Birth</th>
-        <td>{{item.dateOfBirth | dateFormat}}</td>
+        <td>
+          <span if-demographics-visible>{{item.dateOfBirth | dateFormat}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr ng-if="item.dateOfBirth === undefined">
@@ -31,12 +40,25 @@
         <td>{{item.yearOfBirth | missing}}</td>
       </tr>
 
+      <tr if-demographics-hidden ng-if="item.dateOfBirth !== undefined">
+        <th>Year of Birth</th>
+        <td>{{item.yearOfBirth | missing}}</td>
+      </tr>
+
       <tr ng-if="item.dateOfDeath !== undefined">
         <th>Date of Death</th>
-        <td>{{item.dateOfDeath | dateFormat}}</td>
+        <td>
+          <span if-demographics-visible>{{item.dateOfDeath | dateFormat}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr ng-if="item.dateOfDeath === undefined">
+        <th>Year of Death</th>
+        <td>{{item.yearOfDeath | missing}}</td>
+      </tr>
+
+      <tr if-demographics-hidden ng-if="item.dateOfDeath !== undefined">
         <th>Year of Death</th>
         <td>{{item.yearOfDeath | missing}}</td>
       </tr>
@@ -53,22 +75,34 @@
 
       <tr ng-if="item.homeNumber !== undefined">
         <th>Home Number</th>
-        <td>{{item.homeNumber | missing}}</td>
+        <td>
+          <span if-demographics-visible>{{item.homeNumber}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr ng-if="item.workNumber !== undefined">
         <th>Work Number</th>
-        <td>{{item.workNumber | missing}}</td>
+        <td>
+          <span if-demographics-visible>{{item.workNumber}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr ng-if="item.mobileNumber !== undefined">
         <th>Mobile Number</th>
-        <td>{{item.mobileNumber | missing}}</td>
+        <td>
+          <span if-demographics-visible>{{item.mobileNumber}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr ng-if="item.emailAddress !== undefined">
         <th>Email Address</th>
-        <td>{{item.emailAddress | missing}}</td>
+        <td>
+          <span if-demographics-visible>{{item.emailAddress}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
     </table>
 
@@ -214,23 +248,39 @@
           </td>
 
           <td>
-            <span ng-if="item.firstName !== undefined">{{item.firstName | missing}}</span>
-            <span ng-if="item.firstName === undefined" class="hidden-demographics">Hidden</span>
+            <span if-demographics-visible>
+              <span ng-if="item.firstName !== undefined">{{item.firstName | missing}}</span>
+              <span ng-if="item.firstName === undefined" class="hidden-demographics">Hidden</span>
+            </span>
+
+            <span if-demographics-hidden class="hidden-demographics">Hidden</span>
           </td>
 
           <td>
-            <span ng-if="item.lastName !== undefined">{{item.lastName | missing}}</span>
-            <span ng-if="item.lastName === undefined" class="hidden-demographics">Hidden</span>
+            <span if-demographics-visible>
+              <span ng-if="item.lastName !== undefined">{{item.lastName | missing}}</span>
+              <span ng-if="item.lastName === undefined" class="hidden-demographics">Hidden</span>
+            </span>
+
+            <span if-demographics-hidden class="hidden-demographics">Hidden</span>
           </td>
 
           <td>
-            <span ng-if="item.dateOfBirth !== undefined">{{item.dateOfBirth | dateFormat}}</span>
-            <span ng-if="item.dateOfBirth === undefined">{{item.yearOfBirth | missing}}</span>
+            <span if-demographics-visible>
+              <span ng-if="item.dateOfBirth !== undefined">{{item.dateOfBirth | dateFormat}}</span>
+              <span ng-if="item.dateOfBirth === undefined">{{item.yearOfBirth | missing}}</span>
+            </span>
+
+            <span if-demographics-hidden>{{item.yearOfBirth | missing}}</span>
           </td>
 
           <td>
-            <span ng-if="item.dateOfDeath !== undefined">{{item.dateOfDeath | dateFormat}}</span>
-            <span ng-if="item.dateOfDeath === undefined">{{item.yearOfDeath | missing}}</span>
+            <span if-demographics-visible>
+              <span ng-if="item.dateOfDeath !== undefined">{{item.dateOfDeath | dateFormat}}</span>
+              <span ng-if="item.dateOfDeath === undefined">{{item.yearOfDeath | missing}}</span>
+            </span>
+
+            <span if-demographics-hidden>{{item.yearOfDeath | missing}}</span>
           </td>
 
           <td>{{item.gender.label | missing}}</td>

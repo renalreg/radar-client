@@ -13,12 +13,18 @@
 
       <tr>
         <th>Number Group</th>
-        <td>{{item.numberGroup.name}}</td>
+        <td>
+          <span if-demographics-visible>{{item.numberGroup.name}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr>
         <th>Number</th>
-        <td>{{item.number}}</td>
+        <td>
+          <span if-demographics-visible>{{item.number}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
     </table>
 
@@ -86,8 +92,16 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td>{{item.numberGroup.shortName}}</td>
-          <td>{{item.number}}</td>
+          <td>
+            <span if-demographics-visible>{{item.numberGroup.shortName}}</span>
+            <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+          </td>
+
+          <td>
+            <span if-demographics-visible>{{item.number}}</span>
+            <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+          </td>
+
           <td class="source">{{item.getSource()}}</td>
 
           <td>

@@ -23,7 +23,10 @@
 
       <tr>
         <th>Address</th>
-        <td class="newlines">{{item.getAddress()}}</td>
+        <td>
+          <span if-demographics-visible class="newlines">{{item.getAddress()}}</span>
+          <span if-demographics-hidden class="newlines">{{item.getAddress(false)}}</span>
+        </td>
       </tr>
     </table>
 
@@ -137,7 +140,11 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td class="newlines">{{item.getAddress()}}</td>
+          <td>
+            <span if-demographics-visible class="newlines">{{item.getAddress(true)}}</span>
+            <span if-demographics-hidden class="newlines">{{item.getAddress(false)}}</span>
+          </td>
+
           <td>{{item.fromDate | dateFormat}}</td>
           <td>{{item.toDate | dateFormat}}</td>
           <td class="source">{{item.getSource()}}</td>

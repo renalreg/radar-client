@@ -10,7 +10,7 @@
     hasPermissionForPatient
   ) {
     $scope.patient = patient;
-    $scope.showDemographics = hasPermissionForPatient(session.user, patient, 'VIEW_DEMOGRAPHICS');
+    $scope.viewDemographicsPermission = hasPermissionForPatient(session.user, patient, 'VIEW_DEMOGRAPHICS');
   }
 
   PatientDetailController.$inject = [
