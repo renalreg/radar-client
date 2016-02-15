@@ -13,12 +13,18 @@
 
       <tr>
         <th>First Name</th>
-        <td>{{item.firstName}}</td>
+        <td>
+          <span if-demographics-visible>{{item.firstName | missing}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
 
       <tr>
         <th>Last Name</th>
-        <td>{{item.lastName}}</td>
+        <td>
+          <span if-demographics-visible>{{item.lastName | missing}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
       </tr>
     </table>
 
@@ -86,8 +92,16 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td>{{item.firstName}}</td>
-          <td>{{item.lastName}}</td>
+          <td>
+            <span if-demographics-visible>{{item.firstName | missing}}</span>
+            <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+          </td>
+
+          <td>
+            <span if-demographics-visible>{{item.lastName | missing}}</span>
+            <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+          </td>
+
           <td class="source">{{item.getSource()}}</td>
 
           <td>

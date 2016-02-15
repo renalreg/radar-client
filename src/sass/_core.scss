@@ -321,3 +321,11 @@ table.metadata {
 a.delete-user, a.delete-patient {
   color: #777;
 }
+
+.no-link, .no-link:hover {
+  text-decoration: none;
+}
+
+.link {
+  text-decoration: underline;
+}

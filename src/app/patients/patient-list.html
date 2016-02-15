@@ -15,6 +15,10 @@
         <table class="table table-condensed table-striped" ng-if="items.length">
           <thead>
             <tr>
+              <td colspan="8" toggle-demographics></td>
+            </tr>
+
+            <tr>
               <th sort-helper="id">ID</th>
               <th sort-helper="firstName">First Name</th>
               <th sort-helper="lastName">Last Name</th>
@@ -32,20 +36,32 @@
 
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">
-                  <span ng-if="patient.firstName !== undefined">{{patient.firstName | missing}}</span>
+                  <span ng-if="patient.firstName !== undefined">
+                    <span if-demographics-visible>{{patient.firstName | missing}}</span>
+                    <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+                  </span>
+
                   <span ng-if="patient.firstName === undefined" class="hidden-demographics">Hidden</span>
                 </a>
               </td>
 
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">
-                  <span ng-if="patient.lastName !== undefined">{{patient.lastName | missing}}</span>
+                  <span ng-if="patient.lastName !== undefined">
+                    <span if-demographics-visible>{{patient.lastName | missing}}</span>
+                    <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+                  </span>
+
                   <span ng-if="patient.lastName === undefined" class="hidden-demographics">Hidden</span>
                 </a>
               </td>
 
               <td>
-                <span ng-if="patient.dateOfBirth !== undefined">{{patient.dateOfBirth | dateFormat}}</span>
+                <span ng-if="patient.dateOfBirth !== undefined">
+                  <span if-demographics-visible>{{patient.dateOfBirth | dateFormat}}</span>
+                  <span if-demographics-hidden>{{patient.yearOfBirth | missing}}</span>
+                </span>
+
                 <span ng-if="patient.dateOfBirth === undefined">{{patient.yearOfBirth | missing}}</span>
               </td>
 
