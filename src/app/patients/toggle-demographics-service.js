@@ -12,7 +12,8 @@
       show: show,
       hide: hide,
       listen: listen,
-      isVisible: isVisible
+      isVisible: isVisible,
+      isHidden: isHidden
     };
 
     function toggle() {
@@ -31,6 +32,10 @@
 
     function isVisible() {
       return visible;
+    }
+
+    function isHidden() {
+      return !visible;
     }
 
     function listen(callback) {
