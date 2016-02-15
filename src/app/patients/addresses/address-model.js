@@ -40,7 +40,7 @@
       } else {
         if (this.postcode) {
           // Postcode parts should be separated by a space but limit to first 4 charcters just in case
-          var area = this.postcode.split(' ')[0].substring(0, 4)
+          var area = this.postcode.split(' ')[0].substring(0, 4);
           lines.push(area);
         }
       }
