@@ -3,17 +3,17 @@
 
   var app = angular.module('radar.core');
 
-  app.factory('radar', ['authStore', 'session', 'store', '$q', function(authStore, session, store, $q) {
+  app.factory('radar', ['session', 'store', '$q', function(session, store, $q) {
     var promises = [];
 
-    var userId = authStore.getUserId();
+    var userId = session.getUserId();
 
     if (userId !== null) {
       var sessionUserDeferred = $q.defer();
 
       store.findOne('users', userId)
         .then(function(user) {
-          session.login(user);
+          session.setUser(user);
         })
         ['catch'](function() {
           session.logout(true);
