@@ -1,6 +1,6 @@
 {
   "name": "radar-client",
-  "version": "2.2.4",
+  "version": "2.2.5",
   "devDependencies": {
     "bower": "^1.6.3",
     "browser-sync": "^2.9.3",
