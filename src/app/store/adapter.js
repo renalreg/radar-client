@@ -89,6 +89,18 @@
         return camelCaseKeys(data);
       };
 
+      function transformBadResponse(response) {
+        var data = {
+          status: response.status
+        };
+
+        if (response.status === 422) {
+          data.errors = response.data.errors;
+        }
+
+        return data;
+      }
+
       Adapter.prototype.findOne = function(modelName, id) {
         var self = this;
 
@@ -99,7 +111,7 @@
             return response.data;
           })
           ['catch'](function(response) {
-            var data = {status: response.status};
+            var data = transformBadResponse(response);
             return $q.reject(data);
           });
       };
@@ -118,7 +130,7 @@
             }
           })
           ['catch'](function(response) {
-            var data = {status: response.status};
+            var data = transformBadResponse(response);
             return $q.reject(data);
           });
       };
@@ -133,12 +145,7 @@
             return response.data;
           })
           ['catch'](function(response) {
-            var data = {status: response.status};
-
-            if (response.status === 422) {
-              data.errors = self.transformResponse(response.data.errors);
-            }
-
+            var data = transformBadResponse(response);
             return $q.reject(data);
           });
       };
@@ -153,12 +160,7 @@
             return response.data;
           })
           ['catch'](function(response) {
-            var data = {status: response.status};
-
-            if (response.status === 422) {
-              data.errors = response.data.errors;
-            }
-
+            var data = transformBadResponse(response);
             return $q.reject(data);
           });
       };
@@ -173,7 +175,7 @@
             return undefined;
           })
           ['catch'](function(response) {
-            var data = {status: response.status};
+            var data = transformBadResponse(response);
             return $q.reject(data);
           });
       };

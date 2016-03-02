@@ -19,10 +19,13 @@
 
       self.scope.loading = true;
 
-      return $q.when(promise).then(function(items) {
-        self.scope.loading = false;
-        self.scope.items = items;
-      });
+      return $q.when(promise)
+        .then(function(items) {
+          self.scope.items = items;
+        })
+        .finally(function() {
+          self.scope.loading = false;
+        });
     };
 
     return ListController;

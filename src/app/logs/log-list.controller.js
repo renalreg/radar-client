@@ -7,7 +7,8 @@
     ListController,
     $injector,
     ListHelperProxy,
-    store
+    store,
+    $q
   ) {
     function LogListController($scope) {
       var self = this;
@@ -25,6 +26,7 @@
 
       $scope.proxy = proxy;
       $scope.search = search;
+      $scope.errors = {};
       $scope.clear = clear;
       $scope.count = 0;
 
@@ -32,12 +34,20 @@
         var proxyParams = proxy.getParams();
         var params = angular.extend({}, proxyParams, $scope.filters);
 
-        return self.load(store.findMany('logs', params, true).then(function(data) {
-          proxy.setItems(data.data);
-          proxy.setCount(data.pagination.count);
-          $scope.count = data.pagination.count;
-          return data.data;
-        }));
+        var promise = store.findMany('logs', params, true)
+          .then(function(data) {
+            proxy.setItems(data.data);
+            proxy.setCount(data.pagination.count);
+            $scope.count = data.pagination.count;
+            $scope.errors = {};
+            return data.data;
+          })
+          .catch(function(response) {
+            $scope.errors = response.errors;
+            return $q.reject();
+          });
+
+        return self.load(promise);
       }
 
       function search() {
@@ -61,7 +71,8 @@
     'ListController',
     '$injector',
     'ListHelperProxy',
-    'store'
+    'store',
+    '$q'
   ];
 
   app.factory('LogListController', controllerFactory);
