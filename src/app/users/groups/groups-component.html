@@ -31,16 +31,16 @@
         <div frm-label>Group</div>
 
         <div frm-control>
-          <div frm-group-field model="item.group" required="true"></div>
+          <div frm-select-field model="item.group" options="getGroups()" required="true" options-label="name"></div>
           <div frm-errors errors="item.errors.group"></div>
         </div>
       </div>
 
-      <div frm-field frm-group>
+      <div frm-field frm-group ng-if="item.group">
         <div frm-label>Role</div>
 
         <div frm-control>
-          <div frm-select-field model="item.role" options="roles" required="true"></div>
+          <div frm-select-field model="item.role" options="getRolesForGroup(item.group)" required="true"></div>
           <div frm-errors errors="item.errors.role"></div>
         </div>
       </div>
