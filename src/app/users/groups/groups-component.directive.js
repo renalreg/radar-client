@@ -18,8 +18,6 @@
     return UserGroupPermission;
   }]);
 
-
-
   function controllerFactory(
     ModelListDetailController,
     $injector,
