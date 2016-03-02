@@ -169,7 +169,7 @@ gulp.task('reload', function(done) {
   done();
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', gulp.series('build', function() {
   function watch(glob, opt, task) {
     return gulp.watch(glob, opt, task)
       .on('add', function(path) {
@@ -194,7 +194,7 @@ gulp.task('watch', function() {
   watch('src/index.html', gulp.series('inject'));
 
   watch(['src/app/**/*.html', '!src/index.html'], gulp.series('reload'));
-});
+}));
 
 gulp.task('browser-sync', function() {
   browserSync.init({
@@ -263,7 +263,7 @@ gulp.task('sauce-labs', function(cb) {
   }, cb).start();
 });
 
-gulp.task('serve', gulp.series('build', gulp.parallel('watch', 'browser-sync', 'express')));
+gulp.task('serve', gulp.parallel('watch', 'browser-sync', 'express'));
 
 gulp.task('serve:dist', gulp.series('build:dist', 'express:dist'));
 
