@@ -6,7 +6,7 @@
   app.directive('title', ['titleService', function(titleService) {
     return {
       scope: true,
-      restrict: 'EA',
+      restrict: 'E',
       template: '{{title}}',
       link: function(scope) {
         titleService.watch(function(title) {
