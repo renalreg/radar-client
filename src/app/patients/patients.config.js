@@ -21,6 +21,9 @@
         patient: ['$stateParams', 'store', function($stateParams, store) {
           return store.findOne('patients', $stateParams.patientId);
         }]
+      },
+      data: {
+        title: false // don't update the title on state change (inherited by child states too)
       }
     });
 
