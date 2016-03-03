@@ -23,7 +23,9 @@
     $injector,
     store,
     firstPromise,
-    UserGroupPermission
+    UserGroupPermission,
+    getGroupRoles,
+    _
   ) {
     function UserGroupsController($scope) {
       var self = this;
@@ -37,14 +39,36 @@
 
       self.load(firstPromise([
         $scope.user.groups,
-        store.findMany('roles').then(function(roles) {
-          $scope.roles = roles;
-        })
+        loadGroupRoles()
       ]));
 
       $scope.create = function() {
         self.edit(store.create('group-users', {user: $scope.user.id}));
       };
+
+      $scope.groups = [];
+      $scope.groupToRoles = {};
+
+      $scope.getGroups = function() {
+        return $scope.groups;
+      };
+
+      $scope.getRolesForGroup = function(group) {
+        if (group) {
+          return $scope.groupToRoles[group.id].roles;
+        } else {
+          return [];
+        }
+      };
+
+      function loadGroupRoles() {
+        return getGroupRoles().then(function(groupRoles) {
+          $scope.groups = _.map(groupRoles, function(groupRole) {
+            return groupRole.group;
+          });
+          $scope.groupToRoles = _.keyBy(groupRoles, 'group.id');
+        });
+      }
     }
 
     UserGroupsController.$inject = ['$scope'];
@@ -58,7 +82,9 @@
     '$injector',
     'store',
     'firstPromise',
-    'UserGroupPermission'
+    'UserGroupPermission',
+    'getGroupRoles',
+    '_'
   ];
 
   app.factory('UserGroupsController', controllerFactory);
