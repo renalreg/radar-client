@@ -46,6 +46,24 @@
     PatientNumbersController.$inject = ['$scope'];
     PatientNumbersController.prototype = Object.create(ModelListDetailController.prototype);
 
+    PatientNumbersController.prototype.save = function() {
+      var self = this;
+
+      return ModelListDetailController.prototype.save.call(self).then(function() {
+        // Reload the patient incase the primary patient number has changed
+        self.scope.patient.reload();
+      });
+    };
+
+    PatientNumbersController.prototype.remove = function(item) {
+      var self = this;
+
+      return ModelListDetailController.prototype.remove.call(self, item).then(function() {
+        // Reload the patient incase the primary patient number has changed
+        self.scope.patient.reload();
+      });
+    };
+
     return PatientNumbersController;
   }
 

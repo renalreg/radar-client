@@ -24,6 +24,7 @@
               <th sort-helper="lastName">Last Name</th>
               <th sort-helper="dateOfBirth">DOB</th>
               <th sort-helper="gender">Gender</th>
+              <th sort-helper="primaryPatientNumber" ng-if="viewDemographicsPermission">Patient Number</th>
               <th sort-helper="recruitedDate">Date Recruited</th>
               <th>Cohorts</th>
               <th>Hospitals</th>
@@ -66,6 +67,21 @@
               </td>
 
               <td>{{patient.gender.label | missing}}</td>
+
+              <td ng-if="viewDemographicsPermission">
+                <span ng-if="patient.primaryPatientNumber !== undefined">
+                  <span if-demographics-visible>
+                    <span ng-if="patient.primaryPatientNumber === null">-</span>
+                    <span ng-if="patient.primaryPatientNumber !== null">
+                      {{patient.primaryPatientNumber.number}} <small>({{patient.primaryPatientNumber.numberGroup.shortName}})</small>
+                    </span>
+                  </span>
+
+                  <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+                </span>
+
+                <span ng-if="patient.primaryPatientNumber === undefined" class="hidden-demographics">Hidden</span>
+              </td>
 
               <td>{{patient.recruitedDate | dateFormat}}</td>
 
