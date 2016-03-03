@@ -14,6 +14,7 @@
     $scope.patient = patient;
     $scope.viewDemographicsPermission = hasPermissionForPatient(session.user, patient, 'VIEW_DEMOGRAPHICS');
 
+    // Set the title to the patient's name
     $scope.$watch(function() {
       return patient.getName(toggleDemographicsService.isVisible());
     }, titleService.setTitle);
