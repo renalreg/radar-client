@@ -146,7 +146,7 @@
                   <th sort-helper="date">Date</th>
 
                   <th ng-repeat="observation in selectedObservations" sort-helper="results[observation.id].getDisplayValue()" sort-id="results.{{observation.id}}">
-                    {{observation.shortName}}<span ng-if="observation.units"> ({{observation.units}})</span>
+                    {{observation.shortName}}<span ng-if="observation.units">&nbsp;({{observation.units}})</span>
                   </th>
 
                   <th sort-helper="getSource()">Source</th>
