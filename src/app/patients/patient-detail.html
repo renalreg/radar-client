@@ -36,7 +36,7 @@
         </span>
       </li>
 
-      <li class="info" ng-if="patient.primaryPatientNumber !== undefined" if-demographics-visible>
+      <li class="info" ng-if="patient.primaryPatientNumber" if-demographics-visible>
         <span>
           <span class="key">{{patient.primaryPatientNumber.numberGroup.shortName}}</span>
           <span class="value">{{patient.primaryPatientNumber.number}}</span>
