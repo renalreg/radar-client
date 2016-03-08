@@ -23,7 +23,7 @@
         .then(function(items) {
           self.scope.items = items;
         })
-        .finally(function() {
+        ['finally'](function() {
           self.scope.loading = false;
         });
     };

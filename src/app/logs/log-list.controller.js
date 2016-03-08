@@ -42,7 +42,7 @@
             $scope.errors = {};
             return data.data;
           })
-          .catch(function(response) {
+          ['catch'](function(response) {
             $scope.errors = response.errors;
             return $q.reject();
           });
