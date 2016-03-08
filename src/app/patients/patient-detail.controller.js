@@ -8,15 +8,15 @@
     patient,
     session,
     hasPermissionForPatient,
-    toggleDemographicsService,
     titleService
   ) {
     $scope.patient = patient;
     $scope.viewDemographicsPermission = hasPermissionForPatient(session.user, patient, 'VIEW_DEMOGRAPHICS');
 
-    // Set the title to the patient's name
+    // Set the title to the patient's ID
     $scope.$watch(function() {
-      return patient.getName(toggleDemographicsService.isVisible());
+      // No demographics
+      return patient.getName(false);
     }, titleService.setTitle);
   }
 
@@ -25,7 +25,6 @@
     'patient',
     'session',
     'hasPermissionForPatient',
-    'toggleDemographicsService',
     'titleService'
   ];
 
