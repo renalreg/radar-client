@@ -50,4 +50,10 @@
       });
     }
   }]);
+
+  app.run(['$window', 'titleService', function($window, titleService) {
+    titleService.watch(function(title) {
+      $window.document.title = title;
+    });
+  }]);
 })();
