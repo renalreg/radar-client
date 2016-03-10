@@ -4,6 +4,10 @@
   var app = angular.module('radar.users.groups');
 
   app.factory('getGroupRoles', ['session', '_', '$q', 'store', function(session, _, $q, store) {
+    function sort(groupRoles) {
+      return _.sortBy(groupRoles, ['group.type', 'group.name']);
+    }
+
     return function() {
       var deferred = $q.defer();
 
@@ -24,6 +28,8 @@
             };
           });
 
+          groupRoles = sort(groupRoles);
+
           deferred.resolve(groupRoles);
         });
       } else {
@@ -37,6 +43,8 @@
         groupRoles = _.filter(groupRoles, function(groupRole) {
           return groupRole.roles.length > 0;
         });
+
+        groupRoles = sort(groupRoles);
 
         deferred.resolve(groupRoles);
       }
