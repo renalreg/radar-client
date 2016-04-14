@@ -8,6 +8,7 @@
     $compile,
     session
   ) {
+    // TODO $compile memory leak
     return {
       scope: true,
       link: function(scope, element, attrs) {

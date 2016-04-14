@@ -4,6 +4,7 @@
   var app = angular.module('radar.users');
 
   app.directive('createUserPermission', ['hasPermission', '$compile', 'session', function(hasPermission, $compile, session) {
+    // TODO $compile memory leak
     return {
       scope: true,
       link: function(scope, element, attrs) {

@@ -4,6 +4,7 @@
   var app = angular.module('radar.posts');
 
   app.directive('createPostPermission', ['PostPermission', '$compile', function(PostPermission, $compile) {
+    // TODO $compile memory leak
     return {
       scope: true,
       link: function(scope, element, attrs) {
