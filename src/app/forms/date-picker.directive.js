@@ -19,6 +19,11 @@
 
         element.datepicker(options);
 
+        element.on('$destroy', function() {
+            element.datepicker('hide');
+            element.datepicker('destroy');
+        });
+
         attrs.$observe('datePickerMinDate', function(value) {
           setOption('minDate', getDate(value));
         });
