@@ -8,7 +8,9 @@
       link: function(scope, element) {
         update(toggleDemographicsService.isVisible());
 
-        toggleDemographicsService.listen(update);
+        var unsubscribe = toggleDemographicsService.listen(update);
+
+        scope.$on('$destroy', unsubscribe);
 
         function update(visible) {
           if (visible) {

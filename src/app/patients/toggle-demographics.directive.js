@@ -14,9 +14,11 @@
           toggleDemographicsService.toggle();
         };
 
-        toggleDemographicsService.listen(function(value) {
+        var unsubscribe = toggleDemographicsService.listen(function(value) {
           scope.visible = value;
         });
+
+        scope.$on('$destroy', unsubscribe);
       }
     };
   }]);

@@ -44,6 +44,10 @@
 
     function listen(callback) {
       callbacks.push(callback);
+
+      return function() {
+          _.pull(callbacks, callback);
+      };
     }
 
     function update(value) {

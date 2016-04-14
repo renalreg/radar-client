@@ -8,9 +8,11 @@
       link: function(scope, element) {
         update(toggleDemographicsService.isHidden());
 
-        toggleDemographicsService.listen(function(value) {
+        var unsubscribe = toggleDemographicsService.listen(function(value) {
           update(!value);
         });
+
+        scope.$on('$destroy', unsubscribe);
 
         function update(hidden) {
           if (hidden) {
