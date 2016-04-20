@@ -6,6 +6,14 @@
 <h2>Patient Details</h2>
 
 <form class="form-horizontal form-container" submit-if-valid="recruit()" novalidate>
+  <div frm-field frm-group ng-if="patient.id">
+    <div frm-label>RaDaR</div>
+
+    <div frm-control>
+      <p class="form-control-static">{{patient.id}}</p>
+    </div>
+  </div>
+
   <div frm-field frm-group>
     <div frm-label>First Name</div>
 
@@ -30,30 +38,23 @@
     </div>
   </div>
 
-  <div ng-repeat="x in patient.patientNumbers track by $index" frm-field frm-group>
-    <div frm-label>{{x.numberGroup.shortName}}</div>
-
-    <div frm-control>
-      <p class="form-control-static">{{x.number}}</p>
-    </div>
-  </div>
-
   <div frm-field frm-group>
     <div frm-label>Gender</div>
 
     <div frm-control>
-      <div ng-if="patient.existing">
-        <p class="form-control-static">{{patient.gender.label | missing}}</p>
-      </div>
-
-      <div ng-if="!patient.existing">
-        <div frm-select-field model="patient.gender" required="true" options="genders"></div>
-        <div frm-errors errors="patientErrors.gender"></div>
-      </div>
+      <p class="form-control-static">{{patient.gender.label | missing}}</p>
     </div>
   </div>
 
-  <div ng-if="!patient.existing" frm-field frm-group>
+  <div frm-field frm-group>
+    <div frm-label>{{patient.numberGroup.shortName}}</div>
+
+    <div frm-control>
+      <p class="form-control-static">{{patient.number}}</p>
+    </div>
+  </div>
+
+  <div ng-if="!patient.id" frm-field frm-group>
     <div frm-label>Ethnicity</div>
 
     <div frm-control>
