@@ -39,8 +39,10 @@
         .then(function(response) {
           var patient = response.data.patient;
 
+          var patientId = patient ? patient.id : null;
+
           $scope.patient = {
-            id: patient.id,
+            id: patientId,
             firstName: $scope.searchParams.firstName,
             lastName: $scope.searchParams.lastName,
             dateOfBirth: $scope.searchParams.dateOfBirth,
