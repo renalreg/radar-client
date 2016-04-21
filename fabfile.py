@@ -12,7 +12,7 @@ def deploy(archive=None, name='radar-client'):
 
     version = re.search('-([^-]+)\.tar\.gz$', archive).group(1)
 
-    tmp_archive_path = '/tmp/{}.tar.gz'.format(name)
+    tmp_archive_path = '/tmp/{name}.tar.gz'.format(name=name)
     put(archive, tmp_archive_path)
 
     current_version = '/srv/{name}/current'.format(name=name)
