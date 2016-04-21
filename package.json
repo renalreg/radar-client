@@ -4,6 +4,7 @@
   "devDependencies": {
     "bower": "^1.6.3",
     "browser-sync": "^2.9.3",
+    "coveralls": "^2.11.9",
     "del": "^2.0.2",
     "express": "^4.13.3",
     "gulp": "github:gulpjs/gulp#4.0",
