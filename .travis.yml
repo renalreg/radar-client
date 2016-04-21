@@ -9,4 +9,4 @@ script:
   - gulp coverage
   - gulp sauce-labs || true
 after_success:
-  - cat client/coverage/*/lcov.info | coveralls
+  - cat coverage/*/lcov.info | coveralls
