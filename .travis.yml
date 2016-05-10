@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "5"
+install:
+  - npm install --quiet --no-spin
+  - bower install --quiet
+script:
+  - gulp lint
+  - gulp coverage
+  - gulp sauce-labs || true
+after_success:
+  - cat coverage/*/lcov.info | coveralls
+env:
+  global:
+    # Sauce Labs credentials (SAUCE_USERNAME and SAUCE_ACCESS_KEY)
+    - secure: 3SmG35F6tdHEdpEAZB2HsHdW9UUZGSR/QBd4bcmh0Vd3n8gOFOPMhSXCZO6+6fVKQhkfqu9BxwGrJdwevnPSWbfARPd9Lzxl2Cz2pgyYziHyT3Xea/tlgV9klt0MPCcxHOIRASsvnqAW7O//XfyUfOjEh93FgyfXQp52z3wRIfH7GYRaySk+csA6Yxd7QWlSsaqf7rS4OlGkiB+mRMaMM2cOUsbR8wwuZf4E0OSbdNEJPhHbSz5wKdF0xsM5lmBN14Y9M6+ZJXqrnWmEadldkq2HUXObGbC8zsOq66oNS5FoprJKSoDSaX8PeFdT6JsrtxlqHDRpiqxdnwSg4SWGk1eOcBsAOjJnSabZWtojceOinqfIafr6qZTY8OiEvkhUuIRc9zIezVEly11UA2DP0PQlHOFo9Ah/CjT2UagSjJAiwSMOcRrRbeObsBNfrVtUo2n/j1ebV6htyPtx3TpFx/HZlx7zDjR29DL1W6z7JcU0cNyUK4tH5TzHQCjBMJxBbhEhyZA68h9uadH5aiYLPTStQ1Xj2IrtZi7QogM2Wuw2lJw8sbxN6wZQxF4VQMnnLJ+EYOSpK4yxUSYrQZrL3nYmD4ZVdeUWGDXOBcOqyBRcAGT6RjZAKrBSqZbzKkJJN7/0uJ8Mlvk7cd8RtoDJ2Ag+Iu0eWZJhEZUMXWoO6uQ=
+    - secure: Jrx5FrIMJ7I7z26FEcHL/SijGXMjskYmQ6RG6qA5B6sjN/IIiNMjWaszfpa+FH4J307SsPLus00XrSXPqBv82fmpjbVZjw45qsmDXrCPhltYoC+BWFyxBAzh7WxaHrop3fY5mspMZCou+KUQ2fNH9Z/9KJBy45LU4Eh8/PEetYCfzeqXGBMB4RtNYgJEZtRudKh5CcHBjhkig4lZlt/IbZ6sRiRHCxedZ6ctR8N6SjFwSDnZfgMcJ1Y19oMDBqORYLulTOns7MjoXDWgsYsUeZkA2wpgNsCK9eiB1UToq2RvpeyW7tq8ESMa9fEV6ua1VR/Ua9rulJn1dGtAdyrAYcXQFjMAyDrlP+B1B3nyfqG6Vuv3l/7hNNdEAkBa9bVJuV5QpSwoATT/l2eEc1jWxTVu8Iv7hHW8e0xDVktwfjJCNx8hd7oVFI7fbWjKiadUofU3Q78N/LMnQ8W+erSrkYgmDNggt1V/nNkQwl/fIBN+WmzJ60EQhQn0PmUq5OM+QNMtjBuBUTBEOMeBpmrfi1qR5K0D2h8ZgT34MxjDW+dlgzLC7PNXvDDzj3Hn86W4AaAWg/rUfYeTf2SJ9dISeQ7eScBvxwkAOfWlBCsXuWcSnt3AnMvttHyDnKoj/jm1+Lnft+4ouk2xXvFdUp/1Macv6i9CUmUxr6vdtPCQFRk=
