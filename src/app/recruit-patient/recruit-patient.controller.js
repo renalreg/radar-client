@@ -20,8 +20,6 @@
     $scope.patientErrors = {};
 
     $scope.search = search;
-    $scope.patientFound = patientFound;
-    $scope.patientNotFound = patientNotFound;
     $scope.recruit = recruit;
 
     $scope.backToSearch = backToSearch;
@@ -39,16 +37,21 @@
 
       return adapter.post('/recruit-patient-search', {}, $scope.searchParams)
         .then(function(response) {
-          var patients = response.data.patients;
+          var patient = response.data.patient;
 
-          $scope.patients = patients;
+          var patientId = patient ? patient.id : null;
+
+          $scope.patient = {
+            id: patientId,
+            firstName: $scope.searchParams.firstName,
+            lastName: $scope.searchParams.lastName,
+            dateOfBirth: $scope.searchParams.dateOfBirth,
+            gender: $scope.searchParams.gender,
+            numberGroup: $scope.searchParams.numberGroup,
+            number: $scope.searchParams.number,
+          };
+
           $scope.searchErrors = {};
-
-          if (patients.length) {
-            patientFound(patients[0]);
-          } else {
-            patientNotFound();
-          }
 
           $state.go('recruitPatient.form');
         })
@@ -60,32 +63,6 @@
         ['finally'](function() {
           $scope.loading = false;
         });
-    }
-
-    function patientFound(patient) {
-      $scope.patient = {
-        existing: true,
-        firstName: patient.firstName,
-        lastName: patient.lastName,
-        dateOfBirth: patient.dateOfBirth,
-        gender: patient.gender,
-        patientNumbers: patient.patientNumbers
-      };
-    }
-
-    function patientNotFound() {
-      $scope.patient = {
-        existing: false,
-        firstName: $scope.searchParams.firstName.toUpperCase(),
-        lastName: $scope.searchParams.lastName.toUpperCase(),
-        dateOfBirth: $scope.searchParams.dateOfBirth,
-        patientNumbers: [
-          {
-            number: $scope.searchParams.number,
-            numberGroup: $scope.searchParams.numberGroup
-          }
-        ]
-      };
     }
 
     function recruit() {

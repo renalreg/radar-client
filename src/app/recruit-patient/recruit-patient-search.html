@@ -33,6 +33,15 @@
   </div>
 
   <div frm-field frm-group>
+    <div frm-label>Gender</div>
+
+    <div frm-control>
+      <div frm-select-field model="searchParams.gender" options="genders" required="true"></div>
+      <div frm-errors errors="searchErrors.gender"></div>
+    </div>
+  </div>
+
+  <div frm-field frm-group>
     <div frm-label>Patient Number</div>
 
     <div frm-control>
