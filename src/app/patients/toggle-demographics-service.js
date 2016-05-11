@@ -46,7 +46,7 @@
       callbacks.push(callback);
 
       return function() {
-          _.pull(callbacks, callback);
+        _.pull(callbacks, callback);
       };
     }
 
