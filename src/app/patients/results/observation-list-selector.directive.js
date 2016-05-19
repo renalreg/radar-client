@@ -25,7 +25,7 @@
         load();
 
         function load() {
-          adapter.get('observation-counts', {patient: scope.patient.id}).then(function(response) {
+          adapter.get('/observation-counts', {patient: scope.patient.id}).then(function(response) {
             var observations = [];
             counts = {};
 
