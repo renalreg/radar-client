@@ -4,7 +4,9 @@
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
 
-## Development Build
+## Build
+
+### Development
 
 During development you will probably want to run `gulp watch`. This will build
 a development version of the application and watch for any changes to the
@@ -14,11 +16,23 @@ version without watching for changes afterwards.
 The terminal output will show any JavaScript lint errors. You can also check for
 lint errors using `gulp lint`.
 
-## Distribution Build
+### Distribution
 
 You can build a distribution version of the application using `gulp build:dist`.
 This builds an optimised version of the application in the `dist` folder. Source
 files are concatenated and minified.
+
+## Deploy
+
+```
+virtualenv venv
+source venv/bin/activate
+pip install fabric
+
+fab -H nww.radar.nhs.uk -u root deploy
+```
+
+The `--gateway` option is useful for tunneling through another server.
 
 ## Gulp Tasks
 
