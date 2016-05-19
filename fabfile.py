@@ -12,8 +12,8 @@ def deploy(archive=None, name='radar-client'):
 
     version = re.search('-([^-]+)\.tar\.gz$', archive).group(1)
 
-    tmp_archive_path = '/tmp/{name}.tar.gz'.format(name=name)
-    put(archive, tmp_archive_path)
+    remote_archive = '/tmp/{name}.tar.gz'.format(name=name)
+    put(archive, remote_archive)
 
     current_version = '/srv/{name}/current'.format(name=name)
     new_version = '/srv/{name}/{version}'.format(name=name, version=version)
@@ -21,8 +21,7 @@ def deploy(archive=None, name='radar-client'):
     run('rm -rf {0} && mkdir -p {0}'.format(new_version))
 
     with cd(new_version):
-        run('tar --strip-components=1 -xzf {}'.format(tmp_archive_path))
+        run('tar --strip-components=1 -xzf {}'.format(remote_archive))
 
     run('ln -sfn {0} {1}'.format(new_version, current_version))
-    run('rm -rf {0}'.format(tmp_archive_path))
-
+    run('rm -rf {0}'.format(remote_archive))
