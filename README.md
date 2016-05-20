@@ -24,6 +24,14 @@ files are concatenated and minified.
 
 ## Deploy
 
+Build a `.tar.gz`:
+
+```
+./build.sh
+```
+
+Deploy to servers:
+
 ```
 virtualenv venv
 source venv/bin/activate
