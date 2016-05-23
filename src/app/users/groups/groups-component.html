@@ -52,7 +52,7 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page" sort-by="group.shortName">
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{sortBy: 'group.shortName'}">
     <p>
       <span crud-create-button action="create()"></span>
     </p>

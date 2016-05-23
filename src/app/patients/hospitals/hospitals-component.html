@@ -80,7 +80,7 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page" sort-by="organisation.name">
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{sortBy: 'group.name'}">
     <p>
       <span crud-create-button action="create()"></span>
     </p>
