@@ -17,9 +17,9 @@
         }, function(user) {
           setCohorts([]);
 
-          cohortStore.findMany({isRecruitmentGroup: true}).then(function(cohorts) {
+          cohortStore.findMany().then(function(cohorts) {
             cohorts = _.filter(cohorts, function(x) {
-              return hasPermissionForGroup(user, x, 'RECRUIT_PATIENT');
+              return !x.hasDependencies && hasPermissionForGroup(user, x, 'RECRUIT_PATIENT');
             });
 
             setCohorts(cohorts);
