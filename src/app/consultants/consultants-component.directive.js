@@ -12,7 +12,8 @@
     ConsultantPermission,
     firstPromise,
     $injector,
-    store
+    store,
+    _
   ) {
     function ConsultantsController($scope) {
       var self = this;
@@ -24,7 +25,14 @@
         }
       });
 
-      self.load(store.findMany('consultants'));
+      self.load(firstPromise([
+        store.findMany('consultants'),
+        store.findMany('specialties').then(function(specialties) {
+          $scope.specialties = _.sortBy(specialties, function(x) {
+            return x.name;
+          });
+        })
+      ]));
 
       $scope.create = function() {
         var item = store.create('consultants');
@@ -43,7 +51,8 @@
     'ConsultantPermission',
     'firstPromise',
     '$injector',
-    'store'
+    'store',
+    '_'
   ];
 
   app.factory('ConsultantsController', controllerFactory);

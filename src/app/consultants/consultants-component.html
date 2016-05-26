@@ -17,6 +17,11 @@
       </tr>
 
       <tr>
+        <th>Specialty</th>
+        <td>{{item.specialty.name}}</td>
+      </tr>
+
+      <tr>
         <th>Email Address</th>
         <td>{{item.email | missing}}</td>
       </tr>
@@ -68,6 +73,15 @@
         <div frm-control>
           <div frm-text-field model="item.lastName" required="true"></div>
           <div frm-errors errors="item.errors.lastName"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Specialty</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.specialty" options="specialties" options-label="name" required="true"></div>
+          <div frm-errors errors="item.errors.specialty"></div>
         </div>
       </div>
 
@@ -124,6 +138,7 @@
           <th></th>
           <th sort-helper="firstName">First Name</th>
           <th sort-helper="lastName">Last Name</th>
+          <th sort-helper="specialty.name">Specialty</th>
           <th sort-helper="email">Email</th>
           <th sort-helper="telephoneNumber">Telephone Number</th>
           <th sort-helper="gmcNumber">GMC Number</th>
@@ -141,6 +156,7 @@
 
           <td>{{item.firstName}}</td>
           <td>{{item.lastName}}</td>
+          <td>{{item.specialty.name}}</td>
           <td>{{item.email | missing}}</td>
           <td>{{item.telephoneNumber | missing}}</td>
           <td>{{item.gmcNumber | missing}}</td>
