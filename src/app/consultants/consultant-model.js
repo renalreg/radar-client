@@ -15,7 +15,7 @@
     ConsultantModel.prototype = Object.create(Model.prototype);
 
     ConsultantModel.prototype.toString = function() {
-      return this.firstName + ' ' + this.lastName;
+      return this.firstName + ' ' + this.lastName + ' (' + this.specialty.name + ')';
     };
 
     return ConsultantModel;
