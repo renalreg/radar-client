@@ -1,0 +1,184 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Source</th>
+        <td>{{item.getSource()}}</td>
+      </tr>
+
+      <tr>
+        <th>Registration Date</th>
+        <td>{{item.registrationDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Transplant Date</th>
+        <td>{{item.transplantDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Indications</th>
+        <td>
+            <div ng-if="item.indications.length == 0">-</div>
+            <ul ng-if="item.indications.length > 0">
+                <li ng-repeat="indication in item.indications">{{indication.label}}</li>
+            </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Other Indications</th>
+        <td class="newlines">{{item.otherIndications | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>First Graft Source</th>
+        <td>{{item.firstGraftSource.label | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Reason For Loss</th>
+        <td>{{item.lossReason.label | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Other Reason For Loss</th>
+        <td class="newlines">{{item.otherLossReason | missing}}</td>
+      </tr>
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <div frm-field frm-group>
+        <div frm-label>Source</div>
+
+        <div frm-control>
+          <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+          <div frm-errors errors="item.errors.sourceGroup"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Registration Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.registrationDate"></div>
+          <div frm-errors errors="item.errors.registrationDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Transplant Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.transplantDate" required="true"></div>
+          <div frm-errors errors="item.errors.transplantDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Indications</div>
+
+        <div frm-control>
+          <div frm-multiple-checkbox-field model="item.indications" options="indications"></div>
+          <div frm-errors errors="item.errors.indications"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Other Indications</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="item.otherIndications"></div>
+          <div frm-errors errors="item.errors.otherIndications"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>First Graft Source</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.firstGraftSource" options="firstGraftSources"></div>
+          <div frm-errors errors="item.errors.firstGraftSource"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Reason For Loss</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.lossReason" options="lossReasons"></div>
+          <div frm-errors errors="item.errors.lossReason"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Other Reason For Loss</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="item.otherLossReason"></div>
+          <div frm-errors errors="item.errors.otherLossReason"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{sortBy: 'transplantDate', reverse: true}">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div filter-helper></div>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="transplantDate">Date</th>
+          <th sort-helper="getSource()">Source</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.transplantDate | dateFormat}}</td>
+          <td class="source">{{item.getSource()}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+  </div>
+</div>

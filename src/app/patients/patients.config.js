@@ -82,6 +82,7 @@
       INS_CLINICAL_PICTURES: patientPage('Clinical Pictures', 'patient.insClinicalPictures'),
       INS_RELAPSES: patientPage('Relapses', 'patient.insRelapses'),
       LIVER_IMAGING: patientPage('Liver Imaging', 'patient.liverImaging'),
+      LIVER_TRANSPLANTS: patientPage('Liver Transplants', 'patient.liverTransplants'),
       MEDICATIONS: patientPage('Medications', 'patient.medications'),
       META: patientPage('Metadata', 'patient.metadata'),
       MPGN_CLINICAL_PICTURES: patientPage('Clinical Pictures', 'patient.mpgnClinicalPictures'),

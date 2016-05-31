@@ -8,5 +8,10 @@
       url: '/liver-imaging',
       templateUrl: 'app/patients/pkd/liver-imaging.html'
     });
+
+    $stateProvider.state('patient.liverTransplants', {
+      url: '/liver-transplants',
+      templateUrl: 'app/patients/pkd/liver-transplants.html'
+    });
   }]);
 })();
