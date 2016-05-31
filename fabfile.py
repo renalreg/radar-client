@@ -1,5 +1,6 @@
 import os
 import re
+from pkg_resources import parse_version
 
 from fabric.api import task, put, run, cd
 
@@ -7,8 +8,7 @@ from fabric.api import task, put, run, cd
 @task
 def deploy(archive=None, name='radar-client'):
     if archive is None:
-        # Use the latest archive by default
-        archive = sorted(x for x in os.listdir('.') if x.endswith('.tar.gz'))[-1]
+        archive = sorted(filter(lambda x: x.endswith('.tar.gz'), os.listdir('.')), key=parse_version)[-1]
 
     version = re.search('-([^-]+)\.tar\.gz$', archive).group(1)
     current_version = '/srv/{name}/current'.format(name=name)
