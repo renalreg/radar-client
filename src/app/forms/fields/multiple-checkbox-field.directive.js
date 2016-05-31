@@ -3,6 +3,7 @@
 
   var app = angular.module('radar.forms.fields');
 
+  // TODO pass optionsId and optionsLabel to directive
   app.directive('frmMultipleCheckboxField', function() {
     return {
       restrict: 'A',
