@@ -13,7 +13,7 @@
 
         <tr>
           <th>Email</th>
-          <td>{{item.email}}</td>
+          <td>{{item.email | missing}}</td>
         </tr>
 
         <tr>
@@ -76,7 +76,7 @@
         <div frm-label>Email</div>
 
         <div frm-control>
-          <div frm-text-field model="item.email" required="true"></div>
+          <div frm-text-field model="item.email"></div>
           <div frm-errors errors="item.errors.email"></div>
         </div>
       </div>
@@ -85,7 +85,7 @@
         <div frm-label>First Name</div>
 
         <div frm-control>
-          <div frm-text-field model="item.firstName" required="true"></div>
+          <div frm-text-field model="item.firstName"></div>
           <div frm-errors errors="item.errors.firstName"></div>
         </div>
       </div>
@@ -94,8 +94,8 @@
         <div frm-label>Last Name</div>
 
         <div frm-control>
-          <div frm-text-field model="item.lastName" required="true"></div>
-          <div frm-errors errors="item.errors.firstName"></div>
+          <div frm-text-field model="item.lastName"></div>
+          <div frm-errors errors="item.errors.lastName"></div>
         </div>
       </div>
 
