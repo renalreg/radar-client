@@ -7,7 +7,7 @@
 
     <table class="table properties">
       <tr>
-        <th>Source</th>
+        <th>Data Source</th>
         <td>{{item.getSource()}}</td>
       </tr>
 
@@ -53,7 +53,7 @@
 
     <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
       <div frm-field frm-group>
-        <div frm-label>Source</div>
+        <div frm-label>Data Source</div>
 
         <div frm-control>
           <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
@@ -172,7 +172,7 @@
           <th sort-helper="getDose()">Dose</th>
           <th sort-helper="frequency">Frequency</th>
           <th sort-helper="route.label">Route</th>
-          <th sort-helper="getSource()">Source</th>
+          <th sort-helper="getSource()">Data Source</th>
           <th></th>
         </tr>
       </thead>
