@@ -5,31 +5,31 @@
 
   function recruitPatientPermission(
     hasPermission,
-    $compile,
-    session
+    session,
+    ngIfDirective
   ) {
-    // TODO $compile memory leak
-    return {
-      scope: true,
-      link: function(scope, element, attrs) {
-        scope.$watch(function() {
-          return hasPermission(session.user, 'RECRUIT_PATIENT');
-        }, function(hasPermission) {
-          scope.hasPermission = hasPermission;
-        });
+    // Source: http://stackoverflow.com/a/24065378
+    var ngIf = ngIfDirective[0];
 
-        // TODO this will overwrite an existing ng-if attribute
-        element.attr('ng-if', 'hasPermission');
-        element.removeAttr('recruit-patient-permission');
-        $compile(element)(scope);
+    return {
+      transclude: ngIf.transclude,
+      priority: ngIf.priority,
+      terminal: ngIf.terminal,
+      restrict: ngIf.restrict,
+      link: function(scope, element, attrs) {
+        attrs.ngIf = function() {
+          return hasPermission(session.user, 'RECRUIT_PATIENT');
+        };
+
+        ngIf.link.apply(ngIf, arguments);
       }
     };
   }
 
   recruitPatientPermission.$inject = [
     'hasPermission',
-    '$compile',
-    'session'
+    'session',
+    'ngIfDirective'
   ];
 
   app.directive('recruitPatientPermission', recruitPatientPermission);

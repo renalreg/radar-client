@@ -3,24 +3,34 @@
 
   var app = angular.module('radar.posts');
 
-  app.directive('createPostPermission', ['PostPermission', '$compile', function(PostPermission, $compile) {
-    // TODO $compile memory leak
+  function createPostPermission(
+    PostPermission,
+    ngIfDirective
+  ) {
+    // Source: http://stackoverflow.com/a/24065378
+    var ngIf = ngIfDirective[0];
+
     return {
-      scope: true,
+      transclude: ngIf.transclude,
+      priority: ngIf.priority,
+      terminal: ngIf.terminal,
+      restrict: ngIf.restrict,
       link: function(scope, element, attrs) {
         var permission = new PostPermission();
 
-        scope.$watch(function() {
+        attrs.ngIf = function() {
           return permission.hasPermission();
-        }, function(hasPermission) {
-          scope.hasPermission = hasPermission;
-        });
+        };
 
-        // TODO this will overwrite an existing ng-if attribute
-        element.attr('ng-if', 'hasPermission');
-        element.removeAttr('create-post-permission');
-        $compile(element)(scope);
+        ngIf.link.apply(ngIf, arguments);
       }
     };
-  }]);
+  }
+
+  createPostPermission.$inject = [
+    'PostPermission',
+    'ngIfDirective'
+  ];
+
+  app.directive('createPostPermission', createPostPermission);
 })();
