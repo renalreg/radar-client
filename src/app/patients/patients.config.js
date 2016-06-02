@@ -75,6 +75,7 @@
       FAMILY_HISTORY: patientPage('Family History', 'patient.familyHistory', true),
       FETAL_ANOMALY_SCANS: patientPage('Fetal Anomaly Scans', 'patient.fetalAnomalyScans'),
       FETAL_ULTRASOUNDS: patientPage('Fetal Ultrasounds', 'patient.fetalUltrasounds'),
+      FUAN_CLINICAL_PICTURES: patientPage('Clinical Pictures', 'patient.fuanClinicalPictures'),
       GENETICS: patientPage('Genetics', 'patient.genetics', true),
       HNF1B_CLINICAL_PICTURES: patientPage('Clinical Pictures', 'patient.hnf1bClinicalPictures'),
       HOSPITALISATIONS: patientPage('Hospitalisations', 'patient.hospitalisations'),
