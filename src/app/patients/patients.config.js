@@ -89,6 +89,7 @@
       MPGN_CLINICAL_PICTURES: patientPage('Clinical Pictures', 'patient.mpgnClinicalPictures'),
       NEPHRECTOMIES: patientPage('Nephrectomies', 'patient.nephrectomies'),
       NUMBERS: patientPage('Numbers', 'patient.numbers'),
+      NUTRITION: patientPage('Nutrition', 'patient.nutrition'),
       PATHOLOGY: patientPage('Pathology', 'patient.pathology'),
       PLASMAPHERESIS: patientPage('Plasmapheresis', 'patient.plasmapheresis'),
       PREGNANCIES: patientPage('Pregnancies', 'patient.pregnancies'),

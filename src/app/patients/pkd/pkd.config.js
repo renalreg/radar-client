@@ -18,5 +18,10 @@
       url: '/liver-diseases',
       templateUrl: 'app/patients/pkd/liver-diseases.html'
     });
+
+    $stateProvider.state('patient.nutrition', {
+      url: '/nutrition',
+      templateUrl: 'app/patients/pkd/nutrition.html'
+    });
   }]);
 })();
