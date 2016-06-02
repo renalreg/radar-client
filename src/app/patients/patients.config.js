@@ -98,7 +98,7 @@
       RENAL_PROGRESSION: patientPage('Renal Disease Progression', 'patient.renalProgression'),
       RESULTS: patientPage('Results', 'patient.results'),
       SALT_WASTING_CLINICAL_FEATURES: patientPage('Clinical Features', 'patient.saltWastingClinicalFeatures'),
-      TRANSPLANTS: patientPage('Transplants', 'patient.transplants')
+      TRANSPLANTS: patientPage('Kidney Transplants', 'patient.transplants')
     };
   }]);
 })();

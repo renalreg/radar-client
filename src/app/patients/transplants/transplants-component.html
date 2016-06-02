@@ -7,7 +7,7 @@
 
     <table class="table properties">
       <tr>
-        <th>Source</th>
+        <th>Data Source</th>
         <td>{{item.getSource()}}</td>
       </tr>
 
@@ -22,7 +22,7 @@
       </tr>
 
       <tr>
-        <th>Modality</th>
+        <th>Type</th>
         <td>{{item.modality.label}}</td>
       </tr>
 
@@ -78,7 +78,7 @@
 
     <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
       <div frm-field frm-group>
-        <div frm-label>Source</div>
+        <div frm-label>Data Source</div>
 
         <div frm-control>
           <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
@@ -87,7 +87,7 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Date</div>
+        <div frm-label>Date of Transplant</div>
 
         <div frm-control>
           <div frm-date-field model="item.date" required="true"></div>
@@ -105,7 +105,7 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Modality</div>
+        <div frm-label>Type</div>
 
         <div frm-control>
           <div frm-select-field model="item.modality" required="true" options="modalities"></div>
@@ -118,6 +118,7 @@
 
         <div frm-control>
           <div frm-date-field model="item.dateOfRecurrence"></div>
+          <div frm-help>Date of recurrence of original disease.</div>
           <div frm-errors errors="item.errors.dateOfRecurrence"></div>
         </div>
       </div>
@@ -158,10 +159,10 @@
           <th></th>
           <th sort-helper="date">Date</th>
           <th sort-helper="transplantGroup.shortName">Hospital</th>
-          <th sort-helper="modality.label">Modality</th>
+          <th sort-helper="modality.label">Type</th>
           <th sort-helper="dateOfRecurrence.label">Date of Recurrence</th>
           <th sort-helper="dateOfFailure.label">Date of Failure</th>
-          <th sort-helper="getSource()">Source</th>
+          <th sort-helper="getSource()">Data Source</th>
           <th></th>
         </tr>
       </thead>

@@ -15,7 +15,7 @@
           </tr>
 
           <tr>
-            <th>Source</th>
+            <th>Data Source</th>
             <td>{{item.getSource()}}</td>
           </tr>
 
@@ -52,7 +52,7 @@
             <div ng-if="item.observation">
 
               <div frm-field frm-group>
-                <div frm-label>Source</div>
+                <div frm-label>Data Source</div>
 
                 <div frm-control>
                   <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
@@ -149,7 +149,7 @@
                     {{observation.shortName}}<span ng-if="observation.units">&nbsp;({{observation.units}})</span>
                   </th>
 
-                  <th sort-helper="getSource()">Source</th>
+                  <th sort-helper="getSource()">Data Source</th>
                 </tr>
               </thead>
 

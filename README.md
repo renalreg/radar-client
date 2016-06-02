@@ -4,6 +4,13 @@
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
 
+## Setup
+
+* [Install Node.js and npm](https://nodejs.org/en/download/package-manager/)
+* Install npm packages: `npm install`
+* Install bower: `npm install -g bower`
+* Install bower packages: `bower install`
+
 ## Build
 
 ### Development
