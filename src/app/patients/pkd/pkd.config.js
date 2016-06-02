@@ -14,9 +14,9 @@
       templateUrl: 'app/patients/pkd/liver-transplants.html'
     });
 
-    $stateProvider.state('patient.liverSymptoms', {
-      url: '/liver-symptoms',
-      templateUrl: 'app/patients/pkd/liver-symptoms.html'
+    $stateProvider.state('patient.liverDiseases', {
+      url: '/liver-diseases',
+      templateUrl: 'app/patients/pkd/liver-diseases.html'
     });
   }]);
 })();
