@@ -32,6 +32,11 @@
       </tr>
 
       <tr>
+        <th>Prenatal Diagnosis</th>
+        <td><span tick="item.prenatal"></span></td>
+      </tr>
+
+      <tr>
         <th>Confirmed by Gene Test</th>
         <td><span tick="item.geneTest"></span></td>
       </tr>
@@ -108,6 +113,15 @@
         <div frm-control>
           <div frm-date-field model="item.toDate"></div>
           <div frm-errors errors="item.errors.toDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Prenatal Diagnosis</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.prenatal"></div>
+          <div frm-errors errors="item.errors.prenatal"></div>
         </div>
       </div>
 
