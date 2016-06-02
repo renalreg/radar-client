@@ -22,6 +22,11 @@
       </tr>
 
       <tr>
+        <th>Transplant Hospital</th>
+        <td>{{item.transplantGroup.name | missing}}</td>
+      </tr>
+
+      <tr>
         <th>Indications</th>
         <td>
             <div ng-if="item.indications.length == 0">-</div>
@@ -86,6 +91,15 @@
         <div frm-control>
           <div frm-date-field model="item.transplantDate" required="true"></div>
           <div frm-errors errors="item.errors.transplantDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Transplant Hospital</div>
+
+        <div frm-control>
+          <div frm-hospital-field model="item.transplantGroup"></div>
+          <div frm-errors errors="item.errors.transplantGroup"></div>
         </div>
       </div>
 
@@ -156,7 +170,8 @@
       <thead>
         <tr>
           <th></th>
-          <th sort-helper="transplantDate">Date</th>
+          <th sort-helper="transplantDate">Transplant Date</th>
+          <th sort-helper="transplantHospital">Transplant Hospital</th>
           <th sort-helper="getSource()">Source</th>
           <th></th>
         </tr>
@@ -170,6 +185,7 @@
           </td>
 
           <td>{{item.transplantDate | dateFormat}}</td>
+          <td>{{item.transplantGroup.shortName | missing}}</td>
           <td class="source">{{item.getSource()}}</td>
 
           <td>
