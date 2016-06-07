@@ -98,7 +98,7 @@
       for (var i = 0; i < this.groups.length; i++) {
         var currentGroup = this.groups[i];
 
-        if (currentGroup.group.id == group.id && (fromDate === null || currentGroup.fromDate < fromDate)) {
+        if (currentGroup.group.id === group.id && (fromDate === null || currentGroup.fromDate < fromDate)) {
             fromDate = currentGroup.fromDate;
         }
       }

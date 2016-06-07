@@ -68,7 +68,7 @@
           }
         });
 
-        var groups = getGroups(filters)
+        var groups = getGroups(filters);
 
         var groupIds = _.map(groups, function(group) {
           return group.id;
