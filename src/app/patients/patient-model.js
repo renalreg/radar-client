@@ -91,6 +91,21 @@
       return uniqueGroups(this.getCurrentHospitalPatients());
     };
 
+    PatientModel.prototype.getFromDate = function(group) {
+      var fromDate = null;
+
+      // Find the earliest from date for this group
+      for (var i = 0; i < this.groups.length; i++) {
+        var currentGroup = this.groups[i];
+
+        if (currentGroup.group.id == group.id && (fromDate === null || currentGroup.fromDate < fromDate)) {
+            fromDate = currentGroup.fromDate;
+        }
+      }
+
+      return fromDate;
+    };
+
     return PatientModel;
   }]);
 

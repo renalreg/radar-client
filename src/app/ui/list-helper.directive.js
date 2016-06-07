@@ -288,11 +288,18 @@
       this.lastParams = null;
     }
 
-    ListHelperProxy.prototype.sort = function(sortBy, reverse) {
+    ListHelperProxy.prototype.sort = function(sortBy, reverse, load) {
+      if (load === undefined) {
+        load = true;
+      }
+
       this.page = 1;
       this.sortBy = sortBy;
       this.reverse = reverse;
-      this.load();
+
+      if (load) {
+        this.load();
+      }
     };
 
     ListHelperProxy.prototype.getSortBy = function() {

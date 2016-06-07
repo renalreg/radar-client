@@ -25,7 +25,8 @@
               <th sort-helper="dateOfBirth">DOB</th>
               <th sort-helper="gender">Gender</th>
               <th sort-helper="primaryPatientNumber" ng-if="viewDemographicsPermission">Patient Number</th>
-              <th sort-helper="recruitedDate">Date Recruited</th>
+              <th sort-helper="recruitedDate">Recruited On</th>
+              <th ng-repeat="group in groups" sort-helper="group{{group.id}}">{{group.shortName}}</th>
               <th>Cohorts</th>
               <th>Hospitals</th>
             </tr>
@@ -84,6 +85,8 @@
               </td>
 
               <td>{{patient.recruitedDate | dateFormat}}</td>
+
+              <td ng-repeat="group in groups">{{patient.getFromDate(group) | dateFormat}}</td>
 
               <td>
                 <span ng-if="!patient.getCurrentCohorts().length">-</span>
