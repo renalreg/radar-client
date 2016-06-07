@@ -99,7 +99,7 @@
         var currentGroup = this.groups[i];
 
         if (currentGroup.group.id === group.id && (fromDate === null || currentGroup.fromDate < fromDate)) {
-            fromDate = currentGroup.fromDate;
+          fromDate = currentGroup.fromDate;
         }
       }
 
