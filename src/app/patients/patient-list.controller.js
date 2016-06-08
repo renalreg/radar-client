@@ -84,14 +84,17 @@
       function update() {
         $scope.groups = getGroups($scope.filters);
 
-        // Check if we are still filtering against the sorted group
-        var found = _.some($scope.groups, function(group) {
-          return 'group' + group.id === proxy.getSortBy();
-        });
+        // Sorted by group
+        if (proxy.getSortBy().indexOf('group') === 0) {
+          // Check if we are still filtering against the sorted group
+          var found = _.some($scope.groups, function(group) {
+            return 'group' + group.id === proxy.getSortBy();
+          });
 
-        // Use the default ordering if we are no longer filtering by the sorted group
-        if (!found) {
-          proxy.sort('id', true, false);
+          // Use the default ordering if we are no longer filtering by the sorted group
+          if (!found) {
+            proxy.sort('id', true, false);
+          }
         }
 
         var proxyParams = proxy.getParams();
