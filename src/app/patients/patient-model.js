@@ -63,7 +63,7 @@
       return filterGroupPatientsByType(this.groups, 'HOSPITAL');
     };
 
-    PatientModel.prototype.getCohortPatients = function(all) {
+    PatientModel.prototype.getCohortPatients = function() {
       return filterGroupPatientsByType(this.groups, 'COHORT');
     };
 
@@ -75,19 +75,23 @@
       return filterGroupPatientsByCurrent(this.getCohortPatients());
     };
 
-    PatientModel.prototype.getCohorts = function(all) {
+    PatientModel.prototype.getCohorts = function() {
       return uniqueGroups(this.getCohortPatients());
     };
 
-    PatientModel.prototype.getHospitals = function(all) {
+    PatientModel.prototype.getHospitals = function() {
       return uniqueGroups(this.getHospitalPatients());
     };
 
-    PatientModel.prototype.getCurrentCohorts = function(all) {
+    PatientModel.prototype.getGroups = function() {
+      return uniqueGroups(this.groups);
+    };
+
+    PatientModel.prototype.getCurrentCohorts = function() {
       return uniqueGroups(this.getCurrentCohortPatients());
     };
 
-    PatientModel.prototype.getCurrentHospitals = function(all) {
+    PatientModel.prototype.getCurrentHospitals = function() {
       return uniqueGroups(this.getCurrentHospitalPatients());
     };
 

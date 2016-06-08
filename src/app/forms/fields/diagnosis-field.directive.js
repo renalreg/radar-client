@@ -8,7 +8,8 @@
       restrict: 'A',
       scope: {
         model: '=',
-        required: '&'
+        required: '&',
+        patient: '='
       },
       templateUrl: 'app/forms/fields/diagnosis-field.html'
     };
