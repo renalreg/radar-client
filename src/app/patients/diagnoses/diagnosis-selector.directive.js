@@ -50,9 +50,6 @@
 
         // Load diagnoses
         store.findMany('diagnoses').then(function(diagnoses) {
-          // Sort diagnoses by name
-          diagnoses = _.sortBy(diagnoses, 'name');
-
           // Add a diagnosis
           function add(group, diagnosis) {
             var key = group === null ? null : group.id;
