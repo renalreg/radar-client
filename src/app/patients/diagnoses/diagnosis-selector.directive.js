@@ -75,7 +75,7 @@
           });
 
           // Get's patients groups sorted by name
-          scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName')
+          scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
 
           // Remove groups that don't have any diagnoses
           scope.groups = _.filter(scope.groups, function(group) {
