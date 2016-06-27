@@ -5,7 +5,7 @@
 
   app.config(['$stateProvider', function($stateProvider) {
     $stateProvider.state('patient.diagnoses', {
-      url: '/diagnoses',
+      url: '/comorbidities',
       templateUrl: 'app/patients/diagnoses/diagnoses.html'
     });
 

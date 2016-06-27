@@ -68,7 +68,7 @@
       ALIASES: patientPage('Aliases', 'patient.aliases'),
       ALPORT_CLINICAL_PICTURES: patientPage('Clinical Pictures', 'patient.alportClinicalPictures'),
       DEMOGRAPHICS: patientPage('Demographics', 'patient.demographics'),
-      DIAGNOSES: patientPage('Diagnoses', 'patient.diagnoses', true),
+      DIAGNOSES: patientPage('Comorbidities', 'patient.diagnoses', true),
       DIALYSIS: patientPage('Dialysis', 'patient.dialysis'),
       COHORTS: patientPage('Cohorts', 'patient.cohorts'),
       CONSULTANTS: patientPage('Consultants', 'patient.consultants'),
