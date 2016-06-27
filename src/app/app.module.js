@@ -11,6 +11,7 @@
     'radar.controllers',
     'radar.core',
     'radar.crud',
+    'radar.diagnoses',
     'radar.filters',
     'radar.forms',
     'radar.groups',

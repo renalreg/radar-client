@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var app = angular.module('radar.patients.medications');
+  var app = angular.module('radar.consultants');
 
   app.factory('ConsultantPermission', ['AdminPermission', function(AdminPermission) {
     return AdminPermission;
