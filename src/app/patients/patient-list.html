@@ -33,7 +33,7 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="patient in items">
+            <tr ng-repeat="patient in items" ng-class="{dead: patient.dateOfDeath}">
               <td><a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a></td>
 
               <td>

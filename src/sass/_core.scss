@@ -329,3 +329,7 @@ a.delete-user, a.delete-patient {
 .link {
   text-decoration: underline;
 }
+
+.dead, .dead a {
+  color: red;
+}
