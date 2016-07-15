@@ -241,7 +241,7 @@
       </thead>
 
       <tbody>
-        <tr ng-repeat="item in page.getItems()">
+        <tr ng-repeat="item in page.getItems()" ng-class="{'dead': item.yearOfDeath}">
           <td>
             <span crud-list-view-button item="item"></span>
             <span crud-list-edit-button item="item"></span>
