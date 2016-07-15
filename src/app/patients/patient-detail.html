@@ -1,7 +1,7 @@
 <div class="patient-header">
   <div class="patient">
     <ul>
-      <li class="name">
+      <li class="name" ng-class="{'dead': patient.dateOfDeath}">
         <a ui-sref="patient.demographics({patientId: patient.id})">
           <span if-demographics-visible ng-bind="patient.getName(true)"></span>
           <span if-demographics-hidden ng-bind="patient.getName(false)"></span>
