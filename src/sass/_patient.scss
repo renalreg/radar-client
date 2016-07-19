@@ -92,7 +92,12 @@
       }
     }
 
-    li.active a, li a:hover, li a:focus {
+    li.active a,
+    li.group.active a,
+    li.group a:hover,
+    li.group a:focus,
+    li a:hover,
+    li a:focus {
       color: #FFF;
       background-color: #333;
     }
@@ -107,6 +112,11 @@
 
     li.group {
       font-weight: bold;
+
+      a {
+        color: #FFF;
+        background-color: $radar-primary;
+      }
     }
   }
 }
