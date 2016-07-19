@@ -1,0 +1,185 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Date of Picture</th>
+        <td>{{item.pictureDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Gout</th>
+        <td><span tick="item.gout"></span></td>
+      </tr>
+
+      <tr ng-if="item.goutDate">
+        <th>Gout Date</th>
+        <td>{{item.goutDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Family History of Gout</th>
+        <td>
+          <span tick="item.familyGout"></span>
+        </td>
+      </tr>
+
+      <tr ng-if="item.familyGoutRelatives.length">
+        <th>Relatives with Gout</th>
+        <td>
+          <ul>
+            <li ng-repeat="relative in item.familyGoutRelatives">{{relative.label}}</li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Urinary Uromodulin THP</th>
+        <td>{{item.thp.label | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Recurrent UTI</th>
+        <td>
+          <span tick="item.uti"></span>
+        </td>
+      </tr>
+
+      <tr>
+        <th>Comments</th>
+        <td class="newlines">{{item.comments}}</td>
+      </tr>
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <div frm-field frm-group>
+        <div frm-label>Date of Picture</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.pictureDate" required="true"></div>
+          <div frm-errors errors="item.errors.pictureDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Gout</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.gout"></div>
+          <div frm-errors errors="item.errors.gout"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="item.gout">
+        <div frm-label>Date Gout Diagnosed</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.goutDate"></div>
+          <div frm-errors errors="item.errors.goutDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Family History of Gout</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.familyGout"></div>
+          <div frm-errors errors="item.errors.familyGout"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="item.familyGout">
+        <div frm-label>Relatives with Gout</div>
+
+        <div frm-control>
+          <div frm-multiple-checkbox-field model="item.familyGoutRelatives" options="relatives"></div>
+          <div frm-errors errors="item.errors.familyGoutRelatives"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Urinary Uromodulin THP</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.thp" options="thpResults"></div>
+          <div frm-errors errors="item.errors.thp"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Recurrent UTI</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.uti"></div>
+          <div frm-errors errors="item.errors.uti"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Comments</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="item.comments"></div>
+          <div frm-errors errors="item.errors.comments"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'pictureDate', reverse: true}">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div filter-helper></div>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="pictureDate">Date</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.pictureDate | dateFormat}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+  </div>
+</div>
