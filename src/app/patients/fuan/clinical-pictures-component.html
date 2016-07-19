@@ -43,6 +43,13 @@
       </tr>
 
       <tr>
+        <th>Recurrent UTI</th>
+        <td>
+          <span tick="item.uti"></span>
+        </td>
+      </tr>
+
+      <tr>
         <th>Comments</th>
         <td class="newlines">{{item.comments}}</td>
       </tr>
@@ -109,6 +116,15 @@
         <div frm-control>
           <div frm-select-field model="item.thp" options="thpResults"></div>
           <div frm-errors errors="item.errors.thp"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Recurrent UTI</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.uti"></div>
+          <div frm-errors errors="item.errors.uti"></div>
         </div>
       </div>
 
