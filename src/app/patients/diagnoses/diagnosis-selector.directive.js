@@ -66,8 +66,10 @@
             add(null, diagnosis);
 
             _.forEach(diagnosis.groups, function(group) {
-              // Add diagnosis to group
-              add(group.group, diagnosis);
+              if (group.type.id === 'SECONDARY') {
+                // Add diagnosis to group
+                add(group.group, diagnosis);
+              }
             });
           });
 
