@@ -19,7 +19,7 @@ $nhs-yellow: rgb(247, 226, 20);
 
 $radar-primary: $nhs-aqua-green;
 $radar-primary-text: mix($radar-primary, black, 30%);
-$radar-secondary-bg: mix($radar-primary, white, 20%);
+$radar-primary-bg: mix($radar-primary, white, 20%);
 $radar-primary-selected: mix($radar-primary, white, 90%);
 
 $radar-secondary: $nhs-aqua-blue;
