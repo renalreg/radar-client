@@ -323,7 +323,7 @@ a.delete-user, a.delete-patient {
 }
 
 .no-link, .no-link:hover {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .link {
