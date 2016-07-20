@@ -15,7 +15,7 @@
           <td><span tick="item.normalPregnancy"></span></td>
         </tr>
 
-        <tr ng-show="!item.normalPregnancy">
+        <tr ng-show="item.normalPregnancy === false">
           <th>Abnormal Pregnancy Text</th>
           <td class="newlines">{{item.abnormalPregnancyText}}</td>
         </tr>
@@ -103,7 +103,7 @@
         <div frm-label>Was mother's pregnancy normal?</div>
 
         <div frm-control>
-          <div frm-yes-no-field model="item.normalPregnancy" required="true"></div>
+          <div frm-yes-no-field model="item.normalPregnancy"></div>
           <div frm-errors errors="item.errors.normalPregnancy"></div>
         </div>
       </div>
@@ -123,7 +123,7 @@
         <div frm-label>Neurological Problems?</div>
 
         <div frm-control>
-          <div frm-yes-no-field model="item.neurologicalProblems" required="true"></div>
+          <div frm-yes-no-field model="item.neurologicalProblems"></div>
           <div frm-errors errors="item.errors.neurologicalProblems"></div>
         </div>
       </div>
@@ -177,7 +177,7 @@
         <div frm-label>Joint Problems?</div>
 
         <div frm-control>
-          <div frm-yes-no-field model="item.jointProblems" required="true"></div>
+          <div frm-yes-no-field model="item.jointProblems"></div>
           <div frm-errors errors="item.errors.jointProblems"></div>
         </div>
       </div>
