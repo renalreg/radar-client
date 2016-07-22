@@ -9,6 +9,11 @@
         <th>Comments</th>
         <td class="newlines">{{item.comments | missing}}</td>
       </tr>
+
+      <tr>
+        <th>Test Patient?</th>
+        <td><span tick="item.test"></span></td>
+      </tr>
     </table>
 
     <div metadata item="item"></div>
@@ -26,6 +31,15 @@
         <div frm-control>
           <div frm-textarea-field model="item.comments"></div>
           <div frm-errors errors="item.errors.comments"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Test Patient?</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.test"></div>
+          <div frm-errors errors="item.errors.test"></div>
         </div>
       </div>
 
