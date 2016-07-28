@@ -87,6 +87,7 @@
 
 <div page-wrapper>
   <div ng-if="patient.test" class="alert alert-info"><strong><i class="fa fa-info-circle"></i> Info</strong> This is a test patient.</div>
+  <div ng-if="patient.frozen" class="alert alert-warning"><strong><i class="fa fa-exclamation-circle"></i> Warning</strong> This patient is frozen.</div>
 
   <div ui-view></div>
 </div>
