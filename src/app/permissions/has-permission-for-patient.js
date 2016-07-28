@@ -13,6 +13,10 @@
         return true;
       }
 
+      if (permission === 'EDIT_PATIENT' && patient.frozen) {
+        return false;
+      }
+
       var patientGroupIds = _.map(patient.groups, function(patientGroup) {
         return patientGroup.group.id;
       });
