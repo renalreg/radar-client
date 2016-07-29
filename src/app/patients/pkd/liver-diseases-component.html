@@ -24,6 +24,12 @@
           </tr>
 
           <tr>
+            <td>Ascites</td>
+            <td><span tick="item.ascites"></span></td>
+            <td>{{item.ascitesDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
             <td>Oesophageal Varices</td>
             <td><span tick="item.oesophageal"></span></td>
             <td>{{item.oesophagealDate | dateFormat}}</td>
@@ -117,6 +123,28 @@
                 <div frm-control>
                   <div frm-date-field model="item.portalHypertensionDate"></div>
                   <div frm-errors errors="item.errors.portalHypertensionDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Ascites</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.ascites"></div>
+                  <div frm-errors errors="item.errors.ascites"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.ascitesDate"></div>
+                  <div frm-errors errors="item.errors.ascitesDate"></div>
                 </div>
               </div>
             </td>
