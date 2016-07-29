@@ -73,6 +73,48 @@
       </div>
     </div>
 
+    <table class="table properties">
+      <tr>
+        <th>Renal Hypoplasia</th>
+        <td><span tick="item.hypoplasia"></span></td>
+      </tr>
+
+      <tr>
+        <th>Increased Renal Echogenicity</th>
+        <td><span tick="item.echogenicity"></span></td>
+      </tr>
+
+      <tr>
+        <th>Hepatic Abnormalities</th>
+        <td><span tick="item.hepaticAbnormalities"></span></td>
+      </tr>
+
+      <tr ng-if="item.hepaticAbnormalities">
+        <th>Hepatic Abnormality Details</th>
+        <td class="newlines">{{item.hepaticAbnormalityDetails | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Lung Abnormalities</th>
+        <td><span tick="item.lungAbnormalities"></span></td>
+      </tr>
+
+      <tr ng-if="item.lungAbnormalities">
+        <th>Lung Abnormality Details</th>
+        <td class="newlines">{{item.lungAbnormalityDetails | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Amnioinfusion</th>
+        <td><span tick="item.amnioinfusion"></span></td>
+      </tr>
+
+      <tr ng-if="item.amnioinfusion">
+        <th>Number of Amnioinfusions this Pregnancy</th>
+        <td>{{item.amnioinfusionCount | missing}}</td>
+      </tr>
+    </table>
+
     <div metadata item="item"></div>
   </div>
 
@@ -174,6 +216,78 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Renal Hypoplasia</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.hypoplasia"></div>
+          <div frm-errors errors="item.errors.hypoplasia"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Increased Renal Echogenicity</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.echogenicity"></div>
+          <div frm-errors errors="item.errors.echogenicity"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Hepatic Abnormalities</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.hepaticAbnormalities"></div>
+          <div frm-errors errors="item.errors.hepaticAbnormalities"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="item.hepaticAbnormalities">
+        <div frm-label>Hepatic Abnormality Details</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="item.hepaticAbnormalityDetails"></div>
+          <div frm-errors errors="item.errors.hepaticAbnormalityDetails"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Lung Abnormalities</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.lungAbnormalities"></div>
+          <div frm-errors errors="item.errors.lungAbnormalities"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="item.lungAbnormalities">
+        <div frm-label>Lung Abnormality Details</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="item.lungAbnormalityDetails"></div>
+          <div frm-errors errors="item.errors.lungAbnormalityDetails"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Amnioinfusion</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.amnioinfusion"></div>
+          <div frm-errors errors="item.errors.amnioinfusion"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="item.amnioinfusion">
+        <div frm-label>Number of Amnioinfusions this Pregnancy</div>
+
+        <div frm-control>
+          <div frm-integer-field model="item.amnioinfusionCount"></div>
+          <div frm-errors errors="item.errors.amnioinfusionCount"></div>
         </div>
       </div>
 

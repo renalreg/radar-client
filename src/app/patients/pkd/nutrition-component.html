@@ -1,0 +1,127 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Data Source</th>
+        <td>{{item.getSource()}}</td>
+      </tr>
+
+      <tr>
+        <th>Supplemental Feeding</th>
+        <td>{{item.feedingType.label}}</td>
+      </tr>
+
+      <tr>
+        <th>From Date</th>
+        <td>{{item.fromDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>To Date</th>
+        <td>{{item.toDate | dateFormat}}</td>
+      </tr>
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <div frm-field frm-group>
+        <div frm-label>Data Source</div>
+
+        <div frm-control>
+          <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+          <div frm-errors errors="item.errors.sourceGroup"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Supplemental Feeding</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.feedingType" options="feedingTypes" required="true"></div>
+          <div frm-errors errors="item.errors.feedingType"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>From Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.fromDate" required="true"></div>
+          <div frm-errors errors="item.errors.fromDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>To Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.toDate"></div>
+          <div frm-errors errors="item.errors.toDate"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{sortBy: 'fromDate', reverse: true}">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div filter-helper></div>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="feedingType.label">Supplemental Feeding</th>
+          <th sort-helper="fromDate">From Date</th>
+          <th sort-helper="toDate">To Date</th>
+          <th sort-helper="getSource()">Data Source</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.feedingType.label}}</td>
+          <td>{{item.fromDate | dateFormat}}</td>
+          <td>{{item.toDate | dateFormat}}</td>
+          <td class="source">{{item.getSource()}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+  </div>
+</div>

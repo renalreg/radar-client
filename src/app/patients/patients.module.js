@@ -21,6 +21,7 @@
     'radar.patients.hospitalisations',
     'radar.patients.hospitals',
     'radar.patients.ins',
+    'radar.patients.pkd',
     'radar.patients.medications',
     'radar.patients.metadata',
     'radar.patients.mpgn',

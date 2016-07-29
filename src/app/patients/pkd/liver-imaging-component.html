@@ -1,0 +1,195 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Source</th>
+        <td>{{item.getSource()}}</td>
+      </tr>
+
+      <tr>
+        <th>Date</th>
+        <td>{{item.date | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Imaging Type</th>
+        <td>{{item.imagingType.label}}</td>
+      </tr>
+
+      <tr>
+        <th>Size of Liver (cm)</th>
+        <td>{{item.size | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Hepatic Fibrosis</th>
+        <td><span tick="item.hepaticFibrosis"></span></td>
+      </tr>
+
+      <tr>
+        <th>Hepatic Cysts</th>
+        <td><span tick="item.hepaticCysts"></span></td>
+      </tr>
+
+      <tr>
+        <th>Bile Duct Cysts</th>
+        <td><span tick="item.bileDuctCysts"></span></td>
+      </tr>
+
+      <tr>
+        <th>Dilated Bile Ducts</th>
+        <td><span tick="item.dilatedBileDucts"></span></td>
+      </tr>
+
+      <tr>
+        <th>Cholangitis</th>
+        <td><span tick="item.cholangitis"></span></td>
+      </tr>
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <div frm-field frm-group>
+        <div frm-label>Source</div>
+
+        <div frm-control>
+          <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+          <div frm-errors errors="item.errors.sourceGroup"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.date" required="true"></div>
+          <div frm-errors errors="item.errors.date"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Imaging Type</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.imagingType" options="imagingTypes" required="true"></div>
+          <div frm-errors errors="item.errors.imagingType"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Size of Liver</div>
+
+        <div frm-control>
+          <div frm-number-field model="item.size" units="cm"></div>
+          <div frm-errors errors="item.errors.size"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Hepatic Fibrosis</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.hepaticFibrosis"></div>
+          <div frm-errors errors="item.errors.hepaticFibrosis"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Hepatic Cysts</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.hepaticCysts"></div>
+          <div frm-errors errors="item.errors.hepaticCysts"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Bile Duct Cysts</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.bileDuctCysts"></div>
+          <div frm-errors errors="item.errors.bileDuctCysts"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Dilated Bile Ducts</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.dilatedBileDucts"></div>
+          <div frm-errors errors="item.errors.dilatedBileDucts"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Cholangitis</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.cholangitis"></div>
+          <div frm-errors errors="item.errors.cholangitis"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{sortBy: 'date', reverse: true}">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div filter-helper></div>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="date">Date</th>
+          <th sort-helper="imagingType.label">Imaging Type</th>
+          <th sort-helper="getSource()">Source</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.date | dateFormat}}</td>
+          <td>{{item.imagingType.label | missing}}</td>
+          <td class="source">{{item.getSource()}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+  </div>
+</div>

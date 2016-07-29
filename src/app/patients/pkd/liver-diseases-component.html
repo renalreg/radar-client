@@ -1,0 +1,359 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-create-button action="create()"></span>
+      <span crud-edit-button item="item"></span>
+      <span crud-remove-button item="item"></span>
+    </p>
+
+    <div ng-if="item">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Disease Manifestation</th>
+            <th>Y/N</th>
+            <th>Date First Diagnosed</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Portal Hypertension</td>
+            <td><span tick="item.portalHypertension"></span></td>
+            <td>{{item.portalHypertensionDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Ascites</td>
+            <td><span tick="item.ascites"></span></td>
+            <td>{{item.ascitesDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Oesophageal Varices</td>
+            <td><span tick="item.oesophageal"></span></td>
+            <td>{{item.oesophagealDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Oesophageal Variceal Bleeding</td>
+            <td><span tick="item.oesophagealBleeding"></span></td>
+            <td>{{item.oesophagealBleedingDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Gastric Varices</td>
+            <td><span tick="item.gastric"></span></td>
+            <td>{{item.gastricDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Gastric Variceal Bleeding</td>
+            <td><span tick="item.gastricBleeding"></span></td>
+            <td>{{item.gastricBleedingDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Anorectal Varices</td>
+            <td><span tick="item.anorectal"></span></td>
+            <td>{{item.anorectalDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Anorectal Variceal Bleeding</td>
+            <td><span tick="item.anorectalBleeding"></span></td>
+            <td>{{item.anorectalBleedingDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Cholangitis - Acute</td>
+            <td><span tick="item.cholangitisAcute"></span></td>
+            <td>{{item.cholangitisAcuteDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Cholangitis - Recurrent</td>
+            <td><span tick="item.cholangitisRecurrent"></span></td>
+            <td>{{item.cholangitisRecurrentDate | dateFormat}}</td>
+          </tr>
+
+          <tr>
+            <td>Spleen Palpable</td>
+            <td><span tick="item.spleenPalpable"></span></td>
+            <td>{{item.spleenPalpableDate | dateFormat}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p ng-if="!item">Not entered.</p>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-view-button item="originalItem"></span>
+      <span crud-remove-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <table class="table table-striped" frm-layout="vertical">
+        <thead>
+          <tr>
+            <th>Disease Manifestation</th>
+            <th>Y/N</th>
+            <th>Date First Diagnosed</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><label class="control-label">Portal Hypertension</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.portalHypertension"></div>
+                  <div frm-errors errors="item.errors.portalHypertension"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.portalHypertensionDate"></div>
+                  <div frm-errors errors="item.errors.portalHypertensionDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Ascites</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.ascites"></div>
+                  <div frm-errors errors="item.errors.ascites"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.ascitesDate"></div>
+                  <div frm-errors errors="item.errors.ascitesDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Oesophageal Varices</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.oesophageal"></div>
+                  <div frm-errors errors="item.errors.oesophageal"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.oesophagealDate"></div>
+                  <div frm-errors errors="item.errors.oesophagealDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Oesophageal Variceal Bleeding</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.oesophagealBleeding"></div>
+                  <div frm-errors errors="item.errors.oesophagealBleeding"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.oesophagealBleedingDate"></div>
+                  <div frm-errors errors="item.errors.oesophagealBleedingDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Gastric Varices</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.gastric"></div>
+                  <div frm-errors errors="item.errors.gastric"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.gastricDate"></div>
+                  <div frm-errors errors="item.errors.gastricDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Gastric Variceal Bleeding</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.gastricBleeding"></div>
+                  <div frm-errors errors="item.errors.gastricBleeding"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.gastricBleedingDate"></div>
+                  <div frm-errors errors="item.errors.gastricBleedingDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Anorectal Varices</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.anorectal"></div>
+                  <div frm-errors errors="item.errors.anorectal"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.anorectalDate"></div>
+                  <div frm-errors errors="item.errors.anorectalDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Anorectal Variceal Bleeding</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.anorectalBleeding"></div>
+                  <div frm-errors errors="item.errors.anorectalBleeding"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.anorectalBleedingDate"></div>
+                  <div frm-errors errors="item.errors.anorectalBleedingDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Cholangitis - Acute</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.cholangitisAcute"></div>
+                  <div frm-errors errors="item.errors.cholangitisAcute"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.cholangitisAcuteDate"></div>
+                  <div frm-errors errors="item.errors.cholangitisAcuteDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Cholangitis - Recurrent</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.cholangitisRecurrent"></div>
+                  <div frm-errors errors="item.errors.cholangitisRecurrent"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.cholangitisRecurrentDate"></div>
+                  <div frm-errors errors="item.errors.cholangitisRecurrentDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td><label class="control-label">Spleen Palpable</label></td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-boolean-field model="item.spleenPalpable"></div>
+                  <div frm-errors errors="item.errors.spleenPalpable"></div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div frm-field>
+                <div frm-control>
+                  <div frm-date-field model="item.spleenPalpableDate"></div>
+                  <div frm-errors errors="item.errors.spleenPalpableDate"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-button action="view(originalItem)"></span>
+      </div>
+    </form>
+  </div>
+</div>
