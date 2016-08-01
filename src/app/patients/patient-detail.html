@@ -11,7 +11,10 @@
       <li class="info">
         <span>
           <span class="key">ID</span>
-          <span class="value">{{patient.id}}</span>
+          <span class="value">
+            {{patient.id}}
+            <i class="fa fa-link" ng-if="patient.ukrdc" title="Receiving data from UKRDC"></i>
+          </span>
         </span>
       </li>
 

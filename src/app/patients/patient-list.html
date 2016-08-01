@@ -34,7 +34,10 @@
 
           <tbody>
             <tr ng-repeat="patient in items" ng-class="{dead: patient.yearOfDeath}">
-              <td><a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a></td>
+              <td>
+                <a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a>
+                <i class="fa fa-link" ng-if="patient.ukrdc" title="Receiving data from UKRDC"></i>
+              </td>
 
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">
@@ -226,6 +229,15 @@
 
           <div frm-control>
             <div frm-boolean-field model="filters.current"></div>
+            <div frm-errors></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>UKRDC</div>
+
+          <div frm-control>
+            <div frm-boolean-field model="filters.ukrdc"></div>
             <div frm-errors></div>
           </div>
         </div>

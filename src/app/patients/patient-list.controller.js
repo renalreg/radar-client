@@ -57,7 +57,7 @@
             'dateOfBirth', 'yearOfBirth',
             'dateOfDeath', 'yearOfDeath',
             'gender', 'patientNumber',
-            'current'
+            'current', 'ukrdc'
         ];
 
         _.forEach(keys, function(key) {
