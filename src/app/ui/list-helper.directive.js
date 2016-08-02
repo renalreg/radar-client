@@ -51,6 +51,7 @@
           }, function(value) {
             items = value;
             _filter();
+            checkPage();
           });
 
           $scope.$watch('items', function() {
@@ -97,6 +98,17 @@
 
           function getReverse() {
             return reverse;
+          }
+
+          /*
+           * Move back a page when the last item on the page is deleted.
+           */
+          function checkPage() {
+            var totalPages = getTotalPages();
+
+            if (getPage() > totalPages) {
+              setPage(totalPages);
+            }
           }
 
           function getPage() {
