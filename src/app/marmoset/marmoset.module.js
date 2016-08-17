@@ -301,9 +301,16 @@
         errors: '='
       },
       link: function(scope, element) {
+        // TODO
+        if (scope.errors === undefined) {
+          scope.errors = {};
+        }
+
         // Note: add the container to the DOM here so we can $compile in the for loop
         var container = angular.element('<div></div>');
         element.append(container);
+
+        // TODO formula fields
 
         // Loop through the fields in the schema
         for (var i = 0; i < scope.schema.fields.length; i++) {
@@ -388,4 +395,11 @@
       }
     };
   }]);
+
+  // TODO
+  app.factory('createSchema', function() {
+    return function(data) {
+      return new Schema(registry, data);
+    };
+  });
 })();
