@@ -18,6 +18,7 @@
     'radar.home',
     'radar.hospitals',
     'radar.logs',
+    'radar.marmoset',
     'radar.notifications',
     'radar.observations',
     'radar.patients',
