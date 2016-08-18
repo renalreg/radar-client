@@ -3,6 +3,47 @@
 
   var app = angular.module('radar.marmoset', []);
 
+  app.directive('checkboxes', function() {
+    return {
+      require: '?ngModel',
+      scope: {
+        options: '='
+      },
+      template: function(element, attrs) {
+        if (attrs.inline === 'true') {
+          return '<label ng-repeat="option in options" class="checkbox-inline"><input type="checkbox" ng-model="states[$index]" ng-change="update($index)" /> {{option.label}}</label>';
+        } else {
+          return '<div ng-repeat="option in options" class="checkbox"><label><input type="checkbox" ng-model="states[$index]" ng-change="update($index)" /> {{option.label}}</label></div>';
+        }
+      },
+      link: function(scope, element, attr, ngModel) {
+        if (!ngModel) {
+          return;
+        }
+
+        function updateState() {
+          var value = ngModel.$viewValue;
+          var options = scope.options || [];
+
+          for (var i = 0; i < options.length; i++) {
+            scope.states[i] = options[i].value === value;
+          }
+        }
+
+        scope.update = function(index) {
+          var value = scope.states[index] ? scope.options[index].value : null;
+          ngModel.$setViewValue(value);
+          updateState();
+        };
+
+        scope.states = {};
+
+        scope.$watch('options', updateState);
+        ngModel.$render = updateState;
+      }
+    }
+  });
+
   function intWidget(scope, field) {
     var element = angular.element('<input />');
     element.attr('class', 'form-control');
@@ -100,6 +141,24 @@
     labelElement.append('{{option.label}}');
 
     return divElement;
+  }
+
+  function checkboxesWidget(scope, field, data) {
+    var element = angular.element('<div></div>')
+    element.attr('checkboxes', '');
+    element.attr('ng-model', 'field.data[field.name]');
+    element.attr('ng-required', 'field.required()');
+    element.attr('options', 'field.options');
+    element.attr('inline', data.inline ? 'true' : 'false');
+    return element;
+  }
+
+  function formulaWidget(scope, field) {
+    if (field.type === 'date') {
+      return angular.element('<p class="form-control-static">{{field.data[field.name] | dateFormat}}</p>');
+    } else {
+      return angular.element('<p class="form-control-static">{{field.data[field.name] | missing}}</p>');
+    }
   }
 
   function Registry() {
@@ -201,6 +260,7 @@
   registry.addWidget('select', selectWidget);
   registry.addWidget('radio', radioWidget);
   registry.addWidget('yesNoRadio', yesNoRadioWidget);
+  registry.addWidget('checkboxes', checkboxesWidget);
 
   registry.setDefaultWidget('int', 'int');
   registry.setDefaultWidget('float', 'float');

@@ -333,3 +333,8 @@ a.delete-user, a.delete-patient {
 .dead, .dead a {
   color: red !important;
 }
+
+/* More spacing between inline elements */
+.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+  margin-left: 30px;
+}
