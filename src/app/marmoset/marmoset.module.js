@@ -185,6 +185,10 @@
 
   /** Return the widget factory for the given field. */
   Registry.prototype.getWidget = function(field) {
+    if (field.formula) {
+      return formulaWidget; // TODO
+    }
+
     var name = field.widget === undefined ? null : field.widget.name;
 
     // No explicit widget in the field definition so we'll use
