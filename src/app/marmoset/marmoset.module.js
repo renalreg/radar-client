@@ -93,15 +93,10 @@
     return element;
   }
 
-  function radioWidget(scope, field) {
+  function radioWidget(scope, field, data) {
     // TODO add radio for null
 
-    var divElement = angular.element('<div></div>');
-    divElement.attr('class', 'radio');
-    divElement.attr('ng-repeat', 'option in field.options');
-
     var labelElement = angular.element('<label></label>');
-    divElement.append(labelElement);
 
     var inputElement = angular.element('<input />');
     inputElement.attr('name', field.name);
@@ -113,7 +108,21 @@
 
     labelElement.append('{{option.label}}');
 
-    return divElement;
+    var rootElement;
+
+    if (data.inline) {
+      labelElement.attr('class', 'radio-inline');
+      labelElement.attr('ng-repeat', 'option in field.options');
+      rootElement = labelElement;
+    } else {
+      var divElement = angular.element('<div></div>');
+      divElement.attr('class', 'radio');
+      divElement.attr('ng-repeat', 'option in field.options');
+      divElement.append(labelElement);
+      rootElement = divElement;
+    }
+
+    return rootElement;
   }
 
   function yesNoRadioWidget(scope, field) {
