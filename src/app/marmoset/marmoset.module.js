@@ -339,32 +339,38 @@
 
     // Return a widget element
     this.widget = function(scope) {
-      return this.schema.registry.getWidget(this)(scope, this, data.widget);
+      return this.schema.registry.getWidget(data)(scope, this, data.widget || {});
     };
   }
 
   /** Wrap a field so it has access to it's value and any errors. */
-  function wrapField(field, data, errors) {
-    var wrapped = Object.create(field);
+  Field.prototype.wrap = function(data, errors) {
+    var self = this;
+
+    var wrapped = Object.create(this);
 
     wrapped.data = data;
     wrapped.errors = errors;
 
     wrapped.required = function() {
-      return field.required(wrapped);
+      return self.required(wrapped);
     };
 
     wrapped.visible = function() {
-      return field.visible(wrapped);
+      return self.visible(wrapped);
     };
 
     wrapped.valid = function() {
       // Valid if there aren't any errors
-      return !errors[field.name];
+      return !errors[self.name];
+    };
+
+    wrapped.value = function() {
+      return data[self.name];
     };
 
     return wrapped;
-  }
+  };
 
   // Directive to render a schema
   app.directive('marmosetSchema', ['$compile', function($compile) {
@@ -389,7 +395,7 @@
         // Loop through the fields in the schema
         for (var i = 0; i < scope.schema.fields.length; i++) {
           var field = scope.schema.fields[i];
-          var wrapped = wrapField(field, scope.data, scope.errors);
+          var wrapped = field.wrap(scope.data, scope.errors);
 
           var fieldScope = scope.$new();
           fieldScope.field = wrapped;
