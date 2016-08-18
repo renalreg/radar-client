@@ -1,0 +1,16 @@
+<div
+  class="form-group"
+  ng-class="{'required': field.required(), 'has-error': !valid()}"
+  ng-show="field.visible()">
+  <label class="control-label col-md-3">{{field.label}}</label>
+  <div class="col-md-9">
+      <div widget></div>
+
+      <div class="help-block" ng-show="field.help">{{field.help}}</div>
+
+      <div class="help-block" ng-show="error('required')">This field is required.</div>
+      <div class="help-block" ng-show="error('date')">Invalid date.</div>
+      <div class="help-block" ng-show="error('integer')">Not a number.</div>
+      <div class="help-block" ng-show="error('number')">Not a number.</div>
+  </div>
+</div>
