@@ -238,6 +238,7 @@
     this.name = data.name;
     this.type = data.type;
     this.label = data.label;
+    this.help = data.help;
 
     // Default to required
     var required = data.required === undefined ? true : data.required;
@@ -330,43 +331,26 @@
   }]);
 
   // Directive to render a field
-  app.directive('marmosetField', ['$compile', function($compile) {
+  app.directive('marmosetField', ['$compile', '$templateCache', function($compile, $templateCache) {
     return {
       require: '?^form',
       scope: {
         field: '=marmosetField'
       },
+      templateUrl: 'app/marmoset/field.html',
       link: function(scope, element, attr, formCtrl) {
-        var groupElement = angular.element('<div></div>');
-        groupElement.attr('class', 'form-group');
-        groupElement.attr('ng-class', '{\'required\': field.required(), \'has-error\': !valid()}');
-        groupElement.attr('ng-show', 'field.visible()');
+        scope.form = formCtrl;
 
-        var labelElement = angular.element('<label class="control-label col-md-3">{{field.label}}</label>');
-        groupElement.append(labelElement);
+        var targetElement = element.find('[widget]');
+        targetElement.removeAttr('widget');
 
-        var fieldElement = angular.element('<div class="col-md-9"></div>');
-        groupElement.append(fieldElement);
-
-        // TODO errors
-        // TODO help
-
-        // Note: the order elements are added to the DOM and compiled is important
-        //
-        // Anything that uses ng-model must be compiled *after* being added
-        // to the DOM otherwise it won't be able to find the form controller.
-        //
-        // The groupElement is compiled without the widgetElement otherwise
-        // the widgetElement will be compiled twice. Compiling the ng-options directive
-        // twice creates duplicate <option> elements.
-
-        element.append(groupElement);
-        $compile(groupElement)(scope);
-
-        // Create the widget element with its own child scope
+        // Create a new child scope for the widget
         var widgetScope = scope.$new();
         var widgetElement = scope.field.widget(widgetScope);
-        fieldElement.append(widgetElement);
+
+        // Anything that uses ng-model must be compiled *after* being added
+        // to the DOM otherwise it won't be able to find the form controller.
+        targetElement.append(widgetElement);
         $compile(widgetElement)(widgetScope);
 
         // Set the field to null when it is hidden
@@ -379,11 +363,25 @@
           }
         });
 
-        // Return true if the field is valid (no client-side or server-side errors)
-        scope.valid = function() {
+        function getModelCtrl() {
           // frmCtrl (FormController) will be null if this directive isn't inside a form
           // modelCtrl (NgModelController) will be undefined on load
-          var modelCtrl = formCtrl ? formCtrl[scope.field.name] : null;
+          return formCtrl ? (formCtrl[scope.field.name] || null) : null;
+        }
+
+        scope.error = function(name) {
+          var modelCtrl = getModelCtrl();
+
+          if (!modelCtrl) {
+            return false;
+          }
+
+          return !!modelCtrl.$error[name];
+        };
+
+        // Return true if the field is valid (no client-side or server-side errors)
+        scope.valid = function() {
+          var modelCtrl = getModelCtrl();
 
           // If modelCtrl isn't availble yet treat the field as valid and pristine
           var valid = modelCtrl ? modelCtrl.$valid : true;
