@@ -34,12 +34,8 @@
       $scope.create = function() {
         var item = store.create('entries', {
           patient: $scope.patient.id,
-          form: $scope.form.id,
-          data: {} // TODO
+          form: $scope.form.id
         });
-
-        // TODO
-        item.errors.data = {};
 
         self.edit(item);
       };

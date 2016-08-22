@@ -467,7 +467,12 @@
         errors: '='
       },
       link: function(scope, element) {
-        // TODO
+        // Default to empty object
+        if (scope.data === undefined) {
+          scope.data = {};
+        }
+
+        // Default to no errors :)
         if (scope.errors === undefined) {
           scope.errors = {};
         }
