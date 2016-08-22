@@ -162,11 +162,15 @@
     return element;
   }
 
-  function formulaWidget(scope, field) {
+  function staticWidget(scope, field) {
     if (field.type === 'date') {
-      return angular.element('<p class="form-control-static">{{field.data[field.name] | dateFormat}}</p>');
+      return angular.element('<p class="form-control-static">{{field.value() | dateFormat}}</p>');
+    } else if (field.type === 'datetime') {
+      return angular.element('<p class="form-control-static">{{field.value() | dateTimeFormat}}</p>');
+    } else if (field.type === 'boolean') {
+      return angular.element('<p class="form-control-static"><span tick="field.value()"></span></p>');
     } else {
-      return angular.element('<p class="form-control-static">{{field.data[field.name] | missing}}</p>');
+      return angular.element('<p class="form-control-static">{{field.value() | missing}}</p>');
     }
   }
 
@@ -174,8 +178,10 @@
     this.widgets = {};
     this.defaultWidgets = {};
     this.defaultSelectWidget = null;
+    this.defaultFormulaWidgets = {};
     this.required = {};
     this.visible = {};
+    this.formula = {};
   }
 
   /** Register a widget factory. */
@@ -185,19 +191,18 @@
 
   /** Return the widget factory for the given field. */
   Registry.prototype.getWidget = function(field) {
-    if (field.formula) {
-      return formulaWidget; // TODO
-    }
-
     var name = field.widget === undefined ? null : field.widget.name;
 
     // No explicit widget in the field definition so we'll use
     // the default widget for this type of field.
     if (!name) {
       var type = field.type;
+      var formula = field.formula !== undefined;
       var select = field.options !== undefined;
 
-      if (select) {
+      if (formula) {
+        name = this.defaultFormulaWidgets[type];
+      } else if (select) {
         name = this.defaultSelectWidget || this.defaultWidgets[type];
       } else {
         name = this.defaultWidgets[type];
@@ -218,45 +223,66 @@
     this.defaultWidgets[type] = name;
   };
 
+  /** Set the default formula widget for a type. */
+  Registry.prototype.setDefaultFormulaWidget = function(type, name) {
+    this.defaultFormulaWidgets[type] = name;
+  };
+
   /** Set the default select widget (for fields with options). */
   Registry.prototype.setDefaultSelectWidget = function(name) {
     this.defaultSelectWidget = name;
   };
 
   /** Register a required function. */
-  Registry.prototype.addRequired = function(type, f) {
-    this.required[type] = f;
+  Registry.prototype.addRequired = function(name, f) {
+    this.required[name] = f;
   };
 
   /** Get a required function. */
-  Registry.prototype.getRequired = function(type) {
-    var f = this.required[type];
+  Registry.prototype.getRequired = function(name) {
+    var f = this.required[name];
 
     if (f === undefined) {
-      throw 'No required function for: ' + type;
+      throw 'No required function for: ' + name;
     }
 
     return f;
   };
 
   /** Register a visible function. */
-  Registry.prototype.addVisible = function(type, f) {
-    this.visible[type] = f;
+  Registry.prototype.addVisible = function(name, f) {
+    this.visible[name] = f;
   };
 
   /** Get a visible function. */
-  Registry.prototype.getVisible = function(type) {
-    var f = this.visible[type];
+  Registry.prototype.getVisible = function(name) {
+    var f = this.visible[name];
 
     if (f === undefined) {
-      throw 'No visible function for: ' + type;
+      throw 'No visible function for: ' + name;
+    }
+
+    return f;
+  };
+
+  /** Register a formula function. */
+  Registry.prototype.addFormula = function(name, f) {
+    this.formula[name] = f;
+  };
+
+  /** Get a formula function. */
+  Registry.prototype.getFormula = function(name) {
+    var f = this.formula[name];
+
+    if (f === undefined) {
+      throw 'No formula function for: ' + name;
     }
 
     return f;
   };
 
   function jsHandler(field, data) {
-    /*jshint evil:true */
+    /* jshint evil:true */
     var f = new Function('form', 'path', data.value);
 
     return function(wrapped) {
@@ -264,8 +290,21 @@
     };
   }
 
+  function jsFormula(field, data) {
+    /* jshint evil:true */
+    var f = new Function('form', 'path', data.value);
+
+    return function(wrapped) {
+      var newValue = f(wrapped.data, [wrapped.name]);
+
+      // Update the field's value
+      wrapped.value(newValue);
+    };
+  }
+
   var registry = new Registry();
 
+  // Register widgets
   registry.addWidget('string', stringWidget);
   registry.addWidget('date', dateWidget);
   registry.addWidget('int', intWidget);
@@ -274,24 +313,38 @@
   registry.addWidget('radio', radioWidget);
   registry.addWidget('yesNoRadio', yesNoRadioWidget);
   registry.addWidget('checkboxes', checkboxesWidget);
+  registry.addWidget('static', staticWidget);
 
+  // Set default widgets
   registry.setDefaultWidget('int', 'int');
   registry.setDefaultWidget('float', 'float');
   registry.setDefaultWidget('string', 'string');
   registry.setDefaultWidget('boolean', 'yesNoRadio');
   registry.setDefaultWidget('date', 'date');
   registry.setDefaultWidget('datetime', 'string');
-
+  registry.setDefaultFormulaWidget('int', 'static');
+  registry.setDefaultFormulaWidget('float', 'static');
+  registry.setDefaultFormulaWidget('string', 'static');
+  registry.setDefaultFormulaWidget('boolean', 'static');
+  registry.setDefaultFormulaWidget('date', 'static');
+  registry.setDefaultFormulaWidget('datetime', 'static');
   registry.setDefaultSelectWidget('select');
 
+  // Register functions
   registry.addRequired('js', jsHandler);
   registry.addVisible('js', jsHandler);
+  registry.addFormula('js', jsFormula);
 
   /** Wrap a value in a function. */
   function wrap(value) {
     return function() {
       return value;
     };
+  }
+
+  /** Do nothing. */
+  function noop() {
+    return;
   }
 
   /** A form schema. */
@@ -307,47 +360,71 @@
 
   /** A field in the form schema. */
   function Field(schema, data) {
-    this.schema = schema;
-    this.name = data.name;
-    this.type = data.type;
-    this.label = data.label;
-    this.help = data.help;
+    var self = this;
 
-    // Default to required
-    var required = data.required === undefined ? true : data.required;
+    self.schema = schema;
+    self.name = data.name;
+    self.type = data.type;
+    self.label = data.label;
+    self.help = data.help;
 
-    if (required === true) {
-      this.required = wrap(true);
-    } else if (required === false) {
-      this.required = wrap(false);
+    var registy = schema.registry;
+
+    var required;
+
+    if (data.formula) {
+      // Formula fields are never required
+      required = false;
+    } else if (data.required === undefined) {
+      // Default to required
+      required = true;
     } else {
-      this.required = this.schema.registry.getRequired(required.type)(this, required);
+      // Use supplied value
+      required = data.required;
     }
 
-    /// Default to visible
+    if (required === true) {
+      self.required = wrap(true);
+    } else if (required === false) {
+      self.required = wrap(false);
+    } else {
+      self.required = registry.getRequired(required.name)(self, required);
+    }
+
+    // Default to visible
     var visible = data.visible === undefined ? true : data.visible;
 
     if (visible === true) {
-      this.visible = wrap(true);
+      self.visible = wrap(true);
     } else if (visible === false) {
-      this.visible = wrap(false);
+      self.visible = wrap(false);
     } else {
-      this.visible = this.schema.registry.getVisible(visible.type)(this, visible);
+      self.visible = registry.getVisible(visible.name)(self, visible);
     }
 
-    this.options = data.options;
+    self.options = data.options;
+
+    var widgetFactory = registry.getWidget(data);
 
     // Return a widget element
     this.widget = function(scope) {
-      return this.schema.registry.getWidget(data)(scope, this, data.widget || {});
+      return widgetFactory(scope, self, data.widget || {});
     };
+
+    var formula = data.formula;
+
+    if (formula === undefined) {
+      this.update = wrap(noop);
+    } else {
+      this.update = registry.getFormula(formula.name)(self, formula);
+    }
   }
 
   /** Wrap a field so it has access to it's value and any errors. */
   Field.prototype.wrap = function(data, errors) {
     var self = this;
 
-    var wrapped = Object.create(this);
+    var wrapped = Object.create(self);
 
     wrapped.data = data;
     wrapped.errors = errors;
@@ -365,8 +442,17 @@
       return !errors[self.name];
     };
 
-    wrapped.value = function() {
-      return data[self.name];
+    wrapped.value = function(value) {
+      if (value === undefined) {
+        return data[self.name];
+      } else {
+        data[self.name] = value;
+      }
+    };
+
+    wrapped.update = function() {
+      console.log('update!');
+      return self.update(wrapped);
     };
 
     return wrapped;
@@ -389,8 +475,6 @@
         // Note: add the container to the DOM here so we can $compile in the for loop
         var container = angular.element('<div></div>');
         element.append(container);
-
-        // TODO formula fields
 
         // Loop through the fields in the schema
         for (var i = 0; i < scope.schema.fields.length; i++) {
@@ -442,6 +526,9 @@
           }
         });
 
+        // Notify the field when other fields change
+        scope.$watch('field.data', scope.field.update, true);
+
         function getModelCtrl() {
           // frmCtrl (FormController) will be null if this directive isn't inside a form
           // modelCtrl (NgModelController) will be undefined on load
@@ -473,7 +560,6 @@
     };
   }]);
 
-  // TODO
   app.factory('createSchema', function() {
     return function(data) {
       return new Schema(registry, data);
