@@ -420,49 +420,127 @@
     }
   }
 
-  /** Wrap a field so it has access to it's value and any errors. */
-  Field.prototype.wrap = function(data, errors) {
-    var self = this;
+  app.directive('marmosetList', [function() {
+    function wrapField(field, data) {
+      var wrapped = Object.create(field);
 
-    var wrapped = Object.create(self);
+      wrapped.data = data;
+      
+      wrapped.visible = function() {
+        return field.visible(wrapped); 
+      };
 
-    wrapped.data = data;
-    wrapped.errors = errors;
+      return wrapped;
+    }
 
-    wrapped.required = function() {
-      return self.required(wrapped);
-    };
-
-    wrapped.visible = function() {
-      return self.visible(wrapped);
-    };
-
-    wrapped.valid = function() {
-      // Valid if there aren't any errors
-      return !errors[self.name];
-    };
-
-    wrapped.value = function(value) {
-      if (value === undefined) {
-        return data[self.name];
-      } else {
-        data[self.name] = value;
-      }
-    };
-
-    wrapped.update = function() {
-      console.log('update!');
-      return self.update(wrapped);
-    };
-
-    return wrapped;
-  };
-
-  // Directive to render a schema
-  app.directive('marmosetSchema', ['$compile', function($compile) {
     return {
       scope: {
-        schema: '=marmosetSchema',
+        'schema': '=marmosetList',
+        'data': '='
+      },
+      transclude: 'element',
+      link: function(scope, element, attr, ctrl, transclude) {
+        // Default to empty object
+        if (scope.data === undefined) {
+          scope.data = {};
+        }
+
+        console.log(scope.data);
+
+        var last = element;
+
+        for (var index = 0; index < scope.schema.fields.length; index++) {
+          var field = scope.schema.fields[index];
+
+          (function(index) {
+            var wrapped = wrapField(field, scope.data);
+
+            var childScope = scope.$new();
+            childScope.$field = wrapped;
+            childScope.$index = index;
+
+            transclude(childScope, function(clone) {
+              childScope.$watch(function() {
+                return childScope.$field.visible();
+              }, function(visible) {
+                if (visible) {
+                  clone.show();
+                } else {
+                  clone.hide();
+                }
+              });
+
+              last.after(clone);
+              last = clone;
+            });
+          })(index);
+        }
+      }
+    };
+  }]);
+
+  app.directive('marmosetValue', ['$compile', function($compile) {
+    return {
+      scope: {
+        'field': '=marmosetValue'
+      },
+      link: function(scope, element) {
+        var e = angular.element('<div>{{field.data[field.name]}}</div>')
+        element.append(e)
+        $compile(e)(scope);
+      }
+    };
+  }]);
+
+  //<table>
+  //  <tr marmoset-list="schema" data="data">
+  //    <td marmoset-value></td>
+  //  </tr>
+  //</table>
+
+  // Directive to render a form
+  app.directive('marmosetForm', ['$compile', function($compile) {
+    /** Wrap a field so it has access to it's value and any errors. */
+    function wrapField(data, errors) {
+      var self = this;
+
+      var wrapped = Object.create(self);
+
+      wrapped.data = data;
+      wrapped.errors = errors;
+
+      wrapped.required = function() {
+        return self.required(wrapped);
+      };
+
+      wrapped.visible = function() {
+        return self.visible(wrapped);
+      };
+
+      wrapped.valid = function() {
+        // Valid if there aren't any errors
+        return !errors[self.name];
+      };
+
+      wrapped.value = function(value) {
+        if (value === undefined) {
+          return data[self.name];
+        } else {
+          data[self.name] = value;
+        }
+      };
+
+      wrapped.update = function() {
+        console.log('update!');
+        return self.update(wrapped);
+      };
+
+      return wrapped;
+    };
+
+    return {
+      scope: {
+        schema: '=marmosetForm',
         data: '=',
         errors: '='
       },

@@ -5,7 +5,12 @@
       <span crud-edit-button item="item"></span>
     </p>
 
-    <p>TODO</p>
+    <table class="table properties">
+      <tr marmoset-list="schema" data="item.data">
+        <th>{{$field.label}}</th>
+        <td marmoset-value="$field"></td>
+      </tr>
+    </table>
 
     <div metadata item="item"></div>
   </div>
