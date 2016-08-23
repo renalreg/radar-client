@@ -426,6 +426,7 @@
     self.type = data.type;
     self.label = data.label;
     self.help = data.help;
+    self.column = data.column === undefined ? false : data.column;
 
     var registy = schema.registry;
 
@@ -527,13 +528,18 @@
     return {
       scope: {
         'schema': '=marmosetList',
-        'data': '=?'
+        'data': '=?',
+        'column': '=?',
       },
       transclude: 'element',
       link: function(scope, element, attr, ctrl, transclude) {
         // Default to empty object
         if (scope.data === undefined) {
           scope.data = {};
+        }
+
+        if (scope.column === undefined) {
+          scope.column = null;
         }
 
         var last = element;
@@ -543,6 +549,12 @@
           // Wrap each field in a closure
           (function(index) {
             var field = scope.schema.fields[index];
+
+            if (scope.column !== null && scope.column !== field.column) {
+              return;
+            }
+
+            // Wrap the field so it has access to its data
             var wrapped = wrapField(field, scope.data);
 
             // Create a new scope for each field
@@ -711,6 +723,7 @@
             return false;
           }
 
+          // True if there is an error
           return !!modelCtrl.$error[name];
         };
 
