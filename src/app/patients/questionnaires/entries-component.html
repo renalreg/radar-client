@@ -22,7 +22,7 @@
     </p>
 
     <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
-      <div marmoset-schema="schema" data="item.data" errors="item.errors.data"></div>
+      <div marmoset-form="schema" data="item.data" errors="item.errors.data"></div>
 
       <div frm-buttons>
         <span crud-save-button></span>
@@ -46,7 +46,11 @@
       <thead>
         <tr>
           <th></th>
-          <th></th>
+
+          <th marmoset-list="schema">
+            {{$field.label}}
+          </th>
+
           <th></th>
         </tr>
       </thead>
@@ -58,7 +62,9 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td>TODO</td>
+          <td marmoset-list="schema" data="item.data">
+            <span marmoset-value="$field"></span>
+          </td>
 
           <td>
             <span crud-list-remove-button item="item"></span>

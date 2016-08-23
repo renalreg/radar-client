@@ -174,11 +174,29 @@
     }
   }
 
+  function valueView(scope, field) {
+    if (field.options) {
+      return angular.element('<span>{{field.display() | missing}}</span>');
+    } else if (field.type === 'date') {
+      return angular.element('<span>{{field.value() | dateFormat}}</span>');
+    } else if (field.type === 'datetime') {
+      return angular.element('<span>{{field.value() | dateTimeFormat}}</span>');
+    } else if (field.type === 'boolean') {
+      return angular.element('<span tick="field.value()"></span>');
+    } else {
+      return angular.element('<span>{{field.value() | missing}}</span>');
+    }
+  }
+
   function Registry() {
     this.widgets = {};
     this.defaultWidgets = {};
     this.defaultSelectWidget = null;
     this.defaultFormulaWidgets = {};
+
+    this.views = {};
+    this.defaultViews = {};
+
     this.required = {};
     this.visible = {};
     this.formula = {};
@@ -281,6 +299,36 @@
     return f;
   };
 
+  /** Register a view factory. */
+  Registry.prototype.addView = function(name, factory) {
+    this.views[name] = factory;
+  };
+
+  /** Return the view factory for the given field. */
+  Registry.prototype.getView = function(field) {
+    var name = field.view === undefined ? null : field.view.name;
+
+    // No explicit view in the field definition so we'll use
+    // the default view for this type of field.
+    if (!name) {
+      var type = field.type;
+      name = this.defaultViews[type];
+    }
+
+    var factory = this.views[name];
+
+    if (factory === undefined) {
+      throw 'No view factory for: ' + name;
+    }
+
+    return factory;
+  };
+
+  /** Set the default view for a type. */
+  Registry.prototype.setDefaultView = function(type, name) {
+    this.defaultViews[type] = name;
+  };
+
   function jsHandler(field, data) {
     /* jshint evil:true */
     var f = new Function('form', 'path', data.value);
@@ -329,6 +377,17 @@
   registry.setDefaultFormulaWidget('date', 'static');
   registry.setDefaultFormulaWidget('datetime', 'static');
   registry.setDefaultSelectWidget('select');
+
+  // Add views
+  registry.addView('value', valueView);
+
+  // Set default views
+  registry.setDefaultView('int', 'value');
+  registry.setDefaultView('float', 'value');
+  registry.setDefaultView('string', 'value');
+  registry.setDefaultView('boolean', 'value');
+  registry.setDefaultView('date', 'value');
+  registry.setDefaultView('datetime', 'value');
 
   // Register functions
   registry.addRequired('js', jsHandler);
@@ -407,8 +466,15 @@
     var widgetFactory = registry.getWidget(data);
 
     // Return a widget element
-    this.widget = function(scope) {
+    self.widget = function(scope) {
       return widgetFactory(scope, self, data.widget || {});
+    };
+
+    var viewFactory = registry.getView(data);
+
+    // Return a view element
+    self.view = function(scope) {
+      return viewFactory(scope, self, data.view || {});
     };
 
     var formula = data.formula;
@@ -421,6 +487,7 @@
   }
 
   app.directive('marmosetList', [function() {
+    /** Wrap a field so it has access to its value. */
     function wrapField(field, data) {
       var wrapped = Object.create(field);
 
@@ -430,13 +497,37 @@
         return field.visible(wrapped); 
       };
 
+      wrapped.value = function() {
+        return data[field.name];
+      };
+
+      wrapped.display = function() {
+        var value = wrapped.value();
+
+        if (value === undefined) {
+          return null;
+        }
+
+        if (field.options) {
+          for (var i = 0; i < field.options.length; i++) {
+            if (field.options[i].value === value) {
+              return field.options[i].label;
+            }
+          }
+
+          return null;
+        } else {
+          return value;
+        }
+      }
+
       return wrapped;
     }
 
     return {
       scope: {
         'schema': '=marmosetList',
-        'data': '='
+        'data': '=?'
       },
       transclude: 'element',
       link: function(scope, element, attr, ctrl, transclude) {
@@ -445,21 +536,24 @@
           scope.data = {};
         }
 
-        console.log(scope.data);
-
         var last = element;
 
+        // Loop through the fields in the schema
         for (var index = 0; index < scope.schema.fields.length; index++) {
-          var field = scope.schema.fields[index];
-
+          // Wrap each field in a closure
           (function(index) {
+            var field = scope.schema.fields[index];
             var wrapped = wrapField(field, scope.data);
 
+            // Create a new scope for each field
+            // The field's index is available at $index and the wrapped
+            // field at $field.
             var childScope = scope.$new();
             childScope.$field = wrapped;
             childScope.$index = index;
 
             transclude(childScope, function(clone) {
+              // Watch for changes in the field's visibility
               childScope.$watch(function() {
                 return childScope.$field.visible();
               }, function(visible) {
@@ -470,6 +564,7 @@
                 }
               });
 
+              // Add after previous element
               last.after(clone);
               last = clone;
             });
@@ -485,54 +580,45 @@
         'field': '=marmosetValue'
       },
       link: function(scope, element) {
-        var e = angular.element('<div>{{field.data[field.name]}}</div>')
+        var e = scope.field.view();
         element.append(e)
         $compile(e)(scope);
       }
     };
   }]);
 
-  //<table>
-  //  <tr marmoset-list="schema" data="data">
-  //    <td marmoset-value></td>
-  //  </tr>
-  //</table>
-
   // Directive to render a form
   app.directive('marmosetForm', ['$compile', function($compile) {
     /** Wrap a field so it has access to it's value and any errors. */
-    function wrapField(data, errors) {
-      var self = this;
-
-      var wrapped = Object.create(self);
+    function wrapField(field, data, errors) {
+      var wrapped = Object.create(field);
 
       wrapped.data = data;
       wrapped.errors = errors;
 
       wrapped.required = function() {
-        return self.required(wrapped);
+        return field.required(wrapped);
       };
 
       wrapped.visible = function() {
-        return self.visible(wrapped);
+        return field.visible(wrapped);
       };
 
       wrapped.valid = function() {
         // Valid if there aren't any errors
-        return !errors[self.name];
+        return !errors[field.name];
       };
 
       wrapped.value = function(value) {
         if (value === undefined) {
-          return data[self.name];
+          return data[field.name];
         } else {
-          data[self.name] = value;
+          data[field.name] = value;
         }
       };
 
       wrapped.update = function() {
-        console.log('update!');
-        return self.update(wrapped);
+        return field.update(wrapped);
       };
 
       return wrapped;
@@ -562,7 +648,7 @@
         // Loop through the fields in the schema
         for (var i = 0; i < scope.schema.fields.length; i++) {
           var field = scope.schema.fields[i];
-          var wrapped = field.wrap(scope.data, scope.errors);
+          var wrapped = wrapField(field, scope.data, scope.errors);
 
           var fieldScope = scope.$new();
           fieldScope.field = wrapped;
