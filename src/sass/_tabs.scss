@@ -1,45 +1,53 @@
 @import "variables";
 
-$radar-tabs-link-color: $radar-primary-text;
-$radar-tabs-border-color: $radar-primary;
-$radar-tabs-active-link-color: #fff;
-$radar-tabs-active-bg: $radar-primary;
-$radar-tabs-active-border-color: $radar-primary;
-$radar-tabs-link-padding: 10px 15px;
-
-.tabs-radar {
-  margin-bottom: 9px;
-  padding-left: 0;
+.radar-tabs {
+  margin: 0;
+  padding: 0;
   list-style: none;
-  border-bottom: 1px solid $radar-tabs-border-color;
   @include clearfix;
+  border-style: solid;
+  border-width: 1px;
+  border-color: $radar-primary;
+  border-radius: $border-radius-base $border-radius-base 0 0;
 
   > li {
     float: left;
-    margin-bottom: -1px;
-    position: relative;
-    display: block;
 
     > a {
-      position: relative;
       display: block;
-      padding: $radar-tabs-link-padding;
-      margin-right: 2px;
-      line-height: $line-height-base;
-      border: 1px solid transparent;
-      border-radius: $border-radius-base $border-radius-base 0 0;
-      color: $radar-tabs-link-color;
+      margin: 0;
+      padding: 10px 15px;
+      color: $radar-primary-text;
+      font-weight: bold;
       text-decoration: none;
 
-      > img {
-        max-width: none;
+      &:hover {
+        background-color: $radar-primary-bg;
+      }
+
+      span.badge {
+        color: #fff;
+        background-color: $radar-primary-text;
       }
     }
 
     &.active > a {
-      color: $radar-tabs-active-link-color;
-      background-color: $radar-tabs-active-bg;
-      border: 1px solid $radar-tabs-active-border-color;
+      color: #fff;
+      background-color: $radar-primary;
+
+      span.badge {
+        color: $radar-primary;
+        background-color: #fff;
+      }
     }
   }
+}
+
+.radar-body {
+  border-color: $radar-primary;
+  border-style: solid;
+  border-width: 0 1px 1px 1px;
+  border-radius: 0 0 $border-radius-base $border-radius-base;
+  margin: 0 0 18px 0;
+  padding: 15px;
 }
