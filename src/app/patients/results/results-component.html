@@ -124,12 +124,12 @@
     <div observation-list-selector patient="patient" observations="selectedObservations"></div>
 
     <div ng-show="selectedObservations.length">
-      <ul class="tabs-radar">
+      <ul class="radar-tabs">
         <li ng-class="{active: viewingTable()}"><a href="" ng-click="viewTable()"><i class="fa fa-table"></i> Table</a></li>
         <li ng-class="{active: viewingGraph()}"><a href="" ng-click="viewGraph()"><i class="fa fa-line-chart"></i> Graphs</a></li>
       </ul>
 
-      <div loading="loading">
+      <div class="radar-body" loading="loading">
         <div ng-show="viewingTable()">
           <div list-helper="groupedResults as page" list-helper-options="{deep: false, perPage: 50, sortBy: 'date', reverse: true}">
             <p>
