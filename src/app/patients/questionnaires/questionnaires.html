@@ -1,8 +1,11 @@
 <h1 class="page-header">Questionnaires</h1>
 
-<table class="table">
-    <tr marmoset-list>
-        <th>{{$field.label}}</th>
-        <td marmoset-value="$field"></td>
-    </tr>
-</table>
+<ul class="radar-tabs">
+  <li ng-repeat="form in forms" ui-sref-active="active">
+    <a ui-sref="patient.questionnaires.questionnaire({questionnaireId: form.id})">{{form.name}} <span class="badge">999</span></a>
+  </li>
+</ul>
+
+<div class="radar-body" ui-view>
+    <p>Hello</p>
+</div>

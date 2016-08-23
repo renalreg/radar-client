@@ -6,10 +6,17 @@
   app.config(['$stateProvider', function($stateProvider) {
     $stateProvider.state('patient.questionnaires', {
       url: '/questionnaires',
-      templateUrl: 'app/patients/questionnaires/questionnaires.html'
+      templateUrl: 'app/patients/questionnaires/questionnaires.html',
+      resolve: {
+        forms: ['$stateParams', 'store', function($stateParams, store) {
+          // TODO filter by patient
+          return store.findMany('forms');
+        }]
+      },
+      controller: 'QuestionnairesController'
     });
 
-    $stateProvider.state('patient.questionnaire', {
+    $stateProvider.state('patient.questionnaires.questionnaire', {
       url: '/questionnaires/:questionnaireId',
       templateUrl: 'app/patients/questionnaires/questionnaire.html',
       resolve: {
