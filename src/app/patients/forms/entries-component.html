@@ -46,7 +46,7 @@
       <thead>
         <tr>
           <th></th>
-          <th marmoset-list="schema" column="true"><span sort-helper="value()" sort-id="{{$field.name}}">{{$field.label}}</span></th>
+          <th marmoset-columns="schema"><span sort-helper="value()" sort-id="{{$field.name}}">{{$field.label}}</span></th>
           <th></th>
         </tr>
       </thead>
@@ -58,7 +58,7 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td marmoset-list="schema" data="item.data" column="true">
+          <td marmoset-columns="schema" data="item.data">
             <span marmoset-view="$field"></span>
           </td>
 

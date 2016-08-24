@@ -219,10 +219,14 @@
   /** A form schema. */
   function Schema(registry, data) {
     this.registry = registry;
+
+    this.columns = data.columns === undefined ? [] : data.columns;
+    this.sortBy = data.sortBy === undefined ? null : data.sortBy;
+    this.reverse = data.reverse === undefined ? false : data.reverse;
     this.fields = [];
 
-    for (var i = 0; i < data.length; i++) {
-      var field = new Field(this, data[i]);
+    for (var i = 0; i < data.fields.length; i++) {
+      var field = new Field(this, data.fields[i]);
       this.fields.push(field);
     }
   }
@@ -292,7 +296,7 @@
     return this.schema.registry.getView(this);
   };
 
-  app.directive('marmosetList', [function() {
+  function builder(scope, element, transclude) {
     /** Wrap a field so it has access to its value. */
     function wrapField(field, data) {
       var wrapped = Object.create(field);
@@ -330,63 +334,88 @@
       return wrapped;
     }
 
+    var last = element;
+
+    return function append(index, field) {
+      // Wrap the field so it has access to its data
+      var wrapped = wrapField(field, scope.data);
+
+      // Create a new scope for each field
+      // The field's index is available at $index and the wrapped
+      // field at $field.
+      var childScope = scope.$new();
+      childScope.$field = wrapped;
+      childScope.$index = index;
+
+      transclude(childScope, function(clone) {
+        // Watch for changes in the field's visibility
+        childScope.$watch(function() {
+          return childScope.$field.visible();
+        }, function(visible) {
+          if (visible) {
+            clone.show();
+          } else {
+            clone.hide();
+          }
+        });
+
+        // Add after previous element
+        last.after(clone);
+        last = clone;
+      });
+    };
+  }
+
+  app.directive('marmosetColumns', [function() {
     return {
       scope: {
-        schema: '=marmosetList',
-        data: '=?',
-        column: '=?',
+        schema: '=marmosetColumns',
+        data: '=?'
       },
       transclude: 'element',
       link: function(scope, element, attr, ctrl, transclude) {
-        // Default to empty object
         if (scope.data === undefined) {
           scope.data = {};
         }
 
-        if (scope.column === undefined) {
-          scope.column = null;
+        var append = builder(scope, element, transclude);
+        var fields = scope.schema.fields;
+        var nameIndex = {};
+        var columns = scope.schema.columns;
+
+        for (var i = 0; i < fields.length; i++) {
+          nameIndex[fields[i].name] = fields[i];
         }
 
-        var last = element;
+        for (var j = 0; j < columns.length; j++) {
+          var field = nameIndex[columns[j]];
 
-        function add(index) {
-          var field = scope.schema.fields[index];
-
-          if (scope.column !== null && scope.column !== field.column) {
-            return;
+          if (field !== undefined) {
+            append(j, field);
           }
-
-          // Wrap the field so it has access to its data
-          var wrapped = wrapField(field, scope.data);
-
-          // Create a new scope for each field
-          // The field's index is available at $index and the wrapped
-          // field at $field.
-          var childScope = scope.$new();
-          childScope.$field = wrapped;
-          childScope.$index = index;
-
-          transclude(childScope, function(clone) {
-            // Watch for changes in the field's visibility
-            childScope.$watch(function() {
-              return childScope.$field.visible();
-            }, function(visible) {
-              if (visible) {
-                clone.show();
-              } else {
-                clone.hide();
-              }
-            });
-
-            // Add after previous element
-            last.after(clone);
-            last = clone;
-          });
         }
+      }
+    };
+  }]);
+
+  app.directive('marmosetList', [function() {
+    return {
+      scope: {
+        schema: '=marmosetList',
+        data: '=?'
+      },
+      transclude: 'element',
+      link: function(scope, element, attr, ctrl, transclude) {
+        if (scope.data === undefined) {
+          scope.data = {};
+        }
+
+        var append = builder(scope, element, transclude);
+        var fields = scope.schema.fields;
 
         // Loop through the fields in the schema
-        for (var i = 0; i < scope.schema.fields.length; i++) {
-          add(i);
+        for (var i = 0; i < fields.length; i++) {
+          append(i, fields[i]);
         }
       }
     };
