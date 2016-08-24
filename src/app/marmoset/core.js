@@ -506,8 +506,9 @@
             return false;
           }
 
-          // True if there is an error
-          return !!modelCtrl.$error[name];
+          // True if the field is dirty (i.e. the user has interacted with
+          // the control) and there is an error
+          return modelCtrl.$dirty && !!modelCtrl.$error[name];
         };
 
         // Return true if the field is valid (no client-side or server-side errors)

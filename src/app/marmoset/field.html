@@ -12,5 +12,7 @@
       <div class="help-block" ng-show="error('date')">Invalid date.</div>
       <div class="help-block" ng-show="error('integer')">Not a number.</div>
       <div class="help-block" ng-show="error('number')">Not a number.</div>
+
+      <div class="help-block" ng-repeat="error in field.errors[field.name]">{{error}}</div>
   </div>
 </div>
