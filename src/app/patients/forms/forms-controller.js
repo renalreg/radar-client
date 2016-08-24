@@ -9,11 +9,14 @@
 
     $scope.forms = forms;
 
-    // Redirect to first form
-    if ($state.current.name !== 'patient.forms.form' && forms.length) {
-      $state.go('patient.forms.form', {formId: forms[0].form.id});
+    /** Redirect to first form. */
+    function redirect() {
+      if ($state.current.name !== 'patient.forms.form' && forms.length) {
+        $state.go('patient.forms.form', {formId: forms[0].form.id});
+      }
     }
 
+    /** Update the number of entries for a form. */
     function updateCount(id, count) {
       for (var i = 0; i < $scope.forms.length; i++) {
         var form = $scope.forms[i];
@@ -23,6 +26,11 @@
         }
       }
     }
+
+    // When transitioning into this state redirect to the first
+    // available form (if available)
+    redirect();
+    $scope.$on('$stateChangeSuccess', redirect);
 
     $scope.$on('entryCount', function(event, data) {
       // Ignore updates for other patients

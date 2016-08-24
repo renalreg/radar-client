@@ -29,11 +29,7 @@
       self.load(formStore.getEntries($scope.patient.id, $scope.form.id));
 
       $scope.create = function() {
-        var item = store.create('entries', {
-          patient: $scope.patient.id,
-          form: $scope.form.id
-        });
-
+        var item = formStore.create($scope.patient.id, $scope.form.id);
         self.edit(item);
       };
 

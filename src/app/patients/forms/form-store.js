@@ -23,6 +23,9 @@
       },
       getEntries: function(patientId, formId) {
         return store.findMany('entries', {patient: patientId, form: formId});
+      },
+      create: function(patientId, formId) {
+        return store.create('entries', {patient: patientId, form: formId});
       }
     };
   }]);
