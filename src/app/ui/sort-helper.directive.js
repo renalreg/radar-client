@@ -14,12 +14,19 @@
       templateUrl: 'app/ui/sort-helper.html',
       link: function(scope, element, attrs, listHelperCtrl) {
         scope.sort = function() {
+          var sortBy = getSortBy();
+          var sortId = getSortId();
+          var sortScope = getSortScope();
+
+          var reverse;
+
           if (isSorted()) {
-            var currentReverse = listHelperCtrl.getReverse();
-            listHelperCtrl.sort(getSortBy(), !currentReverse, getSortId(), getSortScope());
+            reverse = !listHelperCtrl.getReverse();;
           } else {
-            listHelperCtrl.sort(getSortBy(), getReverse(), getSortId(), getSortScope());
+            reverse = getReverse();
           }
+
+          listHelperCtrl.sort(sortBy, reverse, sortId, sortScope);
         };
 
         scope.isAscending = isAscending;

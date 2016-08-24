@@ -24,7 +24,16 @@
         }
       });
 
-      $scope.schema = createSchema($scope.form.data);
+      var schema = createSchema($scope.form.data);
+      $scope.schema = schema;
+
+      if (schema.sortBy) {
+        $scope.sortBy = 'data.' + schema.sortBy;
+        $scope.reverse = schema.reverse;
+      } else {
+        $scope.sortBy = 'createdDate';
+        $scope.reverse = true;
+      }
 
       self.load(formStore.getEntries($scope.patient.id, $scope.form.id));
 
