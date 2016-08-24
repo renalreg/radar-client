@@ -31,7 +31,7 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: schema.sortBy, reverse: schema.reverse}">
     <p>
       <span crud-create-button action="create()"></span>
     </p>
@@ -46,7 +46,7 @@
       <thead>
         <tr>
           <th></th>
-          <th marmoset-columns="schema"><span sort-helper="value()" sort-id="{{$field.name}}">{{$field.label}}</span></th>
+          <th marmoset-columns="schema"><span sort-helper="data[$field.name]" sort-id="{{$field.name}}">{{$field.label}}</span></th>
           <th></th>
         </tr>
       </thead>
