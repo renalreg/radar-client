@@ -26,7 +26,7 @@
     });
 
     $stateProvider.state('patient.questionnaires.questionnaire', {
-      url: '/questionnaires/:questionnaireId',
+      url: '/:questionnaireId',
       templateUrl: 'app/patients/questionnaires/questionnaire.html',
       resolve: {
         form: ['$stateParams', 'store', function($stateParams, store) {
