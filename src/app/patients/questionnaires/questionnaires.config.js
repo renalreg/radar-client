@@ -8,9 +8,18 @@
       url: '/questionnaires',
       templateUrl: 'app/patients/questionnaires/questionnaires.html',
       resolve: {
-        forms: ['$stateParams', 'store', function($stateParams, store) {
-          // TODO filter by patient
-          return store.findMany('forms');
+        forms: ['$stateParams', 'store', 'adapter', 'patient', function($stateParams, store, adapter, patient) {
+          // Get forms for patient
+          return adapter.get('/form-counts', {patient: patient.id}).then(function(response) {
+            var forms = _.map(response.data.data, function(x) {
+              return {
+                form: store.pushToStore(store.create('forms', x.form)),
+                count: x.count
+              };
+            });
+
+            return forms;
+          });
         }]
       },
       controller: 'QuestionnairesController'
