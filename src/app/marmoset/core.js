@@ -278,9 +278,9 @@
     var formula = data.formula;
 
     if (formula === undefined) {
-      this.formula = null;
+      self.formula = null;
     } else {
-      this.formula = registry.getFormula(formula.name)(self, formula);
+      self.formula = registry.getFormula(formula.name)(self, formula);
     }
   }
 
@@ -423,8 +423,8 @@
       };
 
       wrapped.update = function() {
-        if (this.formula) {
-          this.formula(wrapped);
+        if (field.formula) {
+          field.formula(wrapped);
         }
       };
 
