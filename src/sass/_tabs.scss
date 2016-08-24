@@ -9,6 +9,7 @@
   border-width: 1px;
   border-color: $radar-primary;
   border-radius: $border-radius-base $border-radius-base 0 0;
+  overflow: hidden; /* clip tabs to border */
 
   > li {
     float: left;
