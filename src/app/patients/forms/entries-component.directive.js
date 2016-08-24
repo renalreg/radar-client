@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  var app = angular.module('radar.patients.medications');
+  var app = angular.module('radar.patients.forms');
 
   app.factory('EntryPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
     return PatientObjectPermission;
@@ -11,8 +11,8 @@
     ModelListDetailController,
     EntryPermission,
     $injector,
-    store,
-    createSchema
+    createSchema,
+    formStore
   ) {
     function EntriesController($scope) {
       var self = this;
@@ -26,10 +26,7 @@
 
       $scope.schema = createSchema($scope.form.data);
 
-      self.load(store.findMany('entries', {
-        patient: $scope.patient.id,
-        form: $scope.form.id
-      }));
+      self.load(formStore.getEntries($scope.patient.id, $scope.form.id));
 
       $scope.create = function() {
         var item = store.create('entries', {
@@ -39,6 +36,18 @@
 
         self.edit(item);
       };
+
+      $scope.$watch('items.length', function(count) {
+        if ($scope.loading) {
+          return;
+        }
+
+        $scope.$emit('entryCount', {
+          patient: $scope.patient,
+          form: $scope.form,
+          count: count
+        });
+      });
     }
 
     EntriesController.$inject = ['$scope'];
@@ -51,8 +60,8 @@
     'ModelListDetailController',
     'EntryPermission',
     '$injector',
-    'store',
-    'createSchema'
+    'createSchema',
+    'formStore'
   ];
 
   app.factory('EntriesController', controllerFactory);
@@ -64,7 +73,7 @@
         form: '='
       },
       controller: EntriesController,
-      templateUrl: 'app/patients/questionnaires/entries-component.html'
+      templateUrl: 'app/patients/forms/entries-component.html'
     };
   }]);
 })();

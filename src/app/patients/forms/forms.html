@@ -7,11 +7,9 @@
 <div ng-if="forms.length">
   <ul class="radar-tabs">
     <li ng-repeat="form in forms" ui-sref-active="active">
-      <a ui-sref="patient.questionnaires.questionnaire({questionnaireId: form.form.id})">{{form.form.name}} <span class="badge">{{form.count}}</span></a>
+      <a ui-sref="patient.forms.form({formId: form.form.id})">{{form.form.name}} <span class="badge">{{form.count}}</span></a>
     </li>
   </ul>
 
-  <div class="radar-body" ui-view>
-    <p>Hello</p>
-  </div>
+  <div class="radar-body" ui-view></div>
 </div>
