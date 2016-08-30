@@ -21,7 +21,7 @@
           var reverse;
 
           if (isSorted()) {
-            reverse = !listHelperCtrl.getReverse();;
+            reverse = !listHelperCtrl.getReverse();
           } else {
             reverse = getReverse();
           }
