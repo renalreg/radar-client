@@ -68,6 +68,8 @@
                 </span>
 
                 <span ng-if="patient.dateOfBirth === undefined">{{patient.yearOfBirth | missing}}</span>
+
+                <span ng-if="patient.yearOfDeath" title="Dead"><i class="fa fa-exclamation-triangle"></i></span>
               </td>
 
               <td>{{patient.gender.label | missing}}</td>
