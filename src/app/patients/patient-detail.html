@@ -32,6 +32,20 @@
         </span>
       </li>
 
+      <li class="info dod" ng-if="patient.dateOfDeath || patient.yearOfDeath">
+        <span>
+          <span class="key">DOD</span>
+          <span if-demographics-visible>
+            <span class="value" ng-if="patient.dateOfDeath">{{patient.dateOfDeath | dateFormat}}</span>
+            <span class="value" ng-if="!patient.yearOfDeath">{{patient.yearOfDeath}}</span>
+          </span>
+
+          <span if-demographics-hidden>
+            <span class="value">{{patient.yearOfDeath}}</span>
+          </span>
+        </span>
+      </li>
+
       <li class="info">
         <span>
           <span class="key">Gender</span>
