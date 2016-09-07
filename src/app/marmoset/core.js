@@ -472,10 +472,11 @@
           scope.data = {};
         }
 
-        // Default to no errors :)
-        if (scope.errors === undefined) {
-          scope.errors = {};
-        }
+        var errors = {};
+
+        scope.$watch('errors', function(value) {
+          angular.copy(value || {}, errors);
+        }, true);
 
         // Note: add the container to the DOM here so we can $compile in the for loop
         var container = angular.element('<div></div>');
@@ -484,7 +485,7 @@
         // Loop through the fields in the schema
         for (var i = 0; i < scope.schema.fields.length; i++) {
           var field = scope.schema.fields[i];
-          var wrapped = wrapField(field, scope.data, scope.errors);
+          var wrapped = wrapField(field, scope.data, errors);
 
           var fieldScope = scope.$new();
           fieldScope.field = wrapped;
