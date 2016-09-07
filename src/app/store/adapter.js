@@ -22,7 +22,7 @@
       config.afterResponseChain.push(name);
     };
 
-    this.$get = function($http, $q, _, camelCaseKeys, snakeCaseKeys, flattenRelationships, $injector) {
+    this.$get = function($http, $q, _, flattenRelationships, $injector) {
       function Adapter(config) {
         this.config = config;
 
@@ -65,28 +65,15 @@
       };
 
       Adapter.prototype.transformRequest = function(data) {
-        data = flattenRelationships(data);
-        data = snakeCaseKeys(data);
-        return data;
+        return flattenRelationships(data);
       };
 
       Adapter.prototype.transformParams = function(data) {
-        data = flattenRelationships(data);
-        data = snakeCaseKeys(data);
-
-        if (data.sort) {
-          if (/^-/.exec(data.sort)) {
-            data.sort = '-' + _.snakeCase(data.sort);
-          } else {
-            data.sort = _.snakeCase(data.sort);
-          }
-        }
-
-        return data;
+        return flattenRelationships(data);
       };
 
       Adapter.prototype.transformResponse = function(data) {
-        return camelCaseKeys(data);
+        return data;
       };
 
       function transformBadResponse(response) {
@@ -245,7 +232,7 @@
     };
 
     this.$get.$inject = [
-      '$http', '$q', '_', 'camelCaseKeys', 'snakeCaseKeys', 'flattenRelationships', '$injector'
+      '$http', '$q', '_', 'flattenRelationships', '$injector'
     ];
   });
 })();

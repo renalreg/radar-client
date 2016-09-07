@@ -39,6 +39,16 @@
         color: #FFF;
         background-color: #333;
       }
+
+      &.dod {
+        > span {
+          border-color: red;
+        }
+
+        .key {
+          background-color: red;
+        }
+      }
     }
 
     li.name {
