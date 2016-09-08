@@ -23,9 +23,9 @@
           return formStore.getForm($stateParams.formId);
         }]
       },
-      controller: function($scope, form) {
+      controller: ['$scope', 'form', function($scope, form) {
         $scope.form = form;
-      }
+      }]
     });
   }]);
 })();
