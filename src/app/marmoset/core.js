@@ -500,7 +500,7 @@
   }]);
 
   // Directive to render a field
-  app.directive('marmosetField', function($compile) {
+  app.directive('marmosetField', ['$compile', function($compile) {
     return {
       require: '?^form',
       scope: {
@@ -554,7 +554,7 @@
         };
       }
     };
-  });
+  }]);
 
   app.factory('createSchema', function() {
     return function(data) {
