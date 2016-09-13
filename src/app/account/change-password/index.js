@@ -1,7 +1,9 @@
 import angular from 'angular';
 
-import changePasswordControllerFactory from './change-password-component.controller';
-import changePasswordComponent from './change-password-component.directive';
+import {
+  changePasswordControllerFactory,
+  changePasswordComponent
+} from './change-password-component.directive';
 
 import templateUrl from './change-password.html';
 

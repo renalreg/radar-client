@@ -1,66 +1,70 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.consultants');
+import templateUrl from './consultants-component.html';
 
-  app.factory('ConsultantPermission', ['AdminPermission', function(AdminPermission) {
-    return AdminPermission;
-  }]);
+function consultantPermissionFactory(AdminPermission) {
+  return AdminPermission;
+}
 
-  function controllerFactory(
-    ModelListDetailController,
-    ConsultantPermission,
-    firstPromise,
-    $injector,
-    store,
-    _
-  ) {
-    function ConsultantsController($scope) {
-      var self = this;
+consultantPermissionFactory.$inject = ['AdminPermission'];
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new ConsultantPermission($scope.patient)
-        }
-      });
+function consultantsControllerFactory(
+  ModelListDetailController,
+  ConsultantPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function ConsultantsController($scope) {
+    var self = this;
 
-      self.load(firstPromise([
-        store.findMany('consultants'),
-        store.findMany('specialties').then(function(specialties) {
-          $scope.specialties = _.sortBy(specialties, function(x) {
-            return x.name;
-          });
-        })
-      ]));
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new ConsultantPermission($scope.patient)
+      }
+    });
 
-      $scope.create = function() {
-        var item = store.create('consultants');
-        self.edit(item);
-      };
-    }
+    self.load(firstPromise([
+      store.findMany('consultants'),
+      store.findMany('specialties').then(function(specialties) {
+        $scope.specialties = _.sortBy(specialties, function(x) {
+          return x.name;
+        });
+      })
+    ]));
 
-    ConsultantsController.$inject = ['$scope'];
-    ConsultantsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return ConsultantsController;
+    $scope.create = function() {
+      var item = store.create('consultants');
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'ConsultantPermission',
-    'firstPromise',
-    '$injector',
-    'store',
-    '_'
-  ];
+  ConsultantsController.$inject = ['$scope'];
+  ConsultantsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('ConsultantsController', controllerFactory);
+  return ConsultantsController;
+}
 
-  app.directive('consultantsComponent', ['ConsultantsController', function(ConsultantsController) {
-    return {
-      controller: ConsultantsController,
-      templateUrl: 'app/consultants/consultants-component.html'
-    };
-  }]);
-})();
+consultantsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'ConsultantPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function consultantsComponent(ConsultantsController) {
+  return {
+    controller: ConsultantsController,
+    templateUrl: templateUrl
+  };
+}
+
+consultantsComponent.$inject = ['ConsultantsController'];
+
+export {
+  consultantPermissionFactory,
+  consultantsControllerFactory,
+  consultantsComponent
+};
