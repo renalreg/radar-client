@@ -1,50 +1,49 @@
-(function() {
-  'use strict';
+function diagnosisGroupsControllerFactory(
+  ListEditController,
+  $injector,
+  firstPromise,
+  store
+) {
+  function DiagnosisGroupsController($scope) {
+    $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
+    this.load(firstPromise([
+      $scope.parent.groups,
+      store.findMany('group-diagnosis-types').then(function(types) {
+        $scope.types = types;
+      })
+    ]));
 
-  var app = angular.module('radar.consultants');
-
-  function controllerFactory(
-    ListEditController,
-    $injector,
-    firstPromise,
-    store
-  ) {
-    function DiagnosisGroupsController($scope) {
-      $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
-      this.load(firstPromise([
-        $scope.parent.groups,
-        store.findMany('group-diagnosis-types').then(function(types) {
-          $scope.types = types;
-        })
-      ]));
-
-      $scope.create = function() {
-        $scope.parent.groups.push({});
-      };
-    }
-
-    DiagnosisGroupsController.$inject = ['$scope'];
-    DiagnosisGroupsController.prototype = Object.create(ListEditController.prototype);
-
-    return DiagnosisGroupsController;
+    $scope.create = function() {
+      $scope.parent.groups.push({});
+    };
   }
 
-  controllerFactory.$inject = [
-    'ListEditController',
-    '$injector',
-    'firstPromise',
-    'store'
-  ];
+  DiagnosisGroupsController.$inject = ['$scope'];
+  DiagnosisGroupsController.prototype = Object.create(ListEditController.prototype);
 
-  app.factory('DiagnosisGroupsController', controllerFactory);
+  return DiagnosisGroupsController;
+}
 
-  app.directive('diagnosisGroupsComponent', ['DiagnosisGroupsController', function(DiagnosisGroupsController) {
-    return {
-      scope: {
-        parent: '=diagnosis'
-      },
-      controller: DiagnosisGroupsController,
-      templateUrl: 'app/diagnoses/groups-component.html'
-    };
-  }]);
-})();
+diagnosisGroupsControllerFactory.$inject = [
+  'ListEditController',
+  '$injector',
+  'firstPromise',
+  'store'
+];
+
+function diagnosisGroupsComponent(DiagnosisGroupsController) {
+  return {
+    scope: {
+      parent: '=diagnosis'
+    },
+    controller: DiagnosisGroupsController,
+    templateUrl: 'app/diagnoses/groups-component.html'
+  };
+}
+
+diagnosisGroupsComponent.$inject = ['DiagnosisGroupsController'];
+
+export {
+  diagnosisGroupsControllerFactory,
+  diagnosisGroupsComponent
+};

@@ -10,6 +10,9 @@ import consultants from './consultants';
 import controllers from './controllers';
 import core from './core';
 import crud from './crud';
+import diagnoses from './diagnoses';
+import home from './home';
+import store from './store';
 
 Highcharts.setOptions({
   global: {
@@ -97,11 +100,11 @@ angular.module('radar', [
   controllers,
   core,
   crud,
-  'radar.diagnoses',
+  diagnoses,
   'radar.filters',
   'radar.forms',
   'radar.groups',
-  'radar.home',
+  home,
   'radar.hospitals',
   'radar.logs',
   'radar.notifications',
@@ -112,7 +115,7 @@ angular.module('radar', [
   'radar.recruitPatient',
   'radar.sessions',
   'radar.sources',
-  'radar.store',
+  store,
   'radar.ui',
   'radar.users',
   'radar.utils',

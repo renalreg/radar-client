@@ -26,6 +26,7 @@ function config($stateProvider, storeProvider) {
 config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.consultants', [uiRouter])
+  .config(config)
   .factory('ConsultantModel', consultantModelFactory)
   .factory('ConsultantPermission', consultantPermissionFactory)
   .factory('ConsultantsController', consultantsControllerFactory)
