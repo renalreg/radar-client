@@ -15,6 +15,7 @@ import filters from './filters';
 import groups from './groups';
 import home from './home';
 import store from './store';
+import validators from './validators';
 
 Highcharts.setOptions({
   global: {
@@ -121,7 +122,7 @@ angular.module('radar', [
   'radar.ui',
   'radar.users',
   'radar.utils',
-  'radar.validators'
+  validators
 ])
   .config(config)
   .run(run);

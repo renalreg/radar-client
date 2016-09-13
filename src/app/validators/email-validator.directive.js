@@ -1,22 +1,18 @@
-(function() {
-  'use strict';
+var EMAIL_REGEX = /^.+@[^\.@][^@]*\.[^\.@]+$/;
 
-  var app = angular.module('radar.validators');
+function emailValidator() {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    scope: false,
+    link: function(scope, element, attrs, ngModelCtrl) {
+      ngModelCtrl.$parsers.push(function(viewValue) {
+        var modelValue = viewValue.trim();
+        ngModelCtrl.$setValidity('email', EMAIL_REGEX.test(modelValue));
+        return modelValue;
+      });
+    }
+  };
+}
 
-  var EMAIL_REGEX = /^.+@[^\.@][^@]*\.[^\.@]+$/;
-
-  app.directive('emailValidator', function() {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      scope: false,
-      link: function(scope, element, attrs, ngModelCtrl) {
-        ngModelCtrl.$parsers.push(function(viewValue) {
-          var modelValue = viewValue.trim();
-          ngModelCtrl.$setValidity('email', EMAIL_REGEX.test(modelValue));
-          return modelValue;
-        });
-      }
-    };
-  });
-})();
+export default emailValidator;
