@@ -96,7 +96,7 @@ run.$inject = [
   'sessionTimeoutService'
 ];
 
-angular.module('radar', [
+export default angular.module('radar', [
   localStorage,
   uiRouter,
   account,
@@ -128,4 +128,5 @@ angular.module('radar', [
   validators
 ])
   .config(config)
-  .run(run);
+  .run(run)
+  .name;
