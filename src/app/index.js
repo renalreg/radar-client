@@ -7,6 +7,7 @@ import account from './account';
 import auth from './auth';
 import cohorts from './cohorts';
 import consultants from './consultants';
+import controllers from './controllers';
 
 Highcharts.setOptions({
   global: {
@@ -91,7 +92,7 @@ angular.module('radar', [
   auth,
   cohorts,
   consultants,
-  'radar.controllers',
+  controllers,
   'radar.core',
   'radar.crud',
   'radar.diagnoses',
