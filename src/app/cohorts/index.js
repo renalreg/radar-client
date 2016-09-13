@@ -24,7 +24,7 @@ function config($stateProvider) {
     templateUrl: cohortDetailTemplateUrl,
     controller: 'CohortDetailController',
     resolve: {
-      cohort: ['$stateParams', 'cohortStore', function($stateParams, cohortStore, $q) {
+      cohort: ['$stateParams', 'cohortStore', function($stateParams, cohortStore) {
         return cohortStore.findOne($stateParams.cohortId);
       }]
     }

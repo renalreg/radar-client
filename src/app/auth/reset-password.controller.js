@@ -16,7 +16,7 @@ function ResetPasswordController(
         notificationService.success({message: MESSAGE, timeout: 30000});
         $state.go('login');
       })
-      ['catch'](function(errors) {
+      .catch(function(errors) {
         if (errors) {
           $scope.errors = errors;
         }

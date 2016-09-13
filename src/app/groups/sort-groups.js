@@ -1,13 +1,11 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.groups');
+function sortGroups() {
+  return function sortGroups(groups) {
+    return _.sortBy(groups, ['type', function(x) {
+      return x.name.toUpperCase();
+    }]);
+  };
+}
 
-  app.factory('sortGroups', ['_', function(_) {
-    return function sortGroups(groups) {
-      return _.sortBy(groups, ['type', function(x) {
-        return x.name.toUpperCase();
-      }]);
-    };
-  }]);
-})();
+export default sortGroups;

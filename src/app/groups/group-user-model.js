@@ -1,23 +1,19 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.groups');
+function groupUserModelFactory(Model) {
+  function GroupUserModel(modelName, data) {
+    Model.call(this, modelName, data);
+  }
 
-  app.factory('GroupUserModel', ['Model', '_', function(Model, _) {
-    function GroupUserModel(modelName, data) {
-      Model.call(this, modelName, data);
-    }
+  GroupUserModel.prototype = Object.create(Model.prototype);
 
-    GroupUserModel.prototype = Object.create(Model.prototype);
+  GroupUserModel.prototype.hasPermission = function(permission) {
+    return _.indexOf(this.permissions, permission) >= 0;
+  };
 
-    GroupUserModel.prototype.hasPermission = function(permission) {
-      return _.indexOf(this.permissions, permission) >= 0;
-    };
+  return GroupUserModel;
+}
 
-    return GroupUserModel;
-  }]);
+groupUserModelFactory.$inject = ['Model'];
 
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('group-users', 'GroupUserModel');
-  }]);
-})();
+export default groupUserModelFactory;

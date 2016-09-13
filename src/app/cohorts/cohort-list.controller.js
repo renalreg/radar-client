@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 function CohortListController($scope, session, cohortStore, sortCohorts) {
   $scope.loading = true;
 
