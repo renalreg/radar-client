@@ -1,35 +1,37 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.stats');
+import templateUrl from './patients-by-group-table.html';
 
-  app.directive('patientsByGroupTable', ['adapter', '_', function(adapter, _) {
-    return {
-      scope: {
-        group: '=',
-        groupType: '@',
-      },
-      templateUrl: 'app/stats/patients-by-group-table.html',
-      link: function(scope) {
+function patientsByGroupTable(adapter) {
+  return {
+    scope: {
+      group: '=',
+      groupType: '@',
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.loading = true;
+
+      scope.$watch('group', function(group) {
+        var params = {
+          groupType: scope.groupType
+        };
+
+        if (group) {
+          params.group = group.id;
+        }
+
         scope.loading = true;
 
-        scope.$watch('group', function(group) {
-          var params = {
-            groupType: scope.groupType
-          };
-
-          if (group) {
-            params.group = group.id;
-          }
-
-          scope.loading = true;
-
-          adapter.get('/patients-by-group', params).then(function(response) {
-            scope.loading = false;
-            scope.counts = _.sortBy(response.data.counts, 'count').reverse();
-          });
+        adapter.get('/patients-by-group', params).then(function(response) {
+          scope.loading = false;
+          scope.counts = _.sortBy(response.data.counts, 'count').reverse();
         });
-      }
-    };
-  }]);
-})();
+      });
+    }
+  };
+}
+
+patientsByGroupTable.$inject = ['adapter'];
+
+export default patientsByGroupTable;

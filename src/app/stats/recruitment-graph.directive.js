@@ -1,69 +1,68 @@
-(function() {
-  'use strict';
+import Highcharts from 'highcharts';
+import _ from 'lodash';
 
-  var app = angular.module('radar.stats');
+function recruitmentGraph() {
+  return {
+    scope: {
+      title: '@',
+      data: '='
+    },
+    link: function(scope, element) {
+      scope.$watch('data', load);
 
-  app.directive('recruitmentGraph', ['Highcharts', '_', function(Highcharts, _) {
-    return {
-      scope: {
-        title: '@',
-        data: '='
-      },
-      link: function(scope, element) {
-        scope.$watch('data', load);
+      function load() {
+        var data = scope.data;
 
-        function load() {
-          var data = scope.data;
+        if (!data) {
+          return;
+        }
 
-          if (!data) {
-            return;
-          }
+        var newData = [];
+        var totalData = [];
 
-          var newData = [];
-          var totalData = [];
+        _.forEach(data, function(x) {
+          var date = Date.parse(x.date);
+          newData.push({x: date, y: x.newPatients});
+          totalData.push({x: date, y: x.totalPatients});
+        });
 
-          _.forEach(data, function(x) {
-            var date = Date.parse(x.date);
-            newData.push({x: date, y: x.newPatients});
-            totalData.push({x: date, y: x.totalPatients});
-          });
+        newData = _.sortBy(newData, 'x');
+        totalData = _.sortBy(totalData, 'x');
 
-          newData = _.sortBy(newData, 'x');
-          totalData = _.sortBy(totalData, 'x');
-
-          var options = {
-            chart: {
-              zoomType: 'x',
-              renderTo: element.get(0)
-            },
+        var options = {
+          chart: {
+            zoomType: 'x',
+            renderTo: element.get(0)
+          },
+          title: {
+            text: scope.title
+          },
+          xAxis: {
+            type: 'datetime'
+          },
+          yAxis: {
             title: {
-              text: scope.title
+              text: 'Patients'
             },
-            xAxis: {
-              type: 'datetime'
-            },
-            yAxis: {
-              title: {
-                text: 'Patients'
-              },
-              min: 0
-            },
-            series: [
-              {name: 'New', data: newData},
-              {name: 'Total', data: totalData}
-            ],
-            plotOptions: {
-              line: {
-                marker: {
-                  enabled: true
-                }
+            min: 0
+          },
+          series: [
+            {name: 'New', data: newData},
+            {name: 'Total', data: totalData}
+          ],
+          plotOptions: {
+            line: {
+              marker: {
+                enabled: true
               }
             }
-          };
+          }
+        };
 
-          new Highcharts.Chart(options);
-        }
+        new Highcharts.Chart(options);
       }
-    };
-  }]);
-})();
+    }
+  };
+}
+
+export default recruitmentGraph;

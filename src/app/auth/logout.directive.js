@@ -1,10 +1,5 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.auth');
-
-  app.directive('logout', ['authService', '$state', function(authService, $state) {
-    return {
+function logoutDirective(authService, $state) {
+  return {
       restrict: 'A',
       link: function(scope, element) {
         // Log the user out on click
@@ -16,5 +11,8 @@
         });
       }
     };
-  }]);
-})();
+}
+
+logoutDirective.$inject = ['authService', '$state'];
+
+export default logoutDirective;

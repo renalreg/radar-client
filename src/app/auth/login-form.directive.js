@@ -1,47 +1,43 @@
-(function() {
-  'use strict';
+import templateUrl from './login-form.html';
 
-  var app = angular.module('radar.auth');
+function loginFormDirective(
+  session, authService, notificationService, loginRedirect
+) {
+  return {
+    restrict: 'A',
+    scope: {},
+    templateUrl: templateUrl,
+    link: function(scope) {
+      var credentials = {
+        username: '',
+        password: '',
+        logoutOtherSessions: false
+      };
 
-  function directive(
-    session, authService, notificationService, loginRedirect
-  ) {
-    return {
-      restrict: 'A',
-      scope: {},
-      templateUrl: 'app/auth/login-form.html',
-      link: function(scope) {
-        var credentials = {
-          username: '',
-          password: '',
-          logoutOtherSessions: false
-        };
+      scope.credentials = credentials;
 
-        scope.credentials = credentials;
+      scope.errors = {};
 
+      scope.login = function() {
         scope.errors = {};
 
-        scope.login = function() {
-          scope.errors = {};
+        return authService.login(credentials)
+          .then(function() {
+            notificationService.success('Logged in successfully.');
+            loginRedirect(session.user);
+          })
+          ['catch'](function(errors) {
+            if (errors) {
+              scope.errors = errors;
+            }
+          });
+      };
+    }
+  };
+}
 
-          return authService.login(credentials)
-            .then(function() {
-              notificationService.success('Logged in successfully.');
-              loginRedirect(session.user);
-            })
-            ['catch'](function(errors) {
-              if (errors) {
-                scope.errors = errors;
-              }
-            });
-        };
-      }
-    };
-  }
+loginFormDirective.$inject = [
+  'session', 'authService', 'notificationService', 'loginRedirect'
+];
 
-  directive.$inject = [
-    'session', 'authService', 'notificationService', 'loginRedirect'
-  ];
-
-  app.directive('loginForm', directive);
-})();
+export default loginFormDirective;

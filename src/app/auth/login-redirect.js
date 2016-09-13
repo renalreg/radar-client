@@ -1,38 +1,36 @@
-(function() {
-  'use strict';
+function loginRedirect(session, $state, $location, hasPermission) {
+  var userId = null;
+  var lastUrl = null;
 
-  var app = angular.module('radar.auth');
+  session.on('logout', function(data) {
+    // Remember URL if user was forced to logout
+    if (data.forced) {
+      userId = data.userId;
+      lastUrl = $location.url();
+    } else {
+      userId = null;
+      lastUrl = null;
+    }
+  });
 
-  app.factory('loginRedirect', ['session', '$state', '$location', 'hasPermission', function(session, $state, $location, hasPermission) {
-    var userId = null;
-    var lastUrl = null;
+  return function loginRedirect(user) {
+    // Logging back in as the same user
+    if (user.id === userId) {
+      $location.url(lastUrl);
+    } else {
+      var state;
 
-    session.on('logout', function(data) {
-      // Remember URL if user was forced to logout
-      if (data.forced) {
-        userId = data.userId;
-        lastUrl = $location.url();
+      if (hasPermission(user, 'VIEW_PATIENT')) {
+        state = 'patients';
       } else {
-        userId = null;
-        lastUrl = null;
+        state = 'index';
       }
-    });
 
-    return function loginRedirect(user) {
-      // Logging back in as the same user
-      if (user.id === userId) {
-        $location.url(lastUrl);
-      } else {
-        var state;
+      $state.go(state);
+    }
+  };
+}
 
-        if (hasPermission(user, 'VIEW_PATIENT')) {
-          state = 'patients';
-        } else {
-          state = 'index';
-        }
+loginRedirect.$inject = ['session', '$state', '$location', 'hasPermission'];
 
-        $state.go(state);
-      }
-    };
-  }]);
-})();
+export default loginRedirect;

@@ -1,32 +1,20 @@
-(function() {
-  'use strict';
+function tokenRequestFactory(session) {
+  return function(config) {
+    var token = session.getToken();
 
-  var app = angular.module('radar.store');
-
-  function tokenRequestFactory(session) {
-    return function(config) {
-      var token = session.getToken();
-
-      if (token !== null) {
-        if (config.headers === undefined) {
-          config.headers = {};
-        }
-
-        // Send the token in the header
-        config.headers['X-Auth-Token'] = token;
+    if (token !== null) {
+      if (config.headers === undefined) {
+        config.headers = {};
       }
 
-      return config;
-    };
-  }
+      // Send the token in the header
+      config.headers['X-Auth-Token'] = token;
+    }
 
-  tokenRequestFactory.$inject = [
-    'session'
-  ];
+    return config;
+  };
+}
 
-  app.factory('tokenRequest', tokenRequestFactory);
+tokenRequestFactory.$inject = ['session'];
 
-  app.config(['adapterProvider', function(adapterProvider) {
-    adapterProvider.beforeRequest('tokenRequest');
-  }]);
-})();
+export default tokenRequestFactory;

@@ -3,11 +3,11 @@ node_js:
   - "5"
 install:
   - npm install --quiet --no-spin
-  - bower install --quiet
 script:
-  - gulp lint
-  - gulp coverage
-  - gulp sauce-labs || true
+  - npm run lint
+  # TODO
+  # - gulp coverage
+  # - gulp sauce-labs || true
 after_success:
   - cat coverage/*/lcov.info | coveralls
 env:

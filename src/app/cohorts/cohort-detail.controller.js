@@ -1,9 +1,7 @@
-(function() {
-  'use strict';
+function CohortDetailController($scope, cohort) {
+  $scope.cohort = cohort;
+}
 
-  var app = angular.module('radar.cohorts');
+CohortDetailController.$inject = ['$scope', 'cohort'];
 
-  app.controller('CohortDetailController', ['$scope', 'cohort', function($scope, cohort) {
-    $scope.cohort = cohort;
-  }]);
-})();
+export default CohortDetailController;

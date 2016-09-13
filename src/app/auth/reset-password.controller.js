@@ -1,43 +1,37 @@
-(function() {
-  'use strict';
+var MESSAGE = 'Your password has been reset, you can now login with your new password.';
 
-  var app = angular.module('radar');
+function ResetPasswordController(
+  $scope, $state, authService, $stateParams, notificationService
+) {
+  $scope.errors = {};
+  $scope.data = {};
 
-  var MESSAGE = 'Your password has been reset, you can now login with your new password.';
+  var token = $stateParams.token;
 
-  function ResetPasswordController(
-    $scope, $state, authService, $stateParams, notificationService
-  ) {
+  $scope.submit = function() {
     $scope.errors = {};
-    $scope.data = {};
 
-    var token = $stateParams.token;
+    return authService.resetPassword(token, $scope.data.username, $scope.data.password)
+      .then(function() {
+        notificationService.success({message: MESSAGE, timeout: 30000});
+        $state.go('login');
+      })
+      ['catch'](function(errors) {
+        if (errors) {
+          $scope.errors = errors;
+        }
 
-    $scope.submit = function() {
-      $scope.errors = {};
+        // Token is invalid / has expired
+        if (errors.token) {
+          notificationService.fail({message: errors.token, timeout: 30000});
+          $state.go('forgotPassword');
+        }
+      });
+  };
+}
 
-      return authService.resetPassword(token, $scope.data.username, $scope.data.password)
-        .then(function() {
-          notificationService.success({message: MESSAGE, timeout: 30000});
-          $state.go('login');
-        })
-        ['catch'](function(errors) {
-          if (errors) {
-            $scope.errors = errors;
-          }
+ResetPasswordController.$inject = [
+  '$scope', '$state', 'authService', '$stateParams', 'notificationService'
+];
 
-          // Token is invalid / has expired
-          if (errors.token) {
-            notificationService.fail({message: errors.token, timeout: 30000});
-            $state.go('forgotPassword');
-          }
-        });
-    };
-  }
-
-  ResetPasswordController.$inject = [
-    '$scope', '$state', 'authService', '$stateParams', 'notificationService'
-  ];
-
-  app.controller('ResetPasswordController', ResetPasswordController);
-})();
+export default ResetPasswordController;

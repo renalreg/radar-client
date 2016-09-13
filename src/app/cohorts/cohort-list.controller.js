@@ -1,30 +1,30 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.cohorts');
+function CohortListController($scope, session, cohortStore, sortCohorts) {
+  $scope.loading = true;
 
-  app.controller('CohortListController', ['$scope', 'session', 'cohortStore', '_', 'sortCohorts', function($scope, session, cohortStore, _, sortCohorts) {
-    $scope.loading = true;
+  init();
 
-    init();
+  function setCohorts(cohorts) {
+    $scope.cohorts = sortCohorts(cohorts);
+    $scope.loading = false;
+  }
 
-    function setCohorts(cohorts) {
-      $scope.cohorts = sortCohorts(cohorts);
-      $scope.loading = false;
-    }
+  function init() {
+    var user = session.user;
 
-    function init() {
-      var user = session.user;
-
-      if (user.isAdmin) {
-        // Admins can see all cohorts
-        cohortStore.findMany().then(function(cohorts) {
-          setCohorts(cohorts);
-        });
-      } else {
-        var cohorts = user.getCohorts();
+    if (user.isAdmin) {
+      // Admins can see all cohorts
+      cohortStore.findMany().then(function(cohorts) {
         setCohorts(cohorts);
-      }
+      });
+    } else {
+      var cohorts = user.getCohorts();
+      setCohorts(cohorts);
     }
-  }]);
-})();
+  }
+}
+
+CohortListController.$inject = ['$scope', 'session', 'cohortStore', 'sortCohorts'];
+
+export default CohortListController;

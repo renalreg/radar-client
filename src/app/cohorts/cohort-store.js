@@ -1,10 +1,5 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.cohorts');
-
-  app.factory('cohortStore', ['store', '$q', function(store, $q) {
-    return {
+function cohortStore(store, $q) {
+  return {
       findOne: function(id) {
         return store.findOne('groups', id, true).then(function(group) {
           if (group.type === 'COHORT') {
@@ -23,6 +18,9 @@
 
         return store.findMany('groups', params);
       }
-    };
-  }]);
-})();
+  };
+}
+
+cohortStore.$inject = ['store', '$q'];
+
+export default cohortStore;
