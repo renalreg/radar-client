@@ -17,7 +17,7 @@ function randomPasswordDirective(randomPassword) {
             scope.password = password;
             ngModel.$setViewValue(password);
           })
-          ['finally'](function() {
+          .finally(function() {
             scope.loading = false;
           });
       };

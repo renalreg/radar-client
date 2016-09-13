@@ -45,11 +45,11 @@ function authService(
             session.login(user);
             deferred.resolve(user);
           })
-          ['catch'](function() {
+          .catch(function() {
             deferred.reject();
           });
       })
-      ['catch'](errorHandler(deferred));
+      .catch(errorHandler(deferred));
 
     return deferred.promise;
   }

@@ -34,7 +34,7 @@ accountControllerFactory.$inject = [
   'notificationService'
 ];
 
-function accountComponent() {
+function accountComponent(AccountController) {
   return {
     scope: {
       user: '='

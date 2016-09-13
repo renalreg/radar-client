@@ -26,7 +26,7 @@ function loginFormDirective(
             notificationService.success('Logged in successfully.');
             loginRedirect(session.user);
           })
-          ['catch'](function(errors) {
+          .catch(function(errors) {
             if (errors) {
               scope.errors = errors;
             }
