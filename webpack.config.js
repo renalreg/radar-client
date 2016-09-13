@@ -41,7 +41,8 @@ var config = {
         loader: 'file' // TODO filenames
       }
     ]
-  }
+  },
+  plugins: []
 }
 
 if (production) {
