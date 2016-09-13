@@ -14,6 +14,8 @@ import diagnoses from './diagnoses';
 import filters from './filters';
 import groups from './groups';
 import home from './home';
+import sessions from './sessions';
+import sources from './sources';
 import store from './store';
 import validators from './validators';
 
@@ -116,8 +118,8 @@ angular.module('radar', [
   'radar.permissions',
   'radar.posts',
   'radar.recruitPatient',
-  'radar.sessions',
-  'radar.sources',
+  sessions,
+  sources,
   store,
   'radar.ui',
   'radar.users',
