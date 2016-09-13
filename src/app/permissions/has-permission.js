@@ -1,29 +1,27 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.permissions');
+function hasPermissionFactory() {
+  return function hasPermission(user, permission, groupType) {
+    if (user === null) {
+      return false;
+    }
 
-  app.factory('hasPermission', ['_', function(_) {
-    return function hasPermission(user, permission, groupType) {
-      if (user === null) {
-        return false;
-      }
+    if (user.isAdmin) {
+      return true;
+    }
 
-      if (user.isAdmin) {
-        return true;
-      }
+    var groups = user.groups;
 
-      var groups = user.groups;
-
-      if (groupType !== undefined) {
-        groups = _.filter(groups, function(x) {
-          return x.group.type === groupType;
-        });
-      }
-
-      return _.some(groups, function(x) {
-        return x.hasPermission(permission);
+    if (groupType !== undefined) {
+      groups = _.filter(groups, function(x) {
+        return x.group.type === groupType;
       });
-    };
-  }]);
-})();
+    }
+
+    return _.some(groups, function(x) {
+      return x.hasPermission(permission);
+    });
+  };
+}
+
+export default hasPermissionFactory;

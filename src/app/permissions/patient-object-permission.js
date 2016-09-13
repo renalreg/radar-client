@@ -1,27 +1,25 @@
-(function() {
-  'use strict';
+function patientObjectPermissionFactory(session, hasPermissionForPatient) {
+  function PatientObjectPermission(patient) {
+    this.patient = patient;
+  }
 
-  var app = angular.module('radar.permissions');
-
-  app.factory('PatientObjectPermission', ['session', 'hasPermissionForPatient', function(session, hasPermissionForPatient) {
-    function PatientObjectPermission(patient) {
-      this.patient = patient;
+  PatientObjectPermission.prototype.hasPermission = function() {
+    if (!session.isAuthenticated) {
+      return false;
     }
 
-    PatientObjectPermission.prototype.hasPermission = function() {
-      if (!session.isAuthenticated) {
-        return false;
-      }
+    var user = session.user;
 
-      var user = session.user;
+    return hasPermissionForPatient(user, this.patient, 'EDIT_PATIENT');
+  };
 
-      return hasPermissionForPatient(user, this.patient, 'EDIT_PATIENT');
-    };
+  PatientObjectPermission.prototype.hasObjectPermission = function() {
+    return this.hasPermission();
+  };
 
-    PatientObjectPermission.prototype.hasObjectPermission = function() {
-      return this.hasPermission();
-    };
+  return PatientObjectPermission;
+}
 
-    return PatientObjectPermission;
-  }]);
-})();
+patientObjectPermissionFactory.$inject = ['session', 'hasPermissionForPatient'];
+
+export default patientObjectPermissionFactory;

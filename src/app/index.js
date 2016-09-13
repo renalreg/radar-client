@@ -14,6 +14,7 @@ import diagnoses from './diagnoses';
 import filters from './filters';
 import groups from './groups';
 import home from './home';
+import permissions from './permissions';
 import sessions from './sessions';
 import sources from './sources';
 import store from './store';
@@ -115,7 +116,7 @@ angular.module('radar', [
   'radar.notifications',
   'radar.observations',
   'radar.patients',
-  'radar.permissions',
+  permissions,
   'radar.posts',
   'radar.recruitPatient',
   sessions,

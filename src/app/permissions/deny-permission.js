@@ -1,20 +1,16 @@
-(function() {
-  'use strict';
+function denyPermissionFactory() {
+  function DenyPermission() {
+  }
 
-  var app = angular.module('radar.permissions');
+  DenyPermission.prototype.hasPermission = function() {
+    return false;
+  };
 
-  app.factory('DenyPermission', function() {
-    function DenyPermission() {
-    }
+  DenyPermission.prototype.hasObjectPermission = function() {
+    return false;
+  };
 
-    DenyPermission.prototype.hasPermission = function() {
-      return false;
-    };
+  return DenyPermission;
+}
 
-    DenyPermission.prototype.hasObjectPermission = function() {
-      return false;
-    };
-
-    return DenyPermission;
-  });
-})();
+export default denyPermissionFactory;
