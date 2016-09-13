@@ -1,10 +1,7 @@
-
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.filters');
-
-  app.filter('unsafe', ['$sce', function($sce) {
+function unsafeFilter($sce) {
     return $sce.trustAsHtml;
-  }]);
-})();
+}
+
+unsafeFilter.$inject = '$sce';
+
+export default unsafeFilter;

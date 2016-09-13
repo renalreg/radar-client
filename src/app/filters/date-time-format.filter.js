@@ -1,21 +1,19 @@
-(function() {
-  'use strict';
+import moment from 'moment';
 
-  var app = angular.module('radar.filters');
+function dateTimeFormatFilter() {
+  return function dateTimeFormat(input) {
+    if (input) {
+      var dt = moment(input);
 
-  app.filter('dateTimeFormat', ['moment', function(moment) {
-    return function(input) {
-      if (input) {
-        var dt = moment(input);
-
-        if (dt.isValid()) {
-          return dt.format('DD/MM/YYYY HH:mm:ss');
-        } else {
-          return '-';
-        }
+      if (dt.isValid()) {
+        return dt.format('DD/MM/YYYY HH:mm:ss');
       } else {
         return '-';
       }
-    };
-  }]);
-})();
+    } else {
+      return '-';
+    }
+  };
+}
+
+export default dateTimeFormatFilter;

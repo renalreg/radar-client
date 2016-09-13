@@ -1,23 +1,19 @@
-(function() {
-  'use strict';
+function dateFormatFilter() {
+  return function dateFormat(oldValue) {
+    var newValue;
 
-  var app = angular.module('radar.filters');
+    if (oldValue) {
+      var year = oldValue.substr(0, 4);
+      var month = oldValue.substr(5, 2);
+      var day = oldValue.substr(8, 2);
 
-  app.filter('dateFormat', function() {
-    return function(oldValue) {
-      var newValue;
+      newValue = day + '/' + month + '/' + year;
+    } else {
+      newValue = '-';
+    }
 
-      if (oldValue) {
-        var year = oldValue.substr(0, 4);
-        var month = oldValue.substr(5, 2);
-        var day = oldValue.substr(8, 2);
+    return newValue;
+  };
+}
 
-        newValue = day + '/' + month + '/' + year;
-      } else {
-        newValue = '-';
-      }
-
-      return newValue;
-    };
-  });
-})();
+export default dateFormatFilter;

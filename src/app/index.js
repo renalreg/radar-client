@@ -11,6 +11,7 @@ import controllers from './controllers';
 import core from './core';
 import crud from './crud';
 import diagnoses from './diagnoses';
+import filters from './filters';
 import home from './home';
 import store from './store';
 
@@ -101,7 +102,7 @@ angular.module('radar', [
   core,
   crud,
   diagnoses,
-  'radar.filters',
+  filters,
   'radar.forms',
   'radar.groups',
   home,

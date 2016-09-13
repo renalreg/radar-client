@@ -1,27 +1,23 @@
-(function() {
-  'use strict';
+function ageFormatFilter() {
+  return function ageFormat(seconds) {
+    var output;
 
-  var app = angular.module('radar.filters');
+    if (seconds !== null && seconds !== undefined) {
+      var years = seconds / (365 * 24 * 60 * 60);
+      var months = Math.floor((years - Math.floor(years)) * 12);
+      years = Math.floor(years);
 
-  app.filter('ageFormat', [function() {
-    return function ageFormat(seconds) {
-      var output;
+      output = years + ' ' + (years === 1 ? 'year' : 'years');
 
-      if (seconds !== null && seconds !== undefined) {
-        var years = seconds / (365 * 24 * 60 * 60);
-        var months = Math.floor((years - Math.floor(years)) * 12);
-        years = Math.floor(years);
-
-        output = years + ' ' + (years === 1 ? 'year' : 'years');
-
-        if (months > 0) {
-          output +=  ', ' + months + ' ' + (months === 1 ? 'month' : 'months');
-        }
-      } else {
-        output = '-';
+      if (months > 0) {
+        output +=  ', ' + months + ' ' + (months === 1 ? 'month' : 'months');
       }
+    } else {
+      output = '-';
+    }
 
-      return output;
-    };
-  }]);
-})();
+    return output;
+  };
+}
+
+export default ageFormatFilter;
