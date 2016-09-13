@@ -1,60 +1,58 @@
-(function() {
-  'use strict';
+function crudRemoveButton($timeout) {
+  return {
+    require: '^crud',
+    scope: {
+      item: '='
+    },
+    templateUrl: 'app/crud/remove-button.html',
+    link: function(scope, element, attrs, crudCtrl) {
+      scope.clicked = false;
+      scope.confirmEnabled = false;
 
-  var app = angular.module('radar.crud');
+      var confirmTimeout = null;
 
-  app.directive('crudRemoveButton', ['$timeout', function($timeout) {
-    return {
-      require: '^crud',
-      scope: {
-        item: '='
-      },
-      templateUrl: 'app/crud/remove-button.html',
-      link: function(scope, element, attrs, crudCtrl) {
+      scope.remove = function() {
+        scope.clicked = true;
+        scope.confirmEnabled = false;
+        confirmTimeout = $timeout(function() {
+          scope.confirmEnabled = true;
+        }, 1000);
+      };
+
+      scope.confirm = function() {
         scope.clicked = false;
         scope.confirmEnabled = false;
+        $timeout.cancel(confirmTimeout);
+        crudCtrl.remove(scope.item);
+      };
 
-        var confirmTimeout = null;
+      scope.cancel = function() {
+        scope.clicked = false;
+        scope.confirmEnabled = false;
+        $timeout.cancel(confirmTimeout);
+      };
 
-        scope.remove = function() {
-          scope.clicked = true;
-          scope.confirmEnabled = false;
-          confirmTimeout = $timeout(function() {
-            scope.confirmEnabled = true;
-          }, 1000);
-        };
+      scope.$watch(function() {
+        return crudCtrl.removeEnabled(scope.item);
+      }, function(value) {
+        scope.removeEnabled = value;
+      });
 
-        scope.confirm = function() {
-          scope.clicked = false;
-          scope.confirmEnabled = false;
-          $timeout.cancel(confirmTimeout);
-          crudCtrl.remove(scope.item);
-        };
+      scope.$watch(function() {
+        return crudCtrl.removePermission(scope.item);
+      }, function(value) {
+        scope.permission = value;
+      });
 
-        scope.cancel = function() {
-          scope.clicked = false;
-          scope.confirmEnabled = false;
-          $timeout.cancel(confirmTimeout);
-        };
+      scope.$watch(function() {
+        return crudCtrl.removeVisible(scope.item);
+      }, function(value) {
+        scope.visible = value;
+      });
+    }
+  };
+}
 
-        scope.$watch(function() {
-          return crudCtrl.removeEnabled(scope.item);
-        }, function(value) {
-          scope.removeEnabled = value;
-        });
+crudRemoveButton.$inject = ['$timeout'];
 
-        scope.$watch(function() {
-          return crudCtrl.removePermission(scope.item);
-        }, function(value) {
-          scope.permission = value;
-        });
-
-        scope.$watch(function() {
-          return crudCtrl.removeVisible(scope.item);
-        }, function(value) {
-          scope.visible = value;
-        });
-      }
-    };
-  }]);
-})();
+export default crudRemoveButton;

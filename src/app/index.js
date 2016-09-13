@@ -8,6 +8,8 @@ import auth from './auth';
 import cohorts from './cohorts';
 import consultants from './consultants';
 import controllers from './controllers';
+import core from './core';
+import crud from './crud';
 
 Highcharts.setOptions({
   global: {
@@ -93,8 +95,8 @@ angular.module('radar', [
   cohorts,
   consultants,
   controllers,
-  'radar.core',
-  'radar.crud',
+  core,
+  crud,
   'radar.diagnoses',
   'radar.filters',
   'radar.forms',
