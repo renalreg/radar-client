@@ -1,27 +1,27 @@
-(function() {
-  'use strict';
+import templateUrl from './notifications.html';
 
-  var app = angular.module('radar.notifications');
+var TYPE_TO_CLASS = {
+  success: 'alert-success',
+  fail: 'alert-danger',
+  info: 'alert-info',
+  warn: 'alert-warning',
+  fatal: 'alert-danger',
+};
 
-  var TYPE_TO_CLASS = {
-    success: 'alert-success',
-    fail: 'alert-danger',
-    info: 'alert-info',
-    warn: 'alert-warning',
-    fatal: 'alert-danger',
+function notifications(notificationService) {
+  return {
+    scope: {},
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.notifications = notificationService.notifications;
+
+      scope.getClass = function(notification) {
+        return TYPE_TO_CLASS[notification.type] || 'alert-info';
+      };
+    }
   };
+}
 
-  app.directive('notifications', ['notificationService', function(notificationService) {
-    return {
-      scope: {},
-      templateUrl: 'app/notifications/notifications.html',
-      link: function(scope) {
-        scope.notifications = notificationService.notifications;
+notifications.$inject = ['notificationService'];
 
-        scope.getClass = function(notification) {
-          return TYPE_TO_CLASS[notification.type] || 'alert-info';
-        };
-      }
-    };
-  }]);
-})();
+export default notifications;

@@ -1,79 +1,73 @@
-(function() {
-  'use strict';
+function logListControllerFactory(
+  ListController,
+  $injector,
+  ListHelperProxy,
+  store,
+  $q
+) {
+  function LogListController($scope) {
+    var self = this;
 
-  var app = angular.module('radar.logs');
+    $injector.invoke(ListController, self, {$scope: $scope});
 
-  function controllerFactory(
-    ListController,
-    $injector,
-    ListHelperProxy,
-    store,
-    $q
-  ) {
-    function LogListController($scope) {
-      var self = this;
+    $scope.filters = {};
 
-      $injector.invoke(ListController, self, {$scope: $scope});
+    var proxy = new ListHelperProxy(update, {
+      perPage: 100,
+      sortBy: 'date',
+      reverse: true
+    });
+    proxy.load();
 
-      $scope.filters = {};
+    $scope.proxy = proxy;
+    $scope.search = search;
+    $scope.errors = {};
+    $scope.clear = clear;
+    $scope.count = 0;
 
-      var proxy = new ListHelperProxy(update, {
-        perPage: 100,
-        sortBy: 'date',
-        reverse: true
-      });
-      proxy.load();
+    function update() {
+      var proxyParams = proxy.getParams();
+      var params = angular.extend({}, proxyParams, $scope.filters);
 
-      $scope.proxy = proxy;
-      $scope.search = search;
-      $scope.errors = {};
-      $scope.clear = clear;
-      $scope.count = 0;
+      var promise = store.findMany('logs', params, true)
+        .then(function(data) {
+          proxy.setItems(data.data);
+          proxy.setCount(data.pagination.count);
+          $scope.count = data.pagination.count;
+          $scope.errors = {};
+          return data.data;
+        })
+        ['catch'](function(response) {
+          $scope.errors = response.errors;
+          return $q.reject();
+        });
 
-      function update() {
-        var proxyParams = proxy.getParams();
-        var params = angular.extend({}, proxyParams, $scope.filters);
-
-        var promise = store.findMany('logs', params, true)
-          .then(function(data) {
-            proxy.setItems(data.data);
-            proxy.setCount(data.pagination.count);
-            $scope.count = data.pagination.count;
-            $scope.errors = {};
-            return data.data;
-          })
-          ['catch'](function(response) {
-            $scope.errors = response.errors;
-            return $q.reject();
-          });
-
-        return self.load(promise);
-      }
-
-      function search() {
-        proxy.page = 1;
-        return update();
-      }
-
-      function clear() {
-        $scope.filters = {};
-        search();
-      }
+      return self.load(promise);
     }
 
-    LogListController.$inject = ['$scope'];
-    LogListController.prototype = Object.create(ListController.prototype);
+    function search() {
+      proxy.page = 1;
+      return update();
+    }
 
-    return LogListController;
+    function clear() {
+      $scope.filters = {};
+      search();
+    }
   }
 
-  controllerFactory.$inject = [
-    'ListController',
-    '$injector',
-    'ListHelperProxy',
-    'store',
-    '$q'
-  ];
+  LogListController.$inject = ['$scope'];
+  LogListController.prototype = Object.create(ListController.prototype);
 
-  app.factory('LogListController', controllerFactory);
-})();
+  return LogListController;
+}
+
+logListControllerFactory.$inject = [
+  'ListController',
+  '$injector',
+  'ListHelperProxy',
+  'store',
+  '$q'
+];
+
+export default logListControllerFactory;

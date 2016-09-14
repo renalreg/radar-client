@@ -14,6 +14,8 @@ import diagnoses from './diagnoses';
 import filters from './filters';
 import groups from './groups';
 import home from './home';
+import logs from './logs';
+import notifications from './notifications';
 import permissions from './permissions';
 import sessions from './sessions';
 import sources from './sources';
@@ -112,8 +114,8 @@ export default angular.module('radar', [
   groups,
   home,
   'radar.hospitals',
-  'radar.logs',
-  'radar.notifications',
+  logs,
+  notifications,
   'radar.observations',
   'radar.patients',
   permissions,
