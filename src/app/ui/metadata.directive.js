@@ -1,14 +1,12 @@
-(function() {
-  'use strict';
+import templateUrl from './metadata.html';
 
-  var app = angular.module('radar.ui');
+function metadata() {
+  return {
+    scope: {
+      item: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('metadata', function() {
-    return {
-      scope: {
-        item: '='
-      },
-      templateUrl: 'app/ui/metadata.html'
-    };
-  });
-})();
+export default metadata;

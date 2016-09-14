@@ -1,34 +1,34 @@
-(function() {
-  'use strict';
+import Quill from 'quill';
 
-  var app = angular.module('radar.ui.textEditor');
+import templateUrl from './text-editor.html';
 
-  app.directive('textEditor', ['Quill', function(Quill) {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      templateUrl: 'app/ui/text-editor/text-editor.html',
-      link: function(scope, element, attrs, ngModel) {
-        var container = element.find('.text-editor').get(0);
-        var toolbar = element.find('.text-editor-toolbar').get(0);
+function textEditor() {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    templateUrl: templateUrl,
+    link: function(scope, element, attrs, ngModel) {
+      var container = element.find('.text-editor').get(0);
+      var toolbar = element.find('.text-editor-toolbar').get(0);
 
-        var quill = new Quill(container, {
-          formats: ['bold', 'italic', 'link', 'bullet', 'list']
+      var quill = new Quill(container, {
+        formats: ['bold', 'italic', 'link', 'bullet', 'list']
+      });
+      quill.addModule('toolbar', {container: toolbar});
+      quill.addModule('link-tooltip', true);
+
+      ngModel.$render = function() {
+        quill.setHTML(ngModel.$viewValue || '');
+      };
+
+      quill.on('text-change', function() {
+        scope.$apply(function() {
+          var html = quill.getHTML();
+          ngModel.$setViewValue(html);
         });
-        quill.addModule('toolbar', {container: toolbar});
-        quill.addModule('link-tooltip', true);
+      });
+    }
+  };
+}
 
-        ngModel.$render = function() {
-          quill.setHTML(ngModel.$viewValue || '');
-        };
-
-        quill.on('text-change', function() {
-          scope.$apply(function() {
-            var html = quill.getHTML();
-            ngModel.$setViewValue(html);
-          });
-        });
-      }
-    };
-  }]);
-})();
+export default textEditor;

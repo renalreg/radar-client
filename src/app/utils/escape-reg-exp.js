@@ -1,12 +1,8 @@
-(function() {
-  'use strict';
+function escapeRegExp() {
+  return function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  };
+}
 
-  var app = angular.module('radar.utils');
-
-  app.factory('escapeRegExp', ['_', function(_) {
-    return function escapeRegExp(string) {
-      return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    };
-  }]);
-})();
+export default escapeRegExp;
 

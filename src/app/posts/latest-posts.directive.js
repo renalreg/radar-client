@@ -1,29 +1,36 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.posts');
+import templateUrl from './latest-posts.html';
 
-  app.factory('LatestPostsController', ['ListController', '$injector', 'store', '$sce', '_', function(ListController, $injector, store, $sce, _) {
-    function LatestPostsController($scope) {
-      var self = this;
+function latestPostsControllerFactory(ListController, $injector, store, $sce) {
+  function LatestPostsController($scope) {
+    var self = this;
 
-      $injector.invoke(ListController, self, {$scope: $scope});
+    $injector.invoke(ListController, self, {$scope: $scope});
 
-      self.load(store.findMany('posts', {sort: '-publishedDate', perPage: 1, page: 1}));
-    }
+    self.load(store.findMany('posts', {sort: '-publishedDate', perPage: 1, page: 1}));
+  }
 
-    LatestPostsController.$inject = ['$scope'];
+  LatestPostsController.$inject = ['$scope'];
 
-    LatestPostsController.prototype = Object.create(ListController.prototype);
+  LatestPostsController.prototype = Object.create(ListController.prototype);
 
-    return LatestPostsController;
-  }]);
+  return LatestPostsController;
+}
 
-  app.directive('latestPosts', ['LatestPostsController', function(LatestPostsController) {
-    return {
-      scope: {},
-      controller: LatestPostsController,
-      templateUrl: 'app/posts/latest-posts.html'
-    };
-  }]);
-})();
+latestPostsControllerFactory.$inject = ['ListController', '$injector', 'store', '$sce'];
+
+function latestPosts(LatestPostsController) {
+  return {
+    scope: {},
+    controller: LatestPostsController,
+    templateUrl: templateUrl
+  };
+}
+
+latestPosts.$inject = ['LatestPostsController'];
+
+export {
+  latestPostsControllerFactory,
+  latestPosts
+};

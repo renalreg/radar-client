@@ -17,9 +17,12 @@ import home from './home';
 import logs from './logs';
 import notifications from './notifications';
 import permissions from './permissions';
+import posts from './posts';
 import sessions from './sessions';
 import sources from './sources';
 import store from './store';
+import ui from './ui';
+import utils from './utils';
 import validators from './validators';
 
 Highcharts.setOptions({
@@ -119,14 +122,14 @@ export default angular.module('radar', [
   'radar.observations',
   'radar.patients',
   permissions,
-  'radar.posts',
+  posts,
   'radar.recruitPatient',
   sessions,
   sources,
   store,
-  'radar.ui',
+  ui,
   'radar.users',
-  'radar.utils',
+  utils,
   validators
 ])
   .config(config)

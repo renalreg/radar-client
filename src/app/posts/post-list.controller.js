@@ -1,48 +1,42 @@
-(function() {
-  'use strict';
+function postListControllerFactory(
+  ListController,
+  $injector,
+  ListHelperProxy,
+  store
+) {
+  function PostListController($scope) {
+    var self = this;
 
-  var app = angular.module('radar.posts');
+    $injector.invoke(ListController, self, {$scope: $scope});
 
-  function controllerFactory(
-    ListController,
-    $injector,
-    ListHelperProxy,
-    store
-  ) {
-    function PostListController($scope) {
-      var self = this;
+    var proxy = new ListHelperProxy(update, {perPage: 3});
+    proxy.load();
 
-      $injector.invoke(ListController, self, {$scope: $scope});
+    $scope.proxy = proxy;
 
-      var proxy = new ListHelperProxy(update, {perPage: 3});
-      proxy.load();
+    function update() {
+      var params = proxy.getParams();
+      params.sort = '-publishedDate';
 
-      $scope.proxy = proxy;
-
-      function update() {
-        var params = proxy.getParams();
-        params.sort = '-publishedDate';
-
-        return self.load(store.findMany('posts', params, true).then(function(data) {
-          proxy.setItems(data.data);
-          proxy.setCount(data.pagination.count);
-          return data.data;
-        }));
-      }
+      return self.load(store.findMany('posts', params, true).then(function(data) {
+        proxy.setItems(data.data);
+        proxy.setCount(data.pagination.count);
+        return data.data;
+      }));
     }
-
-    PostListController.$inject = ['$scope'];
-    PostListController.prototype = Object.create(ListController.prototype);
-
-    return PostListController;
   }
 
-  controllerFactory.$inject = [
-    'ListController',
-    '$injector',
-    'ListHelperProxy',
-    'store'
-  ];
+  PostListController.$inject = ['$scope'];
+  PostListController.prototype = Object.create(ListController.prototype);
 
-  app.factory('PostListController', controllerFactory);
-})();
+  return PostListController;
+}
+
+postListControllerFactory.$inject = [
+  'ListController',
+  '$injector',
+  'ListHelperProxy',
+  'store'
+];
+
+export default postListControllerFactory;

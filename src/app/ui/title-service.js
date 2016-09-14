@@ -1,59 +1,53 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.ui');
+function titleService($rootScope, $timeout) {
+  var defaultTitle = 'RaDaR';
+  var title = defaultTitle;
+  var callbacks = [];
 
-  app.factory('titleService', ['_', '$rootScope', '$timeout', function(_, $rootScope, $timeout) {
-    var defaultTitle = 'RaDaR';
-    var title = defaultTitle;
-    var callbacks = [];
+  // Listen for navigation
+  $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+    var newTitle = (toState.data !== undefined && toState.data.title !== undefined) ? toState.data.title : null;
 
-    // Listen for navigation
-    $rootScope.$on('$stateChangeSuccess', function(event, toState) {
-      var newTitle = (toState.data !== undefined && toState.data.title !== undefined) ? toState.data.title : null;
+    // Setting data.title to false prevents the title being updated on state change
+    if (newTitle !== false) {
+      setTitle(newTitle);
+    }
+  });
 
-      // Setting data.title to false prevents the title being updated on state change
-      if (newTitle !== false) {
-        setTitle(newTitle);
-      }
-    });
+  return {
+    setTitle: setTitle,
+    getTitle: getTitle,
+    watch: watch
+  };
 
-    return {
-      setTitle: setTitle,
-      getTitle: getTitle,
-      watch: watch
-    };
-
-    function setTitle(newTitle) {
-      if (newTitle === undefined || newTitle === null) {
-        newTitle = defaultTitle;
-      }
-
-      if (title !== newTitle) {
-        title = newTitle;
-        broadcast(title);
-      }
+  function setTitle(newTitle) {
+    if (newTitle === undefined || newTitle === null) {
+      newTitle = defaultTitle;
     }
 
-    function getTitle() {
-      return title;
+    if (title !== newTitle) {
+      title = newTitle;
+      broadcast(title);
     }
+  }
 
-    function watch(callback) {
-      callbacks.push(callback);
+  function getTitle() {
+    return title;
+  }
+
+  function watch(callback) {
+    callbacks.push(callback);
+    callback(getTitle());
+  }
+
+  function broadcast() {
+    _.forEach(callbacks, function(callback) {
       callback(getTitle());
-    }
-
-    function broadcast() {
-      _.forEach(callbacks, function(callback) {
-        callback(getTitle());
-      });
-    }
-  }]);
-
-  app.run(['$window', 'titleService', function($window, titleService) {
-    titleService.watch(function(title) {
-      $window.document.title = title;
     });
-  }]);
-})();
+  }
+}
+
+titleService.$inject = ['$rootScope', '$timeout'];
+
+export default titleService;

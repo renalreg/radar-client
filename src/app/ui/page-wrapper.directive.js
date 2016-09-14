@@ -1,13 +1,11 @@
-(function() {
-  'use strict';
+import templateUrl from './page-wrapper.html';
 
-  var app = angular.module('radar.ui');
+function pageWrapper() {
+  return {
+    restrict: 'A',
+    transclude: true,
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('pageWrapper', function() {
-    return {
-      restrict: 'A',
-      transclude: true,
-      templateUrl: 'app/ui/page-wrapper.html'
-    };
-  });
-})();
+export default pageWrapper;

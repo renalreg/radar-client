@@ -1,20 +1,20 @@
-(function() {
-  'use strict';
+import templateUrl from './live-warning.html';
 
-  var app = angular.module('radar.ui');
+function liveWarning(adapter) {
+  return {
+    restrict: 'A',
+    scope: true,
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.live = true;
 
-  app.directive('liveWarning', ['adapter', function(adapter) {
-    return {
-      restrict: 'A',
-      scope: true,
-      templateUrl: 'app/ui/live-warning.html',
-      link: function(scope) {
-        scope.live = true;
+      adapter.get('/environment').then(function(response) {
+        scope.live = response.data.live;
+      });
+    }
+  };
+}
 
-        adapter.get('/environment').then(function(response) {
-          scope.live = response.data.live;
-        });
-      }
-    };
-  }]);
-})();
+liveWarning.$inject = ['adapter'];
+
+export default liveWarning;
