@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './observation-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmObservationField() {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&',
+      patient: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmObservationField', ['store', '_', function(store, _) {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&',
-        patient: '='
-      },
-      templateUrl: 'app/forms/fields/observation-field.html'
-    };
-  }]);
-})();
+export default frmObservationField;

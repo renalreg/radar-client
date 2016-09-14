@@ -1,21 +1,21 @@
-(function() {
-  'use strict';
+import templateUrl from './group-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmGroupField(sortGroups, store) {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&'
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      store.findMany('groups').then(function(groups) {
+        scope.groups = sortGroups(groups);
+      });
+    }
+  };
+}
 
-  app.directive('frmGroupField', ['sortGroups', 'store', function(sortGroups, store) {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&'
-      },
-      templateUrl: 'app/forms/fields/group-field.html',
-      link: function(scope) {
-        store.findMany('groups').then(function(groups) {
-          scope.groups = sortGroups(groups);
-        });
-      }
-    };
-  }]);
-})();
+frmGroupField.$inject = ['sortGroups', 'store'];
+
+export default frmGroupField;

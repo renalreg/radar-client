@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './text-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmTextField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmTextField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '='
-      },
-      templateUrl: 'app/forms/fields/text-field.html'
-    };
-  });
-})();
+export default frmTextField;

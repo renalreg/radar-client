@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './text-editor-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmTextEditorField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmTextEditorField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '='
-      },
-      templateUrl: 'app/forms/fields/text-editor-field.html'
-    };
-  });
-})();
+export default frmTextEditorField;

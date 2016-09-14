@@ -1,21 +1,21 @@
-(function() {
-  'use strict';
+import templateUrl from './cohort-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmCohortField(sortCohorts, session, cohortStore) {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&'
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      cohortStore.findMany().then(function(cohorts) {
+        scope.cohorts = sortCohorts(cohorts);
+      });
+    }
+  };
+}
 
-  app.directive('frmCohortField', ['sortCohorts', 'session', 'cohortStore', function(sortCohorts, session, cohortStore) {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&'
-      },
-      templateUrl: 'app/forms/fields/cohort-field.html',
-      link: function(scope) {
-        cohortStore.findMany().then(function(cohorts) {
-          scope.cohorts = sortCohorts(cohorts);
-        });
-      }
-    };
-  }]);
-})();
+frmCohortField.$inject = ['sortCohorts', 'session', 'cohortStore'];
+
+export default frmCohortField;

@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './consent-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmConsentField() {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '='
+    },
+    transclude: true,
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmConsentField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '='
-      },
-      transclude: true,
-      templateUrl: 'app/forms/fields/consent-field.html'
-    };
-  });
-})();
+export default frmConsentField;

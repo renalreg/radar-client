@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './number-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmNumberField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '=',
+      units: '@'
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmNumberField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '=',
-        units: '@'
-      },
-      templateUrl: 'app/forms/fields/number-field.html'
-    };
-  });
-})();
+export default frmNumberField;
