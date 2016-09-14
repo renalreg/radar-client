@@ -1,3 +1,4 @@
+import angular from 'angular';
 import _ from 'lodash';
 
 var DEFAULT_SORT_BY = 'id';

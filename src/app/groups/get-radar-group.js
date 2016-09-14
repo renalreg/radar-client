@@ -14,7 +14,7 @@ function getRadarGroup(store, $q) {
         .then(function(group) {
           deferred.resolve(group);
         })
-        ['catch'](function() {
+        .catch(function() {
           deferred.reject();
         });
     }

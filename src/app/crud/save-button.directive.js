@@ -1,7 +1,7 @@
 import saveButtonTemplateUrl from './save-button.html';
 import saveSubmitButtonTemplateUrl from './save-submit-button.html';
 
-function crudSaveButton($parse) {
+function crudSaveButton() {
   return {
     require: ['^crud', '^form', '?^crudSubmit'],
     scope: {
@@ -44,7 +44,5 @@ function crudSaveButton($parse) {
     }
   };
 }
-
-crudSaveButton.$inject = ['$parse'];
 
 export default crudSaveButton;

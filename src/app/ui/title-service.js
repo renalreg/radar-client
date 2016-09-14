@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-function titleService($rootScope, $timeout) {
+function titleService($rootScope) {
   var defaultTitle = 'RaDaR';
   var title = defaultTitle;
   var callbacks = [];
@@ -48,6 +48,6 @@ function titleService($rootScope, $timeout) {
   }
 }
 
-titleService.$inject = ['$rootScope', '$timeout'];
+titleService.$inject = ['$rootScope'];
 
 export default titleService;

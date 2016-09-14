@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 function diagnosisPermissionFactory(AdminPermission) {
   return AdminPermission;
 }
@@ -10,8 +8,7 @@ function diagnosesControllerFactory(
   ModelListDetailController,
   DiagnosisPermission,
   $injector,
-  store,
-  _
+  store
 ) {
   function DiagnosesController($scope) {
     var self = this;

@@ -1,6 +1,8 @@
+import _ from 'lodash';
+
 import templateUrl from './loading.html';
 
-LOADING_MESSAGES = [
+var LOADING_MESSAGES = [
   'Adding Hidden Agendas',
   'Adjusting Bell Curves',
   'Aesthesizing Industrial Areas',

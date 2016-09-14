@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 function modelEditControllerFactory($q) {
   /** Controller for editing a model */
   function ModelEditController($scope) {
@@ -36,7 +38,7 @@ function modelEditControllerFactory($q) {
         self.scope.item = item.clone();
         return item;
       })
-      ['finally'](function() {
+      .finally(function() {
         self.scope.saving = false;
       });
   };

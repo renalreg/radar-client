@@ -1,5 +1,5 @@
 function unsafeFilter($sce) {
-    return $sce.trustAsHtml;
+  return $sce.trustAsHtml;
 }
 
 unsafeFilter.$inject = '$sce';

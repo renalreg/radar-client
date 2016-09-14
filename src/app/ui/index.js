@@ -18,13 +18,13 @@ import sortHelper from './sort-helper.directive';
 import tick from './tick.directive';
 import titleService from './title-service';
 
-function run(titleService) {
+function run(titleService, $window) {
   titleService.watch(function(title) {
     $window.document.title = title;
   });
 }
 
-run.$inject = ['titleService'];
+run.$inject = ['titleService', '$window'];
 
 export default angular.module('radar.ui', [textEditor, fatalError])
   .run(run)

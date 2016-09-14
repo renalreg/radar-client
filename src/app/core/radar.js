@@ -10,10 +10,10 @@ function radarFactory(session, store, $q) {
       .then(function(user) {
         session.setUser(user);
       })
-      ['catch'](function() {
+      .catch(function() {
         session.logout(true);
       })
-      ['finally'](function() {
+      .finally(function() {
         // Always resolve so the application still boots even if our token is no longer valid
         sessionUserDeferred.resolve();
       });

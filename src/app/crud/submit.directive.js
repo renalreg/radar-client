@@ -44,10 +44,10 @@ function crudSubmit($parse) {
           .then(function() {
             broadcast('success');
           })
-          ['catch'](function() {
+          .catch(function() {
             broadcast('failure');
           })
-          ['finally'](function() {
+          .finally(function() {
             broadcast('submitting', false);
           });
       }
@@ -56,7 +56,7 @@ function crudSubmit($parse) {
       var formCtrl = ctrls[0];
       var crudSubmitCtrl = ctrls[1];
 
-      element.on('submit', function(event) {
+      element.on('submit', function() {
         scope.$apply(function() {
           crudSubmitCtrl.submit();
         });

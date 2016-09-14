@@ -128,7 +128,7 @@ function adapterProvider() {
         .then(function(response) {
           return response.data;
         })
-        ['catch'](function(response) {
+        .catch(function(response) {
           var data = transformBadResponse(response);
           return $q.reject(data);
         });
@@ -143,7 +143,7 @@ function adapterProvider() {
         .then(function(response) {
           return response.data;
         })
-        ['catch'](function(response) {
+        .catch(function(response) {
           var data = transformBadResponse(response);
           return $q.reject(data);
         });
@@ -158,7 +158,7 @@ function adapterProvider() {
         .then(function() {
           return undefined;
         })
-        ['catch'](function(response) {
+        .catch(function(response) {
           var data = transformBadResponse(response);
           return $q.reject(data);
         });
@@ -231,6 +231,6 @@ function adapterProvider() {
   this.$get.$inject = [
     '$http', '$q', '_', 'flattenRelationships', '$injector'
   ];
-};
+}
 
 export default adapterProvider;

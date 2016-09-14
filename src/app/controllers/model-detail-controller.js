@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 function modelDetailControllerFactory(
   $q,
   $window,
@@ -127,7 +129,7 @@ function modelDetailControllerFactory(
 
     self.scope.saving = true;
 
-    return this.scope.item.save()['finally'](function() {
+    return this.scope.item.save().finally(function() {
       self.scope.saving = false;
     });
   };
@@ -151,7 +153,7 @@ function modelDetailControllerFactory(
         self.scope.item = null;
         self.view(null);
       })
-      ['finally'](function() {
+      .finally(function() {
         self.scope.saving = false;
       });
   };

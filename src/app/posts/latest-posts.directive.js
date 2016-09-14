@@ -1,8 +1,6 @@
-import _ from 'lodash';
-
 import templateUrl from './latest-posts.html';
 
-function latestPostsControllerFactory(ListController, $injector, store, $sce) {
+function latestPostsControllerFactory(ListController, $injector, store) {
   function LatestPostsController($scope) {
     var self = this;
 
@@ -18,7 +16,7 @@ function latestPostsControllerFactory(ListController, $injector, store, $sce) {
   return LatestPostsController;
 }
 
-latestPostsControllerFactory.$inject = ['ListController', '$injector', 'store', '$sce'];
+latestPostsControllerFactory.$inject = ['ListController', '$injector', 'store'];
 
 function latestPosts(LatestPostsController) {
   return {
