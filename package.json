@@ -9,7 +9,7 @@
     "start": "webpack-dev-server",
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
-    "lint": "eslint src/app"
+    "lint": "eslint src"
   },
   "devDependencies": {
     "angular": "^1.2.30",
