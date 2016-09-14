@@ -25,6 +25,7 @@ import sessions from './sessions';
 import sources from './sources';
 import store from './store';
 import ui from './ui';
+import users from './users';
 import utils from './utils';
 import validators from './validators';
 
@@ -131,7 +132,7 @@ export default angular.module('radar', [
   sources,
   store,
   ui,
-  'radar.users',
+  users,
   utils,
   validators
 ])
