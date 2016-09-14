@@ -1,4 +1,4 @@
-import templateUrl from './diagnosis-field';
+import templateUrl from './diagnosis-field.html';
 
 function frmDiagnosisField() {
   return {

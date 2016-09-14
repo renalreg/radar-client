@@ -12,6 +12,7 @@ import core from './core';
 import crud from './crud';
 import diagnoses from './diagnoses';
 import filters from './filters';
+import forms from './forms';
 import groups from './groups';
 import home from './home';
 import hospitals from './hospitals';
@@ -115,7 +116,7 @@ export default angular.module('radar', [
   crud,
   diagnoses,
   filters,
-  'radar.forms',
+  forms,
   groups,
   home,
   hospitals,

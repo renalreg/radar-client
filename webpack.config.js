@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -12,10 +13,10 @@ var config = {
       }
     }
   },
-  entry: './src/entry.js',
+  entry: ['babel-polyfill', './src/entry.js'],
   output: {
     path: __dirname + '/dist',
-    filename: 'bundle.js'
+    filename: 'assets/bundle.[hash].js'
   },
   module: {
     loaders: [
@@ -37,12 +38,26 @@ var config = {
         loaders: ['style', 'css', 'sass']
       },
       {
-        test: /\.(woff2?|ttf|eot|svg|png)(\?.*)?$/,
-        loader: 'file' // TODO filenames
+        test: /\.(woff2?|ttf|eot)(\?.*)?$/,
+        loader: 'file',
+        query: {
+          name: 'assets/fonts/[name].[hash].[ext]'
+        }
+      },
+      {
+        test: /\.(svg|png)(\?.*)?$/,
+        loader: 'file',
+        query: {
+          name: 'assets/images/[name].[hash].[ext]'
+        }
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: '!!html-loader!src/index.html'
+    })
+  ]
 }
 
 if (production) {

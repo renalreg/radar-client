@@ -10,7 +10,7 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 // jQuery UI
 @import "~jquery-ui/themes/base/core.css";
 @import "~jquery-ui/themes/base/datepicker.css";
-@import "./jquery-ui/theme.css";
+@import "../jquery-ui/theme.css";
 
 @import "core";
 @import "navbar";
