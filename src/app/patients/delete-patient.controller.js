@@ -1,22 +1,16 @@
-(function() {
-  'use strict';
+function DeletePatientController($scope, notificationService, $state) {
+  $scope.remove = function(patient) {
+    patient.remove()
+      .then(function() {
+        notificationService.success('Patient deleted.');
+        $state.go('patients');
+      })
+      ['catch'](function() {
+        notificationService.fail('Failed to delete patient.');
+      });
+  };
+}
 
-  var app = angular.module('radar.patients');
+DeletePatientController.$inject = ['$scope', 'notificationService', '$state'];
 
-  function DeletePatientController($scope, notificationService, $state) {
-    $scope.remove = function(patient) {
-      patient.remove()
-        .then(function() {
-          notificationService.success('Patient deleted.');
-          $state.go('patients');
-        })
-        ['catch'](function() {
-          notificationService.fail('Failed to delete patient.');
-        });
-    };
-  }
-
-  DeletePatientController.$inject = ['$scope', 'notificationService', '$state'];
-
-  app.controller('DeletePatientController', DeletePatientController);
-})();
+export default DeletePatientController;

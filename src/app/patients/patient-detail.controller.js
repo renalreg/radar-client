@@ -1,32 +1,26 @@
-(function() {
-  'use strict';
+function PatientDetailController(
+  $scope,
+  patient,
+  session,
+  hasPermissionForPatient,
+  titleService
+) {
+  $scope.patient = patient;
+  $scope.viewDemographicsPermission = hasPermissionForPatient(session.user, patient, 'VIEW_DEMOGRAPHICS');
 
-  var app = angular.module('radar.patients');
+  // Set the title to the patient's ID
+  $scope.$watch(function() {
+    // No demographics
+    return patient.getName(false);
+  }, titleService.setTitle);
+}
 
-  function PatientDetailController(
-    $scope,
-    patient,
-    session,
-    hasPermissionForPatient,
-    titleService
-  ) {
-    $scope.patient = patient;
-    $scope.viewDemographicsPermission = hasPermissionForPatient(session.user, patient, 'VIEW_DEMOGRAPHICS');
+PatientDetailController.$inject = [
+  '$scope',
+  'patient',
+  'session',
+  'hasPermissionForPatient',
+  'titleService'
+];
 
-    // Set the title to the patient's ID
-    $scope.$watch(function() {
-      // No demographics
-      return patient.getName(false);
-    }, titleService.setTitle);
-  }
-
-  PatientDetailController.$inject = [
-    '$scope',
-    'patient',
-    'session',
-    'hasPermissionForPatient',
-    'titleService'
-  ];
-
-  app.controller('PatientDetailController', PatientDetailController);
-})();
+export default PatientDetailController;

@@ -1,66 +1,66 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients');
+function toggleDemographicsService(session) {
+  var visible = true;
+  var callbacks = [];
 
-  app.factory('toggleDemographicsService', ['_', 'session', function(_, session) {
-    var visible = true;
-    var callbacks = [];
+  session.on('login', function() {
+    visible = true;
+  });
 
-    session.on('login', function() {
-      visible = true;
-    });
+  return {
+    toggle: toggle,
+    show: show,
+    hide: hide,
+    listen: listen,
+    isVisible: isVisible,
+    isHidden: isHidden
+  };
 
-    return {
-      toggle: toggle,
-      show: show,
-      hide: hide,
-      listen: listen,
-      isVisible: isVisible,
-      isHidden: isHidden
+  function toggle() {
+    visible = !visible;
+    broadcast();
+    return visible;
+  }
+
+  function show() {
+    update(true);
+  }
+
+  function hide() {
+    update(false);
+  }
+
+  function isVisible() {
+    return visible;
+  }
+
+  function isHidden() {
+    return !visible;
+  }
+
+  function listen(callback) {
+    callbacks.push(callback);
+
+    return function() {
+      _.pull(callbacks, callback);
     };
+  }
 
-    function toggle() {
-      visible = !visible;
+  function update(value) {
+    if (visible !== value) {
+      visible = value;
       broadcast();
-      return visible;
     }
+  }
 
-    function show() {
-      update(true);
-    }
+  function broadcast() {
+    _.forEach(callbacks, function(callback) {
+      callback(visible);
+    });
+  }
+}
 
-    function hide() {
-      update(false);
-    }
+toggleDemographicsService.$inject = ['session'];
 
-    function isVisible() {
-      return visible;
-    }
-
-    function isHidden() {
-      return !visible;
-    }
-
-    function listen(callback) {
-      callbacks.push(callback);
-
-      return function() {
-        _.pull(callbacks, callback);
-      };
-    }
-
-    function update(value) {
-      if (visible !== value) {
-        visible = value;
-        broadcast();
-      }
-    }
-
-    function broadcast() {
-      _.forEach(callbacks, function(callback) {
-        callback(visible);
-      });
-    }
-  }]);
-})();
+export default toggleDemographicsService;

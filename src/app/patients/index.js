@@ -32,12 +32,24 @@ import results from './results';
 import saltWasting from './salt-wasting';
 import transplants from './transplants';
 
+import DeletePatientController from './delete-patient.controller';
+import ifDemographicsHidden from './if-demographics-hidden.directive';
+import ifDemographicsVisible from './if-demographics-visible.directive';
+import PatientDetailController from './patient-detail.controller';
+import patientListControllerFactory from './patient-list.controller';
+import patientModelFactory from './patient-model';
+import patientPages from './patient-pages';
+import toggleDemographicsService from './toggle-demographics-service';
+import toggleDemographics from './toggle-demographics.directive';
+
 import patientListTemplateUrl from './patient-list.html';
 import patientDetailTemplateUrl from './patient-detail.html';
 import allTemplateUrl from './all.html';
 import deletePatientTemplateUrl from './delete-patient.html';
 
-function config($stateProvider) {
+function config($stateProvider, storeProvider) {
+  storeProvider.registerModel('patients', 'PatientModel');
+
   $stateProvider.state('patients', {
     url: '/patients',
     templateUrl: patientListTemplateUrl,
@@ -73,7 +85,7 @@ function config($stateProvider) {
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients', [
   addresses,
@@ -109,4 +121,13 @@ export default angular.module('radar.patients', [
   transplants
 ])
   .config(config)
+  .controller('DeletePatientController', DeletePatientController)
+  .directive('ifDemographicsHidden', ifDemographicsHidden)
+  .directive('ifDemographicsVisible', ifDemographicsVisible)
+  .controller('PatientDetailController', PatientDetailController)
+  .factory('PatientListController', patientListControllerFactory)
+  .factory('PatientModel', patientModelFactory)
+  .factory('patientPages', patientPages)
+  .factory('toggleDemographicsService', toggleDemographicsService)
+  .directive('toggleDemographics', toggleDemographics)
   .name;

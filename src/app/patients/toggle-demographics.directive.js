@@ -1,25 +1,25 @@
-(function() {
-  'use strict';
+import templateUrl from './toggle-demographics.html';
 
-  var app = angular.module('radar.patients');
+function toggleDemographics(toggleDemographicsService) {
+  return {
+    scope: true,
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.visible = toggleDemographicsService.isVisible();
 
-  app.directive('toggleDemographics', ['toggleDemographicsService', function(toggleDemographicsService) {
-    return {
-      scope: true,
-      templateUrl: 'app/patients/toggle-demographics.html',
-      link: function(scope) {
-        scope.visible = toggleDemographicsService.isVisible();
+      scope.toggle = function() {
+        toggleDemographicsService.toggle();
+      };
 
-        scope.toggle = function() {
-          toggleDemographicsService.toggle();
-        };
+      var unsubscribe = toggleDemographicsService.listen(function(value) {
+        scope.visible = value;
+      });
 
-        var unsubscribe = toggleDemographicsService.listen(function(value) {
-          scope.visible = value;
-        });
+      scope.$on('$destroy', unsubscribe);
+    }
+  };
+}
 
-        scope.$on('$destroy', unsubscribe);
-      }
-    };
-  }]);
-})();
+toggleDemographics.$inject = ['toggleDemographicsService'];
+
+export default toggleDemographics;
