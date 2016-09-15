@@ -9,11 +9,13 @@
     "start": "webpack-dev-server",
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "karma start --single-run"
   },
   "devDependencies": {
     "angular": "1.2.x",
     "angular-local-storage": "^0.5.0",
+    "angular-mocks": "1.2.x",
     "angular-ui-router": "^0.2.18",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
@@ -30,16 +32,24 @@
     "highcharts": "^4.2.6",
     "html-loader": "^0.4.4",
     "html-webpack-plugin": "^2.22.0",
+    "jasmine-core": "^2.5.1",
     "jquery": "1.x",
     "jquery-ui": "^1.12.0",
+    "karma": "^1.3.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^1.8.0",
     "lodash": "^4.15.0",
     "moment": "^2.15.0",
     "ngtemplate-loader": "^1.3.1",
     "node-sass": "^3.9.3",
+    "phantomjs-prebuilt": "^2.1.12",
     "quill": "0.x",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.7.0",
     "webpack-dev-server": "^1.15.1"
   }
 }

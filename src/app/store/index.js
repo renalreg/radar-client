@@ -1,5 +1,7 @@
 import angular from 'angular';
 
+import utils from '../utils';
+
 import adapterProvider from './adapter';
 import errorResponseFactory from './error-response';
 import forbiddenResponseFactory from './forbidden-response';
@@ -20,7 +22,7 @@ function config(adapterProvider) {
 
 config.$inject = ['adapterProvider'];
 
-export default angular.module('radar.store', [])
+export default angular.module('radar.store', [utils])
   .provider('adapter', adapterProvider)
   .provider('store', storeProvider)
   .config(config)

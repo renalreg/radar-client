@@ -6,7 +6,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var production = process.env.NODE_ENV === 'production';
 
 var config = {
-  devtool: 'source-map',
+  devtool: production ? 'source-map' : 'inline-source-map',
   devServer: {
     proxy: {
       '/api': {
