@@ -17,8 +17,8 @@ import frmModel from './model.directive';
 import frmMultipleCheckbox from './multiple-checkbox.directive';
 import frmRequired from './required.directive';
 import frmStatus from './status.directive';
-import frmSubmitButton from './submit-button.directive';
-import frmSubmitIfValid from './submit-if-valid.directive';
+import submitButton from './submit-button.directive';
+import submitIfValid from './submit-if-valid.directive';
 import frmWeeksAndDays from './weeks-and-days.directive';
 
 export default angular.module('radar.forms', [fields])
@@ -37,7 +37,7 @@ export default angular.module('radar.forms', [fields])
   .directive('frmMultipleCheckbox', frmMultipleCheckbox)
   .directive('frmRequired', frmRequired)
   .directive('frmStatus', frmStatus)
-  .directive('frmSubmitButton', frmSubmitButton)
-  .directive('frmSubmitIfValid', frmSubmitIfValid)
+  .directive('submitButton', submitButton)
+  .directive('submitIfValid', submitIfValid)
   .directive('frmWeeksAndDays', frmWeeksAndDays)
   .name;

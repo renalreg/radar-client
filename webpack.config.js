@@ -13,7 +13,12 @@ var config = {
       }
     }
   },
-  entry: ['babel-polyfill', './src/app/index.js', './src/sass/app.scss'],
+  entry: [
+    'babel-polyfill',
+    './src/app/index.js',
+    './src/sass/app.scss',
+    'bootstrap-sass/assets/javascripts/bootstrap.js'
+  ],
   output: {
     path: __dirname + '/dist',
     filename: 'assets/bundle.[hash].js'
@@ -56,6 +61,11 @@ var config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: '!!html-loader!src/index.html'
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery'
     })
   ]
 }

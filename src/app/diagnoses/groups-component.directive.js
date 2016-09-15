@@ -1,3 +1,5 @@
+import templateUrl from './groups-component.html';
+
 function diagnosisGroupsControllerFactory(
   ListEditController,
   $injector,
@@ -37,7 +39,7 @@ function diagnosisGroupsComponent(DiagnosisGroupsController) {
       parent: '=diagnosis'
     },
     controller: DiagnosisGroupsController,
-    templateUrl: 'app/diagnoses/groups-component.html'
+    templateUrl: templateUrl
   };
 }
 

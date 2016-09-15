@@ -1,36 +1,30 @@
-(function() {
-  'use strict';
+function recruitPatientPermission(
+  hasPermission,
+  session,
+  ngIfDirective
+) {
+  // Source: http://stackoverflow.com/a/24065378
+  var ngIf = ngIfDirective[0];
 
-  var app = angular.module('radar.recruitPatient');
+  return {
+    transclude: ngIf.transclude,
+    priority: ngIf.priority,
+    terminal: ngIf.terminal,
+    restrict: ngIf.restrict,
+    link: function(scope, element, attrs) {
+      attrs.ngIf = function() {
+        return hasPermission(session.user, 'RECRUIT_PATIENT');
+      };
 
-  function recruitPatientPermission(
-    hasPermission,
-    session,
-    ngIfDirective
-  ) {
-    // Source: http://stackoverflow.com/a/24065378
-    var ngIf = ngIfDirective[0];
+      ngIf.link.apply(ngIf, arguments);
+    }
+  };
+}
 
-    return {
-      transclude: ngIf.transclude,
-      priority: ngIf.priority,
-      terminal: ngIf.terminal,
-      restrict: ngIf.restrict,
-      link: function(scope, element, attrs) {
-        attrs.ngIf = function() {
-          return hasPermission(session.user, 'RECRUIT_PATIENT');
-        };
+recruitPatientPermission.$inject = [
+  'hasPermission',
+  'session',
+  'ngIfDirective'
+];
 
-        ngIf.link.apply(ngIf, arguments);
-      }
-    };
-  }
-
-  recruitPatientPermission.$inject = [
-    'hasPermission',
-    'session',
-    'ngIfDirective'
-  ];
-
-  app.directive('recruitPatientPermission', recruitPatientPermission);
-})();
+export default recruitPatientPermission;

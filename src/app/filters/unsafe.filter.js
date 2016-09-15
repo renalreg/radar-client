@@ -2,6 +2,6 @@ function unsafeFilter($sce) {
   return $sce.trustAsHtml;
 }
 
-unsafeFilter.$inject = '$sce';
+unsafeFilter.$inject = ['$sce'];
 
 export default unsafeFilter;

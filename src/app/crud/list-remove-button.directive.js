@@ -50,3 +50,5 @@ function crudListRemoveButton($timeout) {
 }
 
 crudListRemoveButton.$inject = ['$timeout'];
+
+export default crudListRemoveButton;

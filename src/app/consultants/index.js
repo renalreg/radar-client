@@ -8,7 +8,7 @@ import {
   consultantsComponent
 } from './consultants-component.directive';
 import {
-  consultantHospitalControllerFactory,
+  consultantHospitalsControllerFactory,
   consultantHospitalsComponent
 } from './hospitals-component.directive';
 
@@ -31,6 +31,6 @@ export default angular.module('radar.consultants', [uiRouter])
   .factory('ConsultantPermission', consultantPermissionFactory)
   .factory('ConsultantsController', consultantsControllerFactory)
   .directive('consultantsComponent', consultantsComponent)
-  .factory('ConsultantHospitalController', consultantHospitalControllerFactory)
+  .factory('ConsultantHospitalsController', consultantHospitalsControllerFactory)
   .directive('consultantHospitalsComponent', consultantHospitalsComponent)
   .name;

@@ -1,3 +1,5 @@
+import templateUrl from './diagnoses-component.html';
+
 function diagnosisPermissionFactory(AdminPermission) {
   return AdminPermission;
 }
@@ -44,7 +46,7 @@ diagnosesControllerFactory.$inject = [
 function diagnosesComponent(DiagnosesController) {
   return {
     controller: DiagnosesController,
-    templateUrl: 'app/diagnoses/diagnoses-component.html'
+    templateUrl: templateUrl
   };
 }
 

@@ -1,4 +1,6 @@
-function consultantHospitalControllerFactory(
+import templateUrl from './hospitals-component.html';
+
+function consultantHospitalsControllerFactory(
   ListEditController,
   $injector
 ) {
@@ -17,7 +19,7 @@ function consultantHospitalControllerFactory(
   return ConsultantHospitalsController;
 }
 
-consultantHospitalControllerFactory.$inject = [
+consultantHospitalsControllerFactory.$inject = [
   'ListEditController',
   '$injector'
 ];
@@ -28,13 +30,13 @@ function consultantHospitalsComponent(ConsultantHospitalsController) {
       parent: '=consultant'
     },
     controller: ConsultantHospitalsController,
-    templateUrl: 'app/consultants/hospitals-component.html'
+    templateUrl: templateUrl
   };
 }
 
 consultantHospitalsComponent.$inject = ['ConsultantHospitalsController'];
 
 export {
-  consultantHospitalControllerFactory,
+  consultantHospitalsControllerFactory,
   consultantHospitalsComponent
 };

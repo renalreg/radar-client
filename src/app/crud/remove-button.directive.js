@@ -1,10 +1,12 @@
+import templateUrl from './remove-button.html';
+
 function crudRemoveButton($timeout) {
   return {
     require: '^crud',
     scope: {
       item: '='
     },
-    templateUrl: 'app/crud/remove-button.html',
+    templateUrl: templateUrl,
     link: function(scope, element, attrs, crudCtrl) {
       scope.clicked = false;
       scope.confirmEnabled = false;

@@ -103,3 +103,5 @@ authService.$inject = [
   'store',
   'adapter'
 ];
+
+export default authService;

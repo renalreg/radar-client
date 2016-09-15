@@ -248,7 +248,6 @@ function modelListDetailControllerFactory(
 }
 
 modelListDetailControllerFactory.$inject = [
-  '_',
   '$window',
   '$q',
   'GrantPermission'

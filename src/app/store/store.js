@@ -1,4 +1,5 @@
 import angular from 'angular';
+import _ from 'lodash';
 
 function storeProvider() {
   var config = {
@@ -23,7 +24,7 @@ function storeProvider() {
     config.mixins[key].push(name);
   };
 
-  this.$get = ['_', '$injector', 'adapter', '$q', function(_, $injector, adapter, $q) {
+  this.$get = ['$injector', 'adapter', '$q', function($injector, adapter, $q) {
     function Store(config) {
       this.config = config;
       this.store = {};

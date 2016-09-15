@@ -1,4 +1,5 @@
 import angular from 'angular';
+import _ from 'lodash';
 
 function adapterProvider() {
   var config = {
@@ -19,7 +20,7 @@ function adapterProvider() {
     config.afterResponseChain.push(name);
   };
 
-  this.$get = function($http, $q, _, flattenRelationships, $injector) {
+  this.$get = function($http, $q, flattenRelationships, $injector) {
     function Adapter(config) {
       this.config = config;
 
@@ -229,7 +230,7 @@ function adapterProvider() {
   };
 
   this.$get.$inject = [
-    '$http', '$q', '_', 'flattenRelationships', '$injector'
+    '$http', '$q', 'flattenRelationships', '$injector'
   ];
 }
 

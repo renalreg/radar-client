@@ -17,5 +17,7 @@ function config($stateProvider) {
 config.$inject = ['$stateProvider'];
 
 export default angular.module('radar.observations', [])
+  .config(config)
   .factory('ObservationsController', observationsControllerFactory)
+  .directive('observationsComponent', observationsComponent)
   .name;

@@ -14,6 +14,7 @@ import {
   userComponent
 } from './user-component.directive';
 import userListControllerFactory from './user-list.controller';
+import userModelFactory from './user-model';
 
 import userListTemplateUrl from './user-list.html';
 import createUserTemplateUrl from './create-user.html';
@@ -74,4 +75,5 @@ export default angular.module('radar.users', [groups])
   .factory('UserController', userControllerFactory)
   .directive('userComponent', userComponent)
   .factory('UserListController', userListControllerFactory)
+  .factory('UserModel', userModelFactory)
   .name;

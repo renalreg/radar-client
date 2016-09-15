@@ -21,6 +21,7 @@ import notifications from './notifications';
 import observations from './observations';
 import permissions from './permissions';
 import posts from './posts';
+import recruitPatient from './recruit-patient';
 import sessions from './sessions';
 import sources from './sources';
 import store from './store';
@@ -124,10 +125,10 @@ export default angular.module('radar', [
   logs,
   notifications,
   observations,
-  'radar.patients',
+  //'radar.patients',
   permissions,
   posts,
-  'radar.recruitPatient',
+  recruitPatient,
   sessions,
   sources,
   store,
