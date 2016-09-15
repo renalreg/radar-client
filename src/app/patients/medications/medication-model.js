@@ -44,9 +44,4 @@
 
     return MedicationModel;
   }]);
-
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('medications', 'MedicationModel');
-    storeProvider.registerMixin('medications', 'SourceModelMixin');
-  }]);
 })();

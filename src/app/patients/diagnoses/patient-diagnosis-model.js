@@ -24,9 +24,4 @@
 
     return PatientDiagnosisModel;
   }]);
-
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('patient-diagnoses', 'PatientDiagnosisModel');
-    storeProvider.registerMixin('patient-diagnoses', 'SourceModelMixin');
-  }]);
 })();

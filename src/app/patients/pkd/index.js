@@ -5,7 +5,11 @@ import liverTransplantsTemplateUrl from './liver-transplants.html';
 import liverDiseasesTemplateUrl from './liver-diseases.html';
 import nutritionTemplateUrl from './nutrition.html';
 
-function config($stateProvider) {
+function config($stateProvider, storeProvider) {
+  storeProvider.registerMixin('liver-imaging', 'SourceModelMixin');
+  storeProvider.registerMixin('liver-transplants', 'SourceModelMixin');
+  storeProvider.registerMixin('nutrition', 'SourceModelMixin');
+
   $stateProvider.state('patient.liverImaging', {
     url: '/liver-imaging',
     templateUrl: liverImagingTemplateUrl
@@ -27,7 +31,7 @@ function config($stateProvider) {
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.pkd', [])
   .config(config)

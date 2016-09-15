@@ -20,9 +20,4 @@
 
     return TransplantModel;
   }]);
-
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('transplants', 'TransplantModel');
-    storeProvider.registerMixin('transplants', 'SourceModelMixin');
-  }]);
 })();

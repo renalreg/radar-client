@@ -2,7 +2,9 @@ import angular from 'angular';
 
 import templateUrl from './family-history.html';
 
-function config($stateProvider) {
+function config($stateProvider, storeProvider) {
+  storeProvider.registerModel('family-histories', 'FamilyHistoryModel');
+
   $stateProvider.state('patient.familyHistory', {
     url: '/family-history/:cohortId',
     templateUrl: templateUrl,
@@ -17,7 +19,7 @@ function config($stateProvider) {
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.familyHistory', [])
   .config(config)

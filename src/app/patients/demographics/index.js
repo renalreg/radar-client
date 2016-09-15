@@ -6,14 +6,16 @@ import numbers from '../numbers';
 
 import templateUrl from './demographics.html';
 
-function config($stateProvider) {
+function config($stateProvider, storeProvider) {
+  storeProvider.registerMixin('patient-demographics', 'SourceModelMixin');
+
   $stateProvider.state('patient.demographics', {
     url: '',
     templateUrl: templateUrl
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.demographics', [aliases, addresses, numbers])
   .config(config)

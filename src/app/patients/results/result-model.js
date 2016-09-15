@@ -20,9 +20,4 @@
 
     return ResultModel;
   }]);
-
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('results', 'ResultModel');
-    storeProvider.registerMixin('results', 'SourceModelMixin');
-  }]);
 })();

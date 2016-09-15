@@ -16,8 +16,4 @@
 
     return FamilyHistoryModel;
   }]);
-
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('family-histories', 'FamilyHistoryModel');
-  }]);
 })();

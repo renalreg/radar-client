@@ -3,7 +3,10 @@ import angular from 'angular';
 import diagnosesTemplateUrl from './diagnoses.html';
 import primaryDiagnosisTemplateUrl from './primary-diagnosis.html';
 
-function config($stateProvider) {
+function config($stateProvider, storeProvider) {
+  storeProvider.registerModel('patient-diagnoses', 'PatientDiagnosisModel');
+  storeProvider.registerMixin('patient-diagnoses', 'SourceModelMixin');
+
   $stateProvider.state('patient.diagnoses', {
     url: '/comorbidities',
     templateUrl: diagnosesTemplateUrl
@@ -23,7 +26,7 @@ function config($stateProvider) {
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.diagnoses', [])
   .config(config)
