@@ -1,13 +1,9 @@
-(function() {
-  'use strict';
+function frmLayout() {
+  return {
+    controller: ['$attrs', function($attrs) {
+      this.layout = $attrs.frmLayout;
+    }]
+  };
+}
 
-  var app = angular.module('radar.forms');
-
-  app.directive('frmLayout', function() {
-    return {
-      controller: ['$attrs', function($attrs) {
-        this.layout = $attrs.frmLayout;
-      }]
-    };
-  });
-})();
+export default frmLayout;

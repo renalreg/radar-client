@@ -13,7 +13,7 @@ var config = {
       }
     }
   },
-  entry: ['babel-polyfill', './src/entry.js'],
+  entry: ['babel-polyfill', './src/app/index.js', './src/sass/app.scss'],
   output: {
     path: __dirname + '/dist',
     filename: 'assets/bundle.[hash].js'

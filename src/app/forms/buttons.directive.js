@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './buttons.html';
 
-  var app = angular.module('radar.forms');
+function frmButtons() {
+  return {
+    require: '?^frmLayout',
+    templateUrl: templateUrl,
+    transclude: true,
+    link: function(scope, element, attrs, layoutCtrl) {
+      scope.horizontal = !layoutCtrl || layoutCtrl.layout === 'horizontal';
+    }
+  };
+}
 
-  app.directive('frmButtons', function() {
-    return {
-      require: '?^frmLayout',
-      templateUrl: 'app/forms/buttons.html',
-      transclude: true,
-      link: function(scope, element, attrs, layoutCtrl) {
-        scope.horizontal = !layoutCtrl || layoutCtrl.layout === 'horizontal';
-      }
-    };
-  });
-})();
+export default frmButtons;
