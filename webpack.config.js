@@ -48,17 +48,10 @@ var config = {
         loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], {publicPath: '../'})
       },
       {
-        test: /\.(woff2?|ttf|eot)(\?.*)?$/,
+        test: /\.(woff2?|ttf|eot|svg|png)(\?.*)?$/,
         loader: 'file',
         query: {
-          name: 'assets/fonts/[name].[hash].[ext]'
-        }
-      },
-      {
-        test: /\.(svg|png)(\?.*)?$/,
-        loader: 'file',
-        query: {
-          name: 'assets/images/[name].[hash].[ext]'
+          name: 'assets/[name].[hash].[ext]'
         }
       }
     ]
