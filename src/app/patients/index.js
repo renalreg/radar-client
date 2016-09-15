@@ -32,6 +32,49 @@ import results from './results';
 import saltWasting from './salt-wasting';
 import transplants from './transplants';
 
+import patientListTemplateUrl from './patient-list.html';
+import patientDetailTemplateUrl from './patient-detail.html';
+import allTemplateUrl from './all.html';
+import deletePatientTemplateUrl from './delete-patient.html';
+
+function config($stateProvider) {
+  $stateProvider.state('patients', {
+    url: '/patients',
+    templateUrl: patientListTemplateUrl,
+    controller: ['$scope', '$controller', 'PatientListController', function($scope, $controller, PatientListController) {
+      $controller(PatientListController, {$scope: $scope});
+    }]
+  });
+
+  $stateProvider.state('patient', {
+    url: '/patients/:patientId',
+    abstract: true,
+    templateUrl: patientDetailTemplateUrl,
+    controller: 'PatientDetailController',
+    resolve: {
+      patient: ['$stateParams', 'store', function($stateParams, store) {
+        return store.findOne('patients', $stateParams.patientId);
+      }]
+    },
+    data: {
+      title: false // don't update the title on state change (inherited by child states too)
+    }
+  });
+
+  $stateProvider.state('patient.all', {
+    url: '/all',
+    templateUrl: allTemplateUrl
+  });
+
+  $stateProvider.state('patient.delete', {
+    url: '/delete',
+    templateUrl: deletePatientTemplateUrl,
+    controller: 'DeletePatientController'
+  });
+}
+
+config.$inject = ['$stateProvider'];
+
 export default angular.module('radar.patients', [
   addresses,
   aliases,
@@ -65,4 +108,5 @@ export default angular.module('radar.patients', [
   saltWasting,
   transplants
 ])
+  .config(config)
   .name;

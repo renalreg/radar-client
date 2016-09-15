@@ -3,42 +3,6 @@
 
   var app = angular.module('radar.patients');
 
-  app.config(['$stateProvider', function($stateProvider) {
-    $stateProvider.state('patients', {
-      url: '/patients',
-      templateUrl: 'app/patients/patient-list.html',
-      controller: ['$scope', '$controller', 'PatientListController', function($scope, $controller, PatientListController) {
-        $controller(PatientListController, {$scope: $scope});
-      }]
-    });
-
-    $stateProvider.state('patient', {
-      url: '/patients/:patientId',
-      abstract: true,
-      templateUrl: 'app/patients/patient-detail.html',
-      controller: 'PatientDetailController',
-      resolve: {
-        patient: ['$stateParams', 'store', function($stateParams, store) {
-          return store.findOne('patients', $stateParams.patientId);
-        }]
-      },
-      data: {
-        title: false // don't update the title on state change (inherited by child states too)
-      }
-    });
-
-    $stateProvider.state('patient.all', {
-      url: '/all',
-      templateUrl: 'app/patients/all.html'
-    });
-
-    $stateProvider.state('patient.delete', {
-      url: '/delete',
-      templateUrl: 'app/patients/delete-patient.html',
-      controller: 'DeletePatientController'
-    });
-  }]);
-
   app.factory('patientPages', ['_', function(_) {
     function patientPage(name, state, cohort) {
       if (cohort === undefined) {
