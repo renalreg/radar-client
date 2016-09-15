@@ -19,6 +19,7 @@ import hospitals from './hospitals';
 import logs from './logs';
 import notifications from './notifications';
 import observations from './observations';
+import patients from './patients';
 import permissions from './permissions';
 import posts from './posts';
 import recruitPatient from './recruit-patient';
@@ -125,7 +126,7 @@ export default angular.module('radar', [
   logs,
   notifications,
   observations,
-  //'radar.patients',
+  patients,
   permissions,
   posts,
   recruitPatient,

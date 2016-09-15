@@ -1,81 +1,85 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.cohorts');
+import templateUrl from './cohorts-component.html';
 
-  app.factory('PatientCohortPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+function patientCohortPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  function controllerFactory(
-    ModelListDetailController,
-    PatientCohortPermission,
-    $injector,
-    store,
-    _
-  ) {
-    function PatientCohortsController($scope) {
-      var self = this;
+patientCohortPermissionFactory.$inject = ['PatientObjectPermission'];
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new PatientCohortPermission($scope.patient)
-        }
-      });
+function patientCohortsControllerFactory(
+  ModelListDetailController,
+  PatientCohortPermission,
+  $injector,
+  store
+) {
+  function PatientCohortsController($scope) {
+    var self = this;
 
-      self.load($scope.patient.getCohortPatients());
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new PatientCohortPermission($scope.patient)
+      }
+    });
 
-      $scope.create = function() {
-        self.edit(store.create('group-patients', {patient: $scope.patient.id}));
-      };
-    }
+    self.load($scope.patient.getCohortPatients());
 
-    PatientCohortsController.$inject = ['$scope'];
-    PatientCohortsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    PatientCohortsController.prototype.save = function() {
-      var self = this;
-
-      return ModelListDetailController.prototype.save.call(self).then(function(groupPatient) {
-        // Add the group to the patient's groups
-        if (!_.includes(self.scope.patient.groups, groupPatient)) {
-          self.scope.patient.groups.push(groupPatient);
-        }
-
-        return groupPatient;
-      });
+    $scope.create = function() {
+      self.edit(store.create('group-patients', {patient: $scope.patient.id}));
     };
-
-    PatientCohortsController.prototype.remove = function(groupPatient) {
-      var self = this;
-
-      return ModelListDetailController.prototype.remove.call(self, groupPatient).then(function() {
-        // Remove the group from the patient's groups
-        _.pull(self.scope.patient.groups, groupPatient);
-      });
-    };
-
-    return PatientCohortsController;
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'PatientCohortPermission',
-    '$injector',
-    'store',
-    '_'
-  ];
+  PatientCohortsController.$inject = ['$scope'];
+  PatientCohortsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('PatientCohortsController', controllerFactory);
+  PatientCohortsController.prototype.save = function() {
+    var self = this;
 
-  app.directive('patientCohortsComponent', ['PatientCohortsController', function(PatientCohortsController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: PatientCohortsController,
-      templateUrl: 'app/patients/cohorts/cohorts-component.html'
-    };
-  }]);
-})();
+    return ModelListDetailController.prototype.save.call(self).then(function(groupPatient) {
+      // Add the group to the patient's groups
+      if (!_.includes(self.scope.patient.groups, groupPatient)) {
+        self.scope.patient.groups.push(groupPatient);
+      }
+
+      return groupPatient;
+    });
+  };
+
+  PatientCohortsController.prototype.remove = function(groupPatient) {
+    var self = this;
+
+    return ModelListDetailController.prototype.remove.call(self, groupPatient).then(function() {
+      // Remove the group from the patient's groups
+      _.pull(self.scope.patient.groups, groupPatient);
+    });
+  };
+
+  return PatientCohortsController;
+}
+
+patientCohortsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'PatientCohortPermission',
+  '$injector',
+  'store'
+];
+
+function patientCohortsComponent(PatientCohortsController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: PatientCohortsController,
+    templateUrl: templateUrl
+  };
+}
+
+patientCohortsComponent.$inject = ['PatientCohortsController'];
+
+export {
+  patientCohortPermissionFactory,
+  patientCohortsControllerFactory,
+  patientCohortsComponent
+};
