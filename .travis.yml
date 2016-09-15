@@ -6,7 +6,6 @@ install:
 script:
   - npm run lint
   - npm test
-  - NODE_ENV=production npm test
   # TODO
   # - gulp coverage
   # - gulp sauce-labs || true
