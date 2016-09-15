@@ -1,7 +1,7 @@
 import templateUrl from './clinical-pictures-component.html';
 
 function alportClinicalPicturePermissionFactory(PatientObjectPermission) {
-    return PatientObjectPermission;
+  return PatientObjectPermission;
 }
 
 alportClinicalPicturePermissionFactory.$inject = ['PatientObjectPermission'];

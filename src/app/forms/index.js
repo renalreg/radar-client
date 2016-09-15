@@ -8,7 +8,7 @@ import frmDatePicker from './date-picker.directive';
 import frmError from './error.directive';
 import frmErrors from './errors.directive';
 import frmField from './field.directive';
-import frmGroupInline from './group-inline.directive'
+import frmGroupInline from './group-inline.directive';
 import frmGroup from './group.directive';
 import frmHelp from './help.directive';
 import frmLabel from './label.directive';

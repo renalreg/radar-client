@@ -5,7 +5,7 @@ function DeletePatientController($scope, notificationService, $state) {
         notificationService.success('Patient deleted.');
         $state.go('patients');
       })
-      ['catch'](function() {
+      .catch(function() {
         notificationService.fail('Failed to delete patient.');
       });
   };

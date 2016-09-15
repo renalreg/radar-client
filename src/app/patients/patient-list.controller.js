@@ -1,3 +1,4 @@
+import angular from 'angular';
 import _ from 'lodash';
 
 function patientListControllerFactory(
@@ -48,12 +49,12 @@ function patientListControllerFactory(
       var params = {};
 
       var keys = [
-          'id',
-          'firstName', 'lastName',
-          'dateOfBirth', 'yearOfBirth',
-          'dateOfDeath', 'yearOfDeath',
-          'gender', 'patientNumber',
-          'current', 'ukrdc'
+        'id',
+        'firstName', 'lastName',
+        'dateOfBirth', 'yearOfBirth',
+        'dateOfDeath', 'yearOfDeath',
+        'gender', 'patientNumber',
+        'current', 'ukrdc'
       ];
 
       _.forEach(keys, function(key) {

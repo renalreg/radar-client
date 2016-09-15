@@ -2,7 +2,7 @@ import angular from 'angular';
 
 import templateUrl from './consultants.html';
 
-function config() {
+function config($stateProvider) {
   $stateProvider.state('patient.consultants', {
     url: '/consultants',
     templateUrl: templateUrl

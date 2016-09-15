@@ -51,12 +51,12 @@ function RecruitPatientController(
 
         $state.go('recruitPatient.form');
       })
-      ['catch'](function(response) {
+      .catch(function(response) {
         if (response.status === 422) {
           $scope.searchErrors = response.data.errors || {};
         }
       })
-      ['finally'](function() {
+      .finally(function() {
         $scope.loading = false;
       });
   }
@@ -69,12 +69,12 @@ function RecruitPatientController(
         var patientId = response.data.id;
         $state.go('patient.demographics', {patientId: patientId});
       })
-      ['catch'](function(response) {
+      .catch(function(response) {
         if (response.status === 422) {
           $scope.patientErrors = response.data.errors || {};
         }
       })
-      ['finally'](function() {
+      .finally(function() {
         $scope.loading = false;
       });
   }

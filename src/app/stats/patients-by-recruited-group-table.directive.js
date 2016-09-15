@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import templateUrl from './patients-by-recruited-group-table.html';
 
 function patientsByRecruitedGroupTable(adapter) {

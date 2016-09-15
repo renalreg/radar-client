@@ -63,7 +63,7 @@ function patientAddressesComponent(PatientAddressesController) {
       patient: '='
     },
     controller: PatientAddressesController,
-    templateUrl: 'app/patients/addresses/addresses-component.html'
+    templateUrl: templateUrl
   };
 }
 

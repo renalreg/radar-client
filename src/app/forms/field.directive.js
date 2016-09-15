@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 function frmField() {
   function Field($scope, $attrs) {
     this.scope = $scope;
