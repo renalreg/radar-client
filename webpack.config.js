@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -24,6 +25,9 @@ var config = {
     filename: 'assets/bundle.[hash].js'
   },
   module: {
+    noParse: [
+      path.resolve('node_modules/quill/dist/quill.js') // TODO remove when upgrading to Quill 1.0
+    ],
     loaders: [
       {
         test: /\.js$/,
