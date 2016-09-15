@@ -1,65 +1,69 @@
-(function() {
-  'use strict';
+import templateUrl from './clinical-pictures-component.html';
 
-  var app = angular.module('radar.patients.alport');
-
-  app.factory('AlportClinicalPicturePermission', ['PatientObjectPermission', function(PatientObjectPermission) {
+function alportClinicalPicturePermissionFactory(PatientObjectPermission) {
     return PatientObjectPermission;
-  }]);
+}
 
-  function controllerFactory(
-    ModelListDetailController,
-    AlportClinicalPicturePermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function AlportClinicalPicturesController($scope) {
-      var self = this;
+alportClinicalPicturePermissionFactory.$inject = ['PatientObjectPermission'];
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new AlportClinicalPicturePermission($scope.patient)
-        }
-      });
+function alportClinicalPicturesControllerFactory(
+  ModelListDetailController,
+  AlportClinicalPicturePermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function AlportClinicalPicturesController($scope) {
+    var self = this;
 
-      self.load(firstPromise([
-        store.findMany('alport-clinical-pictures', {patient: $scope.patient.id}),
-        store.findMany('alport-deafness-options').then(function(deafnessOptions) {
-          $scope.deafnessOptions = deafnessOptions;
-        })
-      ]));
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new AlportClinicalPicturePermission($scope.patient)
+      }
+    });
 
-      $scope.create = function() {
-        var item = store.create('alport-clinical-pictures', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
+    self.load(firstPromise([
+      store.findMany('alport-clinical-pictures', {patient: $scope.patient.id}),
+      store.findMany('alport-deafness-options').then(function(deafnessOptions) {
+        $scope.deafnessOptions = deafnessOptions;
+      })
+    ]));
 
-    AlportClinicalPicturesController.$inject = ['$scope'];
-    AlportClinicalPicturesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return AlportClinicalPicturesController;
+    $scope.create = function() {
+      var item = store.create('alport-clinical-pictures', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'AlportClinicalPicturePermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  AlportClinicalPicturesController.$inject = ['$scope'];
+  AlportClinicalPicturesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('AlportClinicalPicturesController', controllerFactory);
+  return AlportClinicalPicturesController;
+}
 
-  app.directive('alportClinicalPicturesComponent', ['AlportClinicalPicturesController', function(AlportClinicalPicturesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: AlportClinicalPicturesController,
-      templateUrl: 'app/patients/alport/clinical-pictures-component.html'
-    };
-  }]);
-})();
+alportClinicalPicturesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'AlportClinicalPicturePermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function alportClinicalPicturesComponent(AlportClinicalPicturesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: AlportClinicalPicturesController,
+    templateUrl: templateUrl
+  };
+}
+
+alportClinicalPicturesComponent.$inject = ['AlportClinicalPicturesController'];
+
+export {
+  alportClinicalPicturePermissionFactory,
+  alportClinicalPicturesControllerFactory,
+  alportClinicalPicturesComponent
+};
