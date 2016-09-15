@@ -1,6 +1,7 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var production = process.env.NODE_ENV === 'production';
 
@@ -44,7 +45,7 @@ var config = {
       },
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], {publicPath: '../'})
       },
       {
         test: /\.(woff2?|ttf|eot)(\?.*)?$/,
@@ -70,7 +71,8 @@ var config = {
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
-    })
+    }),
+    new ExtractTextPlugin('assets/bundle.[contentHash].css')
   ]
 }
 
