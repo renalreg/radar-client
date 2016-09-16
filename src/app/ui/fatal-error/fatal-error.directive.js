@@ -27,4 +27,6 @@ function fatalError($window, notificationService) {
   };
 }
 
+fatalError.$inject = ['$window', 'notificationService'];
+
 export default fatalError;

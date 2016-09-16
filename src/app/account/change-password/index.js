@@ -17,7 +17,7 @@ function config($stateProvider) {
 config.$inject = ['$stateProvider'];
 
 export default angular.module('radar.account.changePassword', [])
+  .config(config)
   .factory('ChangePasswordController', changePasswordControllerFactory)
   .directive('changePasswordComponent', changePasswordComponent)
-  .config(config)
   .name;

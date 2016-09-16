@@ -60,6 +60,8 @@ function dialysisComponent(DialysisController) {
   };
 }
 
+dialysisComponent.$inject = ['DialysisController'];
+
 export {
   dialysisPermissionFactory,
   dialysisControllerFactory,

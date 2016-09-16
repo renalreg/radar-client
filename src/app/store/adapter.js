@@ -20,7 +20,7 @@ function adapterProvider() {
     config.afterResponseChain.push(name);
   };
 
-  this.$get = function($http, $q, flattenRelationships, $injector) {
+  this.$get = ['$http', '$q', 'flattenRelationships', '$injector', function($http, $q, flattenRelationships, $injector) {
     function Adapter(config) {
       this.config = config;
 
@@ -227,11 +227,7 @@ function adapterProvider() {
     };
 
     return new Adapter(config);
-  };
-
-  this.$get.$inject = [
-    '$http', '$q', 'flattenRelationships', '$injector'
-  ];
+  }];
 }
 
 export default adapterProvider;
