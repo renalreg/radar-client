@@ -1,66 +1,70 @@
-(function() {
-  'use strict';
+import templateUrl from './genetics-component.directive';
 
-  var app = angular.module('radar.patients.genetics');
+function geneticsPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('GeneticsPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+geneticsPermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    GeneticsPermission,
-    $injector,
-    store,
-    firstPromise
-  ) {
-    function GeneticsController($scope) {
-      var self = this;
+function geneticsControllerFactory(
+  ModelListDetailController,
+  GeneticsPermission,
+  $injector,
+  store,
+  firstPromise
+) {
+  function GeneticsController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new GeneticsPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new GeneticsPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('genetics', {patient: $scope.patient.id, group: $scope.cohort.id}),
-        store.findMany('genetics-karyotypes').then(function(karyotypes) {
-          $scope.karyotypes = karyotypes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('genetics', {patient: $scope.patient.id, group: $scope.cohort.id}),
+      store.findMany('genetics-karyotypes').then(function(karyotypes) {
+        $scope.karyotypes = karyotypes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('genetics', {patient: $scope.patient.id, group: $scope.cohort});
-        self.edit(item);
-      };
-    }
-
-    GeneticsController.$inject = ['$scope'];
-    GeneticsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return GeneticsController;
+    $scope.create = function() {
+      var item = store.create('genetics', {patient: $scope.patient.id, group: $scope.cohort});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'GeneticsPermission',
-    '$injector',
-    'store',
-    'firstPromise'
-  ];
+  GeneticsController.$inject = ['$scope'];
+  GeneticsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('GeneticsController', controllerFactory);
+  return GeneticsController;
+}
 
-  app.directive('geneticsComponent', ['GeneticsController', function(GeneticsController) {
-    return {
-      scope: {
-        patient: '=',
-        cohort: '='
-      },
-      controller: GeneticsController,
-      templateUrl: 'app/patients/genetics/genetics-component.html'
-    };
-  }]);
-})();
+geneticsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'GeneticsPermission',
+  '$injector',
+  'store',
+  'firstPromise'
+];
+
+function geneticsComponent(GeneticsController) {
+  return {
+    scope: {
+      patient: '=',
+      cohort: '='
+    },
+    controller: GeneticsController,
+    templateUrl: templateUrl
+  };
+}
+
+geneticsComponent.$inject = ['GeneticsController'];
+
+export {
+  geneticsPermissionFactory,
+  geneticsControllerFactory,
+  geneticsComponent
+};

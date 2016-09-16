@@ -1,5 +1,11 @@
 import angular from 'angular';
 
+import {
+  geneticsPermissionFactory,
+  geneticsControllerFactory,
+  geneticsComponent
+} from './genetics-component.directive';
+
 import templateUrl from './genetics.html';
 
 function config($stateProvider) {
@@ -21,4 +27,7 @@ config.$inject = ['$stateProvider'];
 
 export default angular.module('radar.patients.genetics', [])
   .config(config)
+  .factory('GeneticsPermission', geneticsPermissionFactory)
+  .factory('GeneticsController', geneticsControllerFactory)
+  .directive('geneticsComponent', geneticsComponent)
   .name;

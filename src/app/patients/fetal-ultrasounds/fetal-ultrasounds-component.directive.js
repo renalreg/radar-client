@@ -1,65 +1,69 @@
-(function() {
-  'use strict';
+import templateUrl from './fetal-ultrasounds-component.html';
 
-  var app = angular.module('radar.patients.fetalUltrasounds');
+function fetalUltrasoundPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('FetalUltrasoundPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+fetalUltrasoundPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    FetalUltrasoundPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function FetalUltrasoundsController($scope) {
-      var self = this;
+function fetalUltrasoundsControllerFactory(
+  ModelListDetailController,
+  FetalUltrasoundPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function FetalUltrasoundsController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new FetalUltrasoundPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new FetalUltrasoundPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('fetal-ultrasounds', {patient: $scope.patient.id}),
-        store.findMany('fetal-ultrasound-liquor-volumes').then(function(liquorVolumes) {
-          $scope.liquorVolumes = liquorVolumes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('fetal-ultrasounds', {patient: $scope.patient.id}),
+      store.findMany('fetal-ultrasound-liquor-volumes').then(function(liquorVolumes) {
+        $scope.liquorVolumes = liquorVolumes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('fetal-ultrasounds', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    FetalUltrasoundsController.$inject = ['$scope'];
-    FetalUltrasoundsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return FetalUltrasoundsController;
+    $scope.create = function() {
+      var item = store.create('fetal-ultrasounds', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'FetalUltrasoundPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  FetalUltrasoundsController.$inject = ['$scope'];
+  FetalUltrasoundsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('FetalUltrasoundsController', controllerFactory);
+  return FetalUltrasoundsController;
+}
 
-  app.directive('fetalUltrasoundsComponent', ['FetalUltrasoundsController', function(FetalUltrasoundsController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: FetalUltrasoundsController,
-      templateUrl: 'app/patients/fetal-ultrasounds/fetal-ultrasounds-component.html'
-    };
-  }]);
-})();
+fetalUltrasoundsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'FetalUltrasoundPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function fetalUltrasoundsComponent(FetalUltrasoundsController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: FetalUltrasoundsController,
+    templateUrl: templateUrl
+  };
+}
+
+fetalUltrasoundsComponent.$inject = ['FetalUltrasoundsController'];
+
+export {
+  fetalUltrasoundPermissionFactory,
+  fetalUltrasoundsControllerFactory,
+  fetalUltrasoundsComponent
+};

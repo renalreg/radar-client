@@ -25,5 +25,5 @@ export default angular.module('radar.patients.consultants', [])
   .factory('PatientConsultantPermission', patientConsultantPermissionFactory)
   .factory('PatientConsultantsPermission', patientConsultantsControllerFactory)
   .directive('patientConsultantsComponent', patientConsultantsComponent)
-  .factory('patientConsultantModelFactory', PatientConsultantModel)
+  .factory('PatientConsultantModel', patientConsultantModelFactory)
   .name;

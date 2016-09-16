@@ -1,51 +1,52 @@
-(function() {
-  'use strict';
+import templateUrl from './relatives-component.html';
 
-  var app = angular.module('radar.patients.familyHistory');
+function familyHistoryRelativesControllerFactory(
+  ListEditController,
+  $injector,
+  firstPromise,
+  store
+) {
+  function FamilyHistoryRelativesController($scope) {
+    $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
 
-  function controllerFactory(
-    ListEditController,
-    $injector,
-    firstPromise,
-    store
-  ) {
-    function FamilyHistoryRelativesController($scope) {
-      $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
+    this.load(firstPromise([
+      $scope.parent.relatives,
+      store.findMany('family-history-relationships').then(function(relationships) {
+        $scope.relationships = relationships;
+      })
+    ]));
 
-      this.load(firstPromise([
-        $scope.parent.relatives,
-        store.findMany('family-history-relationships').then(function(relationships) {
-          $scope.relationships = relationships;
-        })
-      ]));
-
-      $scope.create = function() {
-        $scope.parent.relatives.push({});
-      };
-    }
-
-    FamilyHistoryRelativesController.$inject = ['$scope'];
-    FamilyHistoryRelativesController.prototype = Object.create(ListEditController.prototype);
-
-    return FamilyHistoryRelativesController;
+    $scope.create = function() {
+      $scope.parent.relatives.push({});
+    };
   }
 
-  controllerFactory.$inject = [
-    'ListEditController',
-    '$injector',
-    'firstPromise',
-    'store'
-  ];
+  FamilyHistoryRelativesController.$inject = ['$scope'];
+  FamilyHistoryRelativesController.prototype = Object.create(ListEditController.prototype);
 
-  app.factory('FamilyHistoryRelativesController', controllerFactory);
+  return FamilyHistoryRelativesController;
+}
 
-  app.directive('familyHistoryRelativesComponent', ['FamilyHistoryRelativesController', function(FamilyHistoryRelativesController) {
-    return {
-      scope: {
-        parent: '=familyHistory'
-      },
-      controller: FamilyHistoryRelativesController,
-      templateUrl: 'app/patients/family-history/relatives-component.html'
-    };
-  }]);
-})();
+familyHistoryRelativesControllerFactory.$inject = [
+  'ListEditController',
+  '$injector',
+  'firstPromise',
+  'store'
+];
+
+function familyHistoryRelativesComponent(FamilyHistoryRelativesController) {
+  return {
+    scope: {
+      parent: '=familyHistory'
+    },
+    controller: FamilyHistoryRelativesController,
+    templateUrl: templateUrl
+  };
+}
+
+familyHistoryRelativesComponent.$inject = ['FamilyHistoryRelativesController'];
+
+export {
+  familyHistoryRelativesControllerFactory,
+  familyHistoryRelativesComponent
+};
