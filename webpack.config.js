@@ -29,6 +29,12 @@ var config = {
     noParse: [
       path.resolve('node_modules/quill/dist/quill.js') // TODO remove when upgrading to Quill 1.0
     ],
+    preLoaders: [
+      {
+        test: /\.handlebars$/,
+        loaders: ['extract', 'html?minimize=false']
+      }
+    ],
     loaders: [
       {
         test: /\.js$/,
@@ -53,12 +59,14 @@ var config = {
         query: {
           name: 'assets/[name].[hash].[ext]'
         }
-      }
+      },
+
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: '!!html-loader!src/index.html'
+      template: 'handlebars!src/index.handlebars',
+      inject: false
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
