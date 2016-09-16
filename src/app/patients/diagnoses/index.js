@@ -1,5 +1,17 @@
 import angular from 'angular';
 
+import {
+  patientDiagnosesControllerFactory,
+  patientDiagnosesComponent
+} from './diagnoses-component.directive';
+import diagnosisSelector from './diagnosis-selector.directive';
+import patientDiagnosisModelFactory from './patient-diagnosis-model';
+import patientDiagnosisPermissionFactory from './patient-diagnosis-permission';
+import {
+  primaryPatientDiagnosisControllerFactory,
+  primaryPatientDiagnosisComponent
+} from './primary-diagnosis-component.directive';
+
 import diagnosesTemplateUrl from './diagnoses.html';
 import primaryDiagnosisTemplateUrl from './primary-diagnosis.html';
 
@@ -30,4 +42,11 @@ config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.diagnoses', [])
   .config(config)
+  .factory('PatientDiagnosesController', patientDiagnosesControllerFactory)
+  .directive('patientDiagnosesComponent', patientDiagnosesComponent)
+  .directive('diagnosisSelector', diagnosisSelector)
+  .factory('PatientDiagnosisModel', patientDiagnosisModelFactory)
+  .factory('PatientDiagnosisPermission', patientDiagnosisPermissionFactory)
+  .factory('PrimaryPatientDiagnosisController', primaryPatientDiagnosisControllerFactory)
+  .directive('primaryPatientDiagnosisComponent', primaryPatientDiagnosisComponent)
   .name;

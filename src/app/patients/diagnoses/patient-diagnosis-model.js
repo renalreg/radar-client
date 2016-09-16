@@ -1,27 +1,25 @@
-(function() {
-  'use strict';
+function patientDiagnosisModelFactory(Model) {
+  function PatientDiagnosisModel(modelName, data) {
+    Model.call(this, modelName, data);
+  }
 
-  var app = angular.module('radar.patients.diagnoses');
+  PatientDiagnosisModel.prototype = Object.create(Model.prototype);
 
-  app.factory('PatientDiagnosisModel', ['Model', function(Model) {
-    function PatientDiagnosisModel(modelName, data) {
-      Model.call(this, modelName, data);
+  PatientDiagnosisModel.prototype.getDiagnosis = function() {
+    var r;
+
+    if (this.diagnosis) {
+      r = this.diagnosis.name;
+    } else {
+      r = this.diagnosisText;
     }
 
-    PatientDiagnosisModel.prototype = Object.create(Model.prototype);
+    return r;
+  };
 
-    PatientDiagnosisModel.prototype.getDiagnosis = function() {
-      var r;
+  return PatientDiagnosisModel;
+}
 
-      if (this.diagnosis) {
-        r = this.diagnosis.name;
-      } else {
-        r = this.diagnosisText;
-      }
+patientDiagnosisModelFactory.$inject = ['Model'];
 
-      return r;
-    };
-
-    return PatientDiagnosisModel;
-  }]);
-})();
+export default patientDiagnosisModelFactory;

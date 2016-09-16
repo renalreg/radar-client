@@ -1,54 +1,55 @@
-(function() {
-  'use strict';
+import templateUrl from './diagnoses-component.html';
 
-  var app = angular.module('radar.patients.diagnoses');
+function patientDiagnosesControllerFactory(
+  ModelListDetailController,
+  PatientDiagnosisPermission,
+  $injector,
+  store
+) {
+  function PatientDiagnosesController($scope) {
+    var self = this;
 
-  function controllerFactory(
-    ModelListDetailController,
-    PatientDiagnosisPermission,
-    $injector,
-    store
-  ) {
-    function PatientDiagnosesController($scope) {
-      var self = this;
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new PatientDiagnosisPermission($scope.patient)
+      }
+    });
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new PatientDiagnosisPermission($scope.patient)
-        }
-      });
+    self.load(store.findMany('patient-diagnoses', {patient: $scope.patient.id, includePrimary: false}));
 
-      self.load(store.findMany('patient-diagnoses', {patient: $scope.patient.id, includePrimary: false}));
-
-      $scope.create = function() {
-        var item = store.create('patient-diagnoses', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    PatientDiagnosesController.$inject = ['$scope'];
-    PatientDiagnosesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return PatientDiagnosesController;
+    $scope.create = function() {
+      var item = store.create('patient-diagnoses', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'PatientDiagnosisPermission',
-    '$injector',
-    'store'
-  ];
+  PatientDiagnosesController.$inject = ['$scope'];
+  PatientDiagnosesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('PatientDiagnosesController', controllerFactory);
+  return PatientDiagnosesController;
+}
 
-  app.directive('patientDiagnosesComponent', ['PatientDiagnosesController', function(PatientDiagnosesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: PatientDiagnosesController,
-      templateUrl: 'app/patients/diagnoses/diagnoses-component.html'
-    };
-  }]);
-})();
+patientDiagnosesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'PatientDiagnosisPermission',
+  '$injector',
+  'store'
+];
+
+function patientDiagnosesComponent(PatientDiagnosesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: PatientDiagnosesController,
+    templateUrl: templateUrl
+  };
+}
+
+patientDiagnosesComponent.$inject = ['PatientDiagnosesController'];
+
+export {
+  patientDiagnosesControllerFactory,
+  patientDiagnosesComponent
+};

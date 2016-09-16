@@ -1,65 +1,67 @@
-(function() {
-  'use strict';
+import templateUrl from './dialysis-component.html';
 
-  var app = angular.module('radar.patients.dialysis');
+function dialysisPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('DialysisPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+dialysisPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    DialysisPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function DialysisController($scope) {
-      var self = this;
+function dialysisControllerFactory(
+  ModelListDetailController,
+  DialysisPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function DialysisController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new DialysisPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new DialysisPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('dialysis', {patient: $scope.patient.id}),
-        store.findMany('dialysis-modalities').then(function(modalities) {
-          $scope.modalities = modalities;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('dialysis', {patient: $scope.patient.id}),
+      store.findMany('dialysis-modalities').then(function(modalities) {
+        $scope.modalities = modalities;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('dialysis', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    DialysisController.$inject = ['$scope'];
-    DialysisController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return DialysisController;
+    $scope.create = function() {
+      var item = store.create('dialysis', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'DialysisPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  DialysisController.$inject = ['$scope'];
+  DialysisController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('DialysisController', controllerFactory);
+  return DialysisController;
+}
 
-  app.directive('dialysisComponent', ['DialysisController', function(DialysisController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: DialysisController,
-      templateUrl: 'app/patients/dialysis/dialysis-component.html'
-    };
-  }]);
-})();
+dialysisControllerFactory.$inject = [
+  'ModelListDetailController',
+  'DialysisPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function dialysisComponent(DialysisController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: DialysisController,
+    templateUrl: templateUrl
+  };
+}
+
+export {
+  dialysisPermissionFactory,
+  dialysisControllerFactory,
+  dialysisComponent
+};
