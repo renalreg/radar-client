@@ -1,21 +1,23 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.navigation');
+import templateUrl from './patient-navigation.html';
 
-  app.directive('patientNavigation', ['_', 'sortCohorts', function(_, sortCohorts) {
-    return {
-      scope: {
-        patient: '=',
-      },
-      templateUrl: 'app/patients/navigation/patient-navigation.html',
-      link: function(scope) {
-        scope.$watchCollection(function() {
-          return scope.patient.getCurrentCohorts();
-        }, function(cohorts) {
-          scope.cohorts = sortCohorts(cohorts);
-        });
-      }
-    };
-  }]);
-})();
+function patientNavigation(sortCohorts) {
+  return {
+    scope: {
+      patient: '=',
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.$watchCollection(function() {
+        return scope.patient.getCurrentCohorts();
+      }, function(cohorts) {
+        scope.cohorts = sortCohorts(cohorts);
+      });
+    }
+  };
+}
+
+patientNavigation.$inject = ['sortCohorts'];
+
+export default patientNavigation;

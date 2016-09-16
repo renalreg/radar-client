@@ -1,58 +1,62 @@
-(function() {
-  'use strict';
+import templateUrl from './clinical-pictures-component.html';
 
-  var app = angular.module('radar.patients.ins');
+function insClinicalPicturePermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('InsClinicalPicturePermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+insClinicalPicturePermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    InsClinicalPicturePermission,
-    $injector,
-    store
-  ) {
-    function InsClinicalPicturesController($scope) {
-      var self = this;
+function insClinicalPicturesControllerFactory(
+  ModelListDetailController,
+  InsClinicalPicturePermission,
+  $injector,
+  store
+) {
+  function InsClinicalPicturesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new InsClinicalPicturePermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new InsClinicalPicturePermission($scope.patient)
+      }
+    });
 
-      self.load(store.findMany('ins-clinical-pictures', {patient: $scope.patient.id}));
+    self.load(store.findMany('ins-clinical-pictures', {patient: $scope.patient.id}));
 
-      $scope.create = function() {
-        var item = store.create('ins-clinical-pictures', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    InsClinicalPicturesController.$inject = ['$scope'];
-    InsClinicalPicturesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return InsClinicalPicturesController;
+    $scope.create = function() {
+      var item = store.create('ins-clinical-pictures', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'InsClinicalPicturePermission',
-    '$injector',
-    'store'
-  ];
+  InsClinicalPicturesController.$inject = ['$scope'];
+  InsClinicalPicturesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('InsClinicalPicturesController', controllerFactory);
+  return InsClinicalPicturesController;
+}
 
-  app.directive('insClinicalPicturesComponent', ['InsClinicalPicturesController', function(InsClinicalPicturesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: InsClinicalPicturesController,
-      templateUrl: 'app/patients/ins/clinical-pictures-component.html'
-    };
-  }]);
-})();
+insClinicalPicturesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'InsClinicalPicturePermission',
+  '$injector',
+  'store'
+];
+
+function insClinicalPicturesComponent(InsClinicalPicturesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: InsClinicalPicturesController,
+    templateUrl: templateUrl
+  };
+}
+
+insClinicalPicturesComponent.$inuject = ['InsClinicalPicturesController'];
+
+export {
+  insClinicalPicturePermissionFactory,
+  insClinicalPicturesControllerFactory,
+  insClinicalPicturesComponent
+};

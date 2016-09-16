@@ -2,6 +2,7 @@ import angular from 'angular';
 
 import aliases from '../aliases';
 import addresses from '../addresses';
+import metadata from '../metadata';
 import numbers from '../numbers';
 
 import {
@@ -23,7 +24,7 @@ function config($stateProvider, storeProvider) {
 
 config.$inject = ['$stateProvider', 'storeProvider'];
 
-export default angular.module('radar.patients.demographics', [aliases, addresses, numbers])
+export default angular.module('radar.patients.demographics', [aliases, addresses, numbers, metadata])
   .config(config)
   .factory('PatientDemographicsPermission', patientDemographicsPermissionFactory)
   .factory('PatientDemographicsController', patientDemographicsControllerFactory)

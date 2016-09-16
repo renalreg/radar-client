@@ -1,36 +1,36 @@
-(function() {
-  'use strict';
+import templateUrl from './drug-selector.html';
 
-  var app = angular.module('radar.patients.medications');
+function drugSelector(store) {
+  return {
+    require: 'ngModel',
+    templateUrl: templateUrl,
+    link: function(scope, element, attrs, ngModel) {
+      scope.selectedDrug = null;
 
-  app.directive('drugSelector', ['store', function(store) {
-    return {
-      require: 'ngModel',
-      templateUrl: 'app/patients/medications/drug-selector.html',
-      link: function(scope, element, attrs, ngModel) {
-        scope.selectedDrug = null;
+      store.findMany('drugs').then(function(drugs) {
+        scope.drugs = drugs;
+      });
 
-        store.findMany('drugs').then(function(drugs) {
-          scope.drugs = drugs;
-        });
+      ngModel.$render = function() {
+        scope.selectedDrug = ngModel.$viewValue;
+      };
 
-        ngModel.$render = function() {
-          scope.selectedDrug = ngModel.$viewValue;
-        };
+      scope.use = function(drug) {
+        update(drug);
+      };
 
-        scope.use = function(drug) {
-          update(drug);
-        };
+      scope.drop = function() {
+        update(null);
+      };
 
-        scope.drop = function() {
-          update(null);
-        };
-
-        function update(drug) {
-          scope.selectedDrug = drug;
-          ngModel.$setViewValue(drug);
-        }
+      function update(drug) {
+        scope.selectedDrug = drug;
+        ngModel.$setViewValue(drug);
       }
-    };
-  }]);
-})();
+    }
+  };
+}
+
+drugSelector.$inject = ['store'];
+
+export default drugSelector;

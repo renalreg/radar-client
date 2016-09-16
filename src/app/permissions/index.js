@@ -25,7 +25,7 @@ export default angular.module('radar.permissions', [])
   .factory('PatientObjectPermission',patientObjectPermissionFactory)
   .factory('PatientRadarObjectPermission', patientRadarObjectPermissionFactory)
   .factory('PatientSourceObjectPermission', patientSourceObjectPermissionFactory)
-  .factory('permissionChain', permissionChainFactory)
+  .factory('PermissionChain', permissionChainFactory)
   .factory('RadarObjectPermission', radarObjectPermissionFactory)
   .factory('SourceObjectPermission', sourceObjectPermissionFactory)
   .name;

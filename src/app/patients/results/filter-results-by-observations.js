@@ -1,20 +1,18 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.results');
+function filterResultsByObservations() {
+  return function filterResultsByObservations(results, observations) {
+    var observationIds = _.map(observations, function(x) {
+      return x.id;
+    });
 
-  app.factory('filterResultsByObservations', ['_', function(_) {
-    return function filterResultsByObservations(results, observations) {
-      var observationIds = _.map(observations, function(x) {
-        return x.id;
-      });
+    results = _.filter(results, function(result) {
+      var observationId = result.observation.id;
+      return _.indexOf(observationIds, observationId) >= 0;
+    });
 
-      results = _.filter(results, function(result) {
-        var observationId = result.observation.id;
-        return _.indexOf(observationIds, observationId) >= 0;
-      });
+    return results;
+  };
+}
 
-      return results;
-    };
-  }]);
-})();
+export default filterResultsByObservations;

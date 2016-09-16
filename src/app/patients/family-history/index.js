@@ -5,11 +5,9 @@ import {
   familyHistoryControllerFactory,
   familyHistoryComponent
 } from './family-history-component.directive';
+import familyHistoryModelFactory from './family-history-model';
 import {
-  familyHistoryModelFactory
-} from './family-history-model';
-import {
-  familyHistoryRelativescontrollerFactory,
+  familyHistoryRelativesControllerFactory,
   familyHistoryRelativesComponent
 } from './relatives-component.directive';
 

@@ -1,23 +1,21 @@
-(function() {
-  'use strict';
+function resultModelFactory(Model, lazyLoad) {
+  function ResultModel(modelName, data) {
+    data.observation = lazyLoad('observations', data.observation);
+    data.sourceGroup = lazyLoad('groups', data.sourceGroup);
+    data.createdUser = lazyLoad('users', data.createdUser);
+    data.modifiedUser = lazyLoad('users', data.modifiedUser);
+    Model.call(this, modelName, data);
+  }
 
-  var app = angular.module('radar.patients.results');
+  ResultModel.prototype = Object.create(Model.prototype);
 
-  app.factory('ResultModel', ['Model', 'lazyLoad', function(Model, lazyLoad) {
-    function ResultModel(modelName, data) {
-      data.observation = lazyLoad('observations', data.observation);
-      data.sourceGroup = lazyLoad('groups', data.sourceGroup);
-      data.createdUser = lazyLoad('users', data.createdUser);
-      data.modifiedUser = lazyLoad('users', data.modifiedUser);
-      Model.call(this, modelName, data);
-    }
+  ResultModel.prototype.getDisplayValue = function() {
+    return this.value.description || this.value;
+  };
 
-    ResultModel.prototype = Object.create(Model.prototype);
+  return ResultModel;
+}
 
-    ResultModel.prototype.getDisplayValue = function() {
-      return this.value.description || this.value;
-    };
+resultModelFactory.$inject = ['Model', 'lazyLoad'];
 
-    return ResultModel;
-  }]);
-})();
+export default resultModelFactory;

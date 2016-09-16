@@ -1,58 +1,62 @@
-(function() {
-  'use strict';
+import templateUrl from './clinical-pictures-component.html';
 
-  var app = angular.module('radar.patients.mpgn');
+function mpgnClinicalPicturePermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('MpgnClinicalPicturePermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+mpgnClinicalPicturePermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    MpgnClinicalPicturePermission,
-    $injector,
-    store
-  ) {
-    function MpgnClinicalPicturesController($scope) {
-      var self = this;
+function mpgnClinicalPicturesControllerFactory(
+  ModelListDetailController,
+  MpgnClinicalPicturePermission,
+  $injector,
+  store
+) {
+  function MpgnClinicalPicturesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new MpgnClinicalPicturePermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new MpgnClinicalPicturePermission($scope.patient)
+      }
+    });
 
-      self.load(store.findMany('mpgn-clinical-pictures', {patient: $scope.patient.id}));
+    self.load(store.findMany('mpgn-clinical-pictures', {patient: $scope.patient.id}));
 
-      $scope.create = function() {
-        var item = store.create('mpgn-clinical-pictures', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    MpgnClinicalPicturesController.$inject = ['$scope'];
-    MpgnClinicalPicturesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return MpgnClinicalPicturesController;
+    $scope.create = function() {
+      var item = store.create('mpgn-clinical-pictures', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'MpgnClinicalPicturePermission',
-    '$injector',
-    'store'
-  ];
+  MpgnClinicalPicturesController.$inject = ['$scope'];
+  MpgnClinicalPicturesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('MpgnClinicalPicturesController', controllerFactory);
+  return MpgnClinicalPicturesController;
+}
 
-  app.directive('mpgnClinicalPicturesComponent', ['MpgnClinicalPicturesController', function(MpgnClinicalPicturesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: MpgnClinicalPicturesController,
-      templateUrl: 'app/patients/mpgn/clinical-pictures-component.html'
-    };
-  }]);
-})();
+mpgnClinicalPicturesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'MpgnClinicalPicturePermission',
+  '$injector',
+  'store'
+];
+
+function mpgnClinicalPicturesComponent(MpgnClinicalPicturesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: MpgnClinicalPicturesController,
+    templateUrl: templateUrl
+  };
+}
+
+mpgnClinicalPicturesComponent.$inject = ['MpgnClinicalPicturesController'];
+
+export {
+  mpgnClinicalPicturePermissionFactory,
+  mpgnClinicalPicturesControllerFactory,
+  mpgnClinicalPicturesComponent
+};

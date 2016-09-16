@@ -1,49 +1,53 @@
-(function() {
-  'use strict';
+import templateUrl from './metadata-component.html';
 
-  var app = angular.module('radar.patients.metadata');
+function patientMetadataPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('PatientMetadataPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+patientMetadataPermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelDetailController,
-    PatientMetadataPermission,
-    $injector
-  ) {
-    function PatientMetadataController($scope) {
-      var self = this;
+function patientMetadataControllerFactory(
+  ModelDetailController,
+  PatientMetadataPermission,
+  $injector
+) {
+  function PatientMetadataController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new PatientMetadataPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new PatientMetadataPermission($scope.patient)
+      }
+    });
 
-      self.load($scope.patient).then(function() {
-        self.view();
-      });
-    }
-
-    PatientMetadataController.$inject = ['$scope'];
-    PatientMetadataController.prototype = Object.create(ModelDetailController.prototype);
-
-    return PatientMetadataController;
+    self.load($scope.patient).then(function() {
+      self.view();
+    });
   }
 
-  controllerFactory.$inject = ['ModelDetailController', 'PatientMetadataPermission', '$injector'];
+  PatientMetadataController.$inject = ['$scope'];
+  PatientMetadataController.prototype = Object.create(ModelDetailController.prototype);
 
-  app.factory('PatientMetadataController', controllerFactory);
+  return PatientMetadataController;
+}
 
-  app.directive('patientMetadataComponent', ['PatientMetadataController', function(PatientMetadataController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: PatientMetadataController,
-      templateUrl: 'app/patients/metadata/metadata-component.html'
-    };
-  }]);
-})();
+patientMetadataControllerFactory.$inject = ['ModelDetailController', 'PatientMetadataPermission', '$injector'];
+
+function patientMetadataComponent(PatientMetadataController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: PatientMetadataController,
+    templateUrl: templateUrl
+  };
+}
+
+patientMetadataComponent.$inject = ['PatientMetadataController'];
+
+export {
+  patientMetadataPermissionFactory,
+  patientMetadataControllerFactory,
+  patientMetadataComponent
+};
