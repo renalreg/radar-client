@@ -1,65 +1,69 @@
-(function() {
-  'use strict';
+import templateUrl from './nutrition-component.html';
 
-  var app = angular.module('radar.patients.pkd');
+function nutritionPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('NutritionPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+nutritionPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    NutritionPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function NutritionController($scope) {
-      var self = this;
+function nutritionControllerFactory(
+  ModelListDetailController,
+  NutritionPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function NutritionController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new NutritionPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new NutritionPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('nutrition', {patient: $scope.patient.id}),
-        store.findMany('nutrition-feeding-types').then(function(feedingTypes) {
-          $scope.feedingTypes = feedingTypes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('nutrition', {patient: $scope.patient.id}),
+      store.findMany('nutrition-feeding-types').then(function(feedingTypes) {
+        $scope.feedingTypes = feedingTypes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('nutrition', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    NutritionController.$inject = ['$scope'];
-    NutritionController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return NutritionController;
+    $scope.create = function() {
+      var item = store.create('nutrition', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'NutritionPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  NutritionController.$inject = ['$scope'];
+  NutritionController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('NutritionController', controllerFactory);
+  return NutritionController;
+}
 
-  app.directive('nutritionComponent', ['NutritionController', function(NutritionController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: NutritionController,
-      templateUrl: 'app/patients/pkd/nutrition-component.html'
-    };
-  }]);
-})();
+nutritionControllerFactory.$inject = [
+  'ModelListDetailController',
+  'NutritionPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function nutritionComponent(NutritionController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: NutritionController,
+    templateUrl: templateUrl
+  };
+}
+
+nutritionComponent.$inject = ['NutritionController'];
+
+export {
+  nutritionPermissionFactory,
+  nutritionControllerFactory,
+  nutritionComponent
+};

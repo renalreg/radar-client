@@ -20,6 +20,6 @@ config.$inject = ['$stateProvider'];
 export default angular.module('radar.patients.fuan', [])
   .config(config)
   .factory('FuanClinicalPicturePermission', fuanClinicalPicturePermissionFactory)
-  .factory('FuanClinicalPictureController', fuanClinicalPicturesControllerFactory)
+  .factory('FuanClinicalPicturesController', fuanClinicalPicturesControllerFactory)
   .directive('fuanClinicalPicturesComponent', fuanClinicalPicturesComponent)
   .name;
