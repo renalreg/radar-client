@@ -40,7 +40,7 @@ export default angular.module('radar.patients.results', [])
   .factory('ResultModel', resultModelFactory)
   .factory('ResultPermission', resultPermissionFactory)
   .factory('ResultsController', resultsControllerFactory)
-  .directive('ResultsComponent', resultsComponent)
+  .directive('resultsComponent', resultsComponent)
   .factory('transformResultsForGraph', transformResultsForGraph)
   .factory('transformResultsForTable', transformResultsForTable)
   .name;

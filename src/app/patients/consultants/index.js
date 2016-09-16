@@ -23,7 +23,7 @@ config.$inject = ['$stateProvider', 'storeProvider'];
 export default angular.module('radar.patients.consultants', [])
   .config(config)
   .factory('PatientConsultantPermission', patientConsultantPermissionFactory)
-  .factory('PatientConsultantsPermission', patientConsultantsControllerFactory)
+  .factory('PatientConsultantsController', patientConsultantsControllerFactory)
   .directive('patientConsultantsComponent', patientConsultantsComponent)
   .factory('PatientConsultantModel', patientConsultantModelFactory)
   .name;

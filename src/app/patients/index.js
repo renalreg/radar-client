@@ -9,6 +9,7 @@ import demographics from './demographics';
 import diagnoses from './diagnoses';
 import dialysis from './dialysis';
 import familyHistory from './family-history';
+import fetalAnomalyScans from './fetal-anomaly-scans';
 import fetalUltrasounds from './fetal-ultrasounds';
 import fuan from './fuan';
 import genetics from './genetics';
@@ -97,6 +98,7 @@ export default angular.module('radar.patients', [
   diagnoses,
   dialysis,
   familyHistory,
+  fetalAnomalyScans,
   fetalUltrasounds,
   fuan,
   genetics,
