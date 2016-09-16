@@ -6,9 +6,7 @@ install:
 script:
   - npm run lint
   - npm test
-  # TODO
-  # - gulp coverage
-  # - gulp sauce-labs || true
+  - npm run sauce-labs || true
 after_success:
   - cat coverage/*/lcov.info | coveralls
 env:

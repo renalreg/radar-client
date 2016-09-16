@@ -1,8 +1,6 @@
-'use strict';
+var webpack = require('./webpack.config.js');
+webpack.entry = {};
 
-var common = require('./common');
-
-// Browsers to run on Sauce Labs
 var customLaunchers = {
   'sl_win7_chrome': {
     base: 'SauceLabs',
@@ -37,63 +35,32 @@ var customLaunchers = {
     platform: 'Windows 7',
     browserName: 'internet explorer',
     version: '11'
-  },
-  // sl_ios_safari: {
-  //   base: 'SauceLabs',
-  //   platform: 'OS X 10.11',
-  //   browserName: 'iphone'
-  // },
-  sl_osx_safari: {
-    base: 'SauceLabs',
-    platform: 'OS X 10.11',
-    browserName: 'safari'
   }
 };
 
 module.exports = function(config) {
   config.set({
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['jasmine'],
-
-    // list of files / patterns to load in the browser
-    files: []
-      .concat(common.JS_VENDOR)
-      .concat(common.JS_IE)
-      .concat(common.JS)
-      .concat(common.JS_TESTS),
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
+      'src/app/test.js'
+    ],
+    preprocessors: {
+      'src/app/test.js': ['webpack', 'sourcemap']
+    },
     reporters: ['dots', 'saucelabs'],
-
-    // web server port
-    port: 9876,
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
     browsers: Object.keys(customLaunchers),
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
     singleRun: true,
-
+    webpack: webpack,
+    webpackMiddleware: {
+      noInfo: true,
+      stats: 'errors-only'
+    },
     sauceLabs: {
       testName: 'Radar Unit Tests',
       recordScreenshots: false
     },
     customLaunchers: customLaunchers,
     captureTimeout: 120000
-  });
+  })
 };
