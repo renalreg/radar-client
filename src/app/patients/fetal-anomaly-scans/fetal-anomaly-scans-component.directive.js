@@ -1,3 +1,5 @@
+import templateUrl from './fetal-anomaly-scans-component.html';
+
 function fetalAnomalyScanPermissionFactory(PatientSourceObjectPermission) {
   return PatientSourceObjectPermission;
 }
@@ -47,7 +49,7 @@ function fetalAnomalyScansComponent(FetalAnomalyScansController) {
       patient: '='
     },
     controller: FetalAnomalyScansController,
-    templateUrl: 'app/patients/fetal-anomaly-scans/fetal-anomaly-scans-component.html'
+    templateUrl: templateUrl
   };
 }
 

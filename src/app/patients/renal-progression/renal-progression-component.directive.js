@@ -1,60 +1,64 @@
-(function() {
-  'use strict';
+import templateUrl from './renal-progression-component.html';
 
-  var app = angular.module('radar.patients.renalProgression');
+function renalProgressionPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('RenalProgressionPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+renalProgressionPermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelDetailController,
-    RenalProgressionPermission,
-    $injector,
-    store
-  ) {
-    function RenalProgressionController($scope) {
-      var self = this;
+function renalProgressionControllerFactory(
+  ModelDetailController,
+  RenalProgressionPermission,
+  $injector,
+  store
+) {
+  function RenalProgressionController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new RenalProgressionPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new RenalProgressionPermission($scope.patient)
+      }
+    });
 
-      self.load(store.findFirst('renal-progressions', {patient: $scope.patient.id})).then(function() {
-        self.view();
-      });
+    self.load(store.findFirst('renal-progressions', {patient: $scope.patient.id})).then(function() {
+      self.view();
+    });
 
-      $scope.create = function() {
-        var item = store.create('renal-progressions', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    RenalProgressionController.$inject = ['$scope'];
-    RenalProgressionController.prototype = Object.create(ModelDetailController.prototype);
-
-    return RenalProgressionController;
+    $scope.create = function() {
+      var item = store.create('renal-progressions', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelDetailController',
-    'RenalProgressionPermission',
-    '$injector',
-    'store'
-  ];
+  RenalProgressionController.$inject = ['$scope'];
+  RenalProgressionController.prototype = Object.create(ModelDetailController.prototype);
 
-  app.factory('RenalProgressionController', controllerFactory);
+  return RenalProgressionController;
+}
 
-  app.directive('renalProgressionComponent', ['RenalProgressionController', function(RenalProgressionController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: RenalProgressionController,
-      templateUrl: 'app/patients/renal-progression/renal-progression-component.html'
-    };
-  }]);
-})();
+renalProgressionControllerFactory.$inject = [
+  'ModelDetailController',
+  'RenalProgressionPermission',
+  '$injector',
+  'store'
+];
+
+function renalProgressionComponent(RenalProgressionController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: RenalProgressionController,
+    templateUrl: templateUrl
+  };
+}
+
+renalProgressionComponent.$inject = ['RenalProgressionController'];
+
+export {
+  renalProgressionPermissionFactory,
+  renalProgressionControllerFactory,
+  renalProgressionComponent
+};

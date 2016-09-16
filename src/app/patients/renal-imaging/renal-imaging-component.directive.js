@@ -1,68 +1,72 @@
-(function() {
-  'use strict';
+import templateUrl from './renal-imaging-component.html';
 
-  var app = angular.module('radar.patients.renalImaging');
+function renalImagingPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('RenalImagingPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+renalImagingPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    RenalImagingPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function RenalImagingController($scope) {
-      var self = this;
+function renalImagingControllerFactory(
+  ModelListDetailController,
+  RenalImagingPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function RenalImagingController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new RenalImagingPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new RenalImagingPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('renal-imaging', {patient: $scope.patient.id}),
-        store.findMany('renal-imaging-types').then(function(imagingTypes) {
-          $scope.imagingTypes = imagingTypes;
-        }),
-        store.findMany('renal-imaging-kidney-types').then(function(kidneyTypes) {
-          $scope.kidneyTypes = kidneyTypes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('renal-imaging', {patient: $scope.patient.id}),
+      store.findMany('renal-imaging-types').then(function(imagingTypes) {
+        $scope.imagingTypes = imagingTypes;
+      }),
+      store.findMany('renal-imaging-kidney-types').then(function(kidneyTypes) {
+        $scope.kidneyTypes = kidneyTypes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('renal-imaging', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    RenalImagingController.$inject = ['$scope'];
-    RenalImagingController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return RenalImagingController;
+    $scope.create = function() {
+      var item = store.create('renal-imaging', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'RenalImagingPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  RenalImagingController.$inject = ['$scope'];
+  RenalImagingController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('RenalImagingController', controllerFactory);
+  return RenalImagingController;
+}
 
-  app.directive('renalImagingComponent', ['RenalImagingController', function(RenalImagingController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: RenalImagingController,
-      templateUrl: 'app/patients/renal-imaging/renal-imaging-component.html'
-    };
-  }]);
-})();
+renalImagingControllerFactory.$inject = [
+  'ModelListDetailController',
+  'RenalImagingPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function renalImagingComponent(RenalImagingController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: RenalImagingController,
+    templateUrl: templateUrl
+  };
+}
+
+renalImagingComponent.$inject = ['RenalImagingController'];
+
+export {
+  renalImagingPermissionFactory,
+  renalImagingControllerFactory,
+  renalImagingComponent
+};
