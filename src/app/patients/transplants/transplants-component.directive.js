@@ -1,65 +1,69 @@
-(function() {
-  'use strict';
+import templateUrl from './transplants-component.html';
 
-  var app = angular.module('radar.patients.transplants');
+function transplantPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('TransplantPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+transplantPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    TransplantPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function TransplantsController($scope) {
-      var self = this;
+function transplantsControllerFactory(
+  ModelListDetailController,
+  TransplantPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function TransplantsController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new TransplantPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new TransplantPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('transplants', {patient: $scope.patient.id}),
-        store.findMany('transplant-modalities').then(function(modalities) {
-          $scope.modalities = modalities;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('transplants', {patient: $scope.patient.id}),
+      store.findMany('transplant-modalities').then(function(modalities) {
+        $scope.modalities = modalities;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('transplants', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    TransplantsController.$inject = ['$scope'];
-    TransplantsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return TransplantsController;
+    $scope.create = function() {
+      var item = store.create('transplants', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'TransplantPermission',
-    'firstPromise',
-    '$injector',
-    'store',
-  ];
+  TransplantsController.$inject = ['$scope'];
+  TransplantsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('TransplantsController', controllerFactory);
+  return TransplantsController;
+}
 
-  app.directive('transplantsComponent', ['TransplantsController', function(TransplantsController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: TransplantsController,
-      templateUrl: 'app/patients/transplants/transplants-component.html'
-    };
-  }]);
-})();
+transplantsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'TransplantPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function transplantsComponent(TransplantsController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: TransplantsController,
+    templateUrl: templateUrl
+  };
+}
+
+transplantsComponent.$inject = ['TransplantsController'];
+
+export {
+  transplantPermissionFactory,
+  transplantsControllerFactory,
+  transplantsComponent
+};
