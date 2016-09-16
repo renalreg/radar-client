@@ -11,9 +11,7 @@ module.exports = function(config) {
     },
     reporters: ['dots'],
     port: 9876,
-    colors: true,
     browsers: ['PhantomJS'],
-    singleRun: false,
     webpack: webpack,
     webpackMiddleware: {
       noInfo: true,
