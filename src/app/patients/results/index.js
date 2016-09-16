@@ -12,6 +12,7 @@ import {
   resultsControllerFactory,
   resultsComponent
 } from './results-component.directive';
+import resultsGraph from './results-graph.directive';
 import transformResultsForGraph from './transform-results-for-graph';
 import transformResultsForTable from './transform-results-for-table';
 
@@ -41,6 +42,7 @@ export default angular.module('radar.patients.results', [])
   .factory('ResultPermission', resultPermissionFactory)
   .factory('ResultsController', resultsControllerFactory)
   .directive('resultsComponent', resultsComponent)
+  .directive('resultsGraph', resultsGraph)
   .factory('transformResultsForGraph', transformResultsForGraph)
   .factory('transformResultsForTable', transformResultsForTable)
   .name;

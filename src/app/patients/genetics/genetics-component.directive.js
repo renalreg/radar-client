@@ -1,4 +1,4 @@
-import templateUrl from './genetics-component.directive';
+import templateUrl from './genetics-component.html';
 
 function geneticsPermissionFactory(PatientObjectPermission) {
   return PatientObjectPermission;

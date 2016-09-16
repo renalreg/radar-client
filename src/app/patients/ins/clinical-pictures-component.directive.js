@@ -53,7 +53,7 @@ function insClinicalPicturesComponent(InsClinicalPicturesController) {
   };
 }
 
-insClinicalPicturesComponent.$inuject = ['InsClinicalPicturesController'];
+insClinicalPicturesComponent.$inject = ['InsClinicalPicturesController'];
 
 export {
   insClinicalPicturePermissionFactory,
