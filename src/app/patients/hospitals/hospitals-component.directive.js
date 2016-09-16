@@ -26,7 +26,7 @@ function patientHospitalsControllerFactory(
   ModelListDetailController,
   PatientHospitalPermission,
   $injector,
-  store,
+  store
 ) {
   function PatientHospitalsController($scope) {
     var self = this;
@@ -77,7 +77,7 @@ patientHospitalsControllerFactory.$inject = [
   'ModelListDetailController',
   'PatientHospitalPermission',
   '$injector',
-  'store',
+  'store'
 ];
 
 function patientHospitalsComponent(PatientHospitalsController) {

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 import templateUrl from './patient-navigation.html';
 
 function patientNavigation(sortCohorts) {

@@ -38,10 +38,6 @@ function observationSelector(store) {
         update(observation);
       };
 
-      scope.drop = function(observation) {
-        update(null);
-      };
-
       function update(observation) {
         scope.observation = observation;
         ngModel.$setViewValue(observation);
