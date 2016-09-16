@@ -40,11 +40,13 @@ var customLaunchers = {
 
 module.exports = function(config) {
   config.set({
-    basePath: 'src/app',
     frameworks: ['jasmine'],
-    files: ['test.js'],
+    files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
+      'src/app/test.js'
+    ],
     preprocessors: {
-      'test.js': ['webpack', 'sourcemap']
+      'src/app/test.js': ['webpack', 'sourcemap']
     },
     reporters: ['dots', 'saucelabs'],
     browsers: Object.keys(customLaunchers),
