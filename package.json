@@ -3,7 +3,7 @@
   "version": "2.22.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/renalreg/radar-client.git"
+    "url": "git+https://github.com/renalreg/radar-client.git"
   },
   "scripts": {
     "start": "webpack-dev-server",
