@@ -48,11 +48,11 @@ The development server is available at [http://localhost:8080/](http://localhost
 
 Run the development server with the `npm start` command.
 This will start a development server listening on `http://localhost:8080/`.
-If you using a VM you might want to listen on all interfaces with the `--host 0.0.0.0` argument.
+If you are using a VM you might want to listen on all interfaces with the `--host 0.0.0.0` argument.
 You can pass extra arguments to `npm start` using the `--` separator.
 For example `npm start -- --host 0.0.0.0`.
 
-The development server proxies requests to `/api` to Flask running on `localhost:5000`.
+The development server proxies requests to `/api` to the API running on `localhost:5000`.
 
 The code is automatically linted and tested by [Travis CI](https://travis-ci.org/).
 Lint errors or test failures will prevent a package being built with `./build.sh`.
