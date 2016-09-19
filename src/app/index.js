@@ -31,13 +31,6 @@ import users from './users';
 import utils from './utils';
 import validators from './validators';
 
-Highcharts.setOptions({
-  global: {
-    // Don't convert datetimes to UTC (causes BST issues)
-    useUTC: false
-  }
-});
-
 function config($urlRouterProvider, adapterProvider) {
   adapterProvider.setBaseUrl('/api');
   $urlRouterProvider.otherwise('/');
