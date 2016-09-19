@@ -1,6 +1,6 @@
 # RADAR Client
 
-This repository contains the web interface for RADAR.
+This repository contains RADAR web interface.
 
 ## Build Status
 
@@ -31,7 +31,7 @@ Start the development server:
 npm start
 ```
 
-The development server is available at [http://localhost:8080/](http://localhost:8080/) or at [http://localhost:8080/webpack-dev-server/](http://localhost:8080/webpack-dev-server/) with live reloading.
+The development server is available at [http://localhost:8080/](http://localhost:8080/) or with live reloading at [http://localhost:8080/webpack-dev-server/](http://localhost:8080/webpack-dev-server/).
 
 ## npm scripts
 
@@ -40,17 +40,17 @@ The development server is available at [http://localhost:8080/](http://localhost
 * `build` - build the client in the `dist` folder.
 * `lint` - lint the source code with [ESLint](http://eslint.org/).
 * `test` - run the tests with [Karma](https://karma-runner.github.io/).
-* `sauce-labs` - run the tests on supported browsers using [Sauce Labs](https://saucelabs.com/).
+* `sauce-labs` - run the tests on all supported browsers using [Sauce Labs](https://saucelabs.com/).
 
 ## Develop
 
 Run the development server with the `npm start` command.
-This will start a development server listening on `localhost` on port `8080`.
+This will start a development server listening on `http://localhost:8080/`.
 If you using a VM you might want to listen on all interfaces with the `--host 0.0.0.0` argument.
 You can pass extra arguments to `npm start` using the `--` separator.
 For example `npm start -- --host 0.0.0.0`.
 
-ESLint and the tests are automatically run by [Travis CI](https://travis-ci.org/).
+The code is automatically linted and tested by [Travis CI](https://travis-ci.org/).
 Lint errors or test failures will prevent a package being built with `./build.sh`.
 
 ### Lint
@@ -67,7 +67,7 @@ npm run lint
 ### Test
 
 The tests are written using the [Jasmine](http://jasmine.github.io/) framework and run using [Karma](https://karma-runner.github.io/).
-Test files have the `.test.js` extension and normally named after the file they are testing.
+Test files have the `.test.js` extension and are normally named after the file they are testing.
 
 Run the tests with:
 
@@ -83,7 +83,7 @@ Build a `.tar.gz`:
 ./build.sh
 ```
 
-This will lint the code, run the tests, build the client and create an archive ready for distribution. 
+This will lint the code, run the tests, build the client and create an archive ready for distribution. This will build the client in production mode (`NODE_ENV=production`) which will minify the output.
 
 Deploy the `.tar.gz` to servers:
 
