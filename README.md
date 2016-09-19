@@ -1,6 +1,8 @@
 # RADAR Client
 
-This repository contains RADAR web interface.
+The RADAR client is a web interface for RADAR (Rare Disease Registry).
+The application is built using the [AngularJS](https://angularjs.org/) framework and bundled for browsers using [webpack](https://webpack.github.io/).
+The application communicates with the [RADAR API](https://github.com/renalreg/radar).
 
 ## Build Status
 
