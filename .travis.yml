@@ -3,12 +3,13 @@ node_js:
   - "5"
 install:
   - npm install --quiet --no-spin
+  - pip install coveralls
 script:
   - npm run lint
   - npm test
   - npm run sauce-labs || true
 after_success:
-  - cat coverage/*/lcov.info | coveralls
+  - cat coverage/lcov/lcov.info | coveralls
 env:
   global:
     # Sauce Labs credentials (SAUCE_USERNAME and SAUCE_ACCESS_KEY)
