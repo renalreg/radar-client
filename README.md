@@ -60,7 +60,7 @@ Lint errors or test failures will prevent a package being built with `./build.sh
 ### Lint
 
 The JavaScript code can be linted with the ESLint tool.
-The coding style is two-spaces for indentation, single-quotes and semi-colons.
+The coding style is two-spaces for indentation, single-quotes, and semi-colons.
 
 Lint the code with:
 
