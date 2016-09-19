@@ -37,8 +37,8 @@ The development server is available at [http://localhost:8080/](http://localhost
 
 ## npm scripts
 
-* `start` - start a development server.
-* `clean` - removes build output.
+* `start` - start the development server.
+* `clean` - remove build output.
 * `build` - build the client in the `dist` folder.
 * `lint` - lint the source code with [ESLint](http://eslint.org/).
 * `test` - run the tests with [Karma](https://karma-runner.github.io/).
