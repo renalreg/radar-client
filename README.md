@@ -79,6 +79,8 @@ Run the tests with:
 npm test
 ```
 
+A HTML coverage report is saved to the `coverage/html` directory.
+
 ## Deployment Guide
 
 Build a `.tar.gz`:
