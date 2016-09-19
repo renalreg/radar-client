@@ -33,7 +33,7 @@ Start the development server:
 npm start
 ```
 
-The development server is available at [http://localhost:8080/](http://localhost:8080/) or with live reloading at [http://localhost:8080/webpack-dev-server/](http://localhost:8080/webpack-dev-server/).
+The development server is available at [http://localhost:8080/](http://localhost:8080/) and with live reloading at [http://localhost:8080/webpack-dev-server/](http://localhost:8080/webpack-dev-server/).
 
 ## npm scripts
 
@@ -44,7 +44,7 @@ The development server is available at [http://localhost:8080/](http://localhost
 * `test` - run the tests with [Karma](https://karma-runner.github.io/).
 * `sauce-labs` - run the tests on all supported browsers using [Sauce Labs](https://saucelabs.com/).
 
-## Develop
+## Development Guide
 
 Run the development server with the `npm start` command.
 This will start a development server listening on `http://localhost:8080/`.
@@ -77,7 +77,7 @@ Run the tests with:
 npm test
 ```
 
-## Deploy
+## Deployment Guide
 
 Build a `.tar.gz`:
 
