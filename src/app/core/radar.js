@@ -1,42 +1,40 @@
-(function() {
-  'use strict';
+function radarFactory(session, store, $q) {
+  var promises = [];
 
-  var app = angular.module('radar.core');
+  var userId = session.getUserId();
 
-  app.factory('radar', ['session', 'store', '$q', function(session, store, $q) {
-    var promises = [];
+  if (userId !== null) {
+    var sessionUserDeferred = $q.defer();
 
-    var userId = session.getUserId();
+    store.findOne('users', userId)
+      .then(function(user) {
+        session.setUser(user);
+      })
+      .catch(function() {
+        session.logout(true);
+      })
+      .finally(function() {
+        // Always resolve so the application still boots even if our token is no longer valid
+        sessionUserDeferred.resolve();
+      });
 
-    if (userId !== null) {
-      var sessionUserDeferred = $q.defer();
+    promises.push(sessionUserDeferred.promise);
+  }
 
-      store.findOne('users', userId)
-        .then(function(user) {
-          session.setUser(user);
-        })
-        ['catch'](function() {
-          session.logout(true);
-        })
-        ['finally'](function() {
-          // Always resolve so the application still boots even if our token is no longer valid
-          sessionUserDeferred.resolve();
-        });
+  var promise = $q.all(promises);
 
-      promises.push(sessionUserDeferred.promise);
-    }
+  var service = {
+    ready: false,
+    readyPromise: promise
+  };
 
-    var promise = $q.all(promises);
+  promise.then(function() {
+    service.ready = true;
+  });
 
-    var service = {
-      ready: false,
-      readyPromise: promise
-    };
+  return service;
+}
 
-    promise.then(function() {
-      service.ready = true;
-    });
+radarFactory.$inject = ['session', 'store', '$q'];
 
-    return service;
-  }]);
-})();
+export default radarFactory;

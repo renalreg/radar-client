@@ -1,60 +1,64 @@
-(function() {
-  'use strict';
+import templateUrl from './liver-diseases-component.html';
 
-  var app = angular.module('radar.patients.pkd');
+function liverDiseasesPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('LiverDiseasesPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+liverDiseasesPermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelDetailController,
-    LiverDiseasesPermission,
-    $injector,
-    store
-  ) {
-    function LiverDiseasesController($scope) {
-      var self = this;
+function liverDiseasesControllerFactory(
+  ModelDetailController,
+  LiverDiseasesPermission,
+  $injector,
+  store
+) {
+  function LiverDiseasesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new LiverDiseasesPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new LiverDiseasesPermission($scope.patient)
+      }
+    });
 
-      self.load(store.findFirst('liver-diseases', {patient: $scope.patient.id})).then(function() {
-        self.view();
-      });
+    self.load(store.findFirst('liver-diseases', {patient: $scope.patient.id})).then(function() {
+      self.view();
+    });
 
-      $scope.create = function() {
-        var item = store.create('liver-diseases', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    LiverDiseasesController.$inject = ['$scope'];
-    LiverDiseasesController.prototype = Object.create(ModelDetailController.prototype);
-
-    return LiverDiseasesController;
+    $scope.create = function() {
+      var item = store.create('liver-diseases', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelDetailController',
-    'LiverDiseasesPermission',
-    '$injector',
-    'store'
-  ];
+  LiverDiseasesController.$inject = ['$scope'];
+  LiverDiseasesController.prototype = Object.create(ModelDetailController.prototype);
 
-  app.factory('LiverDiseasesController', controllerFactory);
+  return LiverDiseasesController;
+}
 
-  app.directive('liverDiseasesComponent', ['LiverDiseasesController', function(LiverDiseasesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: LiverDiseasesController,
-      templateUrl: 'app/patients/pkd/liver-diseases-component.html'
-    };
-  }]);
-})();
+liverDiseasesControllerFactory.$inject = [
+  'ModelDetailController',
+  'LiverDiseasesPermission',
+  '$injector',
+  'store'
+];
+
+function liverDiseasesComponent(LiverDiseasesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: LiverDiseasesController,
+    templateUrl: templateUrl
+  };
+}
+
+liverDiseasesComponent.$inject = ['LiverDiseasesController'];
+
+export {
+  liverDiseasesPermissionFactory,
+  liverDiseasesControllerFactory,
+  liverDiseasesComponent
+};

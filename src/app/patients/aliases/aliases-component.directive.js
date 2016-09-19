@@ -1,70 +1,74 @@
-(function() {
-  'use strict';
+import templateUrl from './aliases-component.html';
 
-  var app = angular.module('radar.patients.aliases');
+function patientAliasPermissionFactory(PatientRadarObjectPermission) {
+  return PatientRadarObjectPermission;
+}
 
-  app.factory('PatientAliasPermission', ['PatientRadarObjectPermission', function(PatientRadarObjectPermission) {
-    return PatientRadarObjectPermission;
-  }]);
+patientAliasPermissionFactory.$inject = ['PatientRadarObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    PatientAliasPermission,
-    firstPromise,
-    getRadarGroup,
-    $injector,
-    store
-  ) {
-    function PatientAliasesController($scope) {
-      var self = this;
+function patientAliasesControllerFactory(
+  ModelListDetailController,
+  PatientAliasPermission,
+  firstPromise,
+  getRadarGroup,
+  $injector,
+  store
+) {
+  function PatientAliasesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new PatientAliasPermission($scope.patient)
-        }
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new PatientAliasPermission($scope.patient)
+      }
+    });
+
+    self.load(firstPromise([
+      store.findMany('patient-aliases', {patient: $scope.patient.id}),
+      getRadarGroup().then(function(group) {
+        $scope.sourceGroup = group;
+      })
+    ]));
+
+    $scope.create = function() {
+      var item = store.create('patient-aliases', {
+        patient: $scope.patient.id,
+        sourceGroup: $scope.sourceGroup
       });
-
-      self.load(firstPromise([
-        store.findMany('patient-aliases', {patient: $scope.patient.id}),
-        getRadarGroup().then(function(group) {
-          $scope.sourceGroup = group;
-        })
-      ]));
-
-      $scope.create = function() {
-        var item = store.create('patient-aliases', {
-          patient: $scope.patient.id,
-          sourceGroup: $scope.sourceGroup
-        });
-        self.edit(item);
-      };
-    }
-
-    PatientAliasesController.$inject = ['$scope'];
-    PatientAliasesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return PatientAliasesController;
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'PatientAliasPermission',
-    'firstPromise',
-    'getRadarGroup',
-    '$injector',
-    'store'
-  ];
+  PatientAliasesController.$inject = ['$scope'];
+  PatientAliasesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('PatientAliasesController', controllerFactory);
+  return PatientAliasesController;
+}
 
-  app.directive('patientAliasesComponent', ['PatientAliasesController', function(PatientAliasesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: PatientAliasesController,
-      templateUrl: 'app/patients/aliases/aliases-component.html'
-    };
-  }]);
-})();
+patientAliasesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'PatientAliasPermission',
+  'firstPromise',
+  'getRadarGroup',
+  '$injector',
+  'store'
+];
+
+function patientAliasesComponent(PatientAliasesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: PatientAliasesController,
+    templateUrl: templateUrl
+  };
+}
+
+patientAliasesComponent.$inject = ['PatientAliasesController'];
+
+export {
+  patientAliasPermissionFactory,
+  patientAliasesControllerFactory,
+  patientAliasesComponent
+};

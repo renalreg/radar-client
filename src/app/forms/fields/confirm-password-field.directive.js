@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './confirm-password-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmConfirmPasswordField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '=',
+      password: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmConfirmPasswordField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '=',
-        password: '='
-      },
-      templateUrl: 'app/forms/fields/confirm-password-field.html'
-    };
-  });
-})();
+export default frmConfirmPasswordField;

@@ -1,166 +1,170 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.results');
+import templateUrl from './results-component.html';
 
-  app.factory('ResultPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+function resultPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  function controllerFactory(
-    ModelListDetailController,
-    ResultPermission,
-    firstPromise,
-    $injector,
-    store,
-    _,
-    transformResultsForGraph,
-    transformResultsForTable
-  ) {
-    var TABLE = 0;
-    var GRAPH = 1;
+resultPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-    // Remember selected observations
-    var selectedObservations = [];
+function resultsControllerFactory(
+  ModelListDetailController,
+  ResultPermission,
+  firstPromise,
+  $injector,
+  store,
+  transformResultsForGraph,
+  transformResultsForTable
+) {
+  var TABLE = 0;
+  var GRAPH = 1;
 
-    function ResultsController($scope) {
-      var self = this;
+  // Remember selected observations
+  var selectedObservations = [];
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new ResultPermission($scope.patient)
-        }
-      });
+  function ResultsController($scope) {
+    var self = this;
 
-      var currentView = TABLE;
-      $scope.selectedObservations = selectedObservations;
-      $scope.selectedObservation = null;
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new ResultPermission($scope.patient)
+      }
+    });
 
-      $scope.$watchCollection('selectedObservations', function(selectedObservations) {
-        var promise;
+    var currentView = TABLE;
+    $scope.selectedObservations = selectedObservations;
+    $scope.selectedObservation = null;
 
-        if (selectedObservations.length) {
-          var observationIds = _.map(selectedObservations, function(x) {
-            return x.id;
-          });
+    $scope.$watchCollection('selectedObservations', function(selectedObservations) {
+      var promise;
 
-          observationIds = observationIds.join(',');
-
-          promise = store.findMany('results', {patient: $scope.patient.id, observationId: observationIds});
-        } else {
-          promise = [];
-        }
-
-        self.load(promise);
-      });
-
-      // Reset the result value when the observation changes
-      $scope.$watch('item.observation', function(oldValue, newValue) {
-        if ($scope.editing && oldValue !== newValue) {
-          $scope.item.value = null;
-        }
-      });
-
-      $scope.create = function() {
-        var item = store.create('results', {
-          patient: $scope.patient.id,
-          observation: $scope.selectedObservation
+      if (selectedObservations.length) {
+        var observationIds = _.map(selectedObservations, function(x) {
+          return x.id;
         });
 
-        self.edit(item);
-      };
+        observationIds = observationIds.join(',');
 
-      $scope.saveAndAddAnother = function() {
-        return self.save().then(function(item) {
-          self.edit(store.create('results', {
-            patient: item.patient,
-            sourceGroup: item.sourceGroup,
-            observation: item.observation
-          }));
+        promise = store.findMany('results', {patient: $scope.patient.id, observationId: observationIds});
+      } else {
+        promise = [];
+      }
 
-          return item;
-        });
-      };
+      self.load(promise);
+    });
 
-      $scope.viewTable = function() {
-        currentView = TABLE;
-      };
+    // Reset the result value when the observation changes
+    $scope.$watch('item.observation', function(oldValue, newValue) {
+      if ($scope.editing && oldValue !== newValue) {
+        $scope.item.value = null;
+      }
+    });
 
-      $scope.viewGraph = function() {
-        currentView = GRAPH;
-      };
-
-      $scope.viewingTable = function() {
-        return currentView === TABLE;
-      };
-
-      $scope.viewingGraph = function() {
-        return currentView === GRAPH;
-      };
-    }
-
-    ResultsController.$inject = ['$scope'];
-    ResultsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    ResultsController.prototype.groupResults = function() {
-      var results = this.scope.items;
-      var observations = this.scope.selectedObservations;
-
-      this.scope.groupedResults = transformResultsForTable(results, observations);
-      this.scope.graphs = transformResultsForGraph(results, observations);
-    };
-
-    ResultsController.prototype.load = function(promise) {
-      var self = this;
-
-      return ModelListDetailController.prototype.load.call(this, promise).then(function(items) {
-        self.groupResults();
-        return items;
+    $scope.create = function() {
+      var item = store.create('results', {
+        patient: $scope.patient.id,
+        observation: $scope.selectedObservation
       });
+
+      self.edit(item);
     };
 
-    ResultsController.prototype.save = function() {
-      var self = this;
+    $scope.saveAndAddAnother = function() {
+      return self.save().then(function(item) {
+        self.edit(store.create('results', {
+          patient: item.patient,
+          sourceGroup: item.sourceGroup,
+          observation: item.observation
+        }));
 
-      return ModelListDetailController.prototype.save.call(this).then(function(item) {
-        self.groupResults();
         return item;
       });
     };
 
-    ResultsController.prototype.remove = function(item) {
-      var self = this;
-
-      return ModelListDetailController.prototype.remove.call(this, item).then(function(item) {
-        self.groupResults();
-        return item;
-      });
+    $scope.viewTable = function() {
+      currentView = TABLE;
     };
 
-    return ResultsController;
+    $scope.viewGraph = function() {
+      currentView = GRAPH;
+    };
+
+    $scope.viewingTable = function() {
+      return currentView === TABLE;
+    };
+
+    $scope.viewingGraph = function() {
+      return currentView === GRAPH;
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'ResultPermission',
-    'firstPromise',
-    '$injector',
-    'store',
-    '_',
-    'transformResultsForGraph',
-    'transformResultsForTable'
-  ];
+  ResultsController.$inject = ['$scope'];
+  ResultsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('ResultsController', controllerFactory);
+  ResultsController.prototype.groupResults = function() {
+    var results = this.scope.items;
+    var observations = this.scope.selectedObservations;
 
-  app.directive('resultsComponent', ['ResultsController', function(ResultsController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: ResultsController,
-      templateUrl: 'app/patients/results/results-component.html'
-    };
-  }]);
-})();
+    this.scope.groupedResults = transformResultsForTable(results, observations);
+    this.scope.graphs = transformResultsForGraph(results, observations);
+  };
+
+  ResultsController.prototype.load = function(promise) {
+    var self = this;
+
+    return ModelListDetailController.prototype.load.call(this, promise).then(function(items) {
+      self.groupResults();
+      return items;
+    });
+  };
+
+  ResultsController.prototype.save = function() {
+    var self = this;
+
+    return ModelListDetailController.prototype.save.call(this).then(function(item) {
+      self.groupResults();
+      return item;
+    });
+  };
+
+  ResultsController.prototype.remove = function(item) {
+    var self = this;
+
+    return ModelListDetailController.prototype.remove.call(this, item).then(function(item) {
+      self.groupResults();
+      return item;
+    });
+  };
+
+  return ResultsController;
+}
+
+resultsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'ResultPermission',
+  'firstPromise',
+  '$injector',
+  'store',
+  'transformResultsForGraph',
+  'transformResultsForTable'
+];
+
+function resultsComponent(ResultsController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: ResultsController,
+    templateUrl: templateUrl
+  };
+}
+
+resultsComponent.$inject = ['ResultsController'];
+
+export {
+  resultPermissionFactory,
+  resultsControllerFactory,
+  resultsComponent
+};

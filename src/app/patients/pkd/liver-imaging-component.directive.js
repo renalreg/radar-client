@@ -1,65 +1,69 @@
-(function() {
-  'use strict';
+import templateUrl from './liver-imaging-component.html';
 
-  var app = angular.module('radar.patients.pkd');
+function liverImagingPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('LiverImagingPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+liverImagingPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    LiverImagingPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function LiverImagingController($scope) {
-      var self = this;
+function liverImagingControllerFactory(
+  ModelListDetailController,
+  LiverImagingPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function LiverImagingController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new LiverImagingPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new LiverImagingPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('liver-imaging', {patient: $scope.patient.id}),
-        store.findMany('liver-imaging-types').then(function(imagingTypes) {
-          $scope.imagingTypes = imagingTypes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('liver-imaging', {patient: $scope.patient.id}),
+      store.findMany('liver-imaging-types').then(function(imagingTypes) {
+        $scope.imagingTypes = imagingTypes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('liver-imaging', {patient: $scope.patient.id, imagingType: $scope.imagingTypes[0]});
-        self.edit(item);
-      };
-    }
-
-    LiverImagingController.$inject = ['$scope'];
-    LiverImagingController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return LiverImagingController;
+    $scope.create = function() {
+      var item = store.create('liver-imaging', {patient: $scope.patient.id, imagingType: $scope.imagingTypes[0]});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'LiverImagingPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  LiverImagingController.$inject = ['$scope'];
+  LiverImagingController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('LiverImagingController', controllerFactory);
+  return LiverImagingController;
+}
 
-  app.directive('liverImagingComponent', ['LiverImagingController', function(LiverImagingController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: LiverImagingController,
-      templateUrl: 'app/patients/pkd/liver-imaging-component.html'
-    };
-  }]);
-})();
+liverImagingControllerFactory.$inject = [
+  'ModelListDetailController',
+  'LiverImagingPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function liverImagingComponent(LiverImagingController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: LiverImagingController,
+    templateUrl: templateUrl
+  };
+}
+
+liverImagingComponent.$inject = ['LiverImagingController'];
+
+export {
+  liverImagingPermissionFactory,
+  liverImagingControllerFactory,
+  liverImagingComponent
+};

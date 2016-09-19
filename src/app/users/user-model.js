@@ -1,74 +1,70 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.users');
+function userModelFactory(Model, store) {
+  function filterGroupUsersByType(groupUsers, groupType) {
+    return _.filter(groupUsers, function(x) {
+      return x.group.type === groupType;
+    });
+  }
 
-  app.factory('UserModel', ['Model', 'store', '_', function(Model, store, _) {
-    function filterGroupUsersByType(groupUsers, groupType) {
-      return _.filter(groupUsers, function(x) {
-        return x.group.type === groupType;
-      });
+  function uniqueGroups(groupUsers) {
+    var groups = _.map(groupUsers, function(x) {
+      return x.group;
+    });
+
+    groups = _.uniqBy(groups, 'id');
+
+    return groups;
+  }
+
+  function UserModel(modelName, data) {
+    var i;
+
+    if (data === undefined) {
+      data = {};
     }
 
-    function uniqueGroups(groupUsers) {
-      var groups = _.map(groupUsers, function(x) {
-        return x.group;
-      });
+    if (data.groups === undefined) {
+      data.groups = [];
+    } else {
+      var groups = [];
 
-      groups = _.uniqBy(groups, 'id');
-
-      return groups;
-    }
-
-    function UserModel(modelName, data) {
-      var i;
-
-      if (data === undefined) {
-        data = {};
+      for (i = 0; i < data.groups.length; i++) {
+        var rawGroup = data.groups[i];
+        groups.push(store.pushToStore(store.create('group-users', rawGroup)));
       }
 
-      if (data.groups === undefined) {
-        data.groups = [];
-      } else {
-        var groups = [];
-
-        for (i = 0; i < data.groups.length; i++) {
-          var rawGroup = data.groups[i];
-          groups.push(store.pushToStore(store.create('group-users', rawGroup)));
-        }
-
-        data.groups = groups;
-      }
-
-      Model.call(this, modelName, data);
+      data.groups = groups;
     }
 
-    UserModel.prototype = Object.create(Model.prototype);
+    Model.call(this, modelName, data);
+  }
 
-    UserModel.prototype.getCohortUsers = function() {
-      return filterGroupUsersByType(this.groups, 'COHORT');
-    };
+  UserModel.prototype = Object.create(Model.prototype);
 
-    UserModel.prototype.getHospitalUsers = function() {
-      return filterGroupUsersByType(this.groups, 'HOSPITAL');
-    };
+  UserModel.prototype.getCohortUsers = function() {
+    return filterGroupUsersByType(this.groups, 'COHORT');
+  };
 
-    UserModel.prototype.getCohorts = function() {
-      var groupUsers = this.getCohortUsers();
-      var groups = uniqueGroups(groupUsers);
-      return groups;
-    };
+  UserModel.prototype.getHospitalUsers = function() {
+    return filterGroupUsersByType(this.groups, 'HOSPITAL');
+  };
 
-    UserModel.prototype.getHospitals = function() {
-      var groupUsers = this.getHospitalUsers();
-      var groups = uniqueGroups(groupUsers);
-      return groups;
-    };
+  UserModel.prototype.getCohorts = function() {
+    var groupUsers = this.getCohortUsers();
+    var groups = uniqueGroups(groupUsers);
+    return groups;
+  };
 
-    return UserModel;
-  }]);
+  UserModel.prototype.getHospitals = function() {
+    var groupUsers = this.getHospitalUsers();
+    var groups = uniqueGroups(groupUsers);
+    return groups;
+  };
 
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('users', 'UserModel');
-  }]);
-})();
+  return UserModel;
+}
+
+userModelFactory.$inject = ['Model', 'store'];
+
+export default userModelFactory;

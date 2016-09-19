@@ -1,25 +1,19 @@
-(function() {
-  'use strict';
+function DeleteUserController($scope, user, session, notificationService, $state) {
+  $scope.user = user;
+  $scope.currentUser = session.user;
 
-  var app = angular.module('radar.users');
+  $scope.remove = function(user) {
+    user.remove()
+      .then(function() {
+        notificationService.success('User deleted.');
+        $state.go('users');
+      })
+      .catch(function() {
+        notificationService.fail('Failed to delete user.');
+      });
+  };
+}
 
-  function DeleteUserController($scope, user, session, notificationService, $state) {
-    $scope.user = user;
-    $scope.currentUser = session.user;
+DeleteUserController.$inject = ['$scope', 'user', 'session', 'notificationService', '$state'];
 
-    $scope.remove = function(user) {
-      user.remove()
-        .then(function() {
-          notificationService.success('User deleted.');
-          $state.go('users');
-        })
-        ['catch'](function() {
-          notificationService.fail('Failed to delete user.');
-        });
-    };
-  }
-
-  DeleteUserController.$inject = ['$scope', 'user', 'session', 'notificationService', '$state'];
-
-  app.controller('DeleteUserController', DeleteUserController);
-})();
+export default DeleteUserController;

@@ -1,63 +1,59 @@
-(function() {
-  'use strict';
+function frmWeeksAndDays() {
+  return {
+    require: 'ngModel',
+    transclude: true,
+    template: '<div ng-transclude></div>',
+    link: function(scope, element, attrs, ngModel) {
+      scope.period = {
+        weeks: null,
+        days: null
+      };
 
-  var app = angular.module('radar.forms');
+      ngModel.$render = function() {
+        var value = ngModel.$viewValue;
 
-  app.directive('frmWeeksAndDays', function() {
-    return {
-      require: 'ngModel',
-      transclude: true,
-      template: '<div ng-transclude></div>',
-      link: function(scope, element, attrs, ngModel) {
-        scope.period = {
-          weeks: null,
-          days: null
-        };
+        if (value === null || value === undefined) {
+          scope.period.weeks = null;
+          scope.period.days = null;
+        } else {
+          scope.period.weeks = Math.floor(value / 7);
+          scope.period.days = value % 7;
+        }
+      };
 
-        ngModel.$render = function() {
-          var value = ngModel.$viewValue;
+      scope.$watch('period.weeks', update);
+      scope.$watch('period.days', update);
 
-          if (value === null || value === undefined) {
-            scope.period.weeks = null;
-            scope.period.days = null;
-          } else {
-            scope.period.weeks = Math.floor(value / 7);
-            scope.period.days = value % 7;
-          }
-        };
+      function update() {
+        var weeks = parseInt(scope.period.weeks);
+        var days = parseInt(scope.period.days);
+        var value;
 
-        scope.$watch('period.weeks', update);
-        scope.$watch('period.days', update);
+        if (weeks >= 0 || days >= 0) {
+          value = 0;
 
-        function update() {
-          var weeks = parseInt(scope.period.weeks);
-          var days = parseInt(scope.period.days);
-          var value;
-
-          if (weeks >= 0 || days >= 0) {
-            value = 0;
-
-            if (weeks >= 0) {
-              value += (weeks * 7);
-            }
-
-            if (days >= 0) {
-              value += days;
-            }
-
-            value = value.toString();
-          } else {
-            value = null;
+          if (weeks >= 0) {
+            value += (weeks * 7);
           }
 
-          ngModel.$setViewValue(value);
-
-          // Reset the dirty flag after initialisation
-          if (value === null && (ngModel.$viewValue === undefined || ngModel.$viewValue === null)) {
-            ngModel.$setPristine();
+          if (days >= 0) {
+            value += days;
           }
+
+          value = value.toString();
+        } else {
+          value = null;
+        }
+
+        ngModel.$setViewValue(value);
+
+        // Reset the dirty flag after initialisation
+        if (value === null && (ngModel.$viewValue === undefined || ngModel.$viewValue === null)) {
+          ngModel.$setPristine();
         }
       }
-    };
-  });
-})();
+    }
+  };
+}
+
+export default frmWeeksAndDays;

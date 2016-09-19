@@ -1,9 +1,20 @@
 @import "variables";
-@import "bootstrap";
+
+// Bootstrap
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Font Awesome
+@import "~font-awesome/css/font-awesome.css";
+
+// jQuery UI
+@import "~jquery-ui/themes/base/core.css";
+@import "~jquery-ui/themes/base/datepicker.css";
+@import "../jquery-ui/theme.css";
+
 @import "core";
 @import "navbar";
 @import "tabs";
 @import "patient";
-@import "password_strength_meter";
 @import "overlay";
 @import "fatal_error";

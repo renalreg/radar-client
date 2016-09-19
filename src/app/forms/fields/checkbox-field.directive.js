@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './checkbox-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmCheckboxField() {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '='
+    },
+    transclude: true,
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmCheckboxField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '='
-      },
-      transclude: true,
-      templateUrl: 'app/forms/fields/checkbox-field.html'
-    };
-  });
-})();
+export default frmCheckboxField;

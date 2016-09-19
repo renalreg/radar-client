@@ -1,20 +1,18 @@
-(function() {
-  'use strict';
+function adminPermissionFactory(session) {
+  function AdminPermission() {
+  }
 
-  var app = angular.module('radar.permissions');
+  AdminPermission.prototype.hasPermission = function() {
+    return session.isAuthenticated && session.user.isAdmin;
+  };
 
-  app.factory('AdminPermission', ['session', function(session) {
-    function AdminPermission() {
-    }
+  AdminPermission.prototype.hasObjectPermission = function() {
+    return session.isAuthenticated && session.user.isAdmin;
+  };
 
-    AdminPermission.prototype.hasPermission = function() {
-      return session.isAuthenticated && session.user.isAdmin;
-    };
+  return AdminPermission;
+}
 
-    AdminPermission.prototype.hasObjectPermission = function() {
-      return session.isAuthenticated && session.user.isAdmin;
-    };
+adminPermissionFactory.$inject = ['session'];
 
-    return AdminPermission;
-  }]);
-})();
+export default adminPermissionFactory;

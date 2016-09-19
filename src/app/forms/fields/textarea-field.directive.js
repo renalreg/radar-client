@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './textarea-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmTextareaField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '=',
+      rows: '@'
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmTextareaField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '=',
-        rows: '@'
-      },
-      templateUrl: 'app/forms/fields/textarea-field.html'
-    };
-  });
-})();
+export default frmTextareaField;

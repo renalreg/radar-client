@@ -1,27 +1,21 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.consultants');
-
-  app.factory('ConsultantModel', ['Model', function(Model) {
-    function ConsultantModel(modelName, data) {
-      if (data.groups === undefined) {
-        data.groups = [];
-      }
-
-      Model.call(this, modelName, data);
+function consultantModelFactory(Model) {
+  function ConsultantModel(modelName, data) {
+    if (data.groups === undefined) {
+      data.groups = [];
     }
 
-    ConsultantModel.prototype = Object.create(Model.prototype);
+    Model.call(this, modelName, data);
+  }
 
-    ConsultantModel.prototype.toString = function() {
-      return this.firstName + ' ' + this.lastName + ' (' + this.specialty.name + ')';
-    };
+  ConsultantModel.prototype = Object.create(Model.prototype);
 
-    return ConsultantModel;
-  }]);
+  ConsultantModel.prototype.toString = function() {
+    return this.firstName + ' ' + this.lastName + ' (' + this.specialty.name + ')';
+  };
 
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('consultants', 'ConsultantModel');
-  }]);
-})();
+  return ConsultantModel;
+}
+
+consultantModelFactory.$inject = ['Model'];
+
+export default consultantModelFactory;

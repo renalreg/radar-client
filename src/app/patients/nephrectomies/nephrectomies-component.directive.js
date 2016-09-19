@@ -1,71 +1,75 @@
-(function() {
-  'use strict';
+import templateUrl from './nephrectomies-component.html';
 
-  var app = angular.module('radar.patients.nephrectomies');
+function nephrectomyPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('NephrectomyPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+nephrectomyPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    NephrectomyPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function NephrectomiesController($scope) {
-      var self = this;
+function nephrectomiesControllerFactory(
+  ModelListDetailController,
+  NephrectomyPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function NephrectomiesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new NephrectomyPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new NephrectomyPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('nephrectomies', {patient: $scope.patient.id}),
-        store.findMany('nephrectomy-kidney-sides').then(function(kidneySides) {
-          $scope.kidneySides = kidneySides;
-        }),
-        store.findMany('nephrectomy-kidney-types').then(function(kidneyTypes) {
-          $scope.kidneyTypes = kidneyTypes;
-        }),
-        store.findMany('nephrectomy-entry-types').then(function(entryTypes) {
-          $scope.entryTypes = entryTypes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('nephrectomies', {patient: $scope.patient.id}),
+      store.findMany('nephrectomy-kidney-sides').then(function(kidneySides) {
+        $scope.kidneySides = kidneySides;
+      }),
+      store.findMany('nephrectomy-kidney-types').then(function(kidneyTypes) {
+        $scope.kidneyTypes = kidneyTypes;
+      }),
+      store.findMany('nephrectomy-entry-types').then(function(entryTypes) {
+        $scope.entryTypes = entryTypes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('nephrectomies', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    NephrectomiesController.$inject = ['$scope'];
-    NephrectomiesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return NephrectomiesController;
+    $scope.create = function() {
+      var item = store.create('nephrectomies', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'NephrectomyPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  NephrectomiesController.$inject = ['$scope'];
+  NephrectomiesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('NephrectomiesController', controllerFactory);
+  return NephrectomiesController;
+}
 
-  app.directive('nephrectomiesComponent', ['NephrectomiesController', function(NephrectomiesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: NephrectomiesController,
-      templateUrl: 'app/patients/nephrectomies/nephrectomies-component.html'
-    };
-  }]);
-})();
+nephrectomiesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'NephrectomyPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function nephrectomiesComponent(NephrectomiesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: NephrectomiesController,
+    templateUrl: templateUrl
+  };
+}
+
+nephrectomiesComponent.$inject = ['NephrectomiesController'];
+
+export {
+  nephrectomyPermissionFactory,
+  nephrectomiesControllerFactory,
+  nephrectomiesComponent
+};

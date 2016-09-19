@@ -1,13 +1,11 @@
-(function() {
-  'use strict';
+function randomPassword(adapter) {
+  return function randomPassword() {
+    return adapter.get('/random-password').then(function(response) {
+      return response.data.password;
+    });
+  };
+}
 
-  var app = angular.module('radar.auth');
+randomPassword.$inject = ['adapter'];
 
-  app.factory('randomPassword', ['adapter', function(adapter) {
-    return function randomPassword() {
-      return adapter.get('/random-password').then(function(response) {
-        return response.data.password;
-      });
-    };
-  }]);
-})();
+export default randomPassword;

@@ -1,29 +1,27 @@
-(function() {
-  'use strict';
+import templateUrl from './boolean-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmBooleanField() {
+  return {
+    require: '^frmField',
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '='
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.options = [
+        {
+          value: true,
+          label: 'Yes'
+        },
+        {
+          value: false,
+          label: 'No'
+        }
+      ];
+    }
+  };
+}
 
-  app.directive('frmBooleanField', function() {
-    return {
-      require: '^frmField',
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '='
-      },
-      templateUrl: 'app/forms/fields/boolean-field.html',
-      link: function(scope) {
-        scope.options = [
-          {
-            value: true,
-            label: 'Yes'
-          },
-          {
-            value: false,
-            label: 'No'
-          }
-        ];
-      }
-    };
-  });
-})();
+export default frmBooleanField;

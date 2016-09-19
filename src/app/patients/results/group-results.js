@@ -1,47 +1,45 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.results');
+function groupResults() {
+  function getKey(result) {
+    return result.sourceGroup.id + '.' + result.sourceType + '.' + result.date;
+  }
 
-  app.factory('groupResults', ['_', function(_) {
-    function getKey(result) {
-      return result.sourceGroup.id + '.' + result.sourceType + '.' + result.date;
-    }
+  return function groupResults(results) {
+    var groups = [];
+    var currentKey = null;
+    var currentGroup = null;
 
-    return function groupResults(results) {
-      var groups = [];
-      var currentKey = null;
-      var currentGroup = null;
+    // Sort the results so they group properly
+    results = _.sortBy(results, getKey);
 
-      // Sort the results so they group properly
-      results = _.sortBy(results, getKey);
+    _.forEach(results, function(result) {
+      var observation = result.observation;
+      var observationId = observation.id;
 
-      _.forEach(results, function(result) {
-        var observation = result.observation;
-        var observationId = observation.id;
+      var key = getKey(result);
 
-        var key = getKey(result);
+      if (
+        key !== currentKey ||
+        currentGroup === null ||
+        currentGroup.results[observationId] !== undefined
+      ) {
+        currentKey = key;
+        currentGroup = {
+          date: result.date,
+          getSource: function() {
+            return result.getSource();
+          },
+          results: {}
+        };
+        groups.push(currentGroup);
+      }
 
-        if (
-          key !== currentKey ||
-          currentGroup === null ||
-          currentGroup.results[observationId] !== undefined
-        ) {
-          currentKey = key;
-          currentGroup = {
-            date: result.date,
-            getSource: function() {
-              return result.getSource();
-            },
-            results: {}
-          };
-          groups.push(currentGroup);
-        }
+      currentGroup.results[observationId] = result;
+    });
 
-        currentGroup.results[observationId] = result;
-      });
+    return groups;
+  };
+}
 
-      return groups;
-    };
-  }]);
-})();
+export default groupResults;

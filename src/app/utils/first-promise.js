@@ -1,21 +1,19 @@
-(function() {
-  'use strict';
+function firstPromise($q) {
+  return function firstPromise(promises) {
+    if (promises.length) {
+      var promise = promises[0];
 
-  var app = angular.module('radar.utils');
+      return $q.all(promises).then(function() {
+        return promise;
+      });
+    } else {
+      var deferred = $q.defer();
+      deferred.resolve();
+      return deferred.promise;
+    }
+  };
+}
 
-  app.factory('firstPromise', ['$q', function($q) {
-    return function firstPromise(promises) {
-      if (promises.length) {
-        var promise = promises[0];
+firstPromise.$inject = ['$q'];
 
-        return $q.all(promises).then(function() {
-          return promise;
-        });
-      } else {
-        var deferred = $q.defer();
-        deferred.resolve();
-        return deferred.promise;
-      }
-    };
-  }]);
-})();
+export default firstPromise;

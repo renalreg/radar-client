@@ -1,19 +1,17 @@
-(function() {
-  'use strict';
+import templateUrl from './date-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmDateField() {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&',
+      minDate: '=',
+      maxDate: '=',
+      defaultDate: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmDateField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&',
-        minDate: '=',
-        maxDate: '=',
-        defaultDate: '='
-      },
-      templateUrl: 'app/forms/fields/date-field.html'
-    };
-  });
-})();
+export default frmDateField;

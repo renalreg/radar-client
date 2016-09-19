@@ -1,58 +1,62 @@
-(function() {
-  'use strict';
+import templateUrl from './fetal-anomaly-scans-component.html';
 
-  var app = angular.module('radar.patients.fetalAnomalyScans');
+function fetalAnomalyScanPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('FetalAnomalyScanPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+fetalAnomalyScanPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    FetalAnomalyScanPermission,
-    $injector,
-    store
-  ) {
-    function FetalAnomalyScansController($scope) {
-      var self = this;
+function fetalAnomalyScansControllerFactory(
+  ModelListDetailController,
+  FetalAnomalyScanPermission,
+  $injector,
+  store
+) {
+  function FetalAnomalyScansController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new FetalAnomalyScanPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new FetalAnomalyScanPermission($scope.patient)
+      }
+    });
 
-      self.load(store.findMany('fetal-anomaly-scans', {patient: $scope.patient.id}));
+    self.load(store.findMany('fetal-anomaly-scans', {patient: $scope.patient.id}));
 
-      $scope.create = function() {
-        var item = store.create('fetal-anomaly-scans', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    FetalAnomalyScansController.$inject = ['$scope'];
-    FetalAnomalyScansController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return FetalAnomalyScansController;
+    $scope.create = function() {
+      var item = store.create('fetal-anomaly-scans', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'FetalAnomalyScanPermission',
-    '$injector',
-    'store'
-  ];
+  FetalAnomalyScansController.$inject = ['$scope'];
+  FetalAnomalyScansController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('FetalAnomalyScansController', controllerFactory);
+  return FetalAnomalyScansController;
+}
 
-  app.directive('fetalAnomalyScansComponent', ['FetalAnomalyScansController', function(FetalAnomalyScansController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: FetalAnomalyScansController,
-      templateUrl: 'app/patients/fetal-anomaly-scans/fetal-anomaly-scans-component.html'
-    };
-  }]);
-})();
+fetalAnomalyScansControllerFactory.$inject = [
+  'ModelListDetailController',
+  'FetalAnomalyScanPermission',
+  '$injector',
+  'store'
+];
+
+function fetalAnomalyScansComponent(FetalAnomalyScansController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: FetalAnomalyScansController,
+    templateUrl: templateUrl
+  };
+}
+
+fetalAnomalyScansComponent.$inject = ['FetalAnomalyScansController'];
+
+export {
+  fetalAnomalyScanPermissionFactory,
+  fetalAnomalyScansControllerFactory,
+  fetalAnomalyScansComponent
+};

@@ -1,13 +1,11 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.hospitals');
+function sortHospitals() {
+  return function sortHospitals(hospitals) {
+    return _.sortBy(hospitals, function(x) {
+      return x.name.toUpperCase();
+    });
+  };
+}
 
-  app.factory('sortHospitals', ['_', function(_) {
-    return function sortHospitals(hospitals) {
-      return _.sortBy(hospitals, function(x) {
-        return x.name.toUpperCase();
-      });
-    };
-  }]);
-})();
+export default sortHospitals;

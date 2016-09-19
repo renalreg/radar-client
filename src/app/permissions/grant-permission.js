@@ -1,20 +1,16 @@
-(function() {
-  'use strict';
+function grantPermissionFactory() {
+  function GrantPermission() {
+  }
 
-  var app = angular.module('radar.permissions');
+  GrantPermission.prototype.hasPermission = function() {
+    return true;
+  };
 
-  app.factory('GrantPermission', function() {
-    function GrantPermission() {
-    }
+  GrantPermission.prototype.hasObjectPermission = function() {
+    return true;
+  };
 
-    GrantPermission.prototype.hasPermission = function() {
-      return true;
-    };
+  return GrantPermission;
+}
 
-    GrantPermission.prototype.hasObjectPermission = function() {
-      return true;
-    };
-
-    return GrantPermission;
-  });
-})();
+export default grantPermissionFactory;

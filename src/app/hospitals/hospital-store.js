@@ -1,28 +1,26 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.hospitals');
-
-  app.factory('hospitalStore', ['store', '$q', function(store, $q) {
-    return {
-      findOne: function(id) {
-        return store.findOne('groups', id, true).then(function(group) {
-          if (group.type === 'HOSPITAL') {
-            return group;
-          } else {
-            $q.reject();
-          }
-        });
-      },
-      findMany: function(params) {
-        if (params === undefined) {
-          params = {};
+function hospitalStore(store, $q) {
+  return {
+    findOne: function(id) {
+      return store.findOne('groups', id, true).then(function(group) {
+        if (group.type === 'HOSPITAL') {
+          return group;
+        } else {
+          $q.reject();
         }
-
-        params.type = 'HOSPITAL';
-
-        return store.findMany('groups', params);
+      });
+    },
+    findMany: function(params) {
+      if (params === undefined) {
+        params = {};
       }
-    };
-  }]);
-})();
+
+      params.type = 'HOSPITAL';
+
+      return store.findMany('groups', params);
+    }
+  };
+}
+
+hospitalStore.$inject = ['store', '$q'];
+
+export default hospitalStore;

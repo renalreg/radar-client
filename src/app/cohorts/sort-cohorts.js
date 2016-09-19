@@ -1,13 +1,11 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.cohorts');
+function sortCohorts() {
+  return function sortCohorts(cohorts) {
+    return _.sortBy(cohorts, function(x) {
+      return x.name.toUpperCase();
+    });
+  };
+}
 
-  app.factory('sortCohorts', ['_', function(_) {
-    return function sortCohorts(cohorts) {
-      return _.sortBy(cohorts, function(x) {
-        return x.name.toUpperCase();
-      });
-    };
-  }]);
-})();
+export default sortCohorts;

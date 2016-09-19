@@ -1,50 +1,46 @@
-(function() {
-  'use strict';
+function frmField() {
+  function Field($scope, $attrs) {
+    this.scope = $scope;
+    this.attrs = $attrs;
+    this.valid = true;
+    this.required = false;
+    this.labels = 0;
+    this.modelCtrl = null;
+  }
 
-  var app = angular.module('radar.forms');
+  Field.$inject = ['$scope', '$attrs'];
 
-  app.directive('frmField', ['_', function(_) {
-    function Field($scope, $attrs) {
-      this.scope = $scope;
-      this.attrs = $attrs;
-      this.valid = true;
-      this.required = false;
-      this.labels = 0;
-      this.modelCtrl = null;
-    }
+  Field.prototype.setValid = function(valid) {
+    this.valid = valid;
+  };
 
-    Field.$inject = ['$scope', '$attrs'];
+  Field.prototype.setModelCtrl = function(modelCtrl) {
+    this.modelCtrl = modelCtrl;
+  };
 
-    Field.prototype.setValid = function(valid) {
-      this.valid = valid;
-    };
+  Field.prototype.setRequired = function(required) {
+    this.required = required;
+  };
 
-    Field.prototype.setModelCtrl = function(modelCtrl) {
-      this.modelCtrl = modelCtrl;
-    };
+  Field.prototype.registerLabel = function() {
+    this.labels += 1;
+  };
 
-    Field.prototype.setRequired = function(required) {
-      this.required = required;
-    };
+  Field.prototype.isValid = function() {
+    return this.valid && (this.modelCtrl === null || this.modelCtrl.$pristine || this.modelCtrl.$valid);
+  };
 
-    Field.prototype.registerLabel = function() {
-      this.labels += 1;
-    };
+  Field.prototype.isRequired = function() {
+    return this.required;
+  };
 
-    Field.prototype.isValid = function() {
-      return this.valid && (this.modelCtrl === null || this.modelCtrl.$pristine || this.modelCtrl.$valid);
-    };
+  Field.prototype.hasLabel = function() {
+    return this.labels > 0;
+  };
 
-    Field.prototype.isRequired = function() {
-      return this.required;
-    };
+  return {
+    controller: Field
+  };
+}
 
-    Field.prototype.hasLabel = function() {
-      return this.labels > 0;
-    };
-
-    return {
-      controller: Field
-    };
-  }]);
-})();
+export default frmField;

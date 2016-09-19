@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './weeks-and-days-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmWeeksAndDaysField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmWeeksAndDaysField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '='
-      },
-      templateUrl: 'app/forms/fields/weeks-and-days-field.html'
-    };
-  });
-})();
+export default frmWeeksAndDaysField;

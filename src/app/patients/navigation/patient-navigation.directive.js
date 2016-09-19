@@ -1,21 +1,21 @@
-(function() {
-  'use strict';
+import templateUrl from './patient-navigation.html';
 
-  var app = angular.module('radar.patients.navigation');
+function patientNavigation(sortCohorts) {
+  return {
+    scope: {
+      patient: '=',
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.$watchCollection(function() {
+        return scope.patient.getCurrentCohorts();
+      }, function(cohorts) {
+        scope.cohorts = sortCohorts(cohorts);
+      });
+    }
+  };
+}
 
-  app.directive('patientNavigation', ['_', 'sortCohorts', function(_, sortCohorts) {
-    return {
-      scope: {
-        patient: '=',
-      },
-      templateUrl: 'app/patients/navigation/patient-navigation.html',
-      link: function(scope) {
-        scope.$watchCollection(function() {
-          return scope.patient.getCurrentCohorts();
-        }, function(cohorts) {
-          scope.cohorts = sortCohorts(cohorts);
-        });
-      }
-    };
-  }]);
-})();
+patientNavigation.$inject = ['sortCohorts'];
+
+export default patientNavigation;

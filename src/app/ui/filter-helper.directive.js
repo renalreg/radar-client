@@ -1,25 +1,23 @@
-(function() {
-  'use strict';
+import templateUrl from './filter-helper.html';
 
-  var app = angular.module('radar.ui');
+function filterHelper() {
+  return {
+    require: '^listHelper',
+    scope: {},
+    templateUrl: templateUrl,
+    link: function(scope, element, attrs, listHelperCtrl) {
+      scope.search = '';
 
-  app.directive('filterHelper', function() {
-    return {
-      require: '^listHelper',
-      scope: {},
-      templateUrl: 'app/ui/filter-helper.html',
-      link: function(scope, element, attrs, listHelperCtrl) {
+      scope.$watch('search', function(value) {
+        listHelperCtrl.filter(value);
+      });
+
+      scope.clear = function() {
         scope.search = '';
+        listHelperCtrl.filter('');
+      };
+    }
+  };
+}
 
-        scope.$watch('search', function(value) {
-          listHelperCtrl.filter(value);
-        });
-
-        scope.clear = function() {
-          scope.search = '';
-          listHelperCtrl.filter('');
-        };
-      }
-    };
-  });
-})();
+export default filterHelper;

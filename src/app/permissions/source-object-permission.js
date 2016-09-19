@@ -1,38 +1,36 @@
-(function() {
-  'use strict';
+function sourceObjectPermissionFactory(session, hasPermissionForGroup) {
+  function SourceObjectPermission() {
+  }
 
-  var app = angular.module('radar.permissions');
+  SourceObjectPermission.prototype.hasPermission = function() {
+    return true;
+  };
 
-  app.factory('SourceObjectPermission', ['session', 'hasPermissionForGroup', function(session, hasPermissionForGroup) {
-    function SourceObjectPermission() {
+  SourceObjectPermission.prototype.hasObjectPermission = function(obj) {
+    if (!session.isAuthenticated) {
+      return false;
     }
 
-    SourceObjectPermission.prototype.hasPermission = function() {
+    var sourceType = obj.sourceType;
+
+    if (sourceType !== 'RADAR') {
+      return false;
+    }
+
+    var user = session.user;
+
+    if (user.isAdmin) {
       return true;
-    };
+    }
 
-    SourceObjectPermission.prototype.hasObjectPermission = function(obj) {
-      if (!session.isAuthenticated) {
-        return false;
-      }
+    var sourceGroup = obj.sourceGroup;
 
-      var sourceType = obj.sourceType;
+    return hasPermissionForGroup(user, sourceGroup, 'EDIT_PATIENT');
+  };
 
-      if (sourceType !== 'RADAR') {
-        return false;
-      }
+  return SourceObjectPermission;
+}
 
-      var user = session.user;
+sourceObjectPermissionFactory.$inject = ['session', 'hasPermissionForGroup'];
 
-      if (user.isAdmin) {
-        return true;
-      }
-
-      var sourceGroup = obj.sourceGroup;
-
-      return hasPermissionForGroup(user, sourceGroup, 'EDIT_PATIENT');
-    };
-
-    return SourceObjectPermission;
-  }]);
-})();
+export default sourceObjectPermissionFactory;

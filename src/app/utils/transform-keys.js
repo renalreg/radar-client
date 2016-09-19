@@ -1,49 +1,55 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.utils');
+function transformKeys() {
+  return function transformKeys(x, f) {
+    if (_.isArray(x)) {
+      return _.map(x, function(value) {
+        return transformKeys(value, f);
+      });
+    } else if (_.isObject(x)) {
+      return _.transform(x, function(result, value, key) {
+        result[f(key)] = transformKeys(value, f);
+      });
+    } else {
+      return x;
+    }
+  };
+}
 
-  app.factory('transformKeys', ['_', function(_) {
-    return function transformKeys(x, f) {
-      if (_.isArray(x)) {
-        return _.map(x, function(value) {
-          return transformKeys(value, f);
-        });
-      } else if (_.isObject(x)) {
-        return _.transform(x, function(result, value, key) {
-          result[f(key)] = transformKeys(value, f);
-        });
+function camelCaseKeys(transformKeys) {
+  var re = new RegExp('^[A-Z0-9_]+$');
+
+  return function camelCaseKeys(x) {
+    return transformKeys(x, function(key) {
+      if (re.exec(key)) {
+        return key;
       } else {
-        return x;
+        return _.camelCase(key);
       }
-    };
-  }]);
+    });
+  };
+}
 
-  app.factory('camelCaseKeys', ['transformKeys', '_', function(transformKeys, _) {
-    var re = new RegExp('^[A-Z0-9_]+$');
+camelCaseKeys.$inject = ['transformKeys'];
 
-    return function camelCaseObject(x) {
-      return transformKeys(x, function(key) {
-        if (re.exec(key)) {
-          return key;
-        } else {
-          return _.camelCase(key);
-        }
-      });
-    };
-  }]);
+function snakeCaseKeys(transformKeys) {
+  var re = new RegExp('^[A-Z0-9_]+$');
 
-  app.factory('snakeCaseKeys', ['transformKeys', '_', function(transformKeys, _) {
-    var re = new RegExp('^[A-Z0-9_]+$');
+  return function snakeCaseKeys(x) {
+    return transformKeys(x, function(key) {
+      if (re.exec(key)) {
+        return key;
+      } else {
+        return _.snakeCase(key);
+      }
+    });
+  };
+}
 
-    return function snakeCaseObject(x) {
-      return transformKeys(x, function(key) {
-        if (re.exec(key)) {
-          return key;
-        } else {
-          return _.snakeCase(key);
-        }
-      });
-    };
-  }]);
-})();
+snakeCaseKeys.$inject = ['transformKeys'];
+
+export {
+  transformKeys,
+  camelCaseKeys,
+  snakeCaseKeys
+};

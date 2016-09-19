@@ -1,26 +1,20 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.permissions');
-
-  function permissionFactory(
-    PermissionChain, PatientObjectPermission, SourceObjectPermission
-  ) {
-    function PatientSourceObjectPermission(patient) {
-      PermissionChain.call(this, [
-        new PatientObjectPermission(patient),
-        new SourceObjectPermission(patient)
-      ]);
-    }
-
-    PatientSourceObjectPermission.prototype = Object.create(PermissionChain.prototype);
-
-    return PatientSourceObjectPermission;
+function patientSourceObjectPermissionFactory(
+  PermissionChain, PatientObjectPermission, SourceObjectPermission
+) {
+  function PatientSourceObjectPermission(patient) {
+    PermissionChain.call(this, [
+      new PatientObjectPermission(patient),
+      new SourceObjectPermission(patient)
+    ]);
   }
 
-  permissionFactory.$inject = [
-    'PermissionChain', 'PatientObjectPermission', 'SourceObjectPermission'
-  ];
+  PatientSourceObjectPermission.prototype = Object.create(PermissionChain.prototype);
 
-  app.factory('PatientSourceObjectPermission', permissionFactory);
-})();
+  return PatientSourceObjectPermission;
+}
+
+patientSourceObjectPermissionFactory.$inject = [
+  'PermissionChain', 'PatientObjectPermission', 'SourceObjectPermission'
+];
+
+export default patientSourceObjectPermissionFactory;

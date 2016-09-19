@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './password-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmPasswordField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmPasswordField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '='
-      },
-      templateUrl: 'app/forms/fields/password-field.html'
-    };
-  });
-})();
+export default frmPasswordField;

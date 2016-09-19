@@ -1,23 +1,17 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.patients.consultants');
-
-  app.factory('PatientConsultantModel', ['Model', 'store', function(Model, store) {
-    function PatientConsultantModel(modelName, data) {
-      if (data.consultant) {
-        data.consultant = store.create('consultants', data.consultant);
-      }
-
-      Model.call(this, modelName, data);
+function patientConsultantModelFactory(Model, store) {
+  function PatientConsultantModel(modelName, data) {
+    if (data.consultant) {
+      data.consultant = store.create('consultants', data.consultant);
     }
 
-    PatientConsultantModel.prototype = Object.create(Model.prototype);
+    Model.call(this, modelName, data);
+  }
 
-    return PatientConsultantModel;
-  }]);
+  PatientConsultantModel.prototype = Object.create(Model.prototype);
 
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('patient-consultants', 'PatientConsultantModel');
-  }]);
-})();
+  return PatientConsultantModel;
+}
+
+patientConsultantModelFactory.$inject = ['Model', 'store'];
+
+export default patientConsultantModelFactory;

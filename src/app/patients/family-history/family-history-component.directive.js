@@ -1,61 +1,65 @@
-(function() {
-  'use strict';
+import templateUrl from './family-history-component.html';
 
-  var app = angular.module('radar.patients.familyHistory');
+function familyHistoryPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('FamilyHistoryPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+familyHistoryPermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelDetailController,
-    FamilyHistoryPermission,
-    $injector,
-    store
-  ) {
-    function FamilyHistoryController($scope) {
-      var self = this;
+function familyHistoryControllerFactory(
+  ModelDetailController,
+  FamilyHistoryPermission,
+  $injector,
+  store
+) {
+  function FamilyHistoryController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new FamilyHistoryPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new FamilyHistoryPermission($scope.patient)
+      }
+    });
 
-      self.load(store.findFirst('family-histories', {patient: $scope.patient.id, group: $scope.cohort.id})).then(function() {
-        self.view();
-      });
+    self.load(store.findFirst('family-histories', {patient: $scope.patient.id, group: $scope.cohort.id})).then(function() {
+      self.view();
+    });
 
-      $scope.create = function() {
-        var item = store.create('family-histories', {patient: $scope.patient.id, group: $scope.cohort});
-        self.edit(item);
-      };
-    }
-
-    FamilyHistoryController.$inject = ['$scope'];
-    FamilyHistoryController.prototype = Object.create(ModelDetailController.prototype);
-
-    return FamilyHistoryController;
+    $scope.create = function() {
+      var item = store.create('family-histories', {patient: $scope.patient.id, group: $scope.cohort});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelDetailController',
-    'FamilyHistoryPermission',
-    '$injector',
-    'store'
-  ];
+  FamilyHistoryController.$inject = ['$scope'];
+  FamilyHistoryController.prototype = Object.create(ModelDetailController.prototype);
 
-  app.factory('FamilyHistoryController', controllerFactory);
+  return FamilyHistoryController;
+}
 
-  app.directive('familyHistoryComponent', ['FamilyHistoryController', function(FamilyHistoryController) {
-    return {
-      scope: {
-        patient: '=',
-        cohort: '='
-      },
-      controller: FamilyHistoryController,
-      templateUrl: 'app/patients/family-history/family-history-component.html'
-    };
-  }]);
-})();
+familyHistoryControllerFactory.$inject = [
+  'ModelDetailController',
+  'FamilyHistoryPermission',
+  '$injector',
+  'store'
+];
+
+function familyHistoryComponent(FamilyHistoryController) {
+  return {
+    scope: {
+      patient: '=',
+      cohort: '='
+    },
+    controller: FamilyHistoryController,
+    templateUrl: templateUrl
+  };
+}
+
+familyHistoryComponent.$inject = ['FamilyHistoryController'];
+
+export {
+  familyHistoryPermissionFactory,
+  familyHistoryControllerFactory,
+  familyHistoryComponent
+};

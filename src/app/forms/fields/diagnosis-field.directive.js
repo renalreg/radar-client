@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './diagnosis-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmDiagnosisField() {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&',
+      patient: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmDiagnosisField', ['store', '_', function(store, _) {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&',
-        patient: '='
-      },
-      templateUrl: 'app/forms/fields/diagnosis-field.html'
-    };
-  }]);
-})();
+export default frmDiagnosisField;

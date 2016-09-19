@@ -1,41 +1,42 @@
-(function() {
-  'use strict';
+import templateUrl from './rejections-component.html';
 
-  var app = angular.module('radar.patients.transplants');
+function transplantRejectionsControllerFactory(
+  ListEditController,
+  $injector
+) {
+  function TransplantRejectionsController($scope) {
+    $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
+    this.load($scope.parent.rejections);
 
-  function controllerFactory(
-    ListEditController,
-    $injector
-  ) {
-    function TransplantRejectionsController($scope) {
-      $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
-      this.load($scope.parent.rejections);
-
-      $scope.create = function() {
-        $scope.parent.rejections.push({});
-      };
-    }
-
-    TransplantRejectionsController.$inject = ['$scope'];
-    TransplantRejectionsController.prototype = Object.create(ListEditController.prototype);
-
-    return TransplantRejectionsController;
+    $scope.create = function() {
+      $scope.parent.rejections.push({});
+    };
   }
 
-  controllerFactory.$inject = [
-    'ListEditController',
-    '$injector'
-  ];
+  TransplantRejectionsController.$inject = ['$scope'];
+  TransplantRejectionsController.prototype = Object.create(ListEditController.prototype);
 
-  app.factory('TransplantRejectionsController', controllerFactory);
+  return TransplantRejectionsController;
+}
 
-  app.directive('transplantRejectionsComponent', ['TransplantRejectionsController', function(TransplantRejectionsController) {
-    return {
-      scope: {
-        parent: '=transplant'
-      },
-      controller: TransplantRejectionsController,
-      templateUrl: 'app/patients/transplants/rejections-component.html'
-    };
-  }]);
-})();
+transplantRejectionsControllerFactory.$inject = [
+  'ListEditController',
+  '$injector'
+];
+
+function transplantRejectionsComponent(TransplantRejectionsController) {
+  return {
+    scope: {
+      parent: '=transplant'
+    },
+    controller: TransplantRejectionsController,
+    templateUrl: templateUrl
+  };
+}
+
+transplantRejectionsComponent.$inject = ['TransplantRejectionsController'];
+
+export {
+  transplantRejectionsControllerFactory,
+  transplantRejectionsComponent
+};

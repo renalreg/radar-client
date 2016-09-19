@@ -1,24 +1,22 @@
-(function() {
-  'use strict';
+function frmRequired($parse) {
+  return {
+    require: '^frmField',
+    link: function(scope, element, attrs, fieldCtrl) {
+      var requiredGetter = null;
 
-  var app = angular.module('radar.forms');
+      attrs.$observe('ngRequired', function(value) {
+        requiredGetter = $parse(value);
+      });
 
-  app.directive('frmRequired', ['$parse', function($parse) {
-    return {
-      require: '^frmField',
-      link: function(scope, element, attrs, fieldCtrl) {
-        var requiredGetter = null;
+      scope.$watch(function() {
+        return requiredGetter !== null && requiredGetter(scope) === true;
+      }, function(value) {
+        fieldCtrl.setRequired(value);
+      });
+    }
+  };
+}
 
-        attrs.$observe('ngRequired', function(value) {
-          requiredGetter = $parse(value);
-        });
+frmRequired.$inject = ['$parse'];
 
-        scope.$watch(function() {
-          return requiredGetter !== null && requiredGetter(scope) === true;
-        }, function(value) {
-          fieldCtrl.setRequired(value);
-        });
-      }
-    };
-  }]);
-})();
+export default frmRequired;

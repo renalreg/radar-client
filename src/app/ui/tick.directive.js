@@ -1,29 +1,26 @@
-(function() {
-  'use strict';
+import templateUrl from './tick.html';
 
-  var app = angular.module('radar.ui');
+function tick() {
+  return {
+    restrict: 'A',
+    scope: {
+      tick: '='
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.isTrue = function() {
+        return scope.tick === true;
+      };
 
-  app.directive('tick', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        tick: '='
-      },
-      templateUrl: 'app/ui/tick.html',
-      link: function(scope) {
-        scope.isTrue = function() {
-          return scope.tick === true;
-        };
+      scope.isFalse = function() {
+        return scope.tick === false;
+      };
 
-        scope.isFalse = function() {
-          return scope.tick === false;
-        };
+      scope.isNeither = function() {
+        return !scope.isTrue() && !scope.isFalse();
+      };
+    }
+  };
+}
 
-        scope.isNeither = function() {
-          return !scope.isTrue() && !scope.isFalse();
-        };
-      }
-    };
-  });
-})();
-
+export default tick;

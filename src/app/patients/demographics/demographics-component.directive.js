@@ -1,76 +1,80 @@
-(function() {
-  'use strict';
+import templateUrl from './demographics-component.html';
 
-  var app = angular.module('radar.patients.demographics');
+function patientDemographicsPermissionFactory(PatientRadarObjectPermission) {
+  return PatientRadarObjectPermission;
+}
 
-  app.factory('PatientDemographicsPermission', ['PatientRadarObjectPermission', function(PatientRadarObjectPermission) {
-    return PatientRadarObjectPermission;
-  }]);
+patientDemographicsPermissionFactory.$inject = ['PatientRadarObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    PatientDemographicsPermission,
-    firstPromise,
-    DenyPermission,
-    $injector,
-    store
-  ) {
-    function PatientDemographicsController($scope) {
-      var self = this;
+function patientDemographicsControllerFactory(
+  ModelListDetailController,
+  PatientDemographicsPermission,
+  firstPromise,
+  DenyPermission,
+  $injector,
+  store
+) {
+  function PatientDemographicsController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          createPermission: new DenyPermission(),
-          editPermission: new PatientDemographicsPermission($scope.patient),
-          removePermission: new DenyPermission()
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        createPermission: new DenyPermission(),
+        editPermission: new PatientDemographicsPermission($scope.patient),
+        removePermission: new DenyPermission()
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('patient-demographics', {patient: $scope.patient.id}),
-        store.findMany('genders').then(function(genders) {
-          $scope.genders = genders;
-        }),
-        store.findMany('ethnicities').then(function(ethnicities) {
-          $scope.ethnicities = ethnicities;
-        })
-      ]));
-    }
-
-    PatientDemographicsController.$inject = ['$scope'];
-    PatientDemographicsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    PatientDemographicsController.prototype.save = function() {
-      var self = this;
-
-      return ModelListDetailController.prototype.save.call(self).then(function() {
-        // Reload the patient with the latest demographics
-        self.scope.patient.reload();
-      });
-    };
-
-    return PatientDemographicsController;
+    self.load(firstPromise([
+      store.findMany('patient-demographics', {patient: $scope.patient.id}),
+      store.findMany('genders').then(function(genders) {
+        $scope.genders = genders;
+      }),
+      store.findMany('ethnicities').then(function(ethnicities) {
+        $scope.ethnicities = ethnicities;
+      })
+    ]));
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'PatientDemographicsPermission',
-    'firstPromise',
-    'DenyPermission',
-    '$injector',
-    'store'
-  ];
+  PatientDemographicsController.$inject = ['$scope'];
+  PatientDemographicsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('PatientDemographicsController', controllerFactory);
+  PatientDemographicsController.prototype.save = function() {
+    var self = this;
 
-  app.directive('patientDemographicsComponent', ['PatientDemographicsController', function(PatientDemographicsController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: PatientDemographicsController,
-      templateUrl: 'app/patients/demographics/demographics-component.html'
-    };
-  }]);
-})();
+    return ModelListDetailController.prototype.save.call(self).then(function() {
+      // Reload the patient with the latest demographics
+      self.scope.patient.reload();
+    });
+  };
+
+  return PatientDemographicsController;
+}
+
+patientDemographicsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'PatientDemographicsPermission',
+  'firstPromise',
+  'DenyPermission',
+  '$injector',
+  'store'
+];
+
+function patientDemographicsComponent(PatientDemographicsController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: PatientDemographicsController,
+    templateUrl: templateUrl
+  };
+}
+
+patientDemographicsComponent.$inject = ['PatientDemographicsController'];
+
+export {
+  patientDemographicsPermissionFactory,
+  patientDemographicsControllerFactory,
+  patientDemographicsComponent
+};

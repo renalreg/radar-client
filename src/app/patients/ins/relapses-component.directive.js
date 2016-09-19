@@ -1,68 +1,72 @@
-(function() {
-  'use strict';
+import templateUrl from './relapses-component.html';
 
-  var app = angular.module('radar.patients.ins');
+function insRelapsePermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('InsRelapsePermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+insRelapsePermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    InsRelapsePermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function InsRelapsesController($scope) {
-      var self = this;
+function insRelapsesControllerFactory(
+  ModelListDetailController,
+  InsRelapsePermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function InsRelapsesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new InsRelapsePermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new InsRelapsePermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('ins-relapses', {patient: $scope.patient.id}),
-        store.findMany('ins-kidney-types').then(function(kidneyTypes) {
-          $scope.kidneyTypes = kidneyTypes;
-        }),
-        store.findMany('ins-remission-types').then(function(remissionTypes) {
-          $scope.remissionTypes = remissionTypes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('ins-relapses', {patient: $scope.patient.id}),
+      store.findMany('ins-kidney-types').then(function(kidneyTypes) {
+        $scope.kidneyTypes = kidneyTypes;
+      }),
+      store.findMany('ins-remission-types').then(function(remissionTypes) {
+        $scope.remissionTypes = remissionTypes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('ins-relapses', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    InsRelapsesController.$inject = ['$scope'];
-    InsRelapsesController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return InsRelapsesController;
+    $scope.create = function() {
+      var item = store.create('ins-relapses', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'InsRelapsePermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  InsRelapsesController.$inject = ['$scope'];
+  InsRelapsesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('InsRelapsesController', controllerFactory);
+  return InsRelapsesController;
+}
 
-  app.directive('insRelapsesComponent', ['InsRelapsesController', function(InsRelapsesController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: InsRelapsesController,
-      templateUrl: 'app/patients/ins/relapses-component.html'
-    };
-  }]);
-})();
+insRelapsesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'InsRelapsePermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function insRelapsesComponent(InsRelapsesController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: InsRelapsesController,
+    templateUrl: templateUrl
+  };
+}
+
+insRelapsesComponent.$inject = ['InsRelapsesController'];
+
+export {
+  insRelapsePermissionFactory,
+  insRelapsesControllerFactory,
+  insRelapsesComponent
+};

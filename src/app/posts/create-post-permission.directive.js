@@ -1,36 +1,30 @@
-(function() {
-  'use strict';
+function createPostPermission(
+  PostPermission,
+  ngIfDirective
+) {
+  // Source: http://stackoverflow.com/a/24065378
+  var ngIf = ngIfDirective[0];
 
-  var app = angular.module('radar.posts');
+  return {
+    transclude: ngIf.transclude,
+    priority: ngIf.priority,
+    terminal: ngIf.terminal,
+    restrict: ngIf.restrict,
+    link: function(scope, element, attrs) {
+      var permission = new PostPermission();
 
-  function createPostPermission(
-    PostPermission,
-    ngIfDirective
-  ) {
-    // Source: http://stackoverflow.com/a/24065378
-    var ngIf = ngIfDirective[0];
+      attrs.ngIf = function() {
+        return permission.hasPermission();
+      };
 
-    return {
-      transclude: ngIf.transclude,
-      priority: ngIf.priority,
-      terminal: ngIf.terminal,
-      restrict: ngIf.restrict,
-      link: function(scope, element, attrs) {
-        var permission = new PostPermission();
+      ngIf.link.apply(ngIf, arguments);
+    }
+  };
+}
 
-        attrs.ngIf = function() {
-          return permission.hasPermission();
-        };
+createPostPermission.$inject = [
+  'PostPermission',
+  'ngIfDirective'
+];
 
-        ngIf.link.apply(ngIf, arguments);
-      }
-    };
-  }
-
-  createPostPermission.$inject = [
-    'PostPermission',
-    'ngIfDirective'
-  ];
-
-  app.directive('createPostPermission', createPostPermission);
-})();
+export default createPostPermission;

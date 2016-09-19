@@ -1,52 +1,45 @@
-(function() {
-  'use strict';
+function medicationModelFactory(Model) {
+  function MedicationModel(modelName, data) {
+    Model.call(this, modelName, data);
+  }
 
-  var app = angular.module('radar.patients.medications');
+  MedicationModel.prototype = Object.create(Model.prototype);
 
-  app.factory('MedicationModel', ['Model', function(Model) {
-    function MedicationModel(modelName, data) {
-      Model.call(this, modelName, data);
+  MedicationModel.prototype.getDrug = function() {
+    var r;
+
+    if (this.drug) {
+      r = this.drug.name;
+
+      if (this.drug.drugGroup) {
+        r += ' (' + this.drug.drugGroup.name + ')';
+      }
+    } else {
+      r = this.drugText;
     }
 
-    MedicationModel.prototype = Object.create(Model.prototype);
+    return r;
+  };
 
-    MedicationModel.prototype.getDrug = function() {
-      var r;
+  MedicationModel.prototype.getDose = function() {
+    var r;
 
-      if (this.drug) {
-        r = this.drug.name;
+    if (this.doseQuantity !== undefined && this.doseQuantity !== null) {
+      r = this.doseQuantity;
 
-        if (this.drug.drugGroup) {
-          r += ' (' + this.drug.drugGroup.name + ')';
-        }
-      } else {
-        r = this.drugText;
+      if (this.doseUnit) {
+        r = r + ' ' + this.doseUnit.label;
       }
+    } else {
+      r = this.doseText;
+    }
 
-      return r;
-    };
+    return r;
+  };
 
-    MedicationModel.prototype.getDose = function() {
-      var r;
+  return MedicationModel;
+}
 
-      if (this.doseQuantity !== undefined && this.doseQuantity !== null) {
-        r = this.doseQuantity;
+medicationModelFactory.$inject = ['Model'];
 
-        if (this.doseUnit) {
-          r = r + ' ' + this.doseUnit.label;
-        }
-      } else {
-        r = this.doseText;
-      }
-
-      return r;
-    };
-
-    return MedicationModel;
-  }]);
-
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('medications', 'MedicationModel');
-    storeProvider.registerMixin('medications', 'SourceModelMixin');
-  }]);
-})();
+export default medicationModelFactory;

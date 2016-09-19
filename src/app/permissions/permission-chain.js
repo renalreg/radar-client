@@ -1,37 +1,33 @@
-(function() {
-  'use strict';
+function permissionChainFactory() {
+  function PermissionChain(permissions) {
+    this.permissions = permissions;
+  }
 
-  var app = angular.module('radar.permissions');
+  PermissionChain.prototype.hasPermission = function() {
+    return this.run(function(permission) {
+      return permission.hasPermission();
+    });
+  };
 
-  app.factory('PermissionChain', function() {
-    function PermissionChain(permissions) {
-      this.permissions = permissions;
+  PermissionChain.prototype.hasObjectPermission = function(obj) {
+    return this.run(function(permission) {
+      return permission.hasObjectPermission(obj);
+    });
+  };
+
+  PermissionChain.prototype.run = function(callback) {
+    for (var i = 0; i < this.permissions.length; i++) {
+      var permission = this.permissions[i];
+
+      if (!callback(permission)) {
+        return false;
+      }
     }
 
-    PermissionChain.prototype.hasPermission = function() {
-      return this.run(function(permission) {
-        return permission.hasPermission();
-      });
-    };
+    return true;
+  };
 
-    PermissionChain.prototype.hasObjectPermission = function(obj) {
-      return this.run(function(permission) {
-        return permission.hasObjectPermission(obj);
-      });
-    };
+  return PermissionChain;
+}
 
-    PermissionChain.prototype.run = function(callback) {
-      for (var i = 0; i < this.permissions.length; i++) {
-        var permission = this.permissions[i];
-
-        if (!callback(permission)) {
-          return false;
-        }
-      }
-
-      return true;
-    };
-
-    return PermissionChain;
-  });
-})();
+export default permissionChainFactory;

@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './confirm-email-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmConfirmEmailField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '=',
+      email: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmConfirmEmailField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '=',
-        email: '='
-      },
-      templateUrl: 'app/forms/fields/confirm-email-field.html'
-    };
-  });
-})();
+export default frmConfirmEmailField;

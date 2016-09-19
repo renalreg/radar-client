@@ -1,41 +1,42 @@
-(function() {
-  'use strict';
+import templateUrl from './biopsies-component.html';
 
-  var app = angular.module('radar.patients.transplants');
+function transplantBiopsiesControllerFactory(
+  ListEditController,
+  $injector
+) {
+  function TransplantBiopsiesController($scope) {
+    $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
+    this.load($scope.parent.biopsies);
 
-  function controllerFactory(
-    ListEditController,
-    $injector
-  ) {
-    function TransplantBiopsiesController($scope) {
-      $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
-      this.load($scope.parent.biopsies);
-
-      $scope.create = function() {
-        $scope.parent.biopsies.push({});
-      };
-    }
-
-    TransplantBiopsiesController.$inject = ['$scope'];
-    TransplantBiopsiesController.prototype = Object.create(ListEditController.prototype);
-
-    return TransplantBiopsiesController;
+    $scope.create = function() {
+      $scope.parent.biopsies.push({});
+    };
   }
 
-  controllerFactory.$inject = [
-    'ListEditController',
-    '$injector'
-  ];
+  TransplantBiopsiesController.$inject = ['$scope'];
+  TransplantBiopsiesController.prototype = Object.create(ListEditController.prototype);
 
-  app.factory('TransplantBiopsiesController', controllerFactory);
+  return TransplantBiopsiesController;
+}
 
-  app.directive('transplantBiopsiesComponent', ['TransplantBiopsiesController', function(TransplantBiopsiesController) {
-    return {
-      scope: {
-        parent: '=transplant'
-      },
-      controller: TransplantBiopsiesController,
-      templateUrl: 'app/patients/transplants/biopsies-component.html'
-    };
-  }]);
-})();
+transplantBiopsiesControllerFactory.$inject = [
+  'ListEditController',
+  '$injector'
+];
+
+function transplantBiopsiesComponent(TransplantBiopsiesController) {
+  return {
+    scope: {
+      parent: '=transplant'
+    },
+    controller: TransplantBiopsiesController,
+    templateUrl: templateUrl
+  };
+}
+
+transplantBiopsiesComponent.$inject = ['TransplantBiopsiesController'];
+
+export {
+  transplantBiopsiesControllerFactory,
+  transplantBiopsiesComponent
+};

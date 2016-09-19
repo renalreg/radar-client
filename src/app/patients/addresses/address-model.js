@@ -1,58 +1,51 @@
-(function() {
-  'use strict';
+function patientAddressModelFactory(Model) {
+  function PatientAddressModel(modelName, data) {
+    Model.call(this, modelName, data);
+  }
 
-  var app = angular.module('radar.patients.addresses');
+  PatientAddressModel.prototype = Object.create(Model.prototype);
 
-  app.factory('PatientAddressModel', ['Model', function(Model) {
-    function PatientAddressModel(modelName, data) {
-      Model.call(this, modelName, data);
+  PatientAddressModel.prototype.getAddress = function(demographics) {
+    if (demographics === undefined) {
+      demographics = true;
     }
 
-    PatientAddressModel.prototype = Object.create(Model.prototype);
+    var lines = [];
 
-    PatientAddressModel.prototype.getAddress = function(demographics) {
-      if (demographics === undefined) {
-        demographics = true;
+    if (demographics) {
+      if (this.address1) {
+        lines.push(this.address1);
       }
 
-      var lines = [];
-
-      if (demographics) {
-        if (this.address1) {
-          lines.push(this.address1);
-        }
-
-        if (this.address2) {
-          lines.push(this.address2);
-        }
-
-        if (this.address3) {
-          lines.push(this.address3);
-        }
-
-        if (this.address4) {
-          lines.push(this.address4);
-        }
-
-        if (this.postcode) {
-          lines.push(this.postcode);
-        }
-      } else {
-        if (this.postcode) {
-          // Postcode parts should be separated by a space but limit to first 4 charcters just in case
-          var area = this.postcode.split(' ')[0].substring(0, 4);
-          lines.push(area);
-        }
+      if (this.address2) {
+        lines.push(this.address2);
       }
 
-      return lines.join(',\n');
-    };
+      if (this.address3) {
+        lines.push(this.address3);
+      }
 
-    return PatientAddressModel;
-  }]);
+      if (this.address4) {
+        lines.push(this.address4);
+      }
 
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('patient-addresses', 'PatientAddressModel');
-    storeProvider.registerMixin('patient-addresses', 'SourceModelMixin');
-  }]);
-})();
+      if (this.postcode) {
+        lines.push(this.postcode);
+      }
+    } else {
+      if (this.postcode) {
+        // Postcode parts should be separated by a space but limit to first 4 charcters just in case
+        var area = this.postcode.split(' ')[0].substring(0, 4);
+        lines.push(area);
+      }
+    }
+
+    return lines.join(',\n');
+  };
+
+  return PatientAddressModel;
+}
+
+patientAddressModelFactory.$inject = ['Model'];
+
+export default patientAddressModelFactory;

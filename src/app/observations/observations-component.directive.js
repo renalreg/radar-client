@@ -1,42 +1,43 @@
-(function() {
-  'use strict';
+import templateUrl from './observations-component.html';
 
-  var app = angular.module('radar.observations');
+function observationsControllerFactory(
+  ModelListDetailController,
+  $injector,
+  store
+) {
+  function ObservationsController($scope) {
+    var self = this;
 
-  function controllerFactory(
-    ModelListDetailController,
-    $injector,
-    store
-  ) {
-    function ObservationsController($scope) {
-      var self = this;
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {}
+    });
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {}
-      });
-
-      self.load(store.findMany('observations'));
-    }
-
-    ObservationsController.$inject = ['$scope'];
-    ObservationsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return ObservationsController;
+    self.load(store.findMany('observations'));
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    '$injector',
-    'store'
-  ];
+  ObservationsController.$inject = ['$scope'];
+  ObservationsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('ObservationsController', controllerFactory);
+  return ObservationsController;
+}
 
-  app.directive('observationsComponent', ['ObservationsController', function(ObservationsController) {
-    return {
-      controller: ObservationsController,
-      templateUrl: 'app/observations/observations-component.html'
-    };
-  }]);
-})();
+observationsControllerFactory.$inject = [
+  'ModelListDetailController',
+  '$injector',
+  'store'
+];
+
+function observationsComponent(ObservationsController) {
+  return {
+    controller: ObservationsController,
+    templateUrl: templateUrl
+  };
+}
+
+observationsComponent.$inject = ['ObservationsController'];
+
+export {
+  observationsControllerFactory,
+  observationsComponent
+};

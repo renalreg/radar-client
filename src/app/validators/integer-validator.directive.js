@@ -1,43 +1,39 @@
-(function() {
-  'use strict';
+var INTEGER_REGEX = /^[+-]?[0-9]+$/;
 
-  var app = angular.module('radar.validators');
+function integerValidator() {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    scope: false,
+    link: function(scope, element, attrs, ngModelCtrl) {
+      ngModelCtrl.$parsers.push(function(viewValue) {
+        var modelValue;
+        var valid;
 
-  var INTEGER_REGEX = /^[+-]?[0-9]+$/;
+        if (viewValue === undefined || viewValue === null) {
+          modelValue = null;
+          valid = true;
+        } else {
+          modelValue = viewValue.trim();
 
-  app.directive('integerValidator', function() {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      scope: false,
-      link: function(scope, element, attrs, ngModelCtrl) {
-        ngModelCtrl.$parsers.push(function(viewValue) {
-          var modelValue;
-          var valid;
-
-          if (viewValue === undefined || viewValue === null) {
+          if (modelValue.length === 0) {
             modelValue = null;
             valid = true;
+          } else if (INTEGER_REGEX.test(modelValue)) {
+            modelValue = parseInt(modelValue, 10);
+            valid = true;
           } else {
-            modelValue = viewValue.trim();
-
-            if (modelValue.length === 0) {
-              modelValue = null;
-              valid = true;
-            } else if (INTEGER_REGEX.test(modelValue)) {
-              modelValue = parseInt(modelValue, 10);
-              valid = true;
-            } else {
-              modelValue = null;
-              valid = false;
-            }
+            modelValue = null;
+            valid = false;
           }
+        }
 
-          ngModelCtrl.$setValidity('integer', valid);
+        ngModelCtrl.$setValidity('integer', valid);
 
-          return modelValue;
-        });
-      }
-    };
-  });
-})();
+        return modelValue;
+      });
+    }
+  };
+}
+
+export default integerValidator;

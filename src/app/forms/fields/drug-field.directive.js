@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './drug-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmDrugField() {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&'
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmDrugField', ['store', '_', function(store, _) {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&'
-      },
-      templateUrl: 'app/forms/fields/drug-field.html'
-    };
-  }]);
-})();
+export default frmDrugField;

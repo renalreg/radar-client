@@ -1,28 +1,21 @@
-(function() {
-  'use strict';
-
-  var app = angular.module('radar.patients.transplants');
-
-  app.factory('TransplantModel', ['Model', function(Model) {
-    function TransplantModel(modelName, data) {
-      if (data.biopsies === undefined) {
-        data.biopsies = [];
-      }
-
-      if (data.rejections === undefined) {
-        data.rejections = [];
-      }
-
-      Model.call(this, modelName, data);
+function transplantModelFactory(Model) {
+  function TransplantModel(modelName, data) {
+    if (data.biopsies === undefined) {
+      data.biopsies = [];
     }
 
-    TransplantModel.prototype = Object.create(Model.prototype);
+    if (data.rejections === undefined) {
+      data.rejections = [];
+    }
 
-    return TransplantModel;
-  }]);
+    Model.call(this, modelName, data);
+  }
 
-  app.config(['storeProvider', function(storeProvider) {
-    storeProvider.registerModel('transplants', 'TransplantModel');
-    storeProvider.registerMixin('transplants', 'SourceModelMixin');
-  }]);
-})();
+  TransplantModel.prototype = Object.create(Model.prototype);
+
+  return TransplantModel;
+}
+
+transplantModelFactory.$inject = ['Model'];
+
+export default transplantModelFactory;

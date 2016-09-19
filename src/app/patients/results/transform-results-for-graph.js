@@ -1,26 +1,20 @@
-(function() {
-  'use strict';
+function transformResultsForGraph(
+  filterObservationsByNumeric,
+  filterResultsByObservations,
+  groupResultsByObservation
+) {
+  return function transformResultsForGraph(results, observations) {
+    var filteredObservations = filterObservationsByNumeric(observations);
+    var filteredResults = filterResultsByObservations(results, filteredObservations);
+    var groups = groupResultsByObservation(filteredResults, filteredObservations);
+    return groups;
+  };
+}
 
-  var app = angular.module('radar.patients.results');
+transformResultsForGraph.$inject = [
+  'filterObservationsByNumeric',
+  'filterResultsByObservations',
+  'groupResultsByObservation'
+];
 
-  function factory(
-    filterObservationsByNumeric,
-    filterResultsByObservations,
-    groupResultsByObservation
-  ) {
-    return function transformResultsForGraph(results, observations) {
-      var filteredObservations = filterObservationsByNumeric(observations);
-      var filteredResults = filterResultsByObservations(results, filteredObservations);
-      var groups = groupResultsByObservation(filteredResults, filteredObservations);
-      return groups;
-    };
-  }
-
-  factory.$inject = [
-    'filterObservationsByNumeric',
-    'filterResultsByObservations',
-    'groupResultsByObservation'
-  ];
-
-  app.factory('transformResultsForGraph', factory);
-})();
+export default transformResultsForGraph;

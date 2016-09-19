@@ -1,68 +1,72 @@
-(function() {
-  'use strict';
+import templateUrl from './medications-component.html';
 
-  var app = angular.module('radar.patients.medications');
+function medicationPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  app.factory('MedicationPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
+medicationPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    MedicationPermission,
-    firstPromise,
-    $injector,
-    store
-  ) {
-    function MedicationsController($scope) {
-      var self = this;
+function medicationsControllerFactory(
+  ModelListDetailController,
+  MedicationPermission,
+  firstPromise,
+  $injector,
+  store
+) {
+  function MedicationsController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new MedicationPermission($scope.patient)
-        }
-      });
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new MedicationPermission($scope.patient)
+      }
+    });
 
-      self.load(firstPromise([
-        store.findMany('medications', {patient: $scope.patient.id}),
-        store.findMany('medication-dose-units').then(function(doseUnits) {
-          $scope.doseUnits = doseUnits;
-        }),
-        store.findMany('medication-routes').then(function(routes) {
-          $scope.routes = routes;
-        })
-      ]));
+    self.load(firstPromise([
+      store.findMany('medications', {patient: $scope.patient.id}),
+      store.findMany('medication-dose-units').then(function(doseUnits) {
+        $scope.doseUnits = doseUnits;
+      }),
+      store.findMany('medication-routes').then(function(routes) {
+        $scope.routes = routes;
+      })
+    ]));
 
-      $scope.create = function() {
-        var item = store.create('medications', {patient: $scope.patient.id});
-        self.edit(item);
-      };
-    }
-
-    MedicationsController.$inject = ['$scope'];
-    MedicationsController.prototype = Object.create(ModelListDetailController.prototype);
-
-    return MedicationsController;
+    $scope.create = function() {
+      var item = store.create('medications', {patient: $scope.patient.id});
+      self.edit(item);
+    };
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'MedicationPermission',
-    'firstPromise',
-    '$injector',
-    'store'
-  ];
+  MedicationsController.$inject = ['$scope'];
+  MedicationsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('MedicationsController', controllerFactory);
+  return MedicationsController;
+}
 
-  app.directive('medicationsComponent', ['MedicationsController', function(MedicationsController) {
-    return {
-      scope: {
-        patient: '='
-      },
-      controller: MedicationsController,
-      templateUrl: 'app/patients/medications/medications-component.html'
-    };
-  }]);
-})();
+medicationsControllerFactory.$inject = [
+  'ModelListDetailController',
+  'MedicationPermission',
+  'firstPromise',
+  '$injector',
+  'store'
+];
+
+function medicationsComponent(MedicationsController) {
+  return {
+    scope: {
+      patient: '='
+    },
+    controller: MedicationsController,
+    templateUrl: templateUrl
+  };
+}
+
+medicationsComponent.$inject = ['MedicationsController'];
+
+export {
+  medicationPermissionFactory,
+  medicationsControllerFactory,
+  medicationsComponent
+};

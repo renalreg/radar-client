@@ -1,40 +1,45 @@
-(function() {
-  'use strict';
+import templateUrl from './create-user-component.html';
 
-  var app = angular.module('radar.users');
+function createUserControllerFactory(ModelEditController, $injector, store, $state) {
+  function CreateUserController($scope) {
+    var self = this;
 
-  app.factory('CreateUserController', ['ModelEditController', '$injector', 'store', '$state', function(ModelEditController, $injector, store, $state) {
-    function CreateUserController($scope) {
-      var self = this;
+    $injector.invoke(ModelEditController, self, {
+      $scope: $scope,
+      params: {}
+    });
 
-      $injector.invoke(ModelEditController, self, {
-        $scope: $scope,
-        params: {}
-      });
+    self.load(store.create('users', {
+      isAdmin: false,
+      forcePasswordChange: true
+    }));
+  }
 
-      self.load(store.create('users', {
-        isAdmin: false,
-        forcePasswordChange: true
-      }));
-    }
+  CreateUserController.$inject = ['$scope'];
+  CreateUserController.prototype = Object.create(ModelEditController.prototype);
 
-    CreateUserController.$inject = ['$scope'];
-    CreateUserController.prototype = Object.create(ModelEditController.prototype);
+  CreateUserController.prototype.save = function() {
+    return ModelEditController.prototype.save.call(this).then(function(user) {
+      $state.go('user', {userId: user.id});
+    });
+  };
 
-    CreateUserController.prototype.save = function() {
-      return ModelEditController.prototype.save.call(this).then(function(user) {
-        $state.go('user', {userId: user.id});
-      });
-    };
+  return CreateUserController;
+}
 
-    return CreateUserController;
-  }]);
+createUserControllerFactory.$inject = ['ModelEditController', '$injector', 'store', 'state'];
 
-  app.directive('createUserComponent', ['CreateUserController', function(CreateUserController) {
-    return {
-      scope: {},
-      controller: CreateUserController,
-      templateUrl: 'app/users/create-user-component.html'
-    };
-  }]);
-})();
+function createUserComponent(CreateUserController) {
+  return {
+    scope: {},
+    controller: CreateUserController,
+    templateUrl: templateUrl
+  };
+}
+
+createUserComponent.$inject = ['CreateUserController'];
+
+export {
+  createUserControllerFactory,
+  createUserComponent
+};

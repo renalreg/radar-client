@@ -1,12 +1,10 @@
-(function() {
-  'use strict';
+import templateUrl from './help.html';
 
-  var app = angular.module('radar.forms');
+function frmHelp() {
+  return {
+    templateUrl: templateUrl,
+    transclude: true
+  };
+}
 
-  app.directive('frmHelp', function() {
-    return {
-      templateUrl: 'app/forms/help.html',
-      transclude: true
-    };
-  });
-})();
+export default frmHelp;

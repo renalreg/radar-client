@@ -1,17 +1,15 @@
-(function() {
-  'use strict';
+import templateUrl from './integer-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmIntegerField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '=',
+      units: '@'
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmIntegerField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '=',
-        units: '@'
-      },
-      templateUrl: 'app/forms/fields/integer-field.html'
-    };
-  });
-})();
+export default frmIntegerField;

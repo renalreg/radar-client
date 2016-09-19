@@ -1,27 +1,25 @@
-(function() {
-  'use strict';
+function radarObjectPermissionFactory(session) {
+  function RadarObjectPermission() {
+  }
 
-  var app = angular.module('radar.permissions');
+  RadarObjectPermission.prototype.hasPermission = function() {
+    return true;
+  };
 
-  app.factory('RadarObjectPermission', ['session', function(session) {
-    function RadarObjectPermission() {
+  RadarObjectPermission.prototype.hasObjectPermission = function(obj) {
+    if (!session.isAuthenticated) {
+      return false;
     }
 
-    RadarObjectPermission.prototype.hasPermission = function() {
-      return true;
-    };
+    var sourceGroup = obj.sourceGroup;
+    var sourceType = obj.sourceType;
 
-    RadarObjectPermission.prototype.hasObjectPermission = function(obj) {
-      if (!session.isAuthenticated) {
-        return false;
-      }
+    return sourceGroup.code === 'RADAR' && sourceGroup.type === 'OTHER' && sourceType === 'RADAR';
+  };
 
-      var sourceGroup = obj.sourceGroup;
-      var sourceType = obj.sourceType;
+  return RadarObjectPermission;
+}
 
-      return sourceGroup.code === 'RADAR' && sourceGroup.type === 'OTHER' && sourceType === 'RADAR';
-    };
+radarObjectPermissionFactory.$inject = ['session'];
 
-    return RadarObjectPermission;
-  }]);
-})();
+export default radarObjectPermissionFactory;

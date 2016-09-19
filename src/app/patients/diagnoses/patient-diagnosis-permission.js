@@ -1,9 +1,7 @@
-(function() {
-  'use strict';
+function patientDiagnosisPermissionFactory(PatientSourceObjectPermission) {
+  return PatientSourceObjectPermission;
+}
 
-  var app = angular.module('radar.patients.diagnoses');
+patientDiagnosisPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-  app.factory('PatientDiagnosisPermission', ['PatientSourceObjectPermission', function(PatientSourceObjectPermission) {
-    return PatientSourceObjectPermission;
-  }]);
-})();
+export default patientDiagnosisPermissionFactory;

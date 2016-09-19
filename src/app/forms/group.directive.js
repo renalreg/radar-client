@@ -1,19 +1,17 @@
-(function() {
-  'use strict';
+import templateUrl from './group.html';
 
-  var app = angular.module('radar.forms');
+function frmGroup() {
+  return {
+    require: 'frmField',
+    transclude: true,
+    templateUrl: templateUrl,
+    scope: {},
+    link: function(scope, element, attrs, fieldCtrl) {
+      scope.isRequired = function() {
+        return fieldCtrl.isRequired();
+      };
+    }
+  };
+}
 
-  app.directive('frmGroup', function() {
-    return {
-      require: 'frmField',
-      transclude: true,
-      templateUrl: 'app/forms/group.html',
-      scope: {},
-      link: function(scope, element, attrs, fieldCtrl) {
-        scope.isRequired = function() {
-          return fieldCtrl.isRequired();
-        };
-      }
-    };
-  });
-})();
+export default frmGroup;

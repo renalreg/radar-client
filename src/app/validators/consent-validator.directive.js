@@ -1,20 +1,16 @@
-(function() {
-  'use strict';
+function consentValidator() {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function(scope, element, attrs, ngModelCtrl) {
+      ngModelCtrl.$setValidity('consent', ngModelCtrl.$viewValue);
 
-  var app = angular.module('radar.validators');
+      ngModelCtrl.$parsers.push(function(viewValue) {
+        ngModelCtrl.$setValidity('consent', viewValue);
+        return viewValue;
+      });
+    }
+  };
+}
 
-  app.directive('consentValidator', function() {
-    return {
-      restrict: 'A',
-      require: 'ngModel',
-      link: function(scope, element, attrs, ngModelCtrl) {
-        ngModelCtrl.$setValidity('consent', ngModelCtrl.$viewValue);
-
-        ngModelCtrl.$parsers.push(function(viewValue) {
-          ngModelCtrl.$setValidity('consent', viewValue);
-          return viewValue;
-        });
-      }
-    };
-  });
-})();
+export default consentValidator;

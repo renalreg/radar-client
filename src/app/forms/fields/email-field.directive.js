@@ -1,16 +1,14 @@
-(function() {
-  'use strict';
+import templateUrl from './email-field.html';
 
-  var app = angular.module('radar.forms.fields');
+function frmEmailField() {
+  return {
+    restrict: 'A',
+    scope: {
+      required: '&',
+      model: '='
+    },
+    templateUrl: templateUrl
+  };
+}
 
-  app.directive('frmEmailField', function() {
-    return {
-      restrict: 'A',
-      scope: {
-        required: '&',
-        model: '='
-      },
-      templateUrl: 'app/forms/fields/email-field.html'
-    };
-  });
-})();
+export default frmEmailField;

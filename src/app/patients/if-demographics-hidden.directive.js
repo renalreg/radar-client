@@ -1,27 +1,25 @@
-(function() {
-  'use strict';
+function ifDemographicsHidden(toggleDemographicsService) {
+  return {
+    link: function(scope, element) {
+      update(toggleDemographicsService.isHidden());
 
-  var app = angular.module('radar.patients');
+      var unsubscribe = toggleDemographicsService.listen(function(value) {
+        update(!value);
+      });
 
-  app.directive('ifDemographicsHidden', ['toggleDemographicsService', function(toggleDemographicsService) {
-    return {
-      link: function(scope, element) {
-        update(toggleDemographicsService.isHidden());
+      scope.$on('$destroy', unsubscribe);
 
-        var unsubscribe = toggleDemographicsService.listen(function(value) {
-          update(!value);
-        });
-
-        scope.$on('$destroy', unsubscribe);
-
-        function update(hidden) {
-          if (hidden) {
-            element.removeClass('if-demographics-hidden');
-          } else {
-            element.addClass('if-demographics-hidden');
-          }
+      function update(hidden) {
+        if (hidden) {
+          element.removeClass('if-demographics-hidden');
+        } else {
+          element.addClass('if-demographics-hidden');
         }
       }
-    };
-  }]);
-})();
+    }
+  };
+}
+
+ifDemographicsHidden.$inject = ['toggleDemographicsService'];
+
+export default ifDemographicsHidden;

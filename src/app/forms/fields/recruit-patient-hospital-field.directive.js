@@ -1,39 +1,37 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.forms.fields');
+import templateUrl from './hospital-field.html';
 
-  function factory(_, session, hospitalStore, sortHospitals, hasPermissionForGroup) {
-    return {
-      restrict: 'A',
-      scope: {
-        model: '=',
-        required: '&'
-      },
-      templateUrl: 'app/forms/fields/hospital-field.html',
-      link: function(scope) {
-        scope.$watch(function() {
-          return session.user;
-        }, function(user) {
-          setHospitals([]);
+function frmRecruitPatientHospitalField(session, hospitalStore, sortHospitals, hasPermissionForGroup) {
+  return {
+    restrict: 'A',
+    scope: {
+      model: '=',
+      required: '&'
+    },
+    templateUrl: templateUrl,
+    link: function(scope) {
+      scope.$watch(function() {
+        return session.user;
+      }, function(user) {
+        setHospitals([]);
 
-          hospitalStore.findMany().then(function(hospitals) {
-            hospitals = _.filter(hospitals, function(x) {
-              return hasPermissionForGroup(user, x, 'RECRUIT_PATIENT', true);
-            });
-
-            setHospitals(hospitals);
+        hospitalStore.findMany().then(function(hospitals) {
+          hospitals = _.filter(hospitals, function(x) {
+            return hasPermissionForGroup(user, x, 'RECRUIT_PATIENT', true);
           });
+
+          setHospitals(hospitals);
         });
+      });
 
-        function setHospitals(hospitals) {
-          scope.hospitals = sortHospitals(hospitals);
-        }
+      function setHospitals(hospitals) {
+        scope.hospitals = sortHospitals(hospitals);
       }
-    };
-  }
+    }
+  };
+}
 
-  factory.$inject = ['_', 'session', 'hospitalStore', 'sortHospitals', 'hasPermissionForGroup'];
+frmRecruitPatientHospitalField.$inject = ['session', 'hospitalStore', 'sortHospitals', 'hasPermissionForGroup'];
 
-  app.directive('frmRecruitPatientHospitalField', factory);
-})();
+export default frmRecruitPatientHospitalField;

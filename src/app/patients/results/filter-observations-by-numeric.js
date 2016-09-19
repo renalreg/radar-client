@@ -1,14 +1,12 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.results');
+function filterObservationsByNumeric() {
+  return function filterObservationsByNumeric(observations) {
+    return _.filter(observations, function(observation) {
+      var valueType = observation.valueType.id;
+      return valueType === 'INTEGER' || valueType === 'REAL';
+    });
+  };
+}
 
-  app.factory('filterObservationsByNumeric', ['_', function(_) {
-    return function filterObservationsByNumeric(observations) {
-      return _.filter(observations, function(observation) {
-        var valueType = observation.valueType.id;
-        return valueType === 'INTEGER' || valueType === 'REAL';
-      });
-    };
-  }]);
-})();
+export default filterObservationsByNumeric;

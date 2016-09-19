@@ -1,9 +1,7 @@
-(function() {
-  'use strict';
+function HospitalDetailController($scope, hospital) {
+  $scope.hospital = hospital;
+}
 
-  var app = angular.module('radar.hospitals');
+HospitalDetailController.$inject = ['$scope', 'hospital'];
 
-  app.controller('HospitalDetailController', ['$scope', 'hospital', function($scope, hospital) {
-    $scope.hospital = hospital;
-  }]);
-})();
+export default HospitalDetailController;

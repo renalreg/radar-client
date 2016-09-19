@@ -1,36 +1,30 @@
-(function() {
-  'use strict';
+function createUserPermission(
+  hasPermission,
+  session,
+  ngIfDirective
+) {
+  // Source: http://stackoverflow.com/a/24065378
+  var ngIf = ngIfDirective[0];
 
-  var app = angular.module('radar.users');
+  return {
+    transclude: ngIf.transclude,
+    priority: ngIf.priority,
+    terminal: ngIf.terminal,
+    restrict: ngIf.restrict,
+    link: function(scope, element, attrs) {
+      attrs.ngIf = function() {
+        return hasPermission(session.user, 'EDIT_USER_MEMBERSHIP');
+      };
 
-  function createUserPermission(
-    hasPermission,
-    session,
-    ngIfDirective
-  ) {
-    // Source: http://stackoverflow.com/a/24065378
-    var ngIf = ngIfDirective[0];
+      ngIf.link.apply(ngIf, arguments);
+    }
+  };
+}
 
-    return {
-      transclude: ngIf.transclude,
-      priority: ngIf.priority,
-      terminal: ngIf.terminal,
-      restrict: ngIf.restrict,
-      link: function(scope, element, attrs) {
-        attrs.ngIf = function() {
-          return hasPermission(session.user, 'EDIT_USER_MEMBERSHIP');
-        };
+createUserPermission.$inject = [
+  'hasPermission',
+  'session',
+  'ngIfDirective'
+];
 
-        ngIf.link.apply(ngIf, arguments);
-      }
-    };
-  }
-
-  createUserPermission.$inject = [
-    'hasPermission',
-    'session',
-    'ngIfDirective'
-  ];
-
-  app.directive('createUserPermission', createUserPermission);
-})();
+export default createUserPermission;
