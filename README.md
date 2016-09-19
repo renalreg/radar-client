@@ -6,9 +6,9 @@ The application communicates with the [RADAR API](https://github.com/renalreg/ra
 
 ## Build Status
 
-[![Build Status](https://img.shields.io/travis/renalreg/radar-client/master.svg)](https://travis-ci.org/renalreg/radar-client) [![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client) [![devDependencies Status](https://david-dm.org/renalreg/radar-client/dev-status.svg)](https://david-dm.org/renalreg/radar-client?type=dev)
+[![Travis](https://img.shields.io/travis/renalreg/radar-client/master.svg)](https://travis-ci.org/renalreg/radar-client) [![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client) [![David](https://img.shields.io/david/dev/renalreg/radar-client.svg)](https://david-dm.org/renalreg/radar-client?type=dev)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
+[![Sauce Labs](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
 
 ## Getting Started
 
