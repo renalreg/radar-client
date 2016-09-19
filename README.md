@@ -91,7 +91,7 @@ Deploy the `.tar.gz` to servers:
 
 ```sh
 virtualenv venv
-source venv/bin/activate
+. venv/bin/activate
 pip install fabric
 
 fab -H nww.radar.nhs.uk -u root deploy
