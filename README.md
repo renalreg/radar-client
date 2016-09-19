@@ -52,7 +52,7 @@ If you using a VM you might want to listen on all interfaces with the `--host 0.
 You can pass extra arguments to `npm start` using the `--` separator.
 For example `npm start -- --host 0.0.0.0`.
 
-The development server proxies requests to `/api` to Flask running at `localhost:5000`.
+The development server proxies requests to `/api` to Flask running on `localhost:5000`.
 
 The code is automatically linted and tested by [Travis CI](https://travis-ci.org/).
 Lint errors or test failures will prevent a package being built with `./build.sh`.
