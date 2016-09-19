@@ -1,44 +1,44 @@
-(function() {
-  'use strict';
+import _ from 'lodash';
 
-  var app = angular.module('radar.patients.forms');
+function FormsController($scope, forms, patient, $state) {
+  // Sort by name
+  forms = _.sortBy(forms, 'form.name');
 
-  app.controller('FormsController', ['$scope', 'forms', 'patient', '$state', '_',  function($scope, forms, patient, $state, _) {
-    // Sort by name
-    forms = _.sortBy(forms, 'form.name');
+  $scope.forms = forms;
 
-    $scope.forms = forms;
+  /** Redirect to first form. */
+  function redirect() {
+    if ($state.current.name !== 'patient.forms.form' && forms.length) {
+      $state.go('patient.forms.form', {formId: forms[0].form.id});
+    }
+  }
 
-    /** Redirect to first form. */
-    function redirect() {
-      if ($state.current.name !== 'patient.forms.form' && forms.length) {
-        $state.go('patient.forms.form', {formId: forms[0].form.id});
+  /** Update the number of entries for a form. */
+  function updateCount(id, count) {
+    for (var i = 0; i < $scope.forms.length; i++) {
+      var form = $scope.forms[i];
+
+      if (form.form.id === id) {
+        form.count = count;
       }
     }
+  }
 
-    /** Update the number of entries for a form. */
-    function updateCount(id, count) {
-      for (var i = 0; i < $scope.forms.length; i++) {
-        var form = $scope.forms[i];
+  // When transitioning into this state redirect to the first
+  // available form (if available)
+  redirect();
+  $scope.$on('$stateChangeSuccess', redirect);
 
-        if (form.form.id === id) {
-          form.count = count;
-        }
-      }
+  $scope.$on('entryCount', function(event, data) {
+    // Ignore updates for other patients
+    if (data.patient.id !== patient.id) {
+      return;
     }
 
-    // When transitioning into this state redirect to the first
-    // available form (if available)
-    redirect();
-    $scope.$on('$stateChangeSuccess', redirect);
+    updateCount(data.form.id, data.count);
+  });
+}
 
-    $scope.$on('entryCount', function(event, data) {
-      // Ignore updates for other patients
-      if (data.patient.id !== patient.id) {
-        return;
-      }
+FormsController.$inject = ['$scope', 'forms', 'patient', '$state'];
 
-      updateCount(data.form.id, data.count);
-    });
-  }]);
-})();
+export default FormsController;

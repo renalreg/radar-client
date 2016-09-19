@@ -1,84 +1,88 @@
-(function() {
-  'use strict';
+import templateUrl from './entries-component.html';
 
-  var app = angular.module('radar.patients.forms');
+function entryPermissionFactory(PatientObjectPermission) {
+  return PatientObjectPermission;
+}
 
-  app.factory('EntryPermission', ['PatientObjectPermission', function(PatientObjectPermission) {
-    return PatientObjectPermission;
-  }]);
+entryPermissionFactory.$inject = ['PatientObjectPermission'];
 
-  function controllerFactory(
-    ModelListDetailController,
-    EntryPermission,
-    $injector,
-    createSchema,
-    formStore
-  ) {
-    function EntriesController($scope) {
-      var self = this;
+function entriesControllerFactory(
+  ModelListDetailController,
+  EntryPermission,
+  $injector,
+  createSchema,
+  formStore
+) {
+  function EntriesController($scope) {
+    var self = this;
 
-      $injector.invoke(ModelListDetailController, self, {
-        $scope: $scope,
-        params: {
-          permission: new EntryPermission($scope.patient)
-        }
-      });
-
-      var schema = createSchema($scope.form.data);
-      $scope.schema = schema;
-
-      if (schema.sortBy) {
-        $scope.sortBy = 'data.' + schema.sortBy;
-        $scope.reverse = schema.reverse;
-      } else {
-        $scope.sortBy = 'createdDate';
-        $scope.reverse = true;
+    $injector.invoke(ModelListDetailController, self, {
+      $scope: $scope,
+      params: {
+        permission: new EntryPermission($scope.patient)
       }
+    });
 
-      self.load(formStore.getEntries($scope.patient.id, $scope.form.id));
+    var schema = createSchema($scope.form.data);
+    $scope.schema = schema;
 
-      $scope.create = function() {
-        var item = formStore.create($scope.patient.id, $scope.form.id);
-        self.edit(item);
-      };
-
-      $scope.$watch('items.length', function(count) {
-        if ($scope.loading) {
-          return;
-        }
-
-        $scope.$emit('entryCount', {
-          patient: $scope.patient,
-          form: $scope.form,
-          count: count
-        });
-      });
+    if (schema.sortBy) {
+      $scope.sortBy = 'data.' + schema.sortBy;
+      $scope.reverse = schema.reverse;
+    } else {
+      $scope.sortBy = 'createdDate';
+      $scope.reverse = true;
     }
 
-    EntriesController.$inject = ['$scope'];
-    EntriesController.prototype = Object.create(ModelListDetailController.prototype);
+    self.load(formStore.getEntries($scope.patient.id, $scope.form.id));
 
-    return EntriesController;
+    $scope.create = function() {
+      var item = formStore.create($scope.patient.id, $scope.form.id);
+      self.edit(item);
+    };
+
+    $scope.$watch('items.length', function(count) {
+      if ($scope.loading) {
+        return;
+      }
+
+      $scope.$emit('entryCount', {
+        patient: $scope.patient,
+        form: $scope.form,
+        count: count
+      });
+    });
   }
 
-  controllerFactory.$inject = [
-    'ModelListDetailController',
-    'EntryPermission',
-    '$injector',
-    'createSchema',
-    'formStore'
-  ];
+  EntriesController.$inject = ['$scope'];
+  EntriesController.prototype = Object.create(ModelListDetailController.prototype);
 
-  app.factory('EntriesController', controllerFactory);
+  return EntriesController;
+}
 
-  app.directive('entriesComponent', ['EntriesController', function(EntriesController) {
-    return {
-      scope: {
-        patient: '=',
-        form: '='
-      },
-      controller: EntriesController,
-      templateUrl: 'app/patients/forms/entries-component.html'
-    };
-  }]);
-})();
+entriesControllerFactory.$inject = [
+  'ModelListDetailController',
+  'EntryPermission',
+  '$injector',
+  'createSchema',
+  'formStore'
+];
+
+function entriesComponent(EntriesController) {
+  return {
+    scope: {
+      patient: '=',
+      form: '='
+    },
+    controller: EntriesController,
+    templateUrl: templateUrl
+  };
+}
+
+entriesComponent.$inject = ['EntriesController'];
+
+export {
+  entryPermissionFactory,
+  entriesControllerFactory,
+  entriesComponent
+};
