@@ -89,7 +89,8 @@ Build a `.tar.gz`:
 ./build.sh
 ```
 
-This will lint the code, run the tests, build the client and create an archive ready for distribution. This will build the client in production mode (`NODE_ENV=production`) which will minify the output.
+This will lint the code, run the tests, build the client and create an archive ready for distribution.
+The client will be built in production mode (`NODE_ENV=production`) which will minify the output.
 
 Deploy the `.tar.gz` to servers:
 
