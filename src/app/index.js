@@ -1,7 +1,6 @@
 import angular from 'angular';
 import localStorage from 'angular-local-storage';
 import uiRouter from 'angular-ui-router';
-import Highcharts from 'highcharts';
 
 import account from './account';
 import auth from './auth';
