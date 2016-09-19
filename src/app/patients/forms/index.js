@@ -16,7 +16,7 @@ function config($stateProvider) {
     url: '/questionnaires',
     templateUrl: formsTemplateUrl,
     resolve: {
-      forms: ['$stateParams', 'formStore', '$state', function($stateParams, formStore, $state) {
+      forms: ['$stateParams', 'formStore', function($stateParams, formStore) {
         return formStore.getForms($stateParams.patientId);
       }]
     },

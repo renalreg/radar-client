@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 import fieldTemplateUrl from './field.html';
 
 function Registry() {
@@ -499,7 +501,7 @@ function marmosetForm($compile) {
 marmosetForm.$inject = ['$compile'];
 
 // Directive to render a field
-function marmosetField($compile) {
+function marmosetField() {
   return {
     require: '?^form',
     scope: {
@@ -554,8 +556,6 @@ function marmosetField($compile) {
     }
   };
 }
-
-marmosetField.$inject = ['$compile'];
 
 function createSchema() {
   return function(data) {
