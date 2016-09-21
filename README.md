@@ -103,3 +103,23 @@ fab -H nww.radar.nhs.uk -u root deploy
 ```
 
 The `--gateway` option is useful for tunneling through another server.
+
+
+## Supported Browsers
+
+RADAR supports the following browsers:
+
+* Chrome
+* Firefox
+* Internet Explorer 8+ (we recommend using Internet Explorer 11)
+
+Browser usage on RADAR in August 2016 was:
+
+| Browser              | Usage % |
+| -------------------- | -------:|
+| Chrome               |   41.1% |
+| Internet Explorer 11 |   27.8% |
+| Internet Explorer 8  |   13.9% |
+| Internet Explorer 9  |    7.3% |
+| Firefox              |    6.6% |
+| Internet Explorer 10 |    3.3% |
