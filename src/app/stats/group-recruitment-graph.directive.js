@@ -15,7 +15,7 @@ function groupRecruitmentGraph(adapter) {
 
         scope.loading = true;
 
-        adapter.get('/recruitment-by-month', {group: group.id}).then(function(response) {
+        adapter.get('/stats/recruitment', {group: group.id}).then(function(response) {
           scope.loading = false;
           scope.data = response.data.points;
         });

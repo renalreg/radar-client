@@ -5,6 +5,7 @@ import patientsByGroupTable from './patients-by-group-table.directive';
 import patientsByRecruitedGroupTable from './patients-by-recruited-group-table.directive';
 import radarRecruitmentGraph from './radar-recruitment-graph.directive';
 import recruitmentGraph from './recruitment-graph.directive';
+import patientsByGroupDateGraph from './patients-by-group-date-graph.directive';
 
 import templateUrl from './stats.html';
 
@@ -24,4 +25,5 @@ export default angular.module('radar.stats', [])
   .directive('patientsByRecruitedGroupTable', patientsByRecruitedGroupTable)
   .directive('radarRecruitmentGraph', radarRecruitmentGraph)
   .directive('recruitmentGraph', recruitmentGraph)
+  .directive('patientsByGroupDateGraph', patientsByGroupDateGraph)
   .name;
