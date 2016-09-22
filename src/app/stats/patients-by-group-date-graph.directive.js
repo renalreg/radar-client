@@ -20,7 +20,7 @@ function patientsByGroupDateGraph(adapter) {
         var options = {
           chart: {
             renderTo: element.get(0),
-            type: 'area'
+            type: 'spline'
           },
           title: {
             text: title
@@ -36,8 +36,7 @@ function patientsByGroupDateGraph(adapter) {
           },
           series: [],
           plotOptions: {
-            area: {
-              stacking: 'normal',
+            spline: {
               marker: {
                 enabled: false
               }
