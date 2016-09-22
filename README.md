@@ -123,3 +123,9 @@ Browser usage on RADAR in August 2016 was:
 | Internet Explorer 9  |    7.3% |
 | Firefox              |    6.6% |
 | Internet Explorer 10 |    3.3% |
+
+## License
+
+Copyright (c) 2016 UK Renal Registry.
+
+Licensed under the [AGPL](LICENSE.md) license.
