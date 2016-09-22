@@ -83,6 +83,8 @@ A HTML coverage report is saved to the `coverage/html` directory.
 
 ## Deployment Guide
 
+Bump the version in `package.json` and `git tag` the commit.
+
 Build a `.tar.gz`:
 
 ```sh
