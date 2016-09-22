@@ -12,12 +12,12 @@
           <p>No patients found.</p>
         </div>
 
+        <p ng-if="viewDemographicsPermission"><span toggle-demographics></span></p>
+
+        <p><a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span class="link">Download</span></a></p>
+
         <table class="table table-condensed table-striped" ng-if="items.length">
           <thead>
-            <tr ng-if="viewDemographicsPermission">
-              <td colspan="8" toggle-demographics></td>
-            </tr>
-
             <tr>
               <th sort-helper="id">ID</th>
               <th sort-helper="firstName">First Name</th>
