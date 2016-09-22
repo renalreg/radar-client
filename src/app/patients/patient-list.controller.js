@@ -1,5 +1,15 @@
 import angular from 'angular';
 import _ from 'lodash';
+import $ from 'jquery';
+
+function getDownloadUrl(params) {
+  // Download all patients rather than just the current page
+  params = angular.copy(params);
+  delete params.page;
+  delete params.perPage;
+
+  return '/api/patients.csv?' + $.param(params);
+}
 
 function patientListControllerFactory(
   ListController,
@@ -96,6 +106,8 @@ function patientListControllerFactory(
 
       var proxyParams = proxy.getParams();
       var params = angular.extend({}, proxyParams, filtersToParams($scope.filters));
+
+      $scope.downloadUrl = getDownloadUrl(params);
 
       return self.load(firstPromise([
         store.findMany('patients', params, true).then(function(data) {
