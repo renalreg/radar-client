@@ -32,6 +32,7 @@ function recruitmentGraph() {
         var options = {
           chart: {
             renderTo: element.get(0),
+            type: 'spline',
             zoomType: 'x',
             height: 600
           },
@@ -52,9 +53,9 @@ function recruitmentGraph() {
             {name: 'Total', data: totalData}
           ],
           plotOptions: {
-            line: {
+            spline: {
               marker: {
-                enabled: true
+                enabled: false
               }
             }
           }
