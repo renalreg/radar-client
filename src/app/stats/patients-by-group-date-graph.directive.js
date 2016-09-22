@@ -19,7 +19,8 @@ function patientsByGroupDateGraph(adapter) {
       adapter.get('/stats/patients-by-group-date', params).then(function(response) {
         var options = {
           chart: {
-            renderTo: element.get(0)
+            renderTo: element.get(0),
+            type: 'area'
           },
           title: {
             text: title
@@ -33,7 +34,15 @@ function patientsByGroupDateGraph(adapter) {
             },
             min: 0
           },
-          series: []
+          series: [],
+          plotOptions: {
+            area: {
+              stacking: 'normal',
+              marker: {
+                enabled: false
+              }
+            }
+          }
         };
 
         var data= _.sortBy(response.data, 'group.name');
