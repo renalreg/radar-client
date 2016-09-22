@@ -31,8 +31,9 @@ function recruitmentGraph() {
 
         var options = {
           chart: {
+            renderTo: element.get(0),
             zoomType: 'x',
-            renderTo: element.get(0)
+            height: 600
           },
           title: {
             text: scope.title

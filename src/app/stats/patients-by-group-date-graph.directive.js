@@ -9,6 +9,8 @@ function patientsByGroupDateGraph(adapter) {
     },
     template: '<div loading="loading" class="graph"></div>',
     link: function(scope, element) {
+      scope.loading = true;
+
       var params = {
         groupType: scope.groupType,
         type: scope.type
@@ -17,10 +19,14 @@ function patientsByGroupDateGraph(adapter) {
       var title = scope.type === 'new' ? 'New Patients' : 'Total Patients';
 
       adapter.get('/stats/patients-by-group-date', params).then(function(response) {
+        scope.loading = false;
+
         var options = {
           chart: {
             renderTo: element.get(0),
-            type: 'spline'
+            type: 'spline',
+            zoomType: 'x',
+            height: 600
           },
           title: {
             text: title
