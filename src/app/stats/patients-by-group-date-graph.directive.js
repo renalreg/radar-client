@@ -49,7 +49,7 @@ function patientsByGroupDateGraph(adapter) {
           _.forEach(group.counts, function(count) {
             series.data.push([Date.parse(count.date), count.count]);
           });
-        })
+        });
 
         new Highcharts.Chart(options);
       });
