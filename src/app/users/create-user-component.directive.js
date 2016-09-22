@@ -27,7 +27,7 @@ function createUserControllerFactory(ModelEditController, $injector, store, $sta
   return CreateUserController;
 }
 
-createUserControllerFactory.$inject = ['ModelEditController', '$injector', 'store', 'state'];
+createUserControllerFactory.$inject = ['ModelEditController', '$injector', 'store', '$state'];
 
 function createUserComponent(CreateUserController) {
   return {

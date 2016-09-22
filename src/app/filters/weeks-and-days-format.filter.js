@@ -6,15 +6,17 @@ function weeksAndDaysFormatFilter() {
       var weeks = Math.floor(value / 7);
       var days = value % 7;
 
+      output = '';
+
       if (weeks > 0) {
-        output = weeks + ' ' + (weeks === 1 ? 'week' : 'weeks');
+        output += weeks + ' ' + (weeks === 1 ? 'week' : 'weeks');
 
         if (days > 0) {
           output += ', ';
         }
       }
 
-      if (days > 0) {
+      if (weeks === 0 || days > 0) {
         output += days + ' ' + (days === 1 ? 'day' : 'days');
       }
     } else {

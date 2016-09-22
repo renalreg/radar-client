@@ -26,7 +26,7 @@
               <th sort-helper="gender">Gender</th>
               <th sort-helper="primaryPatientNumber" ng-if="viewDemographicsPermission">Patient Number</th>
               <th sort-helper="recruitedDate">Recruited On</th>
-              <th ng-repeat="group in groups" sort-helper="group{{group.id}}">{{group.shortName}}</th>
+              <th ng-repeat="group in groups" sort-helper="group_{{group.id}}">{{group.shortName}}</th>
               <th>Cohorts</th>
               <th>Hospitals</th>
             </tr>

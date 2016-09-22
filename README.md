@@ -1,47 +1,102 @@
-# RaDaR Client
+# RADAR Client
 
-[![Build Status](https://img.shields.io/travis/renalreg/radar-client/master.svg)](https://travis-ci.org/renalreg/radar-client) [![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client) [![devDependencies Status](https://david-dm.org/renalreg/radar-client/dev-status.svg)](https://david-dm.org/renalreg/radar-client?type=dev)
+This repository is the home of the RADAR (Rare Disease Registry) web interface.
+The application is built using the [AngularJS](https://angularjs.org/) framework and bundled for browsers using [webpack](https://webpack.github.io/).
+The application communicates with the [RADAR API](https://github.com/renalreg/radar).
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
+## Build Status
 
-## Setup
+[![Travis](https://img.shields.io/travis/renalreg/radar-client/master.svg)](https://travis-ci.org/renalreg/radar-client) [![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client) [![David](https://img.shields.io/david/dev/renalreg/radar-client.svg)](https://david-dm.org/renalreg/radar-client?type=dev)
 
-* [Install Node.js and npm](https://nodejs.org/en/download/package-manager/)
-* Install npm packages: `npm install`
-* Install bower: `npm install -g bower`
-* Install bower packages: `bower install`
+[![Sauce Labs](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
 
-## Build
+## Getting Started
 
-### Development
+Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed (npm is included with Node.js).
 
-During development you will probably want to run `gulp watch`. This will build
-a development version of the application and watch for any changes to the
-source code. You can use `gulp build` if you just want to build a development
-version without watching for changes afterwards.
+Clone the repository:
 
-The terminal output will show any JavaScript lint errors. You can also check for
-lint errors using `gulp lint`.
+```sh
+git clone https://github.com/renalreg/radar-client.git
+cd radar-client
+```
 
-### Distribution
+Install the dependencies:
 
-You can build a distribution version of the application using `gulp build:dist`.
-This builds an optimised version of the application in the `dist` folder. Source
-files are concatenated and minified.
+```sh
+npm install
+```
 
-## Deploy
+Start the development server:
+
+```sh
+npm start
+```
+
+The development server is available at [http://localhost:8080/](http://localhost:8080/) and with live reloading at [http://localhost:8080/webpack-dev-server/](http://localhost:8080/webpack-dev-server/).
+
+## npm scripts
+
+* `start` - start the development server.
+* `clean` - remove build output.
+* `build` - build the client in the `dist` folder.
+* `lint` - lint the source code with [ESLint](http://eslint.org/).
+* `test` - run the tests with [Karma](https://karma-runner.github.io/).
+* `sauce-labs` - run the tests on all supported browsers using [Sauce Labs](https://saucelabs.com/).
+
+## Development Guide
+
+Run the development server with the `npm start` command.
+This will start a development server listening on `http://localhost:8080/`.
+If you are using a VM you might want to listen on all interfaces with the `--host 0.0.0.0` argument.
+You can pass extra arguments to `npm start` using the `--` separator.
+For example `npm start -- --host 0.0.0.0`.
+
+The development server proxies requests to `/api` to the API running on `localhost:5000`.
+
+The code is automatically linted and tested by [Travis CI](https://travis-ci.org/).
+Lint errors or test failures will prevent a package being built with `./build.sh`.
+
+### Lint
+
+The JavaScript code can be linted with the ESLint tool.
+The coding style is two-spaces for indentation, single-quotes, and semi-colons.
+
+Lint the code with:
+
+```sh
+npm run lint
+```
+
+### Test
+
+The tests are written using the [Jasmine](http://jasmine.github.io/) framework and run using [Karma](https://karma-runner.github.io/).
+Test files have the `.test.js` extension and are normally named after the file they are testing.
+
+Run the tests with:
+
+```sh
+npm test
+```
+
+A HTML coverage report is saved to the `coverage/html` directory.
+
+## Deployment Guide
 
 Build a `.tar.gz`:
 
-```
+```sh
 ./build.sh
 ```
 
-Deploy to servers:
+This will lint the code, run the tests, build the client and create an archive ready for distribution.
+The client will be built in production mode (`NODE_ENV=production`) which will minify the output.
 
-```
+Deploy the `.tar.gz` to servers:
+
+```sh
 virtualenv venv
-source venv/bin/activate
+. venv/bin/activate
 pip install fabric
 
 fab -H nww.radar.nhs.uk -u root deploy
@@ -49,12 +104,28 @@ fab -H nww.radar.nhs.uk -u root deploy
 
 The `--gateway` option is useful for tunneling through another server.
 
-## Gulp Tasks
 
-* `clean` - delete built files
-* `build` - build the application for development
-* `build:dist` - build the application for distribution
-* `watch` - build the application and watch for changes
-* `lint` - lint the JavaScript files
-* `test` - run the tests
-* `coverage` - run the tests and produce a coverage report
+## Supported Browsers
+
+RADAR supports the following browsers:
+
+* Chrome
+* Firefox
+* Internet Explorer 8+ (we recommend using Internet Explorer 11)
+
+Browser usage on RADAR in August 2016 was:
+
+| Browser              | Usage % |
+| -------------------- | -------:|
+| Chrome               |   41.1% |
+| Internet Explorer 11 |   27.8% |
+| Internet Explorer 8  |   13.9% |
+| Internet Explorer 9  |    7.3% |
+| Firefox              |    6.6% |
+| Internet Explorer 10 |    3.3% |
+
+## License
+
+Copyright (c) 2016 UK Renal Registry.
+
+Licensed under the [AGPL](LICENSE.md) license.

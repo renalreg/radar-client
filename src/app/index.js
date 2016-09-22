@@ -1,7 +1,6 @@
 import angular from 'angular';
 import localStorage from 'angular-local-storage';
 import uiRouter from 'angular-ui-router';
-import Highcharts from 'highcharts';
 
 import account from './account';
 import auth from './auth';
@@ -31,13 +30,6 @@ import ui from './ui';
 import users from './users';
 import utils from './utils';
 import validators from './validators';
-
-Highcharts.setOptions({
-  global: {
-    // Don't convert datetimes to UTC (causes BST issues)
-    useUTC: false
-  }
-});
 
 function config($urlRouterProvider, adapterProvider) {
   adapterProvider.setBaseUrl('/api');

@@ -55,7 +55,8 @@ function resultsGraph() {
             line: {
               marker: {
                 enabled: true
-              }
+              },
+              turboThreshold: 10000
             }
           },
           tooltip: {
