@@ -12,9 +12,11 @@
           <p>No patients found.</p>
         </div>
 
-        <p ng-if="viewDemographicsPermission"><span toggle-demographics></span></p>
+        <div ng-if="items.length">
+          <p ng-if="viewDemographicsPermission"><span toggle-demographics></span></p>
 
-        <p><a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span class="link">Download</span></a></p>
+          <p><a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span class="link">Download</span></a></p>
+        </div>
 
         <table class="table table-condensed table-striped" ng-if="items.length">
           <thead>
