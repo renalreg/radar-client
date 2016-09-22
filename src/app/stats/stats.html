@@ -1,25 +1,47 @@
 <div page-wrapper>
   <h1 class="page-header">Stats</h1>
 
-  <div radar-recruitment-graph></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Patients</h2>
+    </div>
 
-  <div class="row">
-    <div class="col-md-4">
-      <h2>Patients by Cohort</h2>
+    <div class="panel-body">
+      <div radar-recruitment-graph></div>
+    </div>
+  </div>
 
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Recruiting Hospitals</h2>
+    </div>
+
+    <div class="panel-body">
+      <div patients-by-recruited-group-table></div>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Cohorts</h2>
+    </div>
+
+    <div class="panel-body">
+      <div patients-by-group-date-graph group-type="COHORT" type="new"></div>
+      <div patients-by-group-date-graph group-type="COHORT" type="total"></div>
       <div patients-by-group-table group-type="COHORT"></div>
     </div>
+  </div>
 
-    <div class="col-md-4">
-      <h2>Patients by Hospital</h2>
-
-      <div patients-by-group-table group-type="HOSPITAL"></div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Hospitals</h2>
     </div>
 
-    <div class="col-md-4">
-      <h2>Patients by Recruiting Hospital</h2>
-
-      <div patients-by-recruited-group-table></div>
+    <div class="panel-body">
+      <div patients-by-group-date-graph group-type="HOSPITAL" type="new"></div>
+      <div patients-by-group-date-graph group-type="HOSPITAL" type="total"></div>
+      <div patients-by-group-table group-type="HOSPITAL"></div>
     </div>
   </div>
 </div>

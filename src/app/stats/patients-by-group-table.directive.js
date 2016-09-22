@@ -23,7 +23,7 @@ function patientsByGroupTable(adapter) {
 
         scope.loading = true;
 
-        adapter.get('/patients-by-group', params).then(function(response) {
+        adapter.get('/stats/patients-by-group', params).then(function(response) {
           scope.loading = false;
           scope.counts = _.sortBy(response.data.counts, 'count').reverse();
         });

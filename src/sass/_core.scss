@@ -333,3 +333,7 @@ a.delete-user, a.delete-patient {
 .dead, .dead a {
   color: red !important;
 }
+
+.panel-body *:last-child {
+  margin-bottom: 0;
+}
