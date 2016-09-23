@@ -98,9 +98,7 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
           return reverse;
         }
 
-        /*
-          * Move back a page when the last item on the page is deleted.
-          */
+        /** Move back a page when the last item on the page is deleted. */
         function checkPage() {
           var totalPages = getTotalPages();
 
@@ -114,8 +112,10 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
         }
 
         function setPage(newPage) {
-          page = newPage;
-          _paginate();
+          if (newPage > 0 && newPage <= getTotalPages()) {
+            page = newPage;
+            _paginate();
+          }
         }
 
         function getPerPage() {
@@ -327,8 +327,10 @@ function listHelperProxyFactory() {
   };
 
   ListHelperProxy.prototype.setPage = function(page) {
-    this.page = page;
-    this.load();
+    if (page > 0 && page <= this.getTotalPages()) {
+      this.page = page;
+      this.load();
+    }
   };
 
   ListHelperProxy.prototype.getPerPage = function() {
