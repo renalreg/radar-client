@@ -11,12 +11,10 @@ function patientsByGroupDateGraph(adapter) {
     link: function(scope, element) {
       scope.loading = true;
 
-      var params = {
-        groupType: scope.groupType,
-        type: scope.type
-      };
+      var params = {groupType: scope.groupType};
 
       var title = scope.type === 'new' ? 'New Patients' : 'Total Patients';
+      var key = scope.type === 'new' ? 'newPatients' : 'totalPatients';
 
       adapter.get('/stats/patients-by-group-date', params).then(function(response) {
         scope.loading = false;
@@ -61,7 +59,7 @@ function patientsByGroupDateGraph(adapter) {
           options.series.push(series);
 
           _.forEach(group.counts, function(count) {
-            series.data.push([Date.parse(count.date), count.count]);
+            series.data.push([Date.parse(count.date), count[key]]);
           });
         });
 
