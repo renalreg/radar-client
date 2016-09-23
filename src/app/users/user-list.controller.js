@@ -1,5 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
+import $ from 'jquery';
 
 function getDownloadUrl(params) {
   // Download all users rather than just the current page
