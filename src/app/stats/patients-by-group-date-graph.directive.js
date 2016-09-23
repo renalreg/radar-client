@@ -1,11 +1,27 @@
 import _ from 'lodash';
 import Highcharts from 'highcharts';
 
+function getTopGroups(data, n) {
+  return _
+    .chain(data)
+    .sortBy([function(x) {
+      if (x.counts.length) {
+        return x.counts[x.counts.length - 1].totalPatients;
+      } else {
+        return 0;
+      }
+    }, 'group.name'])
+    .take(n)
+    .map('group.id')
+    .value();
+}
+
 function patientsByGroupDateGraph(adapter) {
   return {
     scope: {
       groupType: '@',
-      type: '@'
+      type: '@',
+      top: '@'
     },
     template: '<div loading="loading" class="graph"></div>',
     link: function(scope, element) {
@@ -48,12 +64,28 @@ function patientsByGroupDateGraph(adapter) {
           }
         };
 
-        var data= _.sortBy(response.data, 'group.name');
+        var n = parseInt(scope.top);
+        var isVisible;
+
+        if (n) {
+          var topGroups = getTopGroups(response.data, n);
+
+          isVisible = function(group) {
+            return _.includes(topGroups, group.id);
+          };
+        } else {
+          isVisible = function() {
+            return true;
+          };
+        }
+
+        var data = _.sortBy(response.data, 'group.name');
 
         _.forEach(data, function(group) {
           var series = {
             name: group.group.name,
-            data: []
+            data: [],
+            visible: isVisible(group.group)
           };
 
           options.series.push(series);
