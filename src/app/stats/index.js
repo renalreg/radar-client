@@ -1,11 +1,10 @@
 import angular from 'angular';
 
-import groupRecruitmentGraph from './group-recruitment-graph.directive';
+import patientsByRecruitmentDateGraph from './patients-by-recruitment-date-graph.directive';
 import patientsByGroupTable from './patients-by-group-table.directive';
-import patientsByRecruitedGroupTable from './patients-by-recruited-group-table.directive';
-import radarRecruitmentGraph from './radar-recruitment-graph.directive';
-import recruitmentGraph from './recruitment-graph.directive';
 import patientsByGroupDateGraph from './patients-by-group-date-graph.directive';
+import patientsByRecruitmentGroupTable from './patients-by-recruitment-group-table.directive';
+import patientsByRecruitmentGroupDateGraph from './patients-by-recruitment-group-date-graph.directive';
 
 import templateUrl from './stats.html';
 
@@ -20,10 +19,9 @@ config.$inject = ['$stateProvider'];
 
 export default angular.module('radar.stats', [])
   .config(config)
-  .directive('groupRecruitmentGraph', groupRecruitmentGraph)
+  .directive('patientsByRecruitmentDateGraph', patientsByRecruitmentDateGraph)
   .directive('patientsByGroupTable', patientsByGroupTable)
-  .directive('patientsByRecruitedGroupTable', patientsByRecruitedGroupTable)
-  .directive('radarRecruitmentGraph', radarRecruitmentGraph)
-  .directive('recruitmentGraph', recruitmentGraph)
   .directive('patientsByGroupDateGraph', patientsByGroupDateGraph)
+  .directive('patientsByRecruitmentGroupTable', patientsByRecruitmentGroupTable)
+  .directive('patientsByRecruitmentGroupDateGraph', patientsByRecruitmentGroupDateGraph)
   .name;

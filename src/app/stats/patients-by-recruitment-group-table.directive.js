@@ -1,8 +1,8 @@
 import _ from 'lodash';
 
-import templateUrl from './patients-by-recruited-group-table.html';
+import templateUrl from './patients-by-recruitment-group-table.html';
 
-function patientsByRecruitedGroupTable(adapter) {
+function patientsByRecruitmentGroupTable(adapter) {
   return {
     scope: {
       group: '='
@@ -20,7 +20,7 @@ function patientsByRecruitedGroupTable(adapter) {
 
         scope.loading = true;
 
-        adapter.get('/stats/patients-by-recruited-group', params).then(function(response) {
+        adapter.get('/stats/patients-by-recruitment-group', params).then(function(response) {
           scope.loading = false;
           scope.counts = _.sortBy(response.data.counts, 'count').reverse();
         });
@@ -29,6 +29,6 @@ function patientsByRecruitedGroupTable(adapter) {
   };
 }
 
-patientsByRecruitedGroupTable.$inject = ['adapter'];
+patientsByRecruitmentGroupTable.$inject = ['adapter'];
 
-export default patientsByRecruitedGroupTable;
+export default patientsByRecruitmentGroupTable;

@@ -7,7 +7,7 @@
     </div>
 
     <div class="panel-body">
-      <div radar-recruitment-graph></div>
+      <div patients-by-recruitment-date-graph></div>
     </div>
   </div>
 
@@ -37,24 +37,35 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
+      <h2 class="panel-title">Recruiting Hospitals</h2>
+    </div>
+
+    <div class="panel-body">
+      <div patients-by-recruitment-group-date-graph type="new" top="10"></div>
+      <div patients-by-recruitment-group-date-graph type="total" top="10"></div>
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
       <h2 class="panel-title">Leaderboards</h2>
     </div>
 
     <div class="panel-body">
       <div class="row">
         <div class="col-md-4">
-          <h2>Patients by Cohort</h2>
+          <h2>Cohorts</h2>
           <div patients-by-group-table group-type="COHORT"></div>
         </div>
 
         <div class="col-md-4">
-          <h2>Patients by Hospital</h2>
+          <h2>Hospitals</h2>
           <div patients-by-group-table group-type="HOSPITAL"></div>
         </div>
 
         <div class="col-md-4">
-          <h2>Patients by Recruiting Hospital</h2>
-          <div patients-by-recruited-group-table></div>
+          <h2>Recruiting Hospitals</h2>
+          <div patients-by-recruitment-group-table></div>
         </div>
       </div>
     </div>
