@@ -13,23 +13,13 @@
 
   <div class="panel panel-primary">
     <div class="panel-heading">
-      <h2 class="panel-title">Recruiting Hospitals</h2>
-    </div>
-
-    <div class="panel-body">
-      <div patients-by-recruited-group-table></div>
-    </div>
-  </div>
-
-  <div class="panel panel-primary">
-    <div class="panel-heading">
       <h2 class="panel-title">Cohorts</h2>
     </div>
 
     <div class="panel-body">
       <div patients-by-group-date-graph group-type="COHORT" type="new" top="5"></div>
       <div patients-by-group-date-graph group-type="COHORT" type="total" top="5"></div>
-      <div patients-by-group-table group-type="COHORT"></div>
+
     </div>
   </div>
 
@@ -41,7 +31,32 @@
     <div class="panel-body">
       <div patients-by-group-date-graph group-type="HOSPITAL" type="new" top="10"></div>
       <div patients-by-group-date-graph group-type="HOSPITAL" type="total" top="10"></div>
-      <div patients-by-group-table group-type="HOSPITAL"></div>
+
+    </div>
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h2 class="panel-title">Leaderboards</h2>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Patients by Cohort</h2>
+          <div patients-by-group-table group-type="COHORT"></div>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Patients by Hospital</h2>
+          <div patients-by-group-table group-type="COHORT"></div>
+        </div>
+
+        <div class="col-md-4">
+          <h2>Patients by Recruiting Hospital</h2>
+          <div patients-by-recruited-group-table></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
