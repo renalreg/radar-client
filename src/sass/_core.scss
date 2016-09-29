@@ -334,10 +334,10 @@ a.delete-user, a.delete-patient {
   color: red !important;
 }
 
-.panel-body *:first-child {
+.panel-body > *:first-child {
   margin-top: 0;
 }
 
-.panel-body *:last-child {
+.panel-body > *:last-child {
   margin-bottom: 0;
 }
