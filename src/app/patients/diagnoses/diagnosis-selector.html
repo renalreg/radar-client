@@ -12,18 +12,19 @@
         <tr>
           <th></th>
           <th sort-helper="name">Name</th>
+          <th sort-helper="edta">EDTA</th>
         </tr>
       </thead>
 
       <tbody>
         <tr>
-          <td colspan="2">
+          <td colspan="3">
             <div filter-helper></div>
           </td>
         </tr>
 
         <tr ng-show="!page.getCount()">
-          <td colspan="2" class="empty">No matching diagnoses.</td>
+          <td colspan="3" class="empty">No matching diagnoses.</td>
         </tr>
 
         <tr ng-repeat="diagnosis in page.getItems()">
@@ -32,6 +33,7 @@
           </td>
 
           <td>{{diagnosis.name}}</td>
+          <td>{{diagnosis.edta | missing}}</td>
         </tr>
       </tbody>
     </table>
