@@ -8,6 +8,7 @@ import frmConfirmPasswordField from './confirm-password-field.directive';
 import frmConsentField from './consent-field.directive';
 import frmDateField from './date-field.directive';
 import frmDiagnosisField from './diagnosis-field.directive';
+import frmDiagnosisStatusField from './diagnosis-status-field.directive';
 import frmDrugField from './drug-field.directive';
 import frmEmailField from './email-field.directive';
 import frmGroupField from './group-field.directive';
@@ -37,6 +38,7 @@ export default angular.module('radar.forms.fields', [])
   .directive('frmConsentField', frmConsentField)
   .directive('frmDateField', frmDateField)
   .directive('frmDiagnosisField', frmDiagnosisField)
+  .directive('frmDiagnosisStatusField', frmDiagnosisStatusField)
   .directive('frmDrugField', frmDrugField)
   .directive('frmEmailField', frmEmailField)
   .directive('frmGroupField', frmGroupField)
