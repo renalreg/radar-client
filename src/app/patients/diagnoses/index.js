@@ -11,6 +11,7 @@ import {
   primaryPatientDiagnosisControllerFactory,
   primaryPatientDiagnosisComponent
 } from './primary-diagnosis-component.directive';
+import primaryDiagnosisSelector from './primary-diagnosis-selector.directive';
 
 import diagnosesTemplateUrl from './diagnoses.html';
 import primaryDiagnosisTemplateUrl from './primary-diagnosis.html';
@@ -49,4 +50,5 @@ export default angular.module('radar.patients.diagnoses', [])
   .factory('PatientDiagnosisPermission', patientDiagnosisPermissionFactory)
   .factory('PrimaryPatientDiagnosisController', primaryPatientDiagnosisControllerFactory)
   .directive('primaryPatientDiagnosisComponent', primaryPatientDiagnosisComponent)
+  .directive('primaryDiagnosisSelector', primaryDiagnosisSelector)
   .name;

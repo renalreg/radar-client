@@ -18,6 +18,7 @@ import frmMultipleCheckboxField from './multiple-checkbox-field.directive';
 import frmNumberField from './number-field.directive';
 import frmObservationField from './observation-field.directive';
 import frmPasswordField from './password-field.directive';
+import frmPrimaryDiagnosisField from './primary-diagnosis-field.directive';
 import frmRadioField from './radio-field.directive';
 import frmRecruitPatientCohortField from './recruit-patient-cohort-field.directive';
 import frmRecruitPatientHospitalField from './recruit-patient-hospital-field.directive';
@@ -48,6 +49,7 @@ export default angular.module('radar.forms.fields', [])
   .directive('frmNumberField', frmNumberField)
   .directive('frmObservationField', frmObservationField)
   .directive('frmPasswordField', frmPasswordField)
+  .directive('frmPrimaryDiagnosisField', frmPrimaryDiagnosisField)
   .directive('frmRadioField', frmRadioField)
   .directive('frmRecruitPatientCohortField', frmRecruitPatientCohortField)
   .directive('frmRecruitPatientHospitalField', frmRecruitPatientHospitalField)
