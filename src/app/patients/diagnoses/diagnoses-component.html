@@ -13,7 +13,7 @@
 
       <tr>
         <th>Diagnosis</th>
-        <td>{{item.getDiagnosis()}}</td>
+        <td ng-class="{negative: !item.status}">{{item.getDiagnosis()}}</td>
       </tr>
 
       <tr>
@@ -144,7 +144,7 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td>{{item.getDiagnosis()}}</td>
+          <td ng-class="{negative: !item.status}">{{item.getDiagnosis()}}</td>
           <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
           <td>{{item.toDate | dateFormat}}</td>
           <td class="source">{{item.getSource()}}</td>

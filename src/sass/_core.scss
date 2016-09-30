@@ -341,3 +341,7 @@ a.delete-user, a.delete-patient {
 .panel-body > *:last-child {
   margin-bottom: 0;
 }
+
+.negative {
+  text-decoration: line-through;
+}
