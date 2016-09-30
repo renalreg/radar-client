@@ -62,24 +62,6 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>From Date</div>
-
-        <div frm-control>
-          <div frm-date-field model="item.fromDate" required="true"></div>
-          <div frm-errors errors="item.errors.fromDate"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
-        <div frm-label>To Date</div>
-
-        <div frm-control>
-          <div frm-date-field model="item.toDate" min-date="item.fromDate"></div>
-          <div frm-errors errors="item.errors.toDate"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
         <div frm-label>Drug</div>
 
         <div frm-control>
@@ -95,6 +77,24 @@
           <div frm-text-field model="item.drugText"></div>
           <div frm-help>Please use a drug from the list where possible.</div>
           <div frm-errors errors="item.errors.drugText"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>From Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.fromDate" required="true"></div>
+          <div frm-errors errors="item.errors.fromDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>To Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.toDate" min-date="item.fromDate"></div>
+          <div frm-errors errors="item.errors.toDate"></div>
         </div>
       </div>
 

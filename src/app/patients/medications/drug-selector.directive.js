@@ -5,14 +5,14 @@ function drugSelector(store) {
     require: 'ngModel',
     templateUrl: templateUrl,
     link: function(scope, element, attrs, ngModel) {
-      scope.selectedDrug = null;
+      scope.drug = null;
 
       store.findMany('drugs').then(function(drugs) {
         scope.drugs = drugs;
       });
 
       ngModel.$render = function() {
-        scope.selectedDrug = ngModel.$viewValue;
+        scope.drug = ngModel.$viewValue;
       };
 
       scope.use = function(drug) {
@@ -24,7 +24,7 @@ function drugSelector(store) {
       };
 
       function update(drug) {
-        scope.selectedDrug = drug;
+        scope.drug = drug;
         ngModel.$setViewValue(drug);
       }
     }

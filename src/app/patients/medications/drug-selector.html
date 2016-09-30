@@ -1,43 +1,39 @@
-<div list-helper="drugs as page" list-helper-options="{perPage: 10, sortBy: 'name'}" class="drug-selector">
-  <table class="table table-condensed table-striped">
-    <thead>
-      <tr>
-        <th></th>
-        <th sort-helper="name">Name</th>
-        <th>Group</th>
-      </tr>
-    </thead>
+<p class="form-control-static" ng-show="drug">{{drug.name}} <span ng-if="drug.drugGroup">({{drug.drugGroup.name}})</span> <button type="button" ng-click="drop()" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></button></p>
 
-    <tbody>
-      <tr ng-if="selectedDrug">
-        <td>
-          <button type="button" ng-click="drop()" class="btn btn-primary btn-xs">Deselect</button>
-        </td>
+<div loading="loading" ng-show="!drug">
+  <div list-helper="drugs as page" list-helper-options="{perPage: 10, sortBy: 'name'}" class="drug-selector">
+    <table class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="name">Name</th>
+          <th sort-helper="edta">Group</th>
+        </tr>
+      </thead>
 
-        <td>{{selectedDrug.name}}</td>
-        <td>{{selectedDrug.drugGroup.name | missing}}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <td colspan="3">
+            <div filter-helper></div>
+          </td>
+        </tr>
 
-      <tr ng-show="!selectedDrug">
-        <td colspan="3">
-          <div filter-helper></div>
-        </td>
-      </tr>
+        <tr ng-show="!page.getCount()">
+          <td colspan="3" class="empty">No matching drugs.</td>
+        </tr>
 
-      <tr ng-show="!selectedDrug && !page.getCount()">
-        <td colspan="3" class="empty">No matching drugs.</td>
-      </tr>
+        <tr ng-repeat="drug in page.getItems()">
+          <td>
+            <button type="button" ng-click="use(drug)" class="btn btn-primary btn-xs">Select</button>
+          </td>
 
-      <tr ng-show="!selectedDrug" ng-repeat="drug in page.getItems()">
-        <td>
-          <button type="button" ng-click="use(drug)" class="btn btn-primary btn-xs">Select</button>
-        </td>
+          <td>{{drug.name}}</td>
+          <td>{{drug.drugGroup.name | missing}}</td>
+        </tr>
+      </tbody>
+    </table>
 
-        <td>{{drug.name}}</td>
-        <td>{{drug.drugGroup.name | missing}}</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div pagination-helper></div>
+    <div pagination-helper></div>
+  </div>
 </div>
+
