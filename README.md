@@ -133,6 +133,10 @@ Browser usage on RADAR in August 2016 was:
 </p>
 
 <p align="center">
+  <img src="extra/screenshots/results.png" width="400" alt="Results" />
+</p>
+
+<p align="center">
   <img src="extra/screenshots/stats.png" width="400" alt="Stats" />
 </p>
 
