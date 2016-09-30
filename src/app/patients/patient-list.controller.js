@@ -21,7 +21,8 @@ function patientListControllerFactory(
   session
 ) {
   var DEFAULT_FILTERS = {
-    current: true
+    current: true,
+    test: false
   };
 
   function PatientListController($scope) {
@@ -64,7 +65,7 @@ function patientListControllerFactory(
         'dateOfBirth', 'yearOfBirth',
         'dateOfDeath', 'yearOfDeath',
         'gender', 'patientNumber',
-        'current', 'ukrdc'
+        'current', 'ukrdc', 'test'
       ];
 
       _.forEach(keys, function(key) {

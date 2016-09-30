@@ -227,11 +227,12 @@
           </div>
         </div>
 
-        <div frm-field frm-group>
-          <div frm-label>Current</div>
+        <div ng-if="user.isAdmin" frm-field frm-group>
+          <div frm-label>Current Patient</div>
 
           <div frm-control>
             <div frm-boolean-field model="filters.current"></div>
+            <div frm-help>Filter patients with a current membership.</div>
             <div frm-errors></div>
           </div>
         </div>
@@ -241,6 +242,16 @@
 
           <div frm-control>
             <div frm-boolean-field model="filters.ukrdc"></div>
+            <div frm-help>Filter patients receiving data from the UKRDC.</div>
+            <div frm-errors></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Test Patient</div>
+
+          <div frm-control>
+            <div frm-boolean-field model="filters.test"></div>
             <div frm-errors></div>
           </div>
         </div>
