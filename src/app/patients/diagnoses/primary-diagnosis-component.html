@@ -81,7 +81,7 @@
         <div frm-label>Diagnosis</div>
 
         <div frm-control>
-          <div frm-select-field model="item.diagnosis" required="true" options="diagnoses" options-label="name"></div>
+          <div frm-primary-diagnosis-field cohort="cohort" model="item.diagnosis" required="true"></div>
           <div frm-help>Choose the most specific diagnosis.</div>
           <div frm-errors errors="item.errors.diagnosis"></div>
         </div>

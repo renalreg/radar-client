@@ -1,12 +1,7 @@
 <p class="form-control-static" ng-show="diagnosis">{{diagnosis.name}} <button type="button" ng-click="drop()" class="btn btn-xs btn-primary"><i class="fa fa-pencil"></i></button></p>
 
 <div loading="loading" ng-show="!diagnosis">
-  <ul class="tabs-radar">
-      <li ng-repeat="group in groups" ng-class="{'active': isActive(group)}"><a href="" ng-click="setGroup(group)">{{group.shortName}}</a></li>
-      <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
-  </ul>
-
-  <div list-helper="getDiagnoses(group) as page" list-helper-options="{perPage: 10, sortBy: 'name'}" class="diagnosis-selector">
+  <div list-helper="diagnoses as page" list-helper-options="{perPage: 10, sortBy: 'name'}" class="diagnosis-selector">
     <table class="table table-condensed table-striped">
       <thead>
         <tr>

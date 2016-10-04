@@ -19,7 +19,10 @@ function patientDiagnosesControllerFactory(
     self.load(store.findMany('patient-diagnoses', {patient: $scope.patient.id, includePrimary: false}));
 
     $scope.create = function() {
-      var item = store.create('patient-diagnoses', {patient: $scope.patient.id});
+      var item = store.create('patient-diagnoses', {
+        patient: $scope.patient.id,
+        status: true
+      });
       self.edit(item);
     };
   }

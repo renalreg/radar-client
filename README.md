@@ -83,6 +83,8 @@ A HTML coverage report is saved to the `coverage/html` directory.
 
 ## Deployment Guide
 
+Bump the version in `package.json` and `git tag` the commit.
+
 Build a `.tar.gz`:
 
 ```sh
@@ -123,6 +125,20 @@ Browser usage on RADAR in August 2016 was:
 | Internet Explorer 9  |    7.3% |
 | Firefox              |    6.6% |
 | Internet Explorer 10 |    3.3% |
+
+## Screenshots
+
+<p align="center">
+  <img src="extra/screenshots/patients.png" width="400" alt="Patients" />
+</p>
+
+<p align="center">
+  <img src="extra/screenshots/results.png" width="400" alt="Results" />
+</p>
+
+<p align="center">
+  <img src="extra/screenshots/stats.png" width="400" alt="Stats" />
+</p>
 
 ## License
 

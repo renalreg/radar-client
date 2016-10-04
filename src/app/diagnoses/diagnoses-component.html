@@ -12,6 +12,11 @@
       </tr>
 
       <tr>
+        <th>EDTA</th>
+        <td>{{item.edta | missing}}</td>
+      </tr>
+
+      <tr>
         <th>Retired</th>
         <td><span tick="item.retired"></span></td>
       </tr>
@@ -43,6 +48,15 @@
         <div frm-control>
           <div frm-text-field model="item.name" required="true"></div>
           <div frm-errors errors="item.errors.name"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>EDTA</div>
+
+        <div frm-control>
+          <div frm-integer-field model="item.edta"></div>
+          <div frm-errors errors="item.errors.edta"></div>
         </div>
       </div>
 
@@ -80,6 +94,7 @@
         <tr>
           <th></th>
           <th sort-helper="name">Name</th>
+          <th sort-helper="edta">EDTA</th>
           <th sort-helper="retired">Retired</th>
           <th></th>
         </tr>
@@ -93,6 +108,7 @@
           </td>
 
           <td>{{item.name}}</td>
+          <td>{{item.edta | missing}}</td>
           <td><span tick="item.retired"></span></td>
 
           <td>

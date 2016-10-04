@@ -338,3 +338,15 @@ a.delete-user, a.delete-patient {
 .radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
   margin-left: 30px;
 }
+
+.panel-body > *:first-child {
+  margin-top: 0;
+}
+
+.panel-body > *:last-child {
+  margin-bottom: 0;
+}
+
+.negative {
+  text-decoration: line-through;
+}

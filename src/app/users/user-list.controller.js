@@ -1,5 +1,15 @@
 import angular from 'angular';
 import _ from 'lodash';
+import $ from 'jquery';
+
+function getDownloadUrl(params) {
+  // Download all users rather than just the current page
+  params = angular.copy(params);
+  delete params.page;
+  delete params.perPage;
+
+  return '/api/users.csv?' + $.param(params);
+}
 
 function userListControllerFactory(
   ListController, $injector, ListHelperProxy, store
@@ -54,6 +64,8 @@ function userListControllerFactory(
     function update() {
       var proxyParams = proxy.getParams();
       var params = angular.extend({}, proxyParams, filtersToParams($scope.filters));
+
+      $scope.downloadUrl = getDownloadUrl(params);
 
       return self.load(store.findMany('users', params, true).then(function(data) {
         proxy.setItems(data.data);

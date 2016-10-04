@@ -12,6 +12,10 @@
           <p>No users found.</p>
         </div>
 
+        <p ng-if="items.length">
+          <a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span class="link">Download</span></a>
+        </p>
+
         <table class="table table-condensed table-striped" ng-if="items.length">
           <thead>
             <tr>

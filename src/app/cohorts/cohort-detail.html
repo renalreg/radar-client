@@ -1,19 +1,19 @@
 <div page-wrapper>
   <h1 class="page-header">{{cohort.name}} <small>{{cohort.code}}</small></h1>
 
-  <div group-recruitment-graph group="cohort"></div>
+  <div patients-by-recruitment-date-graph group="cohort"></div>
 
   <div class="row">
     <div class="col-md-6">
-      <h2>Patients by Hospital</h2>
+      <h2>Hospitals</h2>
 
       <div patients-by-group-table group="cohort" group-type="HOSPITAL"></div>
     </div>
 
     <div class="col-md-6">
-      <h2>Patients by Recruiting Hospital</h2>
+      <h2>Recruiting Hospitals</h2>
 
-      <div patients-by-recruited-group-table group="cohort"></div>
+      <div patients-by-recruitment-group-table group="cohort"></div>
     </div>
   </div>
 </div>
