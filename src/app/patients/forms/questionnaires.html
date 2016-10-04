@@ -1,0 +1,15 @@
+<h1 class="page-header">Questionnaires</h1>
+
+<p ng-if="!forms.length">
+    No questionnaires available for this patient.
+</p>
+
+<div ng-if="forms.length">
+  <ul class="radar-tabs">
+    <li ng-repeat="form in forms" ui-sref-active="active">
+      <a ui-sref="patient.questionnaire({formSlug: form.form.slug})">{{form.form.name}} <span class="badge">{{form.count}}</span></a>
+    </li>
+  </ul>
+
+  <div class="radar-body" ui-view></div>
+</div>

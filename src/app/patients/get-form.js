@@ -3,9 +3,9 @@ import { toStateString } from './utils.js';
 function getForm(form, patient) {
   return {
     name: form.name,
-    state: toStateString('patient.forms', {
+    state: toStateString('patient.form', {
       patientId: patient.id,
-      formId: form.id
+      formSlug: form.slug
     })
   };
 }

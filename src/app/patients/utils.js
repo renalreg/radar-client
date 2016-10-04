@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 function toStateString(state, stateParams) {
   return state + '({' + _.map(stateParams, function(v, k) {
-    return k + ': ' + v;
+    return k + ': ' + JSON.stringify(v);
   }).join(', ') + '})';
 }
 
