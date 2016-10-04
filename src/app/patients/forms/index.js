@@ -1,12 +1,17 @@
 import angular from 'angular';
 
 import {
-  entryPermissionFactory,
   entriesControllerFactory,
   entriesComponent
 } from './entries-component.directive';
+import {
+  entryControllerFactory,
+  entryComponent
+} from './entry-component.directive';
 import formStore from './form-store';
 import QuestionnairesController from './questionnaires-controller';
+import formComponent from './form-component.directive';
+import entryPermissionFactory from './entry-permission';
 
 import questionnairesTemplateUrl from './questionnaires.html';
 import questionnaireTemplateUrl from './questionnaire.html';
@@ -26,7 +31,7 @@ function config($stateProvider) {
 
   $stateProvider.state('patient.questionnaire', {
     parent: 'patient.questionnaires',
-    url: '/:formSlug',
+    url: '/{formSlug:[a-z0-9-]+}',
     templateUrl: questionnaireTemplateUrl,
     resolve: {
       form: ['$stateParams', 'formStore', function($stateParams, formStore) {
@@ -61,4 +66,7 @@ export default angular.module('radar.patients.forms', [])
   .directive('entriesComponent', entriesComponent)
   .factory('formStore', formStore)
   .controller('QuestionnairesController', QuestionnairesController)
+  .directive('formComponent', formComponent)
+  .factory('EntryController', entryControllerFactory)
+  .directive('entryComponent', entryComponent)
   .name;

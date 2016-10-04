@@ -1,5 +1,23 @@
 import angular from 'angular';
 
+function withUnit(element, field) {
+  if (!field.unit) {
+    return element;
+  }
+
+  var group = angular.element('<div></div>');
+  group.attr('class', 'input-group');
+
+  group.append(element);
+
+  var addon = angular.element('<div></div>');
+  addon.attr('class', 'input-group-addon');
+  addon.text(field.unit);
+  group.append(addon);
+
+  return group;
+}
+
 function marmosetWidget($compile) {
   return {
     scope: {
@@ -32,6 +50,7 @@ function marmosetIntWidget($compile) {
       e.attr('type', 'text');
       e.attr('ng-model', 'field.data[field.name]');
       e.attr('ng-required', 'field.required()');
+      e = withUnit(e, scope.field);
       element.append(e);
       $compile(e)(scope);
     }
@@ -95,6 +114,7 @@ function marmosetFloatWidget($compile) {
       e.attr('type', 'text');
       e.attr('ng-model', 'field.data[field.name]');
       e.attr('ng-required', 'field.required()');
+      e = withUnit(e, scope.field);
       element.append(e);
       $compile(e)(scope);
     }

@@ -82,7 +82,6 @@ function entriesComponent(EntriesController) {
 entriesComponent.$inject = ['EntriesController'];
 
 export {
-  entryPermissionFactory,
   entriesControllerFactory,
   entriesComponent
 };

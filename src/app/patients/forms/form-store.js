@@ -38,6 +38,11 @@ function formStore(store, adapter) {
     return store.findMany('entries', {patient: patientId, form: formId});
   }
 
+  /** Get entry for this patient and form. */
+  function getEntry(patientId, formId) {
+    return store.findFirst('entries', {patient: patientId, form: formId});
+  }
+
   /** Create a new form entry. */
   function create(patientId, formId) {
     return store.create('entries', {patient: patientId, form: formId});
@@ -48,6 +53,7 @@ function formStore(store, adapter) {
     getQuestionnaires: getQuestionnaires,
     getForm: getForm,
     getEntries: getEntries,
+    getEntry: getEntry,
     create: create
   };
 }

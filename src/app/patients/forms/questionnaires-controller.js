@@ -9,7 +9,7 @@ function QuestionnairesController($scope, forms, patient, $state) {
   /** Redirect to first form. */
   function redirect() {
     if ($state.current.name !== 'patient.questionnaire' && forms.length) {
-      $state.go('patient.questionnaire', {formId: forms[0].form.id});
+      $state.go('patient.questionnaire', {formSlug: forms[0].form.slug});
     }
   }
 
