@@ -143,7 +143,7 @@ function marmosetSelectWidget($compile) {
   };
 }
 
-marmosetSelectWidget.$inject = ['compile'];
+marmosetSelectWidget.$inject = ['$compile'];
 
 function marmosetRadioWidget($compile) {
   return {
