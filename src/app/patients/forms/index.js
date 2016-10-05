@@ -19,11 +19,14 @@ import formTemplateUrl from './form.html';
 
 function config($stateProvider) {
   $stateProvider.state('patient.questionnaires', {
-    url: '/questionnaires',
+    url: '/questionnaires/:cohortId',
     templateUrl: questionnairesTemplateUrl,
     resolve: {
       forms: ['$stateParams', 'formStore', function($stateParams, formStore) {
-        return formStore.getQuestionnaires($stateParams.patientId);
+        return formStore.getQuestionnaires($stateParams.cohortId, $stateParams.patientId);
+      }],
+      cohort: ['$stateParams', 'cohortStore', function($stateParams, cohortStore) {
+        return cohortStore.findOne($stateParams.cohortId);
       }]
     },
     controller: 'QuestionnairesController'

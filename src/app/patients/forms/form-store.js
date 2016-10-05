@@ -18,14 +18,14 @@ function formStore(store, adapter) {
     });
   }
 
-  /** Get forms relevant to a patient. */
-  function getForms(patientId) {
-    return _getForms({patient: patientId, type: 'form'});
+  /** Get forms for a group/patient. */
+  function getForms(groupId, patientId) {
+    return _getForms({group: groupId, patient: patientId, type: 'form'});
   }
 
-  /** Get questionnaires relevant to a patient. */
-  function getQuestionnaires(patientId) {
-    return _getForms({patient: patientId, type: 'questionnaire'});
+  /** Get questionnaires for a group/patient. */
+  function getQuestionnaires(groupId, patientId) {
+    return _getForms({group: groupId, patient: patientId, type: 'questionnaire'});
   }
 
   /** Get a single form. */
