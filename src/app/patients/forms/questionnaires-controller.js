@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 function QuestionnairesController($scope, forms, patient, $state, cohort) {
   $scope.cohort = cohort;
   $scope.forms = forms;
