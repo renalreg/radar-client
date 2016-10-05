@@ -94,12 +94,21 @@
         </div>
       </div>
 
-      <div frm-field frm-group>
+      <div frm-field frm-group ng-if="item.country.id == 'UK'">
         <div frm-label>Postcode</div>
 
         <div frm-control>
-          <div frm-text-field model="item.postcode" required="true"></div>
+          <div frm-text-field model="item.postcode" required="item.country.id == 'UK'"></div>
           <div frm-errors errors="item.errors.postcode"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Country</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.country" options="countries"></div>
+          <div frm-errors errors="item.errors.country"></div>
         </div>
       </div>
 
