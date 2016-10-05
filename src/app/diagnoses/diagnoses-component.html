@@ -12,11 +12,6 @@
       </tr>
 
       <tr>
-        <th>EDTA</th>
-        <td>{{item.edta | missing}}</td>
-      </tr>
-
-      <tr>
         <th>Retired</th>
         <td><span tick="item.retired"></span></td>
       </tr>
@@ -31,6 +26,20 @@
         <tr ng-repeat="group in item.groups">
             <td>{{group.group.name}}</td>
             <td>{{group.type.label}}</td>
+        </tr>
+    </table>
+
+    <table class="table" ng-if="item.codes.length">
+        <tr>
+            <th>System</th>
+            <th>Code</th>
+            <th>Display</th>
+        </tr>
+
+        <tr ng-repeat="code in item.codes">
+            <td>{{code.system}}</td>
+            <td>{{code.code}}</td>
+            <td>{{code.display}}</td>
         </tr>
     </table>
   </div>
@@ -48,15 +57,6 @@
         <div frm-control>
           <div frm-text-field model="item.name" required="true"></div>
           <div frm-errors errors="item.errors.name"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
-        <div frm-label>EDTA</div>
-
-        <div frm-control>
-          <div frm-integer-field model="item.edta"></div>
-          <div frm-errors errors="item.errors.edta"></div>
         </div>
       </div>
 
@@ -94,7 +94,7 @@
         <tr>
           <th></th>
           <th sort-helper="name">Name</th>
-          <th sort-helper="edta">EDTA</th>
+          <th>Codes</th>
           <th sort-helper="retired">Retired</th>
           <th></th>
         </tr>
@@ -108,7 +108,7 @@
           </td>
 
           <td>{{item.name}}</td>
-          <td>{{item.edta | missing}}</td>
+          <td><span ng-repeat="x in item.codes">{{x.code}} ({{x.system}})<span ng-if="!$last">, </span></span></td>
           <td><span tick="item.retired"></span></td>
 
           <td>

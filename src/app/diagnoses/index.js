@@ -9,17 +9,20 @@ import {
   diagnosisGroupsControllerFactory,
   diagnosisGroupsComponent
 } from './groups-component.directive';
+import diagnosisModelFactory from './diagnosis-model';
 
 import templateUrl from './diagnoses.html';
 
-function config($stateProvider) {
+function config($stateProvider, storeProvider) {
+  storeProvider.registerModel('diagnoses', 'DiagnosisModel');
+
   $stateProvider.state('diagnoses', {
     url: '/diagnoses',
     templateUrl: templateUrl
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.diagnoses', [])
   .config(config)
@@ -28,4 +31,5 @@ export default angular.module('radar.diagnoses', [])
   .directive('diagnosesComponent', diagnosesComponent)
   .factory('DiagnosisGroupsController', diagnosisGroupsControllerFactory)
   .directive('diagnosisGroupsComponent', diagnosisGroupsComponent)
+  .factory('DiagnosisModel', diagnosisModelFactory)
   .name;

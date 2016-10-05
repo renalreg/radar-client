@@ -1,5 +1,9 @@
-function patientDiagnosisModelFactory(Model) {
+function patientDiagnosisModelFactory(Model, store) {
   function PatientDiagnosisModel(modelName, data) {
+    if (data.diagnosis) {
+      data.diagnosis = store.pushToStore(store.create('diagnoses', data.diagnosis))
+    }
+
     Model.call(this, modelName, data);
   }
 
@@ -20,6 +24,6 @@ function patientDiagnosisModelFactory(Model) {
   return PatientDiagnosisModel;
 }
 
-patientDiagnosisModelFactory.$inject = ['Model'];
+patientDiagnosisModelFactory.$inject = ['Model', 'store'];
 
 export default patientDiagnosisModelFactory;
