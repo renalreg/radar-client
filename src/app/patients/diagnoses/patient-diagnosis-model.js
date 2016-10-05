@@ -1,7 +1,7 @@
 function patientDiagnosisModelFactory(Model, store) {
   function PatientDiagnosisModel(modelName, data) {
     if (data.diagnosis) {
-      data.diagnosis = store.pushToStore(store.create('diagnoses', data.diagnosis))
+      data.diagnosis = store.pushToStore(store.create('diagnoses', data.diagnosis));
     }
 
     Model.call(this, modelName, data);
