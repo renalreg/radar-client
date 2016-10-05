@@ -167,7 +167,7 @@ function jsFormula(field, data) {
 var registry = new Registry();
 
 // Register widgets
-registry.addWidget('string', 'marmoset-select-widget');
+registry.addWidget('string', 'marmoset-string-widget');
 registry.addWidget('date', 'marmoset-date-widget');
 registry.addWidget('int', 'marmoset-int-widget');
 registry.addWidget('float', 'marmoset-float-widget');
