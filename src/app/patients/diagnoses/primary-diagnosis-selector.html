@@ -7,7 +7,7 @@
         <tr>
           <th></th>
           <th sort-helper="name">Name</th>
-          <th sort-helper="edta">EDTA</th>
+          <th sort-helper="getEdtaCode()">EDTA</th>
         </tr>
       </thead>
 
@@ -28,7 +28,7 @@
           </td>
 
           <td>{{diagnosis.name}}</td>
-          <td>{{diagnosis.edta | missing}}</td>
+          <td>{{diagnosis.getEdtaCodes() | missing}}</td>
         </tr>
       </tbody>
     </table>
