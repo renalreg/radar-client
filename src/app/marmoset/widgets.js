@@ -129,14 +129,17 @@ function marmosetSelectWidget($compile) {
       field: '=marmosetSelectWidget'
     },
     link: function(scope, element) {
-      // TODO null option
-
       var e = angular.element('<select></select>');
       e.attr('class', 'form-control');
       e.attr('name', scope.field.name);
       e.attr('ng-model', 'field.data[field.name]');
       e.attr('ng-options', 'x.value as x.label for x in field.options');
       e.attr('ng-required', 'field.required()');
+
+      // null option
+      var option = angular.element('<option></option>');
+      e.append(option);
+
       element.append(e);
       $compile(e)(scope);
     }
