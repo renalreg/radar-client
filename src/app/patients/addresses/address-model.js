@@ -34,7 +34,7 @@ function patientAddressModelFactory(Model) {
       }
 
       if (this.country) {
-        lines.push(this.country);
+        lines.push(this.country.label);
       }
     } else {
       if (this.postcode) {
