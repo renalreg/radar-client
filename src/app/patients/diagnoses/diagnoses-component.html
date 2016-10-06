@@ -17,7 +17,7 @@
       </tr>
 
       <tr>
-        <th>From Date</th>
+        <th>Diagnosis Date</th>
         <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
       </tr>
 
@@ -81,7 +81,7 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>From Date</div>
+        <div frm-label>Diagnosis Date</div>
 
         <div frm-control>
           <div frm-date-field model="item.fromDate" required="true"></div>
@@ -131,7 +131,7 @@
         <tr>
           <th></th>
           <th sort-helper="getDiagnosis()">Diagnosis</th>
-          <th sort-helper="fromDate">From Date</th>
+          <th sort-helper="fromDate">Diagnosis Date</th>
           <th sort-helper="toDate">To Date</th>
           <th sort-helper="getSource()">Data Source</th>
           <th></th>

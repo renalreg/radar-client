@@ -28,6 +28,9 @@ function patientAddressesControllerFactory(
 
     self.load(firstPromise([
       store.findMany('patient-addresses', {patient: $scope.patient.id}),
+      store.findMany('countries').then(function(countries) {
+        $scope.countries = countries;
+      }),
       getRadarGroup().then(function(group) {
         $scope.sourceGroup = group;
       })
@@ -36,6 +39,7 @@ function patientAddressesControllerFactory(
     $scope.create = function() {
       var item = store.create('patient-addresses', {
         patient: $scope.patient.id,
+        country: {id: 'GB'},
         sourceGroup: $scope.sourceGroup
       });
       self.edit(item);

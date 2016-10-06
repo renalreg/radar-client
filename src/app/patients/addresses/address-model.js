@@ -32,6 +32,10 @@ function patientAddressModelFactory(Model) {
       if (this.postcode) {
         lines.push(this.postcode);
       }
+
+      if (this.country) {
+        lines.push(this.country);
+      }
     } else {
       if (this.postcode) {
         // Postcode parts should be separated by a space but limit to first 4 charcters just in case

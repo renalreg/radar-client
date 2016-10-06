@@ -35,7 +35,7 @@ var PAGES = {
   QUESTIONNAIRES: {name: 'Questionnaires', state: 'patient.questionnaires', cohort: true},
   RENAL_IMAGING: {name: 'Renal Imaging', state: 'patient.renalImaging'},
   RENAL_PROGRESSION: {name: 'Renal Disease Progression', state: 'patient.renalProgression'},
-  RESULTS: {name: 'Results', state: 'patient.results'},
+  RESULTS: {name: 'Lab Results', state: 'patient.results'},
   SALT_WASTING_CLINICAL_FEATURES: {name: 'Clinical Features', state: 'patient.saltWastingClinicalFeatures'},
   TRANSPLANTS: {name: 'Kidney Transplants', state: 'patient.transplants'},
 };
