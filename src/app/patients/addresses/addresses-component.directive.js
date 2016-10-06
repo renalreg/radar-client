@@ -39,7 +39,7 @@ function patientAddressesControllerFactory(
     $scope.create = function() {
       var item = store.create('patient-addresses', {
         patient: $scope.patient.id,
-        country: {id: 'UK'},
+        country: {id: 'GB'},
         sourceGroup: $scope.sourceGroup
       });
       self.edit(item);
