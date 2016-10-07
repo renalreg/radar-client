@@ -24,22 +24,22 @@ describe('age format', function() {
   });
 
   it('handles one month', function() {
-    expect(filter(2628000)).toBe('0 years, 1 month');
+    expect(filter(1)).toBe('0 years, 1 month');
   });
 
   it('handles less than a year', function() {
-    expect(filter(15768000)).toBe('0 years, 6 months');
+    expect(filter(6)).toBe('0 years, 6 months');
   });
 
   it('handles one year', function() {
-    expect(filter(31536000)).toBe('1 year');
+    expect(filter(12)).toBe('1 year');
   });
 
   it('handles years and months', function() {
-    expect(filter(47304000)).toBe('1 year, 6 months');
+    expect(filter(18)).toBe('1 year, 6 months');
   });
 
   it('handles years', function() {
-    expect(filter(315360000)).toBe('10 years');
+    expect(filter(120)).toBe('10 years');
   });
 });

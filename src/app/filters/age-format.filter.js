@@ -1,11 +1,10 @@
 function ageFormatFilter() {
-  return function ageFormat(seconds) {
+  return function ageFormat(months) {
     var output;
 
-    if (seconds !== null && seconds !== undefined) {
-      var years = seconds / (365 * 24 * 60 * 60);
-      var months = Math.floor((years - Math.floor(years)) * 12);
-      years = Math.floor(years);
+    if (months != null) {
+      var years = Math.floor(months / 12);
+      months = months % 12;
 
       output = years + ' ' + (years === 1 ? 'year' : 'years');
 
