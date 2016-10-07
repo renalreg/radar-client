@@ -57,7 +57,7 @@ function diagnosisSelector(store) {
             scope.diagnoses[key] = [];
           }
 
-          var weight = group === null ? diagnosis.name : diagnosis.getWeight(group.id);
+          var weight = group === null ? diagnosis.name : [diagnosis.getWeight(group.id), diagnosis.name];
 
           scope.diagnoses[key].push({
             diagnosis: diagnosis,

@@ -17,7 +17,7 @@ function primaryDiagnosisSelector(store) {
           return {
             diagnosis: x,
             edtaCode: x.getEdtaCode(),
-            weight: x.getWeight(scope.cohort.id)
+            weight: [x.getWeight(scope.cohort.id), x.name]
           };
         });
 
