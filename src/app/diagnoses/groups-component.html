@@ -24,6 +24,15 @@
           </div>
         </div>
 
+        <div frm-field frm-group>
+          <div frm-label>Weight</div>
+
+          <div frm-control>
+            <div frm-integer-field model="item.weight"></div>
+            <div frm-errors errors="parent.errors.groups[$index].weight"></div>
+          </div>
+        </div>
+
         <p><span crud-list-remove-button item="item"></span></p>
 
         <hr />

@@ -21,11 +21,13 @@
         <tr>
             <th>Group</th>
             <th>Type</th>
+            <th>Weight</th>
         </tr>
 
         <tr ng-repeat="group in item.groups">
             <td>{{group.group.name}}</td>
             <td>{{group.type.label}}</td>
+            <td>{{group.weight}}</td>
         </tr>
     </table>
 

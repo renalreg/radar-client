@@ -57,7 +57,13 @@ function diagnosisSelector(store) {
             scope.diagnoses[key] = [];
           }
 
-          scope.diagnoses[key].push(diagnosis);
+          var weight = group === null ? diagnosis.name : diagnosis.getWeight(group.id);
+
+          scope.diagnoses[key].push({
+            diagnosis: diagnosis,
+            edtaCode: diagnosis.getEdtaCode(),
+            weight: weight
+          });
         }
 
         _.forEach(diagnoses, function(diagnosis) {

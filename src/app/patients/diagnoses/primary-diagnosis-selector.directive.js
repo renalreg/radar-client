@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import templateUrl from './primary-diagnosis-selector.html';
 
 function primaryDiagnosisSelector(store) {
@@ -11,8 +12,14 @@ function primaryDiagnosisSelector(store) {
       scope.diagnosis = null;
 
       store.findMany('diagnoses', {primaryGroup: scope.cohort.id}).then(function(diagnoses) {
-        scope.diagnoses = diagnoses;
-      }),
+        scope.diagnoses = _.map(diagnoses, function(x) {
+          return {
+            diagnosis: x,
+            edtaCode: x.getEdtaCode(),
+            weight: x.getWeight(scope.cohort.id)
+          };
+        });
+      });
 
       ngModel.$render = function() {
         scope.diagnosis = ngModel.$viewValue;

@@ -23,10 +23,14 @@ function diagnosisModelFactory(Model) {
     }
   };
 
-  DiagnosisModel.prototype.getEdtaCodes = function() {
-    var codes = this.getSystemCodes('ERA-EDTA PRD');
+  DiagnosisModel.prototype.getWeight = function(groupId) {
+    for (var i = 0; i < this.groups.length; i++) {
+      if (this.groups[i].group.id === groupId) {
+        return this.groups[i].weight;
+      }
+    }
 
-    return _.join(_.map(codes, 'code'), ', ') || '-';
+    return null;
   };
 
   return DiagnosisModel;
