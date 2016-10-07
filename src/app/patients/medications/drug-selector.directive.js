@@ -6,9 +6,13 @@ function drugSelector(store) {
     templateUrl: templateUrl,
     link: function(scope, element, attrs, ngModel) {
       scope.drug = null;
+      scope.loading = true;
 
       store.findMany('drugs').then(function(drugs) {
         scope.drugs = drugs;
+
+        // Finished loading
+        scope.loading = false;
       });
 
       ngModel.$render = function() {

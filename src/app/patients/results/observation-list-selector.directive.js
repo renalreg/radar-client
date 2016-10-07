@@ -20,6 +20,7 @@ function observationListSelector(store, adapter) {
       scope.remove = remove;
       scope.up = up;
       scope.down = down;
+      scope.loading = true;
 
       load();
 
@@ -35,6 +36,9 @@ function observationListSelector(store, adapter) {
           });
 
           scope.observations = observations;
+
+          // Finished loading
+          scope.loading = false;
         });
       }
 

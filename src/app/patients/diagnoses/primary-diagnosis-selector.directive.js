@@ -10,6 +10,7 @@ function primaryDiagnosisSelector(store) {
     },
     link: function(scope, element, attrs, ngModel) {
       scope.diagnosis = null;
+      scope.loading = true;
 
       store.findMany('diagnoses', {primaryGroup: scope.cohort.id}).then(function(diagnoses) {
         scope.diagnoses = _.map(diagnoses, function(x) {
@@ -19,6 +20,9 @@ function primaryDiagnosisSelector(store) {
             weight: x.getWeight(scope.cohort.id)
           };
         });
+
+        // Finished loading
+        scope.loading = false;
       });
 
       ngModel.$render = function() {
