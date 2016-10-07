@@ -34,7 +34,7 @@ function marmosetBasicView($compile) {
       } else if (scope.field.type === 'boolean') {
         e.attr('tick', 'field.value()');
       } else {
-        e.text('{{field.value() | missing}}');
+        e.text('{{field.display() | missing}}');
       }
 
       element.append(e);

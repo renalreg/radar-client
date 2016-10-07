@@ -18,14 +18,14 @@ function formStore(store, adapter) {
     });
   }
 
-  /** Get forms relevant to a patient. */
-  function getForms(patientId) {
-    return _getForms({patient: patientId, type: 'form'});
+  /** Get forms for a group/patient. */
+  function getForms(groupId, patientId) {
+    return _getForms({group: groupId, patient: patientId, type: 'form'});
   }
 
-  /** Get questionnaires relevant to a patient. */
-  function getQuestionnaires(patientId) {
-    return _getForms({patient: patientId, type: 'questionnaire'});
+  /** Get questionnaires for a group/patient. */
+  function getQuestionnaires(groupId, patientId) {
+    return _getForms({group: groupId, patient: patientId, type: 'questionnaire'});
   }
 
   /** Get a single form. */
@@ -38,6 +38,11 @@ function formStore(store, adapter) {
     return store.findMany('entries', {patient: patientId, form: formId});
   }
 
+  /** Get entry for this patient and form. */
+  function getEntry(patientId, formId) {
+    return store.findFirst('entries', {patient: patientId, form: formId});
+  }
+
   /** Create a new form entry. */
   function create(patientId, formId) {
     return store.create('entries', {patient: patientId, form: formId});
@@ -48,6 +53,7 @@ function formStore(store, adapter) {
     getQuestionnaires: getQuestionnaires,
     getForm: getForm,
     getEntries: getEntries,
+    getEntry: getEntry,
     create: create
   };
 }

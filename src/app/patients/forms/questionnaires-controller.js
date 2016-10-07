@@ -1,15 +1,11 @@
-import _ from 'lodash';
-
-function QuestionnairesController($scope, forms, patient, $state) {
-  // Sort by name
-  forms = _.sortBy(forms, 'form.name');
-
+function QuestionnairesController($scope, forms, patient, $state, cohort) {
+  $scope.cohort = cohort;
   $scope.forms = forms;
 
   /** Redirect to first form. */
   function redirect() {
     if ($state.current.name !== 'patient.questionnaire' && forms.length) {
-      $state.go('patient.questionnaire', {formId: forms[0].form.id});
+      $state.go('patient.questionnaire', {formSlug: forms[0].form.slug});
     }
   }
 
@@ -39,6 +35,6 @@ function QuestionnairesController($scope, forms, patient, $state) {
   });
 }
 
-QuestionnairesController.$inject = ['$scope', 'forms', 'patient', '$state'];
+QuestionnairesController.$inject = ['$scope', 'forms', 'patient', '$state', 'cohort'];
 
 export default QuestionnairesController;

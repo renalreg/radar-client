@@ -167,7 +167,7 @@ function jsFormula(field, data) {
 var registry = new Registry();
 
 // Register widgets
-registry.addWidget('string', 'marmoset-select-widget');
+registry.addWidget('string', 'marmoset-string-widget');
 registry.addWidget('date', 'marmoset-date-widget');
 registry.addWidget('int', 'marmoset-int-widget');
 registry.addWidget('float', 'marmoset-float-widget');
@@ -239,6 +239,7 @@ function Field(schema, data) {
   self.type = data.type;
   self.label = data.label;
   self.help = data.help || null;
+  self.unit = data.unit || null;
   self.options = (data.options && data.options.length) ? data.options : null;
   self.widget = data.widget || {};
   self.view = data.view || {};
@@ -295,6 +296,32 @@ Field.prototype.getView = function() {
   return this.schema.registry.getView(this);
 };
 
+function _getDisplay(field, value) {
+  if (value === undefined) {
+    return null;
+  } else if (field.options) {
+    for (var i = 0; i < field.options.length; i++) {
+      if (field.options[i].value === value) {
+        return field.options[i].label;
+      }
+    }
+
+    return null;
+  } else {
+    return value;
+  }
+}
+
+function getDisplay(field, value) {
+  var display = _getDisplay(field, value);
+
+  if (display !== null && field.unit) {
+    display = display + ' ' + field.unit;
+  }
+
+  return display;
+}
+
 function builder(scope, element, transclude) {
   /** Wrap a field so it has access to its value. */
   function wrapField(field, data) {
@@ -311,23 +338,7 @@ function builder(scope, element, transclude) {
     };
 
     wrapped.display = function() {
-      var value = wrapped.value();
-
-      if (value === undefined) {
-        return null;
-      }
-
-      if (field.options) {
-        for (var i = 0; i < field.options.length; i++) {
-          if (field.options[i].value === value) {
-            return field.options[i].label;
-          }
-        }
-
-        return null;
-      } else {
-        return value;
-      }
+      return getDisplay(field, wrapped.value());
     };
 
     return wrapped;

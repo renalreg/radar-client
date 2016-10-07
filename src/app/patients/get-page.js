@@ -32,7 +32,7 @@ var PAGES = {
   PLASMAPHERESIS: {name: 'Plasmapheresis', state: 'patient.plasmapheresis'},
   PREGNANCIES: {name: 'Pregnancies', state: 'patient.pregnancies'},
   PRIMARY_DIAGNOSIS: {name: 'Primary Diagnosis', state: 'patient.primaryDiagnosis', cohort: true},
-  QUESTIONNAIRES: {name: 'Questionnaires', state: 'patient.questionnaires'},
+  QUESTIONNAIRES: {name: 'Questionnaires', state: 'patient.questionnaires', cohort: true},
   RENAL_IMAGING: {name: 'Renal Imaging', state: 'patient.renalImaging'},
   RENAL_PROGRESSION: {name: 'Renal Disease Progression', state: 'patient.renalProgression'},
   RESULTS: {name: 'Lab Results', state: 'patient.results'},
