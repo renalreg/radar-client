@@ -12,6 +12,9 @@ var config = {
       '/api': {
         target: 'http://localhost:5000',
         pathRewrite: {'^/api' : ''}
+      },
+      '/admin': {
+        target: 'http://localhost:5002'
       }
     }
   },
