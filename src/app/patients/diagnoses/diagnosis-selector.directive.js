@@ -10,24 +10,26 @@ function diagnosisSelector(store) {
       'patient': '='
     },
     link: function(scope, element, attrs, ngModel) {
+      var groupDiagnoses = {};
+
+      function getDiagnoses(group) {
+        var key = group === null ? null : group.id;
+        return groupDiagnoses[key] || [];
+      }
+
       scope.group = null;
       scope.groups = [];
       scope.diagnosis = null;
-      scope.diagnoses = {};
+      scope.diagnoses = [];
       scope.loading = true;
 
       ngModel.$render = function() {
         scope.diagnosis = ngModel.$viewValue;
       };
 
-      scope.getDiagnoses = function(group) {
-        var key = group === null ? null : group.id;
-
-        return scope.diagnoses[key] || [];
-      };
-
       scope.setGroup = function(group) {
         scope.group = group;
+        scope.diagnoses = getDiagnoses(group);
       };
 
       scope.isActive = function(group) {
@@ -53,13 +55,13 @@ function diagnosisSelector(store) {
         function add(group, diagnosis) {
           var key = group === null ? null : group.id;
 
-          if (scope.diagnoses[key] === undefined) {
-            scope.diagnoses[key] = [];
+          if (groupDiagnoses[key] === undefined) {
+            groupDiagnoses[key] = [];
           }
 
           var weight = group === null ? diagnosis.name : [diagnosis.getWeight(group.id), diagnosis.name];
 
-          scope.diagnoses[key].push({
+          groupDiagnoses[key].push({
             diagnosis: diagnosis,
             edtaCode: diagnosis.getEdtaCode(),
             weight: weight
@@ -83,7 +85,7 @@ function diagnosisSelector(store) {
 
         // Remove groups that don't have any diagnoses
         scope.groups = _.filter(scope.groups, function(group) {
-          return scope.getDiagnoses(group).length > 0;
+          return getDiagnoses(group).length > 0;
         });
 
         // Default to first group with diagnoses (otherwise all)

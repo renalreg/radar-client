@@ -6,7 +6,7 @@
       <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
   </ul>
 
-  <div list-helper="getDiagnoses(group) as page" list-helper-options="{perPage: 10, sortBy: 'weight'}" class="diagnosis-selector">
+  <div list-helper="diagnoses as page" list-helper-options="{perPage: 10, sortBy: 'weight'}" class="diagnosis-selector">
     <table class="table table-condensed table-striped">
       <thead>
         <tr>
