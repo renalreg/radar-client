@@ -1,5 +1,6 @@
 import angular from 'angular';
 import _ from 'lodash';
+import compare from '../utils/compare';
 
 var DEFAULT_SORT_BY = 'id';
 var DEFAULT_PER_PAGE = 10;
@@ -168,9 +169,12 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
           if (sortBy !== null) {
             var getter = $parse(sortBy);
 
-            sortedItems = _.sortBy(sortedItems, function(item) {
+            sortedItems = sortedItems.sort(function(a, b) {
               // Note: AngularJS doesn't check the prototype of the locals argument
-              return getter(item, sortScope);
+              a = getter(a, sortScope);
+              b = getter(b, sortScope);
+
+              return compare(a, b);
             });
           }
 
