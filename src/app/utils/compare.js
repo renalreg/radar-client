@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Element-wise comparison of two arrays.
  *
@@ -31,7 +33,7 @@ function arrayCompare(a, b) {
  */
 function compare(a, b) {
   if (_.isArray(a) && _.isArray(b)) {
-    return arrayCompare(a, b)
+    return arrayCompare(a, b);
   } else if (a > b) {
     return 1;
   } else if (a < b) {
