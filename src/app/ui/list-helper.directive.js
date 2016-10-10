@@ -156,7 +156,7 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
             };
 
             filteredItems = _.filter(filteredItems, function(x) {
-              return anyValue(x.getData(), matcher);
+              return anyValue(x, matcher);
             });
           }
 
