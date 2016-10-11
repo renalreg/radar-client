@@ -5,7 +5,13 @@ function modelDetailControllerFactory(
   $window,
   GrantPermission
 ) {
-  /** Controller for managing a single model. */
+  /**
+   * Controller for managing a single model.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   * @param {Object} params - optional parameters.
+   */
   function ModelDetailController($scope, params) {
     this.scope = $scope;
 
@@ -96,12 +102,21 @@ function modelDetailControllerFactory(
       });
   };
 
-  /** Warn the user that they will lose unsaved changes. */
+  /**
+   * Warn the user that they will lose unsaved changes.
+   *
+   * @returns {boolean} - true if the user wants to discard changes.
+   */
   ModelDetailController.prototype.discardChanges = function() {
     return $window.confirm('Discard unsaved changes?');
   };
 
-  /** Switch to the detail view. */
+  /**
+   * Switch to the detail view.
+   *
+   * @param {Object} item - the item to view.
+   * @returns {undefined}
+   */
   ModelDetailController.prototype.view = function(item) {
     if (item === undefined) {
       item = this.scope.item;
@@ -131,7 +146,12 @@ function modelDetailControllerFactory(
     this.scope.item = item;
   };
 
-  /** Switch to the edit view. */
+  /**
+   * Switch to the edit view.
+   *
+   * @param {Object} item - item to edit.
+   * @returns {undefined}
+   */
   ModelDetailController.prototype.edit = function(item) {
     if (item === undefined) {
       item = this.scope.item;
@@ -156,7 +176,11 @@ function modelDetailControllerFactory(
     this.scope.item = item.clone();
   };
 
-  /** Save the item. */
+  /**
+   * Save the item.
+   *
+   * @returns {Object} - a promise.
+   */
   ModelDetailController.prototype.save = function() {
     var self = this;
 
@@ -167,7 +191,11 @@ function modelDetailControllerFactory(
     });
   };
 
-  /** Convenience method to save an item and then view it. */
+  /**
+   * Convenience method to save an item and then view it.
+   *
+   * @returns {Object} - a promise.
+   */
   ModelDetailController.prototype.saveAndView = function() {
     var self = this;
 
@@ -176,7 +204,11 @@ function modelDetailControllerFactory(
     });
   };
 
-  /** Remove/delete the item. */
+  /**
+   * Remove/delete the item.
+   *
+   * @returns {Object} - a promise.
+   */
   ModelDetailController.prototype.remove = function() {
     var self = this;
 
@@ -193,7 +225,11 @@ function modelDetailControllerFactory(
       });
   };
 
-  /** Return true if the view button is enabled. */
+  /**
+   * Return true if the view button is enabled.
+   *
+   * @returns {boolean} - true if the view button is enabled.
+   */
   ModelDetailController.prototype.viewEnabled = function() {
     // Can view an item if exists, has been saved and is not
     // currently being saved.
@@ -202,14 +238,22 @@ function modelDetailControllerFactory(
       !this.scope.saving;
   };
 
-  /** Return true if the create button is enabled. */
+  /**
+   * Return true if the create button is enabled.
+   *
+   * @returns {boolean} - true if the create button is enabled.
+   */
   ModelDetailController.prototype.createEnabled = function() {
     // Can create a new item if there isn't an existing item and
     // we're not in the middle of saving.
     return this.scope.item === null && !this.scope.saving;
   };
 
-  /** Return true if the edit button is enabled. */
+  /**
+   * Return true if the edit button is enabled.
+   *
+   * @returns {boolean} - true if the edit button is enabled.
+   */
   ModelDetailController.prototype.editEnabled = function() {
     // Can edit an item if it exists, has been saved and is
     // not currently being saved.
@@ -218,7 +262,11 @@ function modelDetailControllerFactory(
       !this.scope.saving;
   };
 
-  /** Return true if the remove button is enabled. */
+  /**
+   * Return true if the remove button is enabled.
+   *
+   * @returns {boolean} - true if the remove button is enabled.
+   */
   ModelDetailController.prototype.removeEnabled = function() {
     // Can remove/delete an item if it exists, has been saved and is
     // not currently being saved.
@@ -227,47 +275,79 @@ function modelDetailControllerFactory(
       !this.scope.saving;
   };
 
-  /** Returns true if the save button is enabled. */
+  /**
+   * Returns true if the save button is enabled.
+   *
+   * @returns {boolean} - true if the save button is enabled.
+   */
   ModelDetailController.prototype.saveEnabled = function() {
     // Can save an item if it exists and isn't already in the process
     // of being saved.
     return this.scope.item !== null && !this.scope.saving;
   };
 
-  /** Returns true if the cancel button is enabled. */
+  /**
+   * Returns true if the cancel button is enabled.
+   *
+   * @returns {boolean} - true if the cancel button is enabled.
+   */
   ModelDetailController.prototype.cancelEnabled = function() {
     // Can cancel an edit if the item isn't in the process of being saved.
     return !this.scope.saving;
   };
 
-  /** Returns true if the user has permission to create a new item. */
+  /**
+   * Returns true if the user has permission to create a new item.
+   *
+   * @returns {boolean} - true if the user has permission to create a new item.
+   */
   ModelDetailController.prototype.createPermission = function() {
     return this._createPermission.hasPermission();
   };
 
-  /** Returns true if the user has permission to edit this item. */
+  /**
+   * Returns true if the user has permission to edit this item.
+   *
+   * @returns {boolean} - true if the user has permission to edit this item.
+   */
   ModelDetailController.prototype.editPermission = function() {
     return this._editPermission.hasObjectPermission(this.scope.item);
   };
 
-  /** Returns true if the user has permission to remove/delete this item. */
+  /**
+   * Returns true if the user has permission to remove/delete this item.
+   *
+   * @returns {boolean} - true if the user has permission to remove/delete this item.
+   */
   ModelDetailController.prototype.removePermission = function() {
     return this._removePermission.hasObjectPermission(this.scope.item);
   };
 
-  /** Returns true when the create button should be visible. */
+  /**
+   * Returns true when the create button should be visible.
+   *
+   * @returns {boolean} - true when the create button should be visible.
+   */
   ModelDetailController.prototype.createVisible = function() {
     // The create button should be visible if there isn't an existing item.
     return this.scope.item === null;
   };
 
-  /** Returns true when the edit button should be visible. */
+  /**
+   * Returns true when the edit button should be visible.
+   *
+   * @returns {boolean} - true when the edit button should be visible.
+   */
   ModelDetailController.prototype.editVisible = function() {
     // The edit button should be visible if there is an existing item to edit.
     return this.scope.item !== null;
   };
 
-  /** Returns true when the remove button should be visible. */
+  /**
+   * Returns true when the remove button should be visible.
+   *
+   * @returns {boolean} - true when the remove button should be visible.
+   */
   ModelDetailController.prototype.removeVisible = function() {
     // The remove button should be visible if there is an existing item to delete.
     return this.scope.item !== null;
