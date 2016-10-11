@@ -26,7 +26,7 @@ function diagnosisSelector(store) {
       // Currently displayed diagnoses
       scope.diagnoses = [];
 
-      // True while the directive is loading
+      // True while the data is loading
       scope.loading = true;
 
       // Add functions to scope
@@ -106,7 +106,7 @@ function diagnosisSelector(store) {
             // Add the diagnosis to each of its groups
             _.forEach(diagnosis.groups, function(group) {
               if (group.type.id === 'SECONDARY') {
-                // Add the diagnosis to the group list
+                // Add the diagnosis to the group's list
                 add(group.group, diagnosis);
               }
             });
