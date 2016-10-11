@@ -10,7 +10,11 @@ function patientDiagnosisModelFactory(Model, store) {
 
   PatientDiagnosisModel.prototype = Object.create(Model.prototype);
 
-  /** Returns the diagnosis name (coded diagnosis takes precedence). */
+  /**
+   * Returns the diagnosis name (coded diagnosis takes precedence).
+   *
+   * @returns {string} - the diagnosis name.
+   */
   PatientDiagnosisModel.prototype.getDiagnosis = function() {
     var name;
 
