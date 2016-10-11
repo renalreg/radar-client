@@ -31,7 +31,6 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
         aliasSetter($scope, self);
 
         var options = $parse($attrs.listHelperOptions)($scope) || {};
-        var deep = options.deep !== false;
         var perPage = options.perPage || DEFAULT_PER_PAGE;
         var reverse = options.reverse === true;
         var sortBy = options.sortBy || DEFAULT_SORT_BY;
