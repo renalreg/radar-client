@@ -164,7 +164,7 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
           if (sortBy !== null) {
             var getter = $parse(sortBy);
 
-            sortedItems = sortedItems.sort(function(a, b) {
+            sortedItems.sort(function(a, b) {
               // Note: AngularJS doesn't check the prototype of the locals argument
               a = getter(a, sortScope);
               b = getter(b, sortScope);
