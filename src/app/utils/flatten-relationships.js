@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Flattens any child objects into just their id.
  *
@@ -12,14 +14,14 @@ function flattenRelationships(data, depth) {
 
   var newData;
 
-  if (angular.isArray(data)) { // Array
+  if (_.isArray(data)) { // Array
     newData = [];
 
     // Recurse into each value in the array
     _.each(data, function(value) {
       newData.push(flattenRelationships(value, depth + 1));
     });
-  } else if (angular.isObject(data)) { // Object
+  } else if (_.isObject(data)) { // Object
     // Flatten any child objects with an id property
     if (depth > 0 && data.id !== undefined) {
       newData = data.id;
