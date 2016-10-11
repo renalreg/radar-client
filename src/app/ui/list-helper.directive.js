@@ -46,16 +46,12 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
         var page = 1;
 
         $scope.$watchCollection(function() {
-          return collectionGetter($scope) || [];
+          return collectionGetter($scope);
         }, function(value) {
-          items = value;
+          items = value || [];
           _filter();
           checkPage();
         });
-
-        $scope.$watch('items', function() {
-          _filter();
-        }, deep);
 
         _filter();
 
