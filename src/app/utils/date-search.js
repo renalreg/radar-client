@@ -143,6 +143,12 @@ function getDigitGroupRegExp(digits, n) {
   }
 }
 
+/**
+ * Returns a function that checks if the supplied date matches a partially entered date.
+ *
+ * @param {String} search - a partial date (e.g. the 01/02 part of 01/02/2003)
+ * @returns {Function} - a function to match values against the partial date.
+ */
 function dateSearch(search) {
   var params;
   var match;

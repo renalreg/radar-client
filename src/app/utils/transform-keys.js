@@ -2,6 +2,9 @@ import _ from 'lodash';
 
 var constant = new RegExp('^[A-Z0-9_]+$');
 
+/**
+ * Transform an objects keys.
+ */
 function transformKeys(x, f) {
   if (_.isArray(x)) {
     return _.map(x, function(value) {
@@ -16,6 +19,9 @@ function transformKeys(x, f) {
   }
 }
 
+/**
+ * Convert an object's keys to camel case.
+ */
 function camelCaseKeys(x) {
   return transformKeys(x, function(key) {
     if (constant.exec(key)) {
@@ -26,6 +32,9 @@ function camelCaseKeys(x) {
   });
 }
 
+/**
+ * Convert an object's keys to snake case.
+ */
 function snakeCaseKeys(x) {
   return transformKeys(x, function(key) {
     if (constant.exec(key)) {

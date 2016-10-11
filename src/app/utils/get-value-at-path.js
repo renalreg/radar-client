@@ -1,3 +1,10 @@
+/**
+ * Gets the value of an object at the supplied path.
+ *
+ * @param {Object} o - the object to get the value from.
+ * @param {String} path - dot-separated path.
+ * @returns the value at the path.
+ */
 function getValueAtPath(o, path) {
   var paths = path.split('.');
 
