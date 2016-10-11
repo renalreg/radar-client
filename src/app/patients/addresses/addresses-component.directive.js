@@ -6,10 +6,6 @@ function patientAddressPermissionFactory(PatientRadarObjectPermission) {
 
 patientAddressPermissionFactory.$inject = ['PatientRadarObjectPermission'];
 
-/**
- * Each patient can have multiple addresses. Each record has a from and to date
- * which are the dates the patient moved in and moved out respectively.
- */
 function patientAddressesControllerFactory(
   ModelListDetailController,
   PatientAddressPermission,
@@ -18,6 +14,13 @@ function patientAddressesControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * Each patient can have multiple addresses. Each record has a from and to date
+   * which are the dates the patient moved in and moved out respectively.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PatientAddressesController($scope) {
     var self = this;
 
