@@ -13,6 +13,7 @@ function changeEmailControllerFactory(
       params: {}
     });
 
+    // Scratch space to store confirmation of the email
     $scope.data = {};
 
     self.load($scope.user);
@@ -29,6 +30,8 @@ function changeEmailControllerFactory(
 
     return ModelEditController.prototype.save.call(this).then(function() {
       notificationService.success('Your email has been updated.');
+
+      // Reset the scratch space
       self.scope.data = {};
     });
   };

@@ -1,12 +1,16 @@
 import angular from 'angular';
 import _ from 'lodash';
-import compare from '../utils/compare';
 import stable from 'stable';
+
+import compare from '../utils/compare';
+import anyValue from '../utils/any-value';
+import dateSearch from '../utils/date-search';
+import escapeRegExp from '../utils/escape-reg-exp';
 
 var DEFAULT_SORT_BY = 'id';
 var DEFAULT_PER_PAGE = 10;
 
-function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
+function listHelper($parse) {
   return {
     scope: false,
     controller: ['$scope', '$attrs', function($scope, $attrs) {
@@ -267,7 +271,7 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
   };
 }
 
-listHelper.$inject = ['$parse', 'escapeRegExp', 'dateSearch', 'anyValue'];
+listHelper.$inject = ['$parse'];
 
 function listHelperProxyFactory() {
   function ListHelperProxy(callback, params) {

@@ -1,16 +1,6 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import dateSearch from './date-search';
 
 describe('date search', function() {
-  beforeEach(angular.mock.module('radar.utils'));
-
-  var dateSearch;
-
-  beforeEach(angular.mock.inject(function(_dateSearch_) {
-    dateSearch = _dateSearch_;
-  }));
-
   it('empty string', function() {
     var f = dateSearch('');
 

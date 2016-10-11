@@ -1,16 +1,6 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import flattenRelationships from './flatten-relationships';
 
 describe('flatten relationships', function() {
-  beforeEach(angular.mock.module('radar.utils'));
-
-  var flattenRelationships;
-
-  beforeEach(angular.mock.inject(function(_flattenRelationships_) {
-    flattenRelationships = _flattenRelationships_;
-  }));
-
   it('handles an empty object', function() {
     expect(flattenRelationships({})).toEqual({});
   });

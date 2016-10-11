@@ -1,6 +1,8 @@
 import angular from 'angular';
 import _ from 'lodash';
 
+import flattenRelationships from '../utils/flatten-relationships';
+
 function adapterProvider() {
   var config = {
     baseUrl: '',
@@ -20,7 +22,7 @@ function adapterProvider() {
     config.afterResponseChain.push(name);
   };
 
-  this.$get = ['$http', '$q', 'flattenRelationships', '$injector', function($http, $q, flattenRelationships, $injector) {
+  this.$get = ['$http', '$q', '$injector', function($http, $q, $injector) {
     function Adapter(config) {
       this.config = config;
 

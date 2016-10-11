@@ -1,36 +1,31 @@
-import angular from 'angular';
-import _ from 'lodash';
+function flattenRelationships(data, depth) {
+  if (depth === undefined) {
+    depth = 0;
+  }
 
-function flattenRelationships() {
-  return function flattenRelationships(data, depth) {
-    if (depth === undefined) {
-      depth = 0;
-    }
+  var newData;
 
-    var newData;
+  if (angular.isArray(data)) {
+    newData = [];
 
-    if (angular.isArray(data)) {
-      newData = [];
-
-      _.each(data, function(value) {
-        newData.push(flattenRelationships(value, depth + 1));
-      });
-    } else if (angular.isObject(data)) {
-      if (depth > 0 && data.id !== undefined) {
-        newData = data.id;
-      } else {
-        newData = {};
-
-        _.each(data, function(value, key) {
-          newData[key] = flattenRelationships(value, depth + 1);
-        });
-      }
+    _.each(data, function(value) {
+      newData.push(flattenRelationships(value, depth + 1));
+    });
+  } else if (angular.isObject(data)) {
+    if (depth > 0 && data.id !== undefined) {
+      newData = data.id;
     } else {
-      newData = data;
-    }
+      newData = {};
 
-    return newData;
-  };
+      _.each(data, function(value, key) {
+        newData[key] = flattenRelationships(value, depth + 1);
+      });
+    }
+  } else {
+    newData = data;
+  }
+
+  return newData;
 }
 
 export default flattenRelationships;

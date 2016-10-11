@@ -1,16 +1,6 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import { snakeCaseKeys, camelCaseKeys } from './transform-keys';
 
 describe('camel case keys', function() {
-  beforeEach(angular.mock.module('radar.utils'));
-
-  var camelCaseKeys;
-
-  beforeEach(angular.mock.inject(function(_camelCaseKeys_) {
-    camelCaseKeys = _camelCaseKeys_;
-  }));
-
   it('handles an empty object', function() {
     expect(camelCaseKeys({})).toEqual({});
   });
@@ -85,14 +75,6 @@ describe('camel case keys', function() {
 });
 
 describe('snake case keys', function() {
-  beforeEach(angular.mock.module('radar.utils'));
-
-  var snakeCaseKeys;
-
-  beforeEach(angular.mock.inject(function(_snakeCaseKeys_) {
-    snakeCaseKeys = _snakeCaseKeys_;
-  }));
-
   it('handles an empty object', function() {
     expect(snakeCaseKeys({})).toEqual({});
   });
