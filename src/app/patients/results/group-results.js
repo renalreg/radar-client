@@ -1,11 +1,22 @@
 import _ from 'lodash';
 
-/** Key used to group the results. */
+/**
+ * Key used to group the results.
+ *
+ * @param {Object} result - a result.
+ * @returns {string} - the key to group by.
+ */
 function getKey(result) {
   // Group the results by source and date
   return result.sourceGroup.id + '.' + result.sourceType + '.' + result.date;
 }
 
+/**
+ * Group results with the same key.
+ *
+ * @param {array} results - a list of results.
+ * @returns {array} - a list of grouped results.
+ */
 function groupResults(results) {
   var groups = [];
   var currentKey = null;
