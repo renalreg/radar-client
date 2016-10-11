@@ -5,7 +5,13 @@ import getForm from '../get-form.js';
 
 import templateUrl from './cohort-navigation.html';
 
-/** Combine the page and form links for this group. */
+/**
+ * Combine the page and form links for this group.
+ *
+ * @param {Object} group - a group.
+ * @param {Object} patient - a patient.
+ * @returns {array} - a list of links.
+ */
 function getLinks(group, patient) {
   var links = [];
 

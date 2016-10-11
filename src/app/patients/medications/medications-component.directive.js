@@ -6,11 +6,6 @@ function medicationPermissionFactory(PatientSourceObjectPermission) {
 
 medicationPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/**
- * A component for recording a patient's current and historic medications. A separate record should
- * be created for each prescription. For example if a patient is prescribed an increased dosage a new
- * record should be created.
- */
 function medicationsControllerFactory(
   ModelListDetailController,
   MedicationPermission,
@@ -18,6 +13,14 @@ function medicationsControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patient's current and historic medications. A separate record should
+   * be created for each prescription. For example if a patient is prescribed an increased dosage a new
+   * record should be created.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function MedicationsController($scope) {
     var self = this;
 

@@ -5,7 +5,11 @@ function medicationModelFactory(Model) {
 
   MedicationModel.prototype = Object.create(Model.prototype);
 
-  /** Returns the drug name (coded drug takes precedence). */
+  /**
+   * Returns the drug name (coded drug takes precedence).
+   *
+   * @returns {string} - the name of the drug.
+   */
   MedicationModel.prototype.getDrug = function() {
     var name;
 
@@ -22,7 +26,11 @@ function medicationModelFactory(Model) {
     return name;
   };
 
-  /** Returns the drug dose (coded dose takes precedence). */
+  /**
+   * Returns the drug dose (coded dose takes precedence).
+   *
+   * @returns {string} - the drug dose.
+   */
   MedicationModel.prototype.getDose = function() {
     var dose;
 

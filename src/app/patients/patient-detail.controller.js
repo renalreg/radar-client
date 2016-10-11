@@ -1,4 +1,13 @@
-/** Controller for a single patient. */
+/*
+ * Controller for a single patient.
+ *
+ * @class
+ * @param {Object} $scope - angular scope.
+ * @param {Object} patient - injected patient.
+ * @param {Object} session - injected session.
+ * @param {function} hasPermissionForPatient - injected function.
+ * @param {Object} titleService - injected title service.
+ */
 function PatientDetailController(
   $scope,
   patient,

@@ -6,7 +6,6 @@ function pathologyPermissionFactory(PatientSourceObjectPermission) {
 
 pathologyPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/** A component for recording a patient's pathology results. */
 function pathologyControllerFactory(
   ModelListDetailController,
   PathologyPermission,
@@ -14,6 +13,12 @@ function pathologyControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patient's pathology results.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PathologyController($scope) {
     var self = this;
 

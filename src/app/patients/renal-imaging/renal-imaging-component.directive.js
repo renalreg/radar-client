@@ -6,7 +6,6 @@ function renalImagingPermissionFactory(PatientSourceObjectPermission) {
 
 renalImagingPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/** A component for recording a patient's renal imaging results (e.g. ultrasound). */
 function renalImagingControllerFactory(
   ModelListDetailController,
   RenalImagingPermission,
@@ -14,6 +13,12 @@ function renalImagingControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patient's renal imaging results (e.g. ultrasound).
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function RenalImagingController($scope) {
     var self = this;
 
