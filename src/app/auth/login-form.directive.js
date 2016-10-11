@@ -11,6 +11,7 @@ function loginFormDirective(
       var credentials = {
         username: '',
         password: '',
+        // Don't logout other sessions by default
         logoutOtherSessions: false
       };
 

@@ -3,9 +3,9 @@ import _ from 'lodash';
 /**
  * Flattens any child objects into just their id.
  *
- * @params data - the value to flatten.
- * @params {Integer} depth - internal value to keep track of recursion depth.
- * @returns the flattened value.
+ * @param {*} data - the value to flatten.
+ * @param {integer|undefined} depth - internal value to keep track of recursion depth.
+ * @returns {*} - the flattened value.
  */
 function flattenRelationships(data, depth) {
   if (depth === undefined) {

@@ -7,7 +7,6 @@ import store from '../store';
 import CohortDetailController from './cohort-detail.controller';
 import CohortListController from './cohort-list.controller';
 import cohortStore from './cohort-store';
-import sortCohorts from './sort-cohorts';
 
 import cohortListTemplateUrl from './cohort-list.html';
 import cohortDetailTemplateUrl from './cohort-detail.html';
@@ -38,5 +37,4 @@ export default angular.module('radar.cohorts', [uiRouter, stats, store])
   .controller('CohortDetailController', CohortDetailController)
   .controller('CohortListController', CohortListController)
   .factory('cohortStore', cohortStore)
-  .factory('sortCohorts', sortCohorts)
   .name;

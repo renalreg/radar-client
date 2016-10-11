@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 function modelEditControllerFactory($q) {
-  /** Controller for editing a model */
+  /** Controller for editing a model. */
   function ModelEditController($scope) {
     this.scope = $scope;
 

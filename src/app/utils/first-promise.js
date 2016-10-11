@@ -5,6 +5,10 @@ function firstPromise($q) {
    * with the first promise.
    *
    * Useful for fetching secondary data.
+   *
+   * @param {array} promises - a list of promises to resolve.
+   * @returns {Object} - a promise that waits for all of the promises to
+   * resolve and returns the result of the first promise.
    */
   return function firstPromise(promises) {
     if (promises.length) {

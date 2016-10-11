@@ -5,13 +5,16 @@ function ForgotPasswordController(
 ) {
   $scope.errors = {};
   $scope.data = {};
+  $scope.submit = submit;
 
-  $scope.submit = function() {
+  function submit() {
     $scope.errors = {};
 
     return authService.forgotPassword($scope.data.username, $scope.data.email)
       .then(function() {
         notificationService.success({message: MESSAGE, timeout: 30000});
+
+        // Redirect the login page
         $state.go('login');
       })
       .catch(function(errors) {
@@ -19,7 +22,7 @@ function ForgotPasswordController(
           $scope.errors = errors;
         }
       });
-  };
+  }
 }
 
 ForgotPasswordController.$inject = [

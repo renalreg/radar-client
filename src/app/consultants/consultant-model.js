@@ -1,6 +1,7 @@
 function consultantModelFactory(Model) {
   function ConsultantModel(modelName, data) {
     if (data.groups === undefined) {
+      // Default groups to an empty list
       data.groups = [];
     }
 
@@ -9,6 +10,7 @@ function consultantModelFactory(Model) {
 
   ConsultantModel.prototype = Object.create(Model.prototype);
 
+  /** Convert a consultant to a string. */
   ConsultantModel.prototype.toString = function() {
     return this.firstName + ' ' + this.lastName + ' (' + this.specialty.name + ')';
   };
