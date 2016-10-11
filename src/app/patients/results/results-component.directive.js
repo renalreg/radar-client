@@ -1,5 +1,8 @@
 import _ from 'lodash';
 
+import transformResultsForGraph from './transform-results-for-graph';
+import transformResultsForTable from './transform-results-for-table';
+
 import templateUrl from './results-component.html';
 
 function resultPermissionFactory(PatientSourceObjectPermission) {
@@ -13,9 +16,7 @@ function resultsControllerFactory(
   ResultPermission,
   firstPromise,
   $injector,
-  store,
-  transformResultsForGraph,
-  transformResultsForTable
+  store
 ) {
   var TABLE = 0;
   var GRAPH = 1;
@@ -146,9 +147,7 @@ resultsControllerFactory.$inject = [
   'ResultPermission',
   'firstPromise',
   '$injector',
-  'store',
-  'transformResultsForGraph',
-  'transformResultsForTable'
+  'store'
 ];
 
 function resultsComponent(ResultsController) {

@@ -6,6 +6,7 @@ function pathologyPermissionFactory(PatientSourceObjectPermission) {
 
 pathologyPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
+/** A component for recording a patient's pathology results. */
 function pathologyControllerFactory(
   ModelListDetailController,
   PathologyPermission,

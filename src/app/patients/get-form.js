@@ -1,5 +1,6 @@
 import { toStateString } from './utils.js';
 
+/** Get a link for a form. */
 function getForm(form, patient) {
   return {
     name: form.name,

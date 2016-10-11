@@ -40,9 +40,12 @@ var PAGES = {
   TRANSPLANTS: {name: 'Kidney Transplants', state: 'patient.transplants'},
 };
 
+
+/** Get a link for a page. */
 function getPage(code, patient, group) {
   var page = PAGES[code];
 
+  // Unknown page
   if (!page) {
     return null;
   }
@@ -51,6 +54,7 @@ function getPage(code, patient, group) {
     patientId: patient.id
   };
 
+  // A cohort page
   if (page.cohort) {
     stateParams.cohortId = group.id;
   }

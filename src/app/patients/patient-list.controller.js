@@ -2,6 +2,7 @@ import angular from 'angular';
 import _ from 'lodash';
 import $ from 'jquery';
 
+/** Generate a URL to download the list of patients as CSV. */
 function getDownloadUrl(params) {
   // Download all patients rather than just the current page
   params = angular.copy(params);
@@ -11,6 +12,7 @@ function getDownloadUrl(params) {
   return '/api/patients.csv?' + $.param(params);
 }
 
+/** Controller for a list of patients. */
 function patientListControllerFactory(
   ListController,
   $injector,
@@ -32,6 +34,7 @@ function patientListControllerFactory(
 
     $injector.invoke(ListController, self, {$scope: $scope});
 
+    // Initialise the filter to the defaults
     $scope.filters = angular.copy(DEFAULT_FILTERS);
 
     var proxy = new ListHelperProxy(update, {
@@ -50,12 +53,14 @@ function patientListControllerFactory(
       $scope.genders = genders;
     });
 
+    /** Get the groups to filter by. */
     function getGroups(filters) {
       return _.filter([filters.cohort, filters.hospital], function(group) {
-        return group !== undefined && group !== null;
+        return group != null;
       });
     }
 
+    /** Convert the list of filters to URL parameters. */
     function filtersToParams(filters) {
       var params = {};
 
@@ -92,7 +97,7 @@ function patientListControllerFactory(
     function update() {
       $scope.groups = getGroups($scope.filters);
 
-      // Sorted by group
+      // List is currently sorted by group
       if (proxy.getSortBy().indexOf('group') === 0) {
         // Check if we are still filtering against the sorted group
         var found = _.some($scope.groups, function(group) {
@@ -122,11 +127,13 @@ function patientListControllerFactory(
     }
 
     function search() {
+      // Jump back to the first page when updating the search
       proxy.page = 1;
       return update();
     }
 
     function clear() {
+      // Reset the filters back to the default
       $scope.filters = angular.copy(DEFAULT_FILTERS);
       search();
     }

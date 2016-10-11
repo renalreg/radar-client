@@ -6,6 +6,7 @@ function transplantPermissionFactory(PatientSourceObjectPermission) {
 
 transplantPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
+/** A component for viewing and entering a patient's transplants. */
 function transplantsControllerFactory(
   ModelListDetailController,
   TransplantPermission,

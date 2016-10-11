@@ -6,7 +6,7 @@
       <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
   </ul>
 
-  <div list-helper="getObservations(group) as page" list-helper-options="{perPage: 5, sortBy: 'name'}" class="observation-selector">
+  <div list-helper="observations as page" list-helper-options="{perPage: 5, sortBy: 'name'}" class="observation-selector">
     <table class="table table-condensed table-striped">
       <thead>
         <tr>

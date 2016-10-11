@@ -3,6 +3,8 @@ function DeletePatientController($scope, notificationService, $state) {
     patient.remove()
       .then(function() {
         notificationService.success('Patient deleted.');
+
+        // Redirect the patient list
         $state.go('patients');
       })
       .catch(function() {

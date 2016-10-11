@@ -6,6 +6,7 @@ function patientNumberPermissionFactory(PatientRadarObjectPermission) {
 
 patientNumberPermissionFactory.$inject = ['PatientRadarObjectPermission'];
 
+/** A component for recording patient numbers (e.g. NHS numbers, local hosptial numbers, and study numbers). */
 function patientNumbersControllerFactory(
   ModelListDetailController,
   PatientNumberPermission,
@@ -45,6 +46,7 @@ function patientNumbersControllerFactory(
   PatientNumbersController.$inject = ['$scope'];
   PatientNumbersController.prototype = Object.create(ModelListDetailController.prototype);
 
+  /** A number was updated. */
   PatientNumbersController.prototype.save = function() {
     var self = this;
 
@@ -54,6 +56,7 @@ function patientNumbersControllerFactory(
     });
   };
 
+  /** A number was removed. */
   PatientNumbersController.prototype.remove = function(item) {
     var self = this;
 

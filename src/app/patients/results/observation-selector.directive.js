@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import templateUrl from './observation-selector.html';
 
+/** User interface for selecting an observation from a list. */
 function observationSelector(store) {
   return {
     require: 'ngModel',
@@ -10,78 +11,110 @@ function observationSelector(store) {
       'patient': '='
     },
     link: function(scope, element, attrs, ngModel) {
+      // Mapping between group id and observations
+      var groupObservations = {};
+
+      // Currently selected groups (all observations are displayed when set to null)
       scope.group = null;
+
+      // List of groups with at least one observation (displayed as tabs)
       scope.groups = [];
+
+      // Currently selected observation
       scope.observation = null;
-      scope.observations = {};
+
+      // Currently displayed observations
+      scope.observations = [];
+
+      // True while the data is loading
       scope.loading = true;
 
-      scope.getObservations = function(group) {
-        var key = group === null ? null : group.id;
+      // Add functions to the scope
+      scope.isActive = isActive;
+      scope.use = use;
+      scope.setGroup = setGroup;
 
-        return scope.observations[key] || [];
-      };
-
-      scope.setGroup = function(group) {
-        scope.group = group;
-      };
-
-      scope.isActive = function(group) {
-        return scope.group === group;
-      };
-
+      /** Called when the model is updated outside the directive. */
       ngModel.$render = function() {
         scope.observation = ngModel.$viewValue;
       };
 
-      scope.use = function(observation) {
-        update(observation);
-      };
+      load();
 
+      /** Get the observations for this group. */
+      function getObservations(group) {
+        var key = group === null ? null : group.id;
+
+        return groupObservations[key] || [];
+      }
+
+      /** Set the current group. */
+      function setGroup(group) {
+        scope.group = group;
+        scope.observations = getObservations(group);
+      }
+
+      /** Returns true if the group is selected. */
+      function isActive(group) {
+        return scope.group === group;
+      }
+
+      /** Select an observation. */
+      function use(observation) {
+        update(observation);
+      }
+
+      /** Update the selected observation. */
       function update(observation) {
         scope.observation = observation;
+
+        // Update the model value
         ngModel.$setViewValue(observation);
       }
 
-      // Load observations
-      store.findMany('observations').then(function(observations) {
-        // Add a observation
-        function add(group, observation) {
-          var key = group === null ? null : group.id;
+      /** Add an observation to the mapping. */
+      function add(group, observation) {
+        var key = group === null ? null : group.id;
 
-          if (scope.observations[key] === undefined) {
-            scope.observations[key] = [];
+        if (groupObservations[key] === undefined) {
+          groupObservations[key] = [];
+        }
+
+        groupObservations[key].push(observation);
+      }
+
+      /** Load the list of observations. */
+      function load() {
+        store.findMany('observations').then(function(observations) {
+          _.forEach(observations, function(observation) {
+            // Add observation to all
+            add(null, observation);
+
+            _.forEach(observation.groups, function(group) {
+              // Add observation to group
+              add(group, observation);
+            });
+          });
+
+          // Get's patients groups sorted by name
+          scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
+
+          // Remove groups that don't have any observations
+          scope.groups = _.filter(scope.groups, function(group) {
+            return getObservations(group).length > 0;
+          });
+
+          // Default to first group with observations (otherwise all)
+          if (scope.groups.length > 0) {
+            setGroup(scope.groups[0]);
+          } else {
+            setGroup(null);
           }
 
-          scope.observations[key].push(observation);
-        }
-
-        _.forEach(observations, function(observation) {
-          // Add observation to all
-          add(null, observation);
-
-          _.forEach(observation.groups, function(group) {
-            // Add observation to group
-            add(group, observation);
-          });
+          // Finished loading
+          scope.loading = false;
         });
-
-        // Get's patients groups sorted by name
-        scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
-
-        // Remove groups that don't have any observations
-        scope.groups = _.filter(scope.groups, function(group) {
-          return scope.getObservations(group).length > 0;
-        });
-
-        // Default to first group with observations (otherwise all)
-        if (scope.groups.length > 0) {
-          scope.setGroup(scope.groups[0]);
-        }
-
-        // Finished loading
-        scope.loading = false;
-      });
+      }
     }
   };
 }

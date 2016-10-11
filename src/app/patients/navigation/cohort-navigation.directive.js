@@ -5,15 +5,29 @@ import getForm from '../get-form.js';
 
 import templateUrl from './cohort-navigation.html';
 
+/** Combine the page and form links for this group. */
 function getLinks(group, patient) {
   var links = [];
 
   _.forEach(group.pages, function(x) {
+    // Get this link for this page (returns null if not found)
     var link = getPage(x.page, patient, group);
 
     if (!link) {
       return;
     }
+
+    // Add the page to the list of links
+    links.push({
+      link: link,
+      weight: x.weight
+    });
+  });
+
+  // Create a link for each form
+  _.forEach(group.forms, function(x) {
+    // Get the link for this form
+    var link = getForm(x.form, patient);
 
     links.push({
       link: link,
@@ -21,15 +35,7 @@ function getLinks(group, patient) {
     });
   });
 
-  var forms = _.sortBy(group.forms, 'weight');
-
-  _.forEach(forms, function(x) {
-    links.push({
-      link: getForm(x.form, patient),
-      weight: x.weight
-    });
-  });
-
+  // Sort pages/forms by weight (lower numbers first)
   links = _.sortBy(links, 'weight');
   links = _.map(links, 'link');
 

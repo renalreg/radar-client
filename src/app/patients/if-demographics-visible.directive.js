@@ -1,3 +1,4 @@
+/** Directive to add the "if-demographics-visible" CSS class to an element when demographics are visible. */
 function ifDemographicsVisible(toggleDemographicsService) {
   return {
     link: function(scope, element) {

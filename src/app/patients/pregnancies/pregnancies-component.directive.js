@@ -6,6 +6,7 @@ function pregnancyPermissionFactory(PatientObjectPermission) {
 
 pregnancyPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/** A component for recording a patient's pregnancies (one record per pregnancy). */
 function pregnanciesControllerFactory(
   ModelListDetailController,
   PregnancyPermission,

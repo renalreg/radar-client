@@ -6,6 +6,7 @@ function nephrectomyPermissionFactory(PatientSourceObjectPermission) {
 
 nephrectomyPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
+/** A component for recording a patient's nephrectomies. */
 function nephrectomiesControllerFactory(
   ModelListDetailController,
   NephrectomyPermission,

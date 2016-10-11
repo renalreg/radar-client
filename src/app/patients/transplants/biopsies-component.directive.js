@@ -9,6 +9,7 @@ function transplantBiopsiesControllerFactory(
     this.load($scope.parent.biopsies);
 
     $scope.create = function() {
+      // Create a new biopsy
       $scope.parent.biopsies.push({});
     };
   }

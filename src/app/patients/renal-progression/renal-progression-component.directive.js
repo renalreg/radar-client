@@ -6,6 +6,7 @@ function renalProgressionPermissionFactory(PatientObjectPermission) {
 
 renalProgressionPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/** A component for recording the date when a patient was diagnosed with ESRF. */
 function renalProgressionControllerFactory(
   ModelDetailController,
   RenalProgressionPermission,

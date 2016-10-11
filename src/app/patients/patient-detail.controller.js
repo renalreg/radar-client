@@ -1,3 +1,4 @@
+/** Controller for a single patient. */
 function PatientDetailController(
   $scope,
   patient,

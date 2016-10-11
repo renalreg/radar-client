@@ -6,6 +6,7 @@ function renalImagingPermissionFactory(PatientSourceObjectPermission) {
 
 renalImagingPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
+/** A component for recording a patient's renal imaging results (e.g. ultrasound). */
 function renalImagingControllerFactory(
   ModelListDetailController,
   RenalImagingPermission,

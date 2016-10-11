@@ -1,3 +1,4 @@
+/** Directive to add the "if-demographics-hidden" CSS class to an element when demographics are hidden. */
 function ifDemographicsHidden(toggleDemographicsService) {
   return {
     link: function(scope, element) {

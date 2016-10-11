@@ -9,6 +9,7 @@ function transplantRejectionsControllerFactory(
     this.load($scope.parent.rejections);
 
     $scope.create = function() {
+      // Create a new rejection
       $scope.parent.rejections.push({});
     };
   }

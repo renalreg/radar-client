@@ -1,10 +1,12 @@
 function transplantModelFactory(Model) {
   function TransplantModel(modelName, data) {
     if (data.biopsies === undefined) {
+      // Default biopsies to an empty list
       data.biopsies = [];
     }
 
     if (data.rejections === undefined) {
+      // Default rejections to an empty list
       data.rejections = [];
     }
 
