@@ -193,7 +193,6 @@ function listHelper($parse, escapeRegExp, dateSearch, anyValue) {
             var endIndex = page * perPage;
             paginatedItems = _.slice(sortedItems, startIndex, endIndex);
           }
-
         }
       }
 
