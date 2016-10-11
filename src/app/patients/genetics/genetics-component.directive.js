@@ -6,7 +6,6 @@ function geneticsPermissionFactory(PatientObjectPermission) {
 
 geneticsPermissionFactory.$inject = ['PatientObjectPermission'];
 
-/** A component for recording a patient's genetic results. */
 function geneticsControllerFactory(
   ModelListDetailController,
   GeneticsPermission,
@@ -14,6 +13,12 @@ function geneticsControllerFactory(
   store,
   firstPromise
 ) {
+  /**
+   * A component for recording a patient's genetic results.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function GeneticsController($scope) {
     var self = this;
 

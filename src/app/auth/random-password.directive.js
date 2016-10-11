@@ -10,7 +10,11 @@ function randomPasswordDirective(randomPassword) {
       scope.loading = false;
       scope.generate = generate;
 
-      /** Generate a new password. */
+      /**
+       * Generate a new password.
+       *
+       * @returns {undefined}
+       */
       function generate() {
         scope.loading = true;
 

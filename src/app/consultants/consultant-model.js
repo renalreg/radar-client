@@ -10,7 +10,11 @@ function consultantModelFactory(Model) {
 
   ConsultantModel.prototype = Object.create(Model.prototype);
 
-  /** Convert a consultant to a string. */
+  /**
+   * Convert a consultant to a string.
+   *
+   * @returns {string} - a string repesentation of the consulant.
+   */
   ConsultantModel.prototype.toString = function() {
     return this.firstName + ' ' + this.lastName + ' (' + this.specialty.name + ')';
   };

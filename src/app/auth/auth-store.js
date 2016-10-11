@@ -1,11 +1,11 @@
-/**
- * Service for storing user credentials (e.g tokens).
- *
- * Data is stored in the browser's local storage. In older browsers that
- * don't implement the local storage API the data is stored in a cookie
- * instead.
- */
 function authStore(localStorageService) {
+  /**
+   * Service for storing user credentials (e.g tokens).
+   *
+   * Data is stored in the browser's local storage. In older browsers that
+   * don't implement the local storage API the data is stored in a cookie
+   * instead.
+   */
   return {
     logout: logout,
     setToken: setToken,
@@ -14,7 +14,11 @@ function authStore(localStorageService) {
     getUserId: getUserId
   };
 
-  /** Removes the user ID and token. */
+  /**
+   * Removes the user ID and token.
+   *
+   * @returns {undefined}
+   */
   function logout() {
     localStorageService.remove('userId');
     localStorageService.remove('token');
@@ -24,6 +28,7 @@ function authStore(localStorageService) {
    * Sets the token.
    *
    * @param {String} token - Session token.
+   * @returns {undefined}
    */
   function setToken(token) {
     localStorageService.set('token', token);
@@ -33,6 +38,7 @@ function authStore(localStorageService) {
    * Sets the user ID.
    *
    * @param {Number} userId - User ID.
+   * @returns {undefined}
    */
   function setUserId(userId) {
     localStorageService.set('userId', userId);

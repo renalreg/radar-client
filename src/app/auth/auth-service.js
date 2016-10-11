@@ -1,4 +1,3 @@
-/** Service for authorization actions */
 function authService(
   session,
   $q,
@@ -8,6 +7,9 @@ function authService(
   // True while the user is being logged out
   var loggingOut = false;
 
+  /**
+   * Service for authorization actions.
+   */
   return {
     login: login,
     logout: logout,
@@ -19,8 +21,8 @@ function authService(
   /**
    * Generic error handler for authentication methods.
    *
-   * @param promise - the promise to reject with the errors.
-   * @returns a function to handle errors.
+   * @param {Object} promise - the promise to reject with the errors.
+   * @returns {function} - a function to handle errors.
    */
   function errorHandler(promise) {
     if (promise === undefined) {
@@ -42,7 +44,7 @@ function authService(
    * Log the user in.
    *
    * @param {Object} credentials - object with the login credentials.
-   * @returns a promise that is resolved with the logged in user.
+   * @returns {Object} - a promise that is resolved with the logged in user.
    */
   function login(credentials) {
     var deferred = $q.defer();
@@ -72,7 +74,7 @@ function authService(
    * Logout the user.
    *
    * @param {Boolean} forced - true if the user was automatically logged out.
-   * @returns a promise that is resolved when the user is logged out.
+   * @returns {Object} - a promise that is resolved when the user is logged out.
    */
   function logout(forced) {
     var deferred = $q.defer();
@@ -98,7 +100,7 @@ function authService(
    * Request a username reminder.
    *
    * @param {String} email - the email to get the username for.
-   * @returns a promise that is resolved when the username reminder has been successfully requested.
+   * @returns {Object} - a promise that is resolved when the username reminder has been successfully requested.
    */
   function forgotUsername(email) {
     var data = {
@@ -113,7 +115,7 @@ function authService(
    *
    * @param {String} username - the username to reset the password for.
    * @param {String} email - the email to reset the password for.
-   * @returns a promise that is resolved when the password reset has been successfully requested.
+   * @returns {Object} - a promise that is resolved when the password reset has been successfully requested.
    */
   function forgotPassword(username, email) {
     var data = {
@@ -130,7 +132,7 @@ function authService(
    * @param {String} token - the reset password token (from the URL).
    * @param {String} username - the username of the account.
    * @param {String} password - the new password.
-   * @returns a promise is resolved when the password has been successfully updated.
+   * @returns {Object} - a promise is resolved when the password has been successfully updated.
    */
   function resetPassword(token, username, password) {
     var data = {

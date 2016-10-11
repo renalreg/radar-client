@@ -5,6 +5,8 @@ function randomPassword(adapter) {
    * Older browsers don't have the Web Cryptography API
    * which makes it hard to generate cryptographically
    * secure passwords client-side.
+   *
+   * @returns {Object} - a promise.
    */
   return function randomPassword() {
     return adapter.get('/random-password').then(function(response) {

@@ -2,7 +2,12 @@ import angular from 'angular';
 import _ from 'lodash';
 
 function listEditControllerFactory($q) {
-  /** Controller for viewing and editing a list of items. */
+  /**
+   * Controller for viewing and editing a list of items.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function ListEditController($scope) {
     this.scope = $scope;
 
@@ -39,22 +44,40 @@ function listEditControllerFactory($q) {
       });
   };
 
-  /** Append an item to the list of items. */
+  /**
+   * Append an item to the list of items.
+   *
+   * @param {Object} item - the item to append.
+   * @returns {undefined}
+   */
   ListEditController.prototype.append = function(item) {
     this.scope.items.push(item);
   };
 
-  /** Remove an item from the list of items. */
+  /**
+   * Remove an item from the list of items.
+   *
+   * @param {Object} item - the item to remove.
+   * @returns {undefined}
+   */
   ListEditController.prototype.remove = function(item) {
     _.pull(this.scope.items, item);
   };
 
-  /** Returns true if items can be removed. */
+  /**
+   * Returns true if items can be removed.
+   *
+   * @returns {boolean} - true if items can be removed.
+   */
   ListEditController.prototype.removeEnabled = function() {
     return true;
   };
 
-  /** Returns true if the user has permission to remove items. */
+  /**
+   * Returns true if the user has permission to remove items.
+   *
+   * @returns {boolean} - true if the user has permission to remove items.
+   */
   ListEditController.prototype.removePermission = function() {
     return true;
   };

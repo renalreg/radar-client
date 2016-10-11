@@ -1,4 +1,9 @@
-/** Directive to add the "if-demographics-hidden" CSS class to an element when demographics are hidden. */
+/**
+ * Directive to add the "if-demographics-hidden" CSS class to an element when demographics are hidden.
+ *
+ * @param {Object} toggleDemographicsService - injected service.
+ * @returns {Object} - a directive.
+ */
 function ifDemographicsHidden(toggleDemographicsService) {
   return {
     link: function(scope, element) {
@@ -8,6 +13,7 @@ function ifDemographicsHidden(toggleDemographicsService) {
         update(!value);
       });
 
+      // Call unsubscribe to avoid memory leaks
       scope.$on('$destroy', unsubscribe);
 
       function update(hidden) {

@@ -1,5 +1,10 @@
 function listControllerFactory($q) {
-  /** Controller for viewing a list of items. */
+  /**
+   * Controller for viewing a list of items.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function ListController($scope) {
     this.scope = $scope;
 

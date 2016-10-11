@@ -2,6 +2,9 @@ import angular from 'angular';
 
 /**
  * Directive for viewing and editing form entries.
+ *
+ * @param {function} $compile - injected function.
+ * @returns {Object} - a directive.
  */
 function formComponent($compile) {
   return {

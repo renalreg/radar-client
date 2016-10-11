@@ -6,13 +6,18 @@ function hospitalisationPermissionFactory(PatientSourceObjectPermission) {
 
 hospitalisationPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/** A component for recording a patient's hospitalisations (hospital visits). */
 function hospitalisationsControllerFactory(
   ModelListDetailController,
   HospitalisationPermission,
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patient's hospitalisations (hospital visits).
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function HospitalisationsController($scope) {
     var self = this;
 

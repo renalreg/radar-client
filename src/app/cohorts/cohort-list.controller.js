@@ -1,6 +1,13 @@
 import sortCohorts from './sort-cohorts';
 
-/** Controller for a list of cohorts. */
+/**
+ * Controller for a list of cohorts.
+ *
+ * @class
+ * @param {Object} $scope - angular scope.
+ * @param {Object} session - injected session.
+ * @param {Object} cohortStore - injected store.
+ */
 function CohortListController($scope, session, cohortStore) {
   $scope.loading = true;
 

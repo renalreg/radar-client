@@ -41,7 +41,14 @@ var PAGES = {
 };
 
 
-/** Get a link for a page. */
+/**
+ * Get a link for a page.
+ *
+ * @param {string} code - page code e.g. TRANSPLANTS.
+ * @param {Object} patient - a patient.
+ * @param {Object} group - a group.
+ * @returns {Object} - a link.
+ */
 function getPage(code, patient, group) {
   var page = PAGES[code];
 
