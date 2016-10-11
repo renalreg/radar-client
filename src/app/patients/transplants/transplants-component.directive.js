@@ -6,7 +6,6 @@ function transplantPermissionFactory(PatientSourceObjectPermission) {
 
 transplantPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/** A component for viewing and entering a patient's transplants. */
 function transplantsControllerFactory(
   ModelListDetailController,
   TransplantPermission,
@@ -14,6 +13,12 @@ function transplantsControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for viewing and entering a patient's transplants.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function TransplantsController($scope) {
     var self = this;
 

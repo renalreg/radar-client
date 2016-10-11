@@ -99,7 +99,11 @@ function listHelper($parse) {
           return reverse;
         }
 
-        /** Move back a page when the last item on the page is deleted. */
+        /**
+         * Move back a page when the last item on the page is deleted.
+         *
+         * @returns {undefined}
+         */
         function checkPage() {
           var totalPages = getTotalPages();
 

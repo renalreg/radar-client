@@ -22,7 +22,7 @@ function randomPasswordDirective(randomPassword) {
           .finally(function() {
             scope.loading = false;
           });
-      };
+      }
     }
   };
 }
