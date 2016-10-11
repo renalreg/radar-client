@@ -1,5 +1,9 @@
 import templateUrl from './entry-component.html';
 
+/*
+ * An entry is a completed form. This component is for managing forms that allow
+ * a single entry.
+ */
 function entryControllerFactory(
   ModelDetailController,
   EntryPermission,
@@ -34,6 +38,7 @@ function entryControllerFactory(
         return;
       }
 
+      // Check if the form has been completed
       var count = item ? 1 : 0;
 
       $scope.$emit('entryCount', {

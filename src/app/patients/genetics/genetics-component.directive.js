@@ -6,6 +6,7 @@ function geneticsPermissionFactory(PatientObjectPermission) {
 
 geneticsPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/** A component for recording a patient's genetic results. */
 function geneticsControllerFactory(
   ModelListDetailController,
   GeneticsPermission,

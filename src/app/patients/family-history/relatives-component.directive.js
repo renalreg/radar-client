@@ -17,6 +17,7 @@ function familyHistoryRelativesControllerFactory(
     ]));
 
     $scope.create = function() {
+      // Create a new relative
       $scope.parent.relatives.push({});
     };
   }

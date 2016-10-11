@@ -8,8 +8,11 @@ function formStore(store, adapter) {
 
     return adapter.get('/form-counts', params).then(function(response) {
       var forms = _.map(response.data.data, function(x) {
+        // Add the returned form to the store
+        var form = store.pushToStore(store.create('forms', x.form));
+
         return {
-          form: store.pushToStore(store.create('forms', x.form)),
+          form: form,
           count: x.count
         };
       });
@@ -28,7 +31,7 @@ function formStore(store, adapter) {
     return _getForms({group: groupId, patient: patientId, type: 'questionnaire'});
   }
 
-  /** Get a single form. */
+  /** Get a single form using the slug (URL). */
   function getForm(formSlug) {
     return store.findFirst('forms', {slug: formSlug});
   }

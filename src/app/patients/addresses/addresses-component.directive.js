@@ -6,6 +6,10 @@ function patientAddressPermissionFactory(PatientRadarObjectPermission) {
 
 patientAddressPermissionFactory.$inject = ['PatientRadarObjectPermission'];
 
+/**
+ * Each patient can have multiple addresses. Each record has a from and to date
+ * which are the dates the patient moved in and moved out respectively.
+ */
 function patientAddressesControllerFactory(
   ModelListDetailController,
   PatientAddressPermission,
@@ -37,11 +41,13 @@ function patientAddressesControllerFactory(
     ]));
 
     $scope.create = function() {
+      // Set the default country to Great Britain
       var item = store.create('patient-addresses', {
         patient: $scope.patient.id,
         country: {id: 'GB'},
         sourceGroup: $scope.sourceGroup
       });
+
       self.edit(item);
     };
   }

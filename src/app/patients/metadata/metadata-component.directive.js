@@ -6,6 +6,7 @@ function patientMetadataPermissionFactory(PatientObjectPermission) {
 
 patientMetadataPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/** A component for recording metadata about the patient (for example comments). */
 function patientMetadataControllerFactory(
   ModelDetailController,
   PatientMetadataPermission,

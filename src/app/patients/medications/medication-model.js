@@ -5,36 +5,38 @@ function medicationModelFactory(Model) {
 
   MedicationModel.prototype = Object.create(Model.prototype);
 
+  /** Returns the drug name (coded drug takes precedence). */
   MedicationModel.prototype.getDrug = function() {
-    var r;
+    var name;
 
     if (this.drug) {
-      r = this.drug.name;
+      name = this.drug.name;
 
       if (this.drug.drugGroup) {
-        r += ' (' + this.drug.drugGroup.name + ')';
+        name += ' (' + this.drug.drugGroup.name + ')';
       }
     } else {
-      r = this.drugText;
+      name = this.drugText;
     }
 
-    return r;
+    return name;
   };
 
+  /** Returns the drug dose (coded dose takes precedence). */
   MedicationModel.prototype.getDose = function() {
-    var r;
+    var dose;
 
-    if (this.doseQuantity !== undefined && this.doseQuantity !== null) {
-      r = this.doseQuantity;
+    if (this.doseQuantity != null) {
+      dose = this.doseQuantity;
 
       if (this.doseUnit) {
-        r = r + ' ' + this.doseUnit.label;
+        dose = dose + ' ' + this.doseUnit.label;
       }
     } else {
-      r = this.doseText;
+      dose = this.doseText;
     }
 
-    return r;
+    return dose;
   };
 
   return MedicationModel;

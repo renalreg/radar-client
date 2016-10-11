@@ -8,6 +8,12 @@ function patientCohortPermissionFactory(PatientObjectPermission) {
 
 patientCohortPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/**
+ * A patient can be a member of multiple cohorts. Each membership has a from and
+ * to date which is the period where the membership is active. A null to date means
+ * the membership won't expire. A patient can have multiple memberships for the same
+ * group.
+ */
 function patientCohortsControllerFactory(
   ModelListDetailController,
   PatientCohortPermission,
@@ -34,11 +40,12 @@ function patientCohortsControllerFactory(
   PatientCohortsController.$inject = ['$scope'];
   PatientCohortsController.prototype = Object.create(ModelListDetailController.prototype);
 
+  /** Called when a membership is saved. */
   PatientCohortsController.prototype.save = function() {
     var self = this;
 
     return ModelListDetailController.prototype.save.call(self).then(function(groupPatient) {
-      // Add the group to the patient's groups
+      // If this is a new membership add it to the patient's membership list
       if (!_.includes(self.scope.patient.groups, groupPatient)) {
         self.scope.patient.groups.push(groupPatient);
       }
@@ -47,11 +54,12 @@ function patientCohortsControllerFactory(
     });
   };
 
+  /** Called when a membership is deleted. */
   PatientCohortsController.prototype.remove = function(groupPatient) {
     var self = this;
 
     return ModelListDetailController.prototype.remove.call(self, groupPatient).then(function() {
-      // Remove the group from the patient's groups
+      // Remove this membership from the patient's membership list
       _.pull(self.scope.patient.groups, groupPatient);
     });
   };

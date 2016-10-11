@@ -6,6 +6,10 @@ function entryPermissionFactory(PatientObjectPermission) {
 
 entryPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/*
+ * An entry is a completed form. This component is for managing forms that allow
+ * multiple entries.
+ */
 function entriesControllerFactory(
   ModelListDetailController,
   EntryPermission,
@@ -26,10 +30,12 @@ function entriesControllerFactory(
     var schema = createSchema($scope.form.data);
     $scope.schema = schema;
 
+    // If sort order is specified in the schema
     if (schema.sortBy) {
       $scope.sortBy = 'data.' + schema.sortBy;
       $scope.reverse = schema.reverse;
     } else {
+      // Sort newest first by default
       $scope.sortBy = 'createdDate';
       $scope.reverse = true;
     }
@@ -41,11 +47,16 @@ function entriesControllerFactory(
       self.edit(item);
     };
 
-    $scope.$watch('items.length', function(count) {
+    // Watch for entries being added and removed
+    $scope.$watchCollection('items', function(items) {
       if ($scope.loading) {
         return;
       }
 
+      // Number of entries
+      var count = items.length;
+
+      // Update the number of entries for this type of form (used in the tabs)
       $scope.$emit('entryCount', {
         patient: $scope.patient,
         form: $scope.form,

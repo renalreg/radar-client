@@ -1,6 +1,7 @@
 function familyHistoryModelFactory(Model) {
   function FamilyHistoryModel(modelName, data) {
     if (data.relatives === undefined) {
+      // Default relatives to an empty list
       data.relatives = [];
     }
 

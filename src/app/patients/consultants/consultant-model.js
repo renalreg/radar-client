@@ -1,6 +1,7 @@
 function patientConsultantModelFactory(Model, store) {
   function PatientConsultantModel(modelName, data) {
     if (data.consultant) {
+      // Create a consultant model
       data.consultant = store.create('consultants', data.consultant);
     }
 

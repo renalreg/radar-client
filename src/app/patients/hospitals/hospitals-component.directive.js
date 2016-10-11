@@ -22,6 +22,10 @@ function patientHospitalPermissionFactory(hasPermission, hasPermissionForGroup, 
 
 patientHospitalPermissionFactory.$inject = ['hasPermission', 'hasPermissionForGroup', 'session'];
 
+/** A patient may attend several hospitals over their life. A patient may go to another hospital
+ * for specialist treatment or more permanently if they move house. The from and to date of each
+ * membership represented the period where a patient was being treated at that hospital.
+ */
 function patientHospitalsControllerFactory(
   ModelListDetailController,
   PatientHospitalPermission,
@@ -48,11 +52,12 @@ function patientHospitalsControllerFactory(
   PatientHospitalsController.$inject = ['$scope'];
   PatientHospitalsController.prototype = Object.create(ModelListDetailController.prototype);
 
+  /** Called when a membership is updated. */
   PatientHospitalsController.prototype.save = function() {
     var self = this;
 
     return ModelListDetailController.prototype.save.call(self).then(function(groupPatient) {
-      // Add the group to the patient's groups
+      // If this is a new membership add it to the patient's membership list
       if (!_.includes(self.scope.patient.groups, groupPatient)) {
         self.scope.patient.groups.push(groupPatient);
       }
@@ -61,11 +66,12 @@ function patientHospitalsControllerFactory(
     });
   };
 
+  /** Called when a membership is deleted. */
   PatientHospitalsController.prototype.remove = function(groupPatient) {
     var self = this;
 
     return ModelListDetailController.prototype.remove.call(self, groupPatient).then(function() {
-      // Remove the group from the patient's groups
+      // Remove this membership from the patient's membership list
       _.pull(self.scope.patient.groups, groupPatient);
     });
   };

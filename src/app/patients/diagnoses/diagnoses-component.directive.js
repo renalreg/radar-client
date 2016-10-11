@@ -1,5 +1,10 @@
 import templateUrl from './diagnoses-component.html';
 
+/**
+ * This component is for recording the patient's comorbidities. There is a separate component
+ * for recording the patient's primary diagnose(s). A patient may have multiple comorbities
+ * at any one time and may lose and regain comorbidites over time.
+ */
 function patientDiagnosesControllerFactory(
   ModelListDetailController,
   PatientDiagnosisPermission,

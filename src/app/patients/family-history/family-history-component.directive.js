@@ -6,6 +6,9 @@ function familyHistoryPermissionFactory(PatientObjectPermission) {
 
 familyHistoryPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/**
+ * A component for recording the family history of the current diagnosis.
+ */
 function familyHistoryControllerFactory(
   ModelDetailController,
   FamilyHistoryPermission,

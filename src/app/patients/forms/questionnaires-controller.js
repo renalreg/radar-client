@@ -14,6 +14,7 @@ function QuestionnairesController($scope, forms, patient, $state, cohort) {
     for (var i = 0; i < $scope.forms.length; i++) {
       var form = $scope.forms[i];
 
+      // Found the form to update
       if (form.form.id === id) {
         form.count = count;
       }
@@ -21,7 +22,7 @@ function QuestionnairesController($scope, forms, patient, $state, cohort) {
   }
 
   // When transitioning into this state redirect to the first
-  // available form (if available)
+  // available form (if any).
   redirect();
   $scope.$on('$stateChangeSuccess', redirect);
 
@@ -31,6 +32,7 @@ function QuestionnairesController($scope, forms, patient, $state, cohort) {
       return;
     }
 
+    // Update the entry count for this form
     updateCount(data.form.id, data.count);
   });
 }

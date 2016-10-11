@@ -6,6 +6,11 @@ function patientConsultantPermissionFactory(PatientObjectPermission) {
 
 patientConsultantPermissionFactory.$inject = ['PatientObjectPermission'];
 
+/**
+ * This component is for recording the patient's consultants. Each relationship has a from
+ * and to date so we can determine which consultant was responsible for the patient at a
+ * particular date.
+ */
 function patientConsultantsControllerFactory(
   ModelListDetailController,
   PatientConsultantPermission,

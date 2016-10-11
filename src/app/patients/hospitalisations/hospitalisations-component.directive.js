@@ -6,6 +6,7 @@ function hospitalisationPermissionFactory(PatientSourceObjectPermission) {
 
 hospitalisationPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
+/** A component for recording a patient's hospitalisations (hospital visits). */
 function hospitalisationsControllerFactory(
   ModelListDetailController,
   HospitalisationPermission,
