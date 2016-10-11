@@ -91,6 +91,8 @@ function diagnosisSelector(store) {
         // Default to first group with diagnoses (otherwise all)
         if (scope.groups.length > 0) {
           scope.setGroup(scope.groups[0]);
+        } else {
+          scope.setGroup(null);
         }
 
         // Finished loading
