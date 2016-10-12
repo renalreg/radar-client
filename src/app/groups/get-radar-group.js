@@ -1,30 +1,9 @@
-function getRadarGroup(store, $q) {
-  var deferred = null;
-
-  function getRadarGroup() {
-    if (deferred === null) {
-      deferred = $q.defer();
-
-      var params = {
-        code: 'RADAR',
-        type: 'SYSTEM'
-      };
-
-      store.findFirst('groups', params)
-        .then(function(group) {
-          deferred.resolve(group);
-        })
-        .catch(function() {
-          deferred.reject();
-        });
-    }
-
-    return deferred.promise;
+function getRadarGroup(systemStore) {
+  return function getRadarGroup() {
+    return systemStore.getCode('RADAR');
   }
-
-  return getRadarGroup;
 }
 
-getRadarGroup.$inject = ['store', '$q'];
+getRadarGroup.$inject = ['systemStore'];
 
 export default getRadarGroup;

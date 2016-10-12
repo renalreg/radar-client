@@ -1,6 +1,8 @@
+import sortGroups from '../../groups/sort-groups';
+
 import templateUrl from './hospital-field.html';
 
-function frmHospitalField(session, hospitalStore, sortHospitals) {
+function frmHospitalField(session, hospitalStore) {
   return {
     restrict: 'A',
     scope: {
@@ -26,12 +28,12 @@ function frmHospitalField(session, hospitalStore, sortHospitals) {
       });
 
       function setHospitals(hospitals) {
-        scope.hospitals = sortHospitals(hospitals);
+        scope.hospitals = sortGroups(hospitals);
       }
     }
   };
 }
 
-frmHospitalField.$inject = ['session', 'hospitalStore', 'sortHospitals'];
+frmHospitalField.$inject = ['session', 'hospitalStore'];
 
 export default frmHospitalField;

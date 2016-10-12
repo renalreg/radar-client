@@ -70,7 +70,7 @@ function patientListControllerFactory(
      * @returns {array} - list of groups to filter by.
      */
     function getGroups(filters) {
-      return _.filter([filters.cohort, filters.hospital], function(group) {
+      return _.filter([filters.system, filters.cohort, filters.hospital], function(group) {
         return group != null;
       });
     }

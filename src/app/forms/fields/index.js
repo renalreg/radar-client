@@ -24,6 +24,7 @@ import frmRecruitPatientCohortField from './recruit-patient-cohort-field.directi
 import frmRecruitPatientHospitalField from './recruit-patient-hospital-field.directive';
 import frmSelectField from './select-field.directive';
 import frmSourceGroupField from './source-group-field.directive';
+import frmSystemField from './system-field.directive';
 import frmTextEditorField from './text-editor-field.directive';
 import frmTextField from './text-field.directive';
 import frmTextareaField from './textarea-field.directive';
@@ -55,6 +56,7 @@ export default angular.module('radar.forms.fields', [])
   .directive('frmRecruitPatientHospitalField', frmRecruitPatientHospitalField)
   .directive('frmSelectField', frmSelectField)
   .directive('frmSourceGroupField', frmSourceGroupField)
+  .directive('frmSystemField', frmSystemField)
   .directive('frmTextEditorField', frmTextEditorField)
   .directive('frmTextField', frmTextField)
   .directive('frmTextareaField', frmTextareaField)

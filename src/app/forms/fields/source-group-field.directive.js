@@ -1,8 +1,10 @@
 import _ from 'lodash';
 
+import sortGroups from '../../groups/sort-groups';
+
 import templateUrl from './source-group-field.html';
 
-function frmSourceGroupField(store, session, sortGroups) {
+function frmSourceGroupField(store, session) {
   return {
     restrict: 'A',
     scope: {
@@ -50,6 +52,6 @@ function frmSourceGroupField(store, session, sortGroups) {
   };
 }
 
-frmSourceGroupField.$inject = ['store', 'session', 'sortGroups'];
+frmSourceGroupField.$inject = ['store', 'session'];
 
 export default frmSourceGroupField;

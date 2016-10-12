@@ -14,5 +14,4 @@ export default angular.module('radar.groups', [])
   .config(config)
   .factory('getRadarGroup', getRadarGroup)
   .factory('GroupUserModel', groupUserModelFactory)
-  .factory('sortGroups', sortGroups)
   .name;

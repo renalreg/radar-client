@@ -1,6 +1,8 @@
+import sortGroups from '../../groups/sort-groups';
+
 import templateUrl from './group-field.html';
 
-function frmGroupField(sortGroups, store) {
+function frmGroupField(store) {
   return {
     restrict: 'A',
     scope: {
@@ -16,6 +18,6 @@ function frmGroupField(sortGroups, store) {
   };
 }
 
-frmGroupField.$inject = ['sortGroups', 'store'];
+frmGroupField.$inject = ['store'];
 
 export default frmGroupField;

@@ -1,4 +1,6 @@
-function HospitalListController($scope, session, store, sortHospitals) {
+import sortGroups from '../groups/sort-groups';
+
+function HospitalListController($scope, session, store) {
   $scope.loading = true;
 
   var user = session.user;
@@ -13,11 +15,11 @@ function HospitalListController($scope, session, store, sortHospitals) {
   }
 
   function setHospitals(hospitals) {
-    $scope.hospitals = sortHospitals(hospitals);
+    $scope.hospitals = sortGroups(hospitals);
     $scope.loading = false;
   }
 }
 
-HospitalListController.$inject = ['$scope', 'session', 'store', 'sortHospitals'];
+HospitalListController.$inject = ['$scope', 'session', 'store'];
 
 export default HospitalListController;

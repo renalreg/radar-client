@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import sortCohorts from '../../cohorts/sort-cohorts';
+import sortGroups from '../../groups/sort-groups';
 
 import templateUrl from './cohort-field.html';
 
@@ -28,7 +28,7 @@ function frmRecruitPatientCohortField(cohortStore, session, hasPermissionForGrou
       });
 
       function setCohorts(cohorts) {
-        scope.cohorts = sortCohorts(cohorts);
+        scope.cohorts = sortGroups(cohorts);
       }
     }
   };

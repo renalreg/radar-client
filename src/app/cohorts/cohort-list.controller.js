@@ -1,4 +1,4 @@
-import sortCohorts from './sort-cohorts';
+import sortGroups from '../groups/sort-groups';
 
 /**
  * Controller for a list of cohorts.
@@ -14,7 +14,7 @@ function CohortListController($scope, session, cohortStore) {
   init();
 
   function setCohorts(cohorts) {
-    $scope.cohorts = sortCohorts(cohorts);
+    $scope.cohorts = sortGroups(cohorts);
     $scope.loading = false;
   }
 
