@@ -68,6 +68,11 @@ function patientModelFactory(Model, store) {
     return filterGroupPatientsByType(this.groups, 'COHORT');
   };
 
+  /** Get memberships for system groups. */
+  PatientModel.prototype.getSystemPatients = function() {
+    return filterGroupPatientsByType(this.groups, 'SYSTEM');
+  };
+
   /** Get current memberships (using from and to date) for hospital groups. */
   PatientModel.prototype.getCurrentHospitalPatients = function() {
     return filterGroupPatientsByCurrent(this.getHospitalPatients());
@@ -86,6 +91,11 @@ function patientModelFactory(Model, store) {
   /** Get a list of unique hosptials. */
   PatientModel.prototype.getHospitals = function() {
     return uniqueGroups(this.getHospitalPatients());
+  };
+
+  /** Get a list of unique systems. */
+  PatientModel.prototype.getSystems = function() {
+    return uniqueGroups(this.getSystemPatients());
   };
 
   /** Get a list of unique groups. */

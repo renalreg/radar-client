@@ -1,0 +1,15 @@
+<div class="patient-nav">
+  <ul>
+    <li class="radar">
+      {{system.shortName}}
+    </li>
+
+    <li ui-sref-active="active" ng-repeat="item in items">
+      <a ui-sref="{{item.state}}">{{item.name}}</a>
+    </li>
+
+    <li ui-sref-active="active">
+      <a ui-sref="patient.all({patientId: patient.id})">More&hellip;</a>
+    </li>
+  </ul>
+</div>
