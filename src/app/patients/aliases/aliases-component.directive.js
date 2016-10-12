@@ -1,10 +1,10 @@
 import templateUrl from './aliases-component.html';
 
-function patientAliasPermissionFactory(PatientRadarObjectPermission) {
-  return PatientRadarObjectPermission;
+function patientAliasPermissionFactory(PatientSystemObjectPermission) {
+  return PatientSystemObjectPermission;
 }
 
-patientAliasPermissionFactory.$inject = ['PatientRadarObjectPermission'];
+patientAliasPermissionFactory.$inject = ['PatientSystemObjectPermission'];
 
 function patientAliasesControllerFactory(
   ModelListDetailController,

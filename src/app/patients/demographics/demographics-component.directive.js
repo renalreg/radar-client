@@ -1,10 +1,10 @@
 import templateUrl from './demographics-component.html';
 
-function patientDemographicsPermissionFactory(PatientRadarObjectPermission) {
-  return PatientRadarObjectPermission;
+function patientDemographicsPermissionFactory(PatientSystemObjectPermission) {
+  return PatientSystemObjectPermission;
 }
 
-patientDemographicsPermissionFactory.$inject = ['PatientRadarObjectPermission'];
+patientDemographicsPermissionFactory.$inject = ['PatientSystemObjectPermission'];
 
 function patientDemographicsControllerFactory(
   ModelListDetailController,

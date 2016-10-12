@@ -1,10 +1,10 @@
 import templateUrl from './numbers-component.html';
 
-function patientNumberPermissionFactory(PatientRadarObjectPermission) {
-  return PatientRadarObjectPermission;
+function patientNumberPermissionFactory(PatientSystemObjectPermission) {
+  return PatientSystemObjectPermission;
 }
 
-patientNumberPermissionFactory.$inject = ['PatientRadarObjectPermission'];
+patientNumberPermissionFactory.$inject = ['PatientSystemObjectPermission'];
 
 function patientNumbersControllerFactory(
   ModelListDetailController,

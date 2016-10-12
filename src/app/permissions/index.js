@@ -8,10 +8,10 @@ import hasPermissionForGroupFactory from './has-permission-for-group';
 import hasPermissionForPatientFactory from './has-permission-for-patient';
 import hasPermissionForUserFactory from './has-permission-for-user';
 import patientObjectPermissionFactory from './patient-object-permission';
-import patientRadarObjectPermissionFactory from './patient-radar-object-permission';
+import patientSystemObjectPermissionFactory from './patient-system-object-permission';
 import patientSourceObjectPermissionFactory from './patient-source-object-permission';
 import permissionChainFactory from './permission-chain';
-import radarObjectPermissionFactory from './radar-object-permission';
+import systemObjectPermissionFactory from './system-object-permission';
 import sourceObjectPermissionFactory from './source-object-permission';
 
 export default angular.module('radar.permissions', [])
@@ -23,9 +23,9 @@ export default angular.module('radar.permissions', [])
   .factory('hasPermissionForPatient', hasPermissionForPatientFactory)
   .factory('hasPermissionForUser', hasPermissionForUserFactory)
   .factory('PatientObjectPermission',patientObjectPermissionFactory)
-  .factory('PatientRadarObjectPermission', patientRadarObjectPermissionFactory)
+  .factory('PatientSystemObjectPermission', patientSystemObjectPermissionFactory)
   .factory('PatientSourceObjectPermission', patientSourceObjectPermissionFactory)
   .factory('PermissionChain', permissionChainFactory)
-  .factory('RadarObjectPermission', radarObjectPermissionFactory)
+  .factory('SystemObjectPermission', systemObjectPermissionFactory)
   .factory('SourceObjectPermission', sourceObjectPermissionFactory)
   .name;

@@ -7,7 +7,7 @@ function getRadarGroup(store, $q) {
 
       var params = {
         code: 'RADAR',
-        type: 'OTHER'
+        type: 'SYSTEM'
       };
 
       store.findFirst('groups', params)
