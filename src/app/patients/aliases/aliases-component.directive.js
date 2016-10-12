@@ -6,11 +6,6 @@ function patientAliasPermissionFactory(PatientSystemObjectPermission) {
 
 patientAliasPermissionFactory.$inject = ['PatientSystemObjectPermission'];
 
-/**
- * Each patient can have multiple aliases. An alias is another name the patient
- * is known by. This is useful for recording maiden names, name changes, or mispellings.
- * Aliases are searchable in the patient list.
- */
 function patientAliasesControllerFactory(
   ModelListDetailController,
   PatientAliasPermission,
@@ -19,6 +14,14 @@ function patientAliasesControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * Each patient can have multiple aliases. An alias is another name the patient
+   * is known by. This is useful for recording maiden names, name changes, or mispellings.
+   * Aliases are searchable in the patient list.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PatientAliasesController($scope) {
     var self = this;
 

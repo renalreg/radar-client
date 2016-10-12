@@ -8,8 +8,14 @@ function randomPasswordDirective(randomPassword) {
     templateUrl: templateUrl,
     link: function(scope, element, attrs, ngModel) {
       scope.loading = false;
+      scope.generate = generate;
 
-      scope.generate = function() {
+      /**
+       * Generate a new password.
+       *
+       * @returns {undefined}
+       */
+      function generate() {
         scope.loading = true;
 
         randomPassword()
@@ -20,7 +26,7 @@ function randomPasswordDirective(randomPassword) {
           .finally(function() {
             scope.loading = false;
           });
-      };
+      }
     }
   };
 }

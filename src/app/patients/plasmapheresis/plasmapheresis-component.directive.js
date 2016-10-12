@@ -6,7 +6,6 @@ function plasmapheresisPermissionFactory(PatientSourceObjectPermission) {
 
 plasmapheresisPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/** A component for recording a patients plasmapheresis treatments. */
 function plasmapheresisControllerFactory(
   ModelListDetailController,
   PlasmapheresisPermission,
@@ -14,6 +13,12 @@ function plasmapheresisControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patients plasmapheresis treatments.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PlasmapheresisController($scope) {
     var self = this;
 

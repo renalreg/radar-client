@@ -6,7 +6,6 @@ function pregnancyPermissionFactory(PatientObjectPermission) {
 
 pregnancyPermissionFactory.$inject = ['PatientObjectPermission'];
 
-/** A component for recording a patient's pregnancies (one record per pregnancy). */
 function pregnanciesControllerFactory(
   ModelListDetailController,
   PregnancyPermission,
@@ -14,6 +13,12 @@ function pregnanciesControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patient's pregnancies (one record per pregnancy).
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PregnanciesController($scope) {
     var self = this;
 

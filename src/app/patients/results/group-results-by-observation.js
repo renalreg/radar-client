@@ -1,13 +1,19 @@
 import _ from 'lodash';
 
-/* Group results for the same type of observation. */
+/**
+ * Group results for the same type of observation.
+ *
+ * @param {array} results - a list of results.
+ * @param {array} observations - a list of observations.
+ * @returns {array} - results grouped by observation.
+ */
 function groupResultsByObservation(results, observations) {
   var groups = {};
 
   if (observations === undefined) {
     observations = [];
   } else {
-    // Create an empty group for each obervation
+    // Create an empty group for each observation
     _.forEach(observations, function(observation) {
       var observationId = observation.id;
 

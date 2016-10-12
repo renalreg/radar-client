@@ -12,6 +12,8 @@ function ForgotUsernameController(
     return authService.forgotUsername($scope.data.email)
       .then(function() {
         notificationService.success({message: MESSAGE, timeout: 30000});
+
+        // Redirect the login page
         $state.go('login');
       })
       .catch(function(errors) {

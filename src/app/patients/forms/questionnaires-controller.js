@@ -2,14 +2,24 @@ function QuestionnairesController($scope, forms, patient, $state, cohort) {
   $scope.cohort = cohort;
   $scope.forms = forms;
 
-  /** Redirect to first form. */
+  /**
+   * Redirect to first form.
+   *
+   * @returns {undefined}
+   */
   function redirect() {
     if ($state.current.name !== 'patient.questionnaire' && forms.length) {
       $state.go('patient.questionnaire', {formSlug: forms[0].form.slug});
     }
   }
 
-  /** Update the number of entries for a form. */
+  /**
+   * Update the number of entries for a form.
+   *
+   * @param {number} id - id of the form to update.
+   * @param {number} count - number of entries for this form.
+   * @returns {undefined}
+   */
   function updateCount(id, count) {
     for (var i = 0; i < $scope.forms.length; i++) {
       var form = $scope.forms[i];

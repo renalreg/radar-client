@@ -1,16 +1,6 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import anyValue from './any-value';
 
 describe('any value', function() {
-  beforeEach(angular.mock.module('radar.utils'));
-
-  var anyValue;
-
-  beforeEach(angular.mock.inject(function(_anyValue_) {
-    anyValue = _anyValue_;
-  }));
-
   function matcher(x) {
     return x === 'hello';
   }

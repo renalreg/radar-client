@@ -2,7 +2,12 @@ import angular from 'angular';
 import _ from 'lodash';
 import $ from 'jquery';
 
-/** Generate a URL to download the list of patients as CSV. */
+/**
+ * Generate a URL to download the list of patients as CSV.
+ *
+ * @param {Object} params - URL parameters.
+ * @returns {string} - URL to download the patient list.
+ */
 function getDownloadUrl(params) {
   // Download all patients rather than just the current page
   params = angular.copy(params);
@@ -12,7 +17,6 @@ function getDownloadUrl(params) {
   return '/api/patients.csv?' + $.param(params);
 }
 
-/** Controller for a list of patients. */
 function patientListControllerFactory(
   ListController,
   $injector,
@@ -27,6 +31,12 @@ function patientListControllerFactory(
     test: false
   };
 
+  /**
+   * Controller for a list of patients.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PatientListController($scope) {
     var self = this;
 
@@ -53,14 +63,24 @@ function patientListControllerFactory(
       $scope.genders = genders;
     });
 
-    /** Get the groups to filter by. */
+    /**
+     * Get the groups to filter by.
+     *
+     * @param {Object} filters - patient list filters.
+     * @returns {array} - list of groups to filter by.
+     */
     function getGroups(filters) {
       return _.filter([filters.cohort, filters.hospital], function(group) {
         return group != null;
       });
     }
 
-    /** Convert the list of filters to URL parameters. */
+    /**
+     * Convert the list of filters to URL parameters.
+     *
+     * @param {Object} filters - patient list filters.
+     * @returns {Object} - equivalent URL parameters.
+     */
     function filtersToParams(filters) {
       var params = {};
 
@@ -94,6 +114,11 @@ function patientListControllerFactory(
       return params;
     }
 
+    /**
+     * Update the list of patients.
+     *
+     * @returns {Object} - a promise that resolves to a list of patients.
+     */
     function update() {
       $scope.groups = getGroups($scope.filters);
 
@@ -126,16 +151,26 @@ function patientListControllerFactory(
       ]));
     }
 
+    /**
+     * Search patients that match the filters.
+     *
+     * @returns {Object} - a promise that resolves to a list of patients.
+     */
     function search() {
       // Jump back to the first page when updating the search
       proxy.page = 1;
       return update();
     }
 
+    /**
+     * Reset the filters and trigger a search.
+     *
+     * @returns {Object} - a promise that resolves to a list of patients.
+     */
     function clear() {
       // Reset the filters back to the default
       $scope.filters = angular.copy(DEFAULT_FILTERS);
-      search();
+      return search();
     }
   }
 

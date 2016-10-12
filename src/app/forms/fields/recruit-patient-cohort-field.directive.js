@@ -1,8 +1,10 @@
 import _ from 'lodash';
 
+import sortCohorts from '../../cohorts/sort-cohorts';
+
 import templateUrl from './cohort-field.html';
 
-function frmRecruitPatientCohortField(sortCohorts, cohortStore, session, hasPermissionForGroup) {
+function frmRecruitPatientCohortField(cohortStore, session, hasPermissionForGroup) {
   return {
     restrict: 'A',
     scope: {
@@ -32,6 +34,6 @@ function frmRecruitPatientCohortField(sortCohorts, cohortStore, session, hasPerm
   };
 }
 
-frmRecruitPatientCohortField.$inject = ['sortCohorts', 'cohortStore', 'session', 'hasPermissionForGroup'];
+frmRecruitPatientCohortField.$inject = ['cohortStore', 'session', 'hasPermissionForGroup'];
 
 export default frmRecruitPatientCohortField;

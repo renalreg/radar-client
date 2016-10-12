@@ -1,6 +1,8 @@
+import sortCohorts from '../../cohorts/sort-cohorts';
+
 import templateUrl from './cohort-field.html';
 
-function frmCohortField(sortCohorts, session, cohortStore) {
+function frmCohortField(session, cohortStore) {
   return {
     restrict: 'A',
     scope: {
@@ -16,6 +18,6 @@ function frmCohortField(sortCohorts, session, cohortStore) {
   };
 }
 
-frmCohortField.$inject = ['sortCohorts', 'session', 'cohortStore'];
+frmCohortField.$inject = ['session', 'cohortStore'];
 
 export default frmCohortField;

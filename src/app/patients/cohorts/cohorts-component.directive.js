@@ -8,18 +8,21 @@ function patientCohortPermissionFactory(PatientObjectPermission) {
 
 patientCohortPermissionFactory.$inject = ['PatientObjectPermission'];
 
-/**
- * A patient can be a member of multiple cohorts. Each membership has a from and
- * to date which is the period where the membership is active. A null to date means
- * the membership won't expire. A patient can have multiple memberships for the same
- * group.
- */
 function patientCohortsControllerFactory(
   ModelListDetailController,
   PatientCohortPermission,
   $injector,
   store
 ) {
+  /**
+   * A patient can be a member of multiple cohorts. Each membership has a from and
+   * to date which is the period where the membership is active. A null to date means
+   * the membership won't expire. A patient can have multiple memberships for the same
+   * group.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PatientCohortsController($scope) {
     var self = this;
 
@@ -40,7 +43,11 @@ function patientCohortsControllerFactory(
   PatientCohortsController.$inject = ['$scope'];
   PatientCohortsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  /** Called when a membership is saved. */
+  /**
+   * Called when a membership is saved.
+   *
+   * @returns {Object} - a promise.
+   */
   PatientCohortsController.prototype.save = function() {
     var self = this;
 
@@ -54,7 +61,12 @@ function patientCohortsControllerFactory(
     });
   };
 
-  /** Called when a membership is deleted. */
+  /**
+   * Called when a membership is deleted.
+   *
+   * @param {Object} groupPatient - membership to remove.
+   * @returns {Object} - a promise.
+   * */
   PatientCohortsController.prototype.remove = function(groupPatient) {
     var self = this;
 

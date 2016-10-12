@@ -1,8 +1,10 @@
 import _ from 'lodash';
 
+import sortCohorts from '../../cohorts/sort-cohorts';
+
 import templateUrl from './patient-navigation.html';
 
-function patientNavigation(sortCohorts) {
+function patientNavigation() {
   return {
     scope: {
       patient: '=',
@@ -26,7 +28,5 @@ function patientNavigation(sortCohorts) {
     }
   };
 }
-
-patientNavigation.$inject = ['sortCohorts'];
 
 export default patientNavigation;

@@ -2,6 +2,9 @@
  * Get the outward code part of the postcode.
  *
  * For example the "PO1" part of "PO1 3AX".
+ *
+ * @param {string} postcode - a UK postcode.
+ * @returns {string} - the outward code part of the postcode.
  */
 function getOutwardCode(postcode) {
   // Expects the outward code and the inward code to be separated by a space
@@ -17,7 +20,12 @@ function patientAddressModelFactory(Model) {
 
   PatientAddressModel.prototype = Object.create(Model.prototype);
 
-  /** Format the address as a paragraph. */
+  /**
+   * Format the address as a paragraph.
+   *
+   * @param {boolean} demographics - true if demographics should be included.
+   * @returns {string} - the address as a paragraph.
+   */
   PatientAddressModel.prototype.getAddress = function(demographics) {
     if (demographics === undefined) {
       demographics = true;

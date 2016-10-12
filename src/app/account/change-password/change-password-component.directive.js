@@ -13,6 +13,7 @@ function changePasswordControllerFactory(
       params: {}
     });
 
+    // Scratch space to confirmation of the password
     $scope.data = {};
 
     self.load($scope.user);
@@ -32,6 +33,8 @@ function changePasswordControllerFactory(
 
     return ModelEditController.prototype.save.call(this).then(function() {
       notificationService.success('Your password has been updated.');
+
+      // Reset the scratch space
       self.scope.data = {};
     });
   };

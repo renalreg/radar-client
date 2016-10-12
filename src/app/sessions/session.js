@@ -11,6 +11,8 @@ function sessionFactory(authStore, $rootScope) {
    *
    * The session object stores the current user object while persistent
    * storage of the user ID and token is handled by the authStore.
+   *
+   * @class
    */
   function Session() {
     this.setUser(null);
@@ -21,6 +23,7 @@ function sessionFactory(authStore, $rootScope) {
    * Login as a user.
    *
    * @param {Object} user - User.
+   * @returns {undefined}
    */
   Session.prototype.login = function(user) {
     this.setUserId(user.id);
@@ -31,7 +34,8 @@ function sessionFactory(authStore, $rootScope) {
   /**
    * Logout the current user.
    *
-   * @param {Boolean} forced - True if the user was forced to logout (e.g. their token expired).
+   * @param {boolean} forced - True if the user was forced to logout (e.g. their token expired).
+   * @returns {undefined}
    */
   Session.prototype.logout = function(forced) {
     if (forced === undefined) {
@@ -55,7 +59,7 @@ function sessionFactory(authStore, $rootScope) {
   /**
    * Get the current session token.
    *
-   * @return {String} token - Session token.
+   * @return {string} token - Session token.
    */
   Session.prototype.getToken = function() {
     return authStore.getToken();
@@ -67,7 +71,8 @@ function sessionFactory(authStore, $rootScope) {
    * The user is given a token when they login and a fresh token with each
    * API response.
    *
-   * @param {String} token - Session token.
+   * @param {string} token - Session token.
+   * @returns {undefined}
    */
   Session.prototype.setToken = function(token) {
     authStore.setToken(token);
@@ -81,7 +86,7 @@ function sessionFactory(authStore, $rootScope) {
    * gets the ID from the authStore directly rather than using the user
    * property.
    *
-   * @return {Number} ID of the current user.
+   * @return {number} ID of the current user.
    */
   Session.prototype.getUserId = function() {
     return authStore.getUserId();
@@ -92,7 +97,8 @@ function sessionFactory(authStore, $rootScope) {
    *
    * This shouldn't be used directly, use the login method instead.
    *
-   * @param {Number} id - User ID.
+   * @param {number} id - used ID.
+   * @returns {undefined}
    */
   Session.prototype.setUserId = function(id) {
     authStore.setUserId(id);
@@ -101,7 +107,7 @@ function sessionFactory(authStore, $rootScope) {
   /**
    * Get the current user.
    *
-   * @return {Object} Current user.
+   * @returns {Object} - current user.
    */
   Session.prototype.getUser = function() {
     return this.user;
@@ -113,6 +119,7 @@ function sessionFactory(authStore, $rootScope) {
    * Called when the user logs in.
    *
    * @param {Object} user - User.
+   * @returns {undefined}
    */
   Session.prototype.setUser = function(user) {
     this.user = user;
@@ -128,7 +135,8 @@ function sessionFactory(authStore, $rootScope) {
    *
    * There are three events: login, logout and refresh.
    *
-   * @param {String} name - Name of the event (e.g. login).
+   * @param {string} name - Name of the event (e.g. login).
+   * @returns {undefined}
    */
   Session.prototype.broadcast = function(name) {
     var self = this;
@@ -144,8 +152,9 @@ function sessionFactory(authStore, $rootScope) {
   /**
     * Registers a callback function for an event.
     *
-    * @param {String} name - Name of the event (e.g. login).
-    * @param {Function} callback - Function to be called when the event happens.
+    * @param {string} name - Name of the event (e.g. login).
+    * @param {function} callback - Function to be called when the event happens.
+    * @returns {undefined}
     */
   Session.prototype.on = function(name, callback) {
     if (this.callbacks[name] === undefined) {

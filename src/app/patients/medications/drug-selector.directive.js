@@ -1,6 +1,11 @@
 import templateUrl from './drug-selector.html';
 
-/** User interface for selecting drugs/medications. */
+/**
+ * User interface for selecting drugs/medications.
+ *
+ * @param {Object} store - injected store.
+ * @returns {Object} - a directive.
+ */
 function drugSelector(store) {
   return {
     require: 'ngModel',
@@ -16,24 +21,42 @@ function drugSelector(store) {
       scope.use = use;
       scope.drop = drop;
 
-      /** Called when the model is updated outside of the directive. */
+      /**
+       * Called when the model is updated outside of the directive.
+       *
+       * @returns {undefined}
+       */
       ngModel.$render = function() {
         scope.drug = ngModel.$viewValue;
       };
 
       load();
 
-      /** Select a drug. */
+      /**
+       * Select a drug.
+       *
+       * @param {Object} drug - drug to select.
+       * @returns {undefined}
+       */
       function use(drug) {
         update(drug);
       }
 
-      /** Deselect the drug. */
+      /**
+       * Deselect the drug.
+       *
+       * @returns {undefined}
+       */
       function drop() {
         update(null);
       }
 
-      /** Update the selected drug. */
+      /**
+       * Update the selected drug.
+       *
+       * @param {Object} drug - drug to select.
+       * @returns {undefined}
+       */
       function update(drug) {
         scope.drug = drug;
 
@@ -41,7 +64,11 @@ function drugSelector(store) {
         ngModel.$setViewValue(drug);
       }
 
-      /** Load the list of drugs. */
+      /**
+       * Load the list of drugs.
+       *
+       * @returns {undefined}
+       */
       function load() {
         store.findMany('drugs').then(function(drugs) {
           scope.drugs = drugs;

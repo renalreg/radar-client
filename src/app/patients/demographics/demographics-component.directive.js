@@ -6,11 +6,6 @@ function patientDemographicsPermissionFactory(PatientSystemObjectPermission) {
 
 patientDemographicsPermissionFactory.$inject = ['PatientSystemObjectPermission'];
 
-/**
- * Each patient has a demographics record which includes PID like their name, date of birth
- * and ethnicity. A patient can have at most one demographics record per source (e.g. RADAR
- * and UKRDC).
- */
 function patientDemographicsControllerFactory(
   ModelListDetailController,
   PatientDemographicsPermission,
@@ -19,6 +14,14 @@ function patientDemographicsControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * Each patient has a demographics record which includes PID like their name, date of birth
+   * and ethnicity. A patient can have at most one demographics record per source (e.g. RADAR
+   * and UKRDC).
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function PatientDemographicsController($scope) {
     var self = this;
 
@@ -50,7 +53,11 @@ function patientDemographicsControllerFactory(
   PatientDemographicsController.$inject = ['$scope'];
   PatientDemographicsController.prototype = Object.create(ModelListDetailController.prototype);
 
-  /** Called when the demographics are saved. */
+  /**
+   * Called when the demographics are saved.
+   *
+   * @returns {Object} - a promise.
+   */
   PatientDemographicsController.prototype.save = function() {
     var self = this;
 

@@ -2,6 +2,11 @@ import angular from 'angular';
 
 import fieldTemplateUrl from './field.html';
 
+/**
+ * Registry of widgets and functions.
+ *
+ * @class
+ */
 function Registry() {
   this.widgets = {};
   this.defaultWidgets = {};
@@ -16,12 +21,23 @@ function Registry() {
   this.formula = {};
 }
 
-/** Register a widget factory. */
+/**
+ * Register a widget factory.
+ *
+ * @param {string} name - name of the widget.
+ * @param {function} factory - widget factory.
+ * @returns {undefined}
+ */
 Registry.prototype.addWidget = function(name, factory) {
   this.widgets[name] = factory;
 };
 
-/** Return the widget directive for the given field. */
+/**
+ * Return the widget directive for the given field.
+ *
+ * @param {Object} field - the field to get a widget for.
+ * @returns {string} - name of the widget directive to use.
+ */
 Registry.prototype.getWidget = function(field) {
   var name = field.widget.name;
 
@@ -50,27 +66,55 @@ Registry.prototype.getWidget = function(field) {
   return directive;
 };
 
-/** Set the default widget for a type. */
+/**
+ * Set the default widget for a type.
+ *
+ * @param {string} type - data type.
+ * @param {string} name - widget name.
+ * @returns {undefined}
+ */
 Registry.prototype.setDefaultWidget = function(type, name) {
   this.defaultWidgets[type] = name;
 };
 
-/** Set the default formula widget for a type. */
+/**
+ * Set the default formula widget for a type.
+ *
+ * @param {string} type - data type.
+ * @param {string} name - widget name.
+ * @returns {undefined}
+ */
 Registry.prototype.setDefaultFormulaWidget = function(type, name) {
   this.defaultFormulaWidgets[type] = name;
 };
 
-/** Set the default select widget (for fields with options). */
+/**
+ * Set the default select widget (for fields with options).
+ *
+ * @param {string} name - widget name.
+ * @returns {undefined}
+ */
 Registry.prototype.setDefaultSelectWidget = function(name) {
   this.defaultSelectWidget = name;
 };
 
-/** Register a required function. */
+/**
+ * Register a required function.
+ *
+ * @param {string} name - required function name.
+ * @param {function} f - required function.
+ * @returns {undefined}
+ */
 Registry.prototype.addRequired = function(name, f) {
   this.required[name] = f;
 };
 
-/** Get a required function. */
+/**
+ * Get a required function.
+ *
+ * @param {string} name - required function name.
+ * @returns {function} - required function.
+ */
 Registry.prototype.getRequired = function(name) {
   var f = this.required[name];
 
@@ -81,12 +125,23 @@ Registry.prototype.getRequired = function(name) {
   return f;
 };
 
-/** Register a visible function. */
+/**
+ * Register a visible function.
+ *
+ * @param {string} name - visible function name.
+ * @param {function} f - visible function.
+ * @returns {undefined}
+ */
 Registry.prototype.addVisible = function(name, f) {
   this.visible[name] = f;
 };
 
-/** Get a visible function. */
+/**
+ * Get a visible function.
+ *
+ * @param {string} name - visible function name.
+ * @returns {function} - visible function.
+ */
 Registry.prototype.getVisible = function(name) {
   var f = this.visible[name];
 
@@ -97,12 +152,23 @@ Registry.prototype.getVisible = function(name) {
   return f;
 };
 
-/** Register a formula function. */
+/**
+ * Register a formula function.
+ *
+ * @param {string} name - formula function name.
+ * @param {function} f - formula function.
+ * @returns {undefined}
+ */
 Registry.prototype.addFormula = function(name, f) {
   this.formula[name] = f;
 };
 
-/** Get a formula function. */
+/**
+ * Get a formula function.
+ *
+ * @param {string} name - formula function name.
+ * @returns {function} - formula function.
+ */
 Registry.prototype.getFormula = function(name) {
   var f = this.formula[name];
 
@@ -113,12 +179,23 @@ Registry.prototype.getFormula = function(name) {
   return f;
 };
 
-/** Register a view factory. */
-Registry.prototype.addView = function(name, factory) {
-  this.views[name] = factory;
+/**
+ * Register a view directive.
+ *
+ * @param {string} name - view name.
+ * @param {string} directive - view directive.
+ * @returns {undefined}
+ */
+Registry.prototype.addView = function(name, directive) {
+  this.views[name] = directive;
 };
 
-/** Return the view directive for the given field. */
+/**
+ * Return the view directive for the given field.
+ *
+ * @param {Object} field - a field.
+ * @returns {string} - view directive.
+ */
 Registry.prototype.getView = function(field) {
   var name = field.value.name;
 
@@ -138,7 +215,13 @@ Registry.prototype.getView = function(field) {
   return directive;
 };
 
-/** Set the default view for a type. */
+/**
+ * Set the default view for a type.
+ *
+ * @param {string} type - data type.
+ * @param {stirng} name - view name.
+ * @returns {undefined}
+ */
 Registry.prototype.setDefaultView = function(type, name) {
   this.defaultViews[type] = name;
 };
@@ -208,14 +291,25 @@ registry.addRequired('js', jsHandler);
 registry.addVisible('js', jsHandler);
 registry.addFormula('js', jsFormula);
 
-/** Wrap a value in a function. */
+/**
+ * Wrap a value in a function.
+ *
+ * @param {*} value - the value to wrap.
+ * @returns {function} - a function that returns the value.
+ */
 function wrap(value) {
   return function() {
     return value;
   };
 }
 
-/** A form schema. */
+/**
+ * A form schema.
+ *
+ * @class
+ * @param {Object} registry - a registry.
+ * @param {Object} data - the form schema.
+ */
 function Schema(registry, data) {
   this.registry = registry;
 
@@ -230,7 +324,13 @@ function Schema(registry, data) {
   }
 }
 
-/** A field in the form schema. */
+/**
+ * A field in the form schema.
+ *
+ * @class
+ * @param {Object} schema - a schema.
+ * @param {Object} data - the field schema.
+ */
 function Field(schema, data) {
   var self = this;
 
@@ -323,7 +423,13 @@ function getDisplay(field, value) {
 }
 
 function builder(scope, element, transclude) {
-  /** Wrap a field so it has access to its value. */
+  /**
+   * Wrap a field so it has access to its value.
+   *
+   * @param {Object} field - a field.
+   * @param {Object} data - form data.
+   * @return {Object} - the field wrapped with extra data methods.
+   */
   function wrapField(field, data) {
     var wrapped = Object.create(field);
 
@@ -433,7 +539,14 @@ function marmosetList() {
 
 // Directive to render a form
 function marmosetForm($compile) {
-  /** Wrap a field so it has access to it's value and any errors. */
+  /**
+   * Wrap a field so it has access to it's value and any errors.
+   *
+   * @param {Object} field - a field.
+   * @param {Object} data - form data.
+   * @param {Object} errors - form errors.
+   * @returns {Object} - the field wrapped with extra data and error methods.
+   */
   function wrapField(field, data, errors) {
     var wrapped = Object.create(field);
 

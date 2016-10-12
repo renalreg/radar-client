@@ -4,7 +4,13 @@ import swap from '../../utils/swap';
 
 import templateUrl from './observation-list-selector.html';
 
-/** User interface for selecting the observations to display. */
+/**
+ * User interface for selecting the observations to display.
+ *
+ * @param {Object} store - injected store object.
+ * @param {Object} adapter - injected adapter object.
+ * @returns {Object} - a directive.
+ */
 function observationListSelector(store, adapter) {
   return {
     scope: {
@@ -31,6 +37,11 @@ function observationListSelector(store, adapter) {
 
       load();
 
+      /**
+       * Load the observations.
+       *
+       * @returns {undefined}
+       */
       function load() {
         adapter.get('/observation-counts', {patient: scope.patient.id}).then(function(response) {
           var observations = [];
@@ -49,12 +60,22 @@ function observationListSelector(store, adapter) {
         });
       }
 
-      /** Get the number of results for the supplied observation. */
+      /**
+       * Get the number of results for the supplied observation.
+       *
+       * @param {Object} observation - an observation.
+       * @returns {number} - the number of results for this observation.
+       */
       function getCount(observation) {
         return counts[observation.id];
       }
 
-      /** Add an observation to the list to display. */
+      /**
+       * Add an observation to the list to display.
+       *
+       * @param {Object} observation - the observation to add.
+       * @returns {undefined}
+       */
       function add(observation) {
         // Attempt to remove the observation first so an already selectedObservations
         // observation will be moved to the bottom of the list.
@@ -62,12 +83,22 @@ function observationListSelector(store, adapter) {
         scope.selectedObservations.push(observation);
       }
 
-      /** Remove an observation from the list to display. */
+      /**
+       * Remove an observation from the list to display.
+       *
+       * @param {Object} observation - the observation to remove.
+       * @returns {undefined}
+       */
       function remove(observation) {
         _.pull(scope.selectedObservations, observation);
       }
 
-      /** Move an observation up the list. */
+      /**
+       * Move an observation up the list.
+       *
+       * @param {Object} observation - the observation to move up.
+       * @returns {undefined}
+       */
       function up(observation) {
         var index = _.indexOf(scope.selectedObservations, observation);
 
@@ -77,7 +108,12 @@ function observationListSelector(store, adapter) {
         }
       }
 
-      /** Move an observation down the list. */
+      /**
+       * Move an observation down the list.
+       *
+       * @param {Object} observation - the observation to move down.
+       * @returns {undefined}
+       */
       function down(observation) {
         var index = _.indexOf(scope.selectedObservations, observation);
         var lastIndex = scope.selectedObservations.length - 1;

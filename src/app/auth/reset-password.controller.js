@@ -6,6 +6,7 @@ function ResetPasswordController(
   $scope.errors = {};
   $scope.data = {};
 
+  // Get the token from the URL
   var token = $stateParams.token;
 
   $scope.submit = function() {
@@ -24,6 +25,9 @@ function ResetPasswordController(
         // Token is invalid / has expired
         if (errors.token) {
           notificationService.fail({message: errors.token, timeout: 30000});
+
+          // Redirect the user to the forgot password page so
+          // they can generate another link.
           $state.go('forgotPassword');
         }
       });

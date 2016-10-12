@@ -6,15 +6,18 @@ function familyHistoryPermissionFactory(PatientObjectPermission) {
 
 familyHistoryPermissionFactory.$inject = ['PatientObjectPermission'];
 
-/**
- * A component for recording the family history of the current diagnosis.
- */
 function familyHistoryControllerFactory(
   ModelDetailController,
   FamilyHistoryPermission,
   $injector,
   store
 ) {
+  /**
+   * A component for recording the family history of the current diagnosis.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function FamilyHistoryController($scope) {
     var self = this;
 

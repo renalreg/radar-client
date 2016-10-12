@@ -2,7 +2,12 @@ import _ from 'lodash';
 
 import templateUrl from './diagnosis-selector.html';
 
-/** User interface for choosing a diagnosis from a list. */
+/**
+ * User interface for choosing a diagnosis from a list.
+ *
+ * @param {Object} store - injected store.
+ * @returns {Object} - a directive.
+ */
 function diagnosisSelector(store) {
   return {
     require: 'ngModel',
@@ -35,31 +40,55 @@ function diagnosisSelector(store) {
       scope.use = use;
       scope.drop = drop;
 
-      /** Called when the model is updated outside of the directive. */
+      /**
+       * Called when the model is updated outside of the directive.
+       *
+       * @returns {undefined}
+       */
       ngModel.$render = function() {
         scope.diagnosis = ngModel.$viewValue;
       };
 
       load();
 
-      /** Get the list of diagnoses for this group. */
+      /**
+       * Get the list of diagnoses for this group.
+       *
+       * @param {Object} group - a group.
+       * @returns {array} - the diagnoses for this group.
+       */
       function getDiagnoses(group) {
         var key = group === null ? null : group.id;
         return groupDiagnoses[key] || [];
       }
 
-      /** Set the current group (triggered by clicking a tab). */
+      /**
+       * Set the current group (triggered by clicking a tab).
+       *
+       * @param {Object} group - the group to select.
+       * @returns {undefined}
+       */
       function setGroup(group) {
         scope.group = group;
         scope.diagnoses = getDiagnoses(group);
       }
 
-      /** Returns true if the group is selected. */
+      /**
+       * Returns true if the group is selected.
+       *
+       * @param {Object} group - a group.
+       * @returns {boolean} - true if the group is active.
+       */
       function isActive(group) {
         return scope.group === group;
       }
 
-      /** Update the selected diagnosis. */
+      /**
+       * Update the selected diagnosis.
+       *
+       * @param {Object} diagnosis - the diagnosis to select.
+       * @returns {undefined}
+       */
       function update(diagnosis) {
         scope.diagnosis = diagnosis;
 
@@ -67,17 +96,32 @@ function diagnosisSelector(store) {
         ngModel.$setViewValue(diagnosis);
       }
 
-      /** Select a diagnosis. */
+      /**
+       * Select a diagnosis.
+       *
+       * @param {Object} diagnosis - the diagnosis to select.
+       * @returns {undefined}
+       */
       function use(diagnosis) {
         update(diagnosis);
       }
 
-      /** Deselect the diagnosis. */
+      /**
+       * Deselect the diagnosis.
+       *
+       * @returns {undefined}
+       */
       function drop() {
         update(null);
       }
 
-      /** Add a diagnosis to the mapping */
+      /**
+       * Add a diagnosis to the mapping.
+       *
+       * @param {Object} group - a group.
+       * @param {Object} diagnosis - a diagnosis.
+       * @returns {undefined}
+       */
       function add(group, diagnosis) {
         var key = group === null ? null : group.id;
 
@@ -96,7 +140,11 @@ function diagnosisSelector(store) {
         });
       }
 
-      /** Load the list of diagnoses. */
+      /**
+       * Load the list of diagnoses.
+       *
+       * @returns {undefined}
+       */
       function load() {
         store.findMany('diagnoses').then(function(diagnoses) {
           _.forEach(diagnoses, function(diagnosis) {

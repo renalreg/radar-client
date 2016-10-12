@@ -1,16 +1,6 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import escapeRegExp from './escape-reg-exp';
 
 describe('escape reg exp', function() {
-  beforeEach(angular.mock.module('radar.utils'));
-
-  var escapeRegExp;
-
-  beforeEach(angular.mock.inject(function(_escapeRegExp_) {
-    escapeRegExp = _escapeRegExp_;
-  }));
-
   it('escapes .', function() {
     expect(escapeRegExp('.')).toBe('\\.');
   });

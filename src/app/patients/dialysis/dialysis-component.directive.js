@@ -6,10 +6,6 @@ function dialysisPermissionFactory(PatientSourceObjectPermission) {
 
 dialysisPermissionFactory.$inject = ['PatientSourceObjectPermission'];
 
-/**
- * A component for recording a patients dialysis treatments. This is similar to the
- * TXT block in the UKRR dataset.
- */
 function dialysisControllerFactory(
   ModelListDetailController,
   DialysisPermission,
@@ -17,6 +13,13 @@ function dialysisControllerFactory(
   $injector,
   store
 ) {
+  /**
+   * A component for recording a patients dialysis treatments. This is similar to the
+   * TXT block in the UKRR dataset.
+   *
+   * @class
+   * @param {Object} $scope - angular scope.
+   */
   function DialysisController($scope) {
     var self = this;
 

@@ -2,7 +2,12 @@ import _ from 'lodash';
 
 import templateUrl from './observation-selector.html';
 
-/** User interface for selecting an observation from a list. */
+/**
+ * User interface for selecting an observation from a list.
+ *
+ * @param {Object} store - injected store object.
+ * @returns {Object} - a directive.
+ */
 function observationSelector(store) {
   return {
     require: 'ngModel',
@@ -34,37 +39,66 @@ function observationSelector(store) {
       scope.use = use;
       scope.setGroup = setGroup;
 
-      /** Called when the model is updated outside the directive. */
+      /**
+       * Called when the model is updated outside the directive.
+       *
+       * @returns {undefined}
+       */
       ngModel.$render = function() {
         scope.observation = ngModel.$viewValue;
       };
 
       load();
 
-      /** Get the observations for this group. */
+      /**
+       * Get the observations for this group.
+       *
+       * @param {Object} group - the group to get observations for.
+       * @returns {array} - the list of observations for this group.
+       */
       function getObservations(group) {
         var key = group === null ? null : group.id;
 
         return groupObservations[key] || [];
       }
 
-      /** Set the current group. */
+      /**
+       * Set the current group.
+       *
+       * @param {Object} group - the selected group.
+       * @returns {undefined}
+       */
       function setGroup(group) {
         scope.group = group;
         scope.observations = getObservations(group);
       }
 
-      /** Returns true if the group is selected. */
+      /**
+       * Returns true if the group is selected.
+       *
+       * @param {Object} group - a group.
+       * @returns {boolean} - true if the group is active.
+       */
       function isActive(group) {
         return scope.group === group;
       }
 
-      /** Select an observation. */
+      /**
+       * Select an observation.
+       *
+       * @param {Object} observation - the observation to select.
+       * @returns {undefined}
+       */
       function use(observation) {
         update(observation);
       }
 
-      /** Update the selected observation. */
+      /**
+       * Update the selected observation.
+       *
+       * @param {Object} observation - the observation to select.
+       * @returns {undefined}
+       */
       function update(observation) {
         scope.observation = observation;
 
@@ -72,7 +106,13 @@ function observationSelector(store) {
         ngModel.$setViewValue(observation);
       }
 
-      /** Add an observation to the mapping. */
+      /**
+       * Add an observation to the mapping.
+       *
+       * @param {Object} group - a group.
+       * @param {Object} observation - an observation.
+       * @returns {undefined}
+       */
       function add(group, observation) {
         var key = group === null ? null : group.id;
 
@@ -83,7 +123,11 @@ function observationSelector(store) {
         groupObservations[key].push(observation);
       }
 
-      /** Load the list of observations. */
+      /**
+       * Load the list of observations.
+       *
+       * @returns {undefined}
+       */
       function load() {
         store.findMany('observations').then(function(observations) {
           _.forEach(observations, function(observation) {

@@ -18,34 +18,59 @@ function toggleDemographicsService(session) {
     isHidden: isHidden
   };
 
-  /** Toggle demographics visibility. */
+  /**
+   * Toggle demographics visibility.
+   *
+   * @returns {boolean} - new visibility.
+   */
   function toggle() {
     visible = !visible;
     broadcast();
     return visible;
   }
 
-  /** Show demographics. */
+  /**
+   * Show demographics.
+   *
+   * @returns {undefined}
+   */
   function show() {
     update(true);
   }
 
-  /** Hide demographics. */
+  /**
+   * Hide demographics.
+   *
+   * @returns {undefined}
+   */
   function hide() {
     update(false);
   }
 
-  /** True if demographics are visible. */
+  /**
+   * True if demographics are visible.
+   *
+   * @returns {boolean} - true if demographics are visible.
+   */
   function isVisible() {
     return visible;
   }
 
-  /** True if demographics are hidden. */
+  /**
+   * True if demographics are hidden.
+   *
+   * @returns {boolean} - true if demographics are hidden.
+   */
   function isHidden() {
     return !visible;
   }
 
-  /** Add a function to be called when the visibility of demographics is toggled. */
+  /**
+   * Add a function to be called when the visibility of demographics is toggled.
+   *
+   * @param {function} callback - function that will be called when visibility changes.
+   * @returns {function} - function to call to unsubscribe.
+   */
   function listen(callback) {
     callbacks.push(callback);
 
@@ -54,7 +79,12 @@ function toggleDemographicsService(session) {
     };
   }
 
-  /** Update the demographics visibility. */
+  /**
+   * Update the demographics visibility.
+   *
+   * @param {boolean} value - new visibiility.
+   * @returns {undefined}
+   */
   function update(value) {
     if (visible !== value) {
       visible = value;
@@ -62,7 +92,11 @@ function toggleDemographicsService(session) {
     }
   }
 
-  /** Notifiy listeners of a change. */
+  /**
+   * Notifiy listeners of a change.
+   *
+   * @returns {undefined}
+   */
   function broadcast() {
     _.forEach(callbacks, function(callback) {
       callback(visible);

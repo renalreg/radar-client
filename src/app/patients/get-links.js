@@ -3,7 +3,13 @@ import _ from 'lodash';
 import getPage from './get-page';
 import getForm from './get-form';
 
-/** Combine the page and form links for this group. */
+/**
+ * Combine the page and form links for this group.
+ *
+ * @param {Object} group - a group.
+ * @param {Object} patient - a patient.
+ * @returns {array} - a list of links.
+ */
 function getLinks(group, patient) {
   var links = [];
 

@@ -31,6 +31,8 @@ import users from './users';
 import utils from './utils';
 import validators from './validators';
 
+import getValueAtPath from './utils/get-value-at-path';
+
 function config($urlRouterProvider, adapterProvider) {
   adapterProvider.setBaseUrl('/api');
   $urlRouterProvider.otherwise('/');
@@ -41,7 +43,6 @@ config.$inject = ['$urlRouterProvider', 'adapterProvider'];
 function run(
   $rootScope,
   radar,
-  getValueAtPath,
   session,
   $state,
   notificationService,
@@ -93,7 +94,6 @@ function run(
 run.$inject = [
   '$rootScope',
   'radar',
-  'getValueAtPath',
   'session',
   '$state',
   'notificationService',
