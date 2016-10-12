@@ -2,7 +2,6 @@ import angular from 'angular';
 
 import getRadarGroup from './get-radar-group';
 import groupUserModelFactory from './group-user-model';
-import sortGroups from './sort-groups';
 
 function config(storeProvider) {
   storeProvider.registerModel('group-users', 'GroupUserModel');
