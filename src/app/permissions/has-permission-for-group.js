@@ -14,11 +14,10 @@ function hasPermissionForGroupFactory(hasPermission) {
       return true;
     }
 
-    // Users get permissions on the RaDaR group through their other groups
+    // Users get permissions on system groups through their other groups
     if (
       !explicit &&
-      group.code === 'RADAR' &&
-      group.type === 'OTHER' &&
+      group.type === 'SYSTEM' &&
       (
         permission === 'VIEW_PATIENT' ||
         permission === 'EDIT_PATIENT'

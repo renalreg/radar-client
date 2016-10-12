@@ -32,7 +32,7 @@ function frmSourceGroupField(store, session, sortGroups) {
 
       _.forEach(patientGroups, function(patientGroup) {
         if (
-          (patientGroup.group.code === 'RADAR' && patientGroup.group.type === 'OTHER') ||
+          (patientGroup.group.type === 'SYSTEM') ||
           (patientGroup.group.type === 'HOSPITAL' && (isAdmin || groupIds.indexOf(patientGroup.group.id) >= 0))
         ) {
           sourceGroups.push(patientGroup.group);
