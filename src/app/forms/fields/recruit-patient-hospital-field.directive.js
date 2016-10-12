@@ -1,8 +1,10 @@
 import _ from 'lodash';
 
+import sortGroups from '../../groups/sort-groups';
+
 import templateUrl from './hospital-field.html';
 
-function frmRecruitPatientHospitalField(session, hospitalStore, sortHospitals, hasPermissionForGroup) {
+function frmRecruitPatientHospitalField(session, hospitalStore, hasPermissionForGroup) {
   return {
     restrict: 'A',
     scope: {
@@ -26,12 +28,12 @@ function frmRecruitPatientHospitalField(session, hospitalStore, sortHospitals, h
       });
 
       function setHospitals(hospitals) {
-        scope.hospitals = sortHospitals(hospitals);
+        scope.hospitals = sortGroups(hospitals);
       }
     }
   };
 }
 
-frmRecruitPatientHospitalField.$inject = ['session', 'hospitalStore', 'sortHospitals', 'hasPermissionForGroup'];
+frmRecruitPatientHospitalField.$inject = ['session', 'hospitalStore', 'hasPermissionForGroup'];
 
 export default frmRecruitPatientHospitalField;

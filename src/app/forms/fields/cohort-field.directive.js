@@ -1,4 +1,4 @@
-import sortCohorts from '../../cohorts/sort-cohorts';
+import sortGroups from '../../groups/sort-groups';
 
 import templateUrl from './cohort-field.html';
 
@@ -12,7 +12,7 @@ function frmCohortField(session, cohortStore) {
     templateUrl: templateUrl,
     link: function(scope) {
       cohortStore.findMany().then(function(cohorts) {
-        scope.cohorts = sortCohorts(cohorts);
+        scope.cohorts = sortGroups(cohorts);
       });
     }
   };

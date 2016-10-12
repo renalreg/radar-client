@@ -26,6 +26,7 @@ import recruitPatient from './recruit-patient';
 import sessions from './sessions';
 import sources from './sources';
 import store from './store';
+import systems from './systems';
 import ui from './ui';
 import users from './users';
 import utils from './utils';
@@ -127,6 +128,7 @@ export default angular.module('radar', [
   sessions,
   sources,
   store,
+  systems,
   ui,
   users,
   utils,

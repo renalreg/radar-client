@@ -3,7 +3,6 @@ import angular from 'angular';
 import stats from '../stats';
 
 import hospitalStore from './hospital-store';
-import sortHospitals from './sort-hospitals';
 import HospitalDetailController from './hospital-detail.controller';
 import HospitalListController from './hospital-list.controller';
 
@@ -41,6 +40,5 @@ export default angular.module('radar.hospitals', [stats])
   .config(config)
   .controller('HospitalDetailController', HospitalDetailController)
   .controller('HospitalListController', HospitalListController)
-  .factory('sortHospitals', sortHospitals)
   .factory('hospitalStore', hospitalStore)
   .name;

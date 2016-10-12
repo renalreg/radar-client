@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import sortCohorts from '../../cohorts/sort-cohorts';
+import sortGroups from '../../groups/sort-groups';
 
 import templateUrl from './patient-navigation.html';
 
@@ -23,7 +23,7 @@ function patientNavigation() {
         return scope.patient.getCurrentCohorts();
       }, function(cohorts) {
         // Sort the cohorts by name
-        scope.cohorts = sortCohorts(cohorts);
+        scope.cohorts = sortGroups(cohorts);
       });
     }
   };
