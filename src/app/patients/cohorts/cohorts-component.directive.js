@@ -57,6 +57,9 @@ function patientCohortsControllerFactory(
         self.scope.patient.groups.push(groupPatient);
       }
 
+      // Reload the patient in case they were added to any other groups
+      self.scope.patient.reload();
+
       return groupPatient;
     });
   };
@@ -73,6 +76,9 @@ function patientCohortsControllerFactory(
     return ModelListDetailController.prototype.remove.call(self, groupPatient).then(function() {
       // Remove this membership from the patient's membership list
       _.pull(self.scope.patient.groups, groupPatient);
+
+      // Reload the patient in case they were removed from any other groups
+      self.scope.patient.reload();
     });
   };
 
