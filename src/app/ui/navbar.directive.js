@@ -21,7 +21,7 @@ function navbar(session, hasPermission, systemStore) {
         if (isAuthenticated) {
           load();
         }
-      })
+      });
 
       function load() {
         systemStore.getAll().then(function(systems) {
