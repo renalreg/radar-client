@@ -13,11 +13,7 @@ function patientsByRecruitmentDateGraph(adapter) {
       scope.$watch('group', function(group) {
         scope.loading = true;
 
-        var params = {};
-
-        if (group) {
-          params.group = group.id;
-        }
+        var params = {group: group.id};
 
         adapter.get('/stats/patients-by-recruitment-date', params).then(function(response) {
           scope.loading = false;
@@ -44,7 +40,7 @@ function patientsByRecruitmentDateGraph(adapter) {
               height: 600
             },
             title: {
-              text: group ? group.name : 'RaDaR'
+              text: group.name
             },
             xAxis: {
               type: 'datetime'

@@ -12,11 +12,7 @@ function patientsByRecruitmentGroupTable(adapter) {
       scope.loading = true;
 
       scope.$watch('group', function(group) {
-        var params = {};
-
-        if (group) {
-          params.group = group.id;
-        }
+        var params = {group: group.id};
 
         scope.loading = true;
 

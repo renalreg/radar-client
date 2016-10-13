@@ -8,13 +8,13 @@ function SystemStore(store, $q) {
 SystemStore.prototype.getCode = function(code) {
   return this._first(function(group) {
     return group.code === code;
-  })
+  });
 };
 
 SystemStore.prototype.getId = function(id) {
   return this._first(function(group) {
     return group.id === id;
-  })
+  });
 };
 
 SystemStore.prototype.getAll = function() {

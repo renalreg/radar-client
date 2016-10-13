@@ -17,11 +17,7 @@ function patientsByRecruitmentGroupDateGraph(adapter) {
       scope.$watch('group', function(group) {
         scope.loading = true;
 
-        var params = {};
-
-        if (group) {
-          params.group = group.id;
-        }
+        var params = {group: group.id};
 
         var title = scope.type === 'new' ? 'New Patients' : 'Total Patients';
         var key = scope.type === 'new' ? 'newPatients' : 'totalPatients';
