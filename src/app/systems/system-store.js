@@ -38,12 +38,18 @@ SystemStore.prototype._first = function(fn) {
 };
 
 SystemStore.prototype._load = function() {
+  var self = this;
+
   // Only need to fetch the list of systems once as they are unlikely to change
-  if (this.promise === null) {
-    this.promise = this.store.findMany('groups', {type: 'SYSTEM'});
+  if (self.promise === null) {
+    self.promise = self.store.findMany('groups', {type: 'SYSTEM'}).catch(function() {
+      // Retry later
+      self.promise = null;
+      return self.$q.reject();
+    });
   }
 
-  return this.promise;
+  return self.promise;
 };
 
 SystemStore.$inject = ['store', '$q'];
