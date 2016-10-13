@@ -60,6 +60,12 @@
       }
     }
 
+    li.name.dead {
+      a {
+        color: red;
+      }
+    }
+
     li.toggle-demographics {
       float: right;
       display: block;

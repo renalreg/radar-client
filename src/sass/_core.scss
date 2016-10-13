@@ -330,8 +330,8 @@ a.delete-user, a.delete-patient {
   text-decoration: underline;
 }
 
-.dead, .dead a {
-  color: red !important;
+.dead, .dead a, .dead a .hidden-demographics {
+  color: red;
 }
 
 /* More spacing between inline elements */
