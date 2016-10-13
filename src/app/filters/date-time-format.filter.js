@@ -6,7 +6,7 @@ function dateTimeFormatFilter() {
       var dt = moment(input);
 
       if (dt.isValid()) {
-        return dt.utc().format('DD/MM/YYYY HH:mm:ss');
+        return dt.utc().format('DD/MM/YYYY HH:mm:ss') + ' (UTC)';
       } else {
         return '-';
       }

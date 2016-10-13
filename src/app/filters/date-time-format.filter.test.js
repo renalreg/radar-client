@@ -20,10 +20,10 @@ describe('date time format', function() {
   });
 
   it('displays UTC in winter time', function() {
-    expect(filter('2016-01-01T00:00:00+00:00')).toBe('01/01/2016 00:00:00');
+    expect(filter('2016-01-01T00:00:00+00:00')).toBe('01/01/2016 00:00:00 (UTC)');
   });
 
   it('displays UTC in summer time', function() {
-    expect(filter('2016-07-01T00:00:00+00:00')).toBe('01/07/2016 00:00:00');
+    expect(filter('2016-07-01T00:00:00+00:00')).toBe('01/07/2016 00:00:00 (UTC)');
   });
 });
