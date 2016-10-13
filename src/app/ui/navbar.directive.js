@@ -1,6 +1,8 @@
+import sortGroups from '../groups/sort-groups';
+
 import templateUrl from './navbar.html';
 
-function navbar(session, hasPermission) {
+function navbar(session, hasPermission, systemStore) {
   return {
     restrict: 'A',
     scope: true,
@@ -12,10 +14,18 @@ function navbar(session, hasPermission) {
         scope.showPatients = hasPermission(user, 'VIEW_PATIENT');
         scope.showUsers = hasPermission(user, 'VIEW_USER');
       });
+
+      load();
+
+      function load() {
+        systemStore.getAll().then(function(systems) {
+          scope.systems = sortGroups(systems);
+        });
+      }
     }
   };
 }
 
-navbar.$inject = ['session', 'hasPermission'];
+navbar.$inject = ['session', 'hasPermission', 'systemStore'];
 
 export default navbar;

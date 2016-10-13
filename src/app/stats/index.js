@@ -10,8 +10,16 @@ import templateUrl from './stats.html';
 
 function config($stateProvider) {
   $stateProvider.state('stats', {
-    url: '/stats',
-    templateUrl: templateUrl
+    url: '/stats/{systemId:int}',
+    templateUrl: templateUrl,
+    controller: ['$scope', 'system', function($scope, system) {
+      $scope.system = system;
+    }],
+    resolve: {
+      system: ['$stateParams', 'systemStore', function($stateParams, systemStore) {
+        return systemStore.getId($stateParams.systemId);
+      }]
+    }
   });
 }
 

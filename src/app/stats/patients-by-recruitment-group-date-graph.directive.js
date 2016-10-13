@@ -5,6 +5,7 @@ import { getTopGroups } from './utils';
 function patientsByRecruitmentGroupDateGraph(adapter) {
   return {
     scope: {
+      group: '=',
       groupType: '@',
       type: '@',
       top: '@'
