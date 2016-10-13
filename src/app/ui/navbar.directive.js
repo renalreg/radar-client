@@ -15,13 +15,11 @@ function navbar(session, hasPermission, systemStore) {
         scope.showUsers = hasPermission(user, 'VIEW_USER');
       });
 
-      load();
-
-      function load() {
+      session.on('login', function() {
         systemStore.getAll().then(function(systems) {
           scope.systems = sortGroups(systems);
         });
-      }
+      });
     }
   };
 }
