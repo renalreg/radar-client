@@ -121,7 +121,7 @@ function marmosetFloatWidget($compile) {
   };
 }
 
-marmosetFloatWidget.$inject = ['compile'];
+marmosetFloatWidget.$inject = ['$compile'];
 
 function marmosetSelectWidget($compile) {
   return {
