@@ -97,7 +97,11 @@ function patientListControllerFactory(
         var value = filters[key];
 
         if (value !== undefined && value !== null && value !== '') {
-          params[key] = value;
+          if (key === 'gender') {
+            params[key] = value.id;
+          } else {
+            params[key] = value;
+          }
         }
       });
 
