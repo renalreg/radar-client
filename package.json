@@ -1,13 +1,13 @@
 {
   "name": "radar-client",
-  "version": "2.38.8",
+  "version": "2.39.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/renalreg/radar-client.git"
   },
   "license": "AGPL-3.0",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --host 0.0.0.0",
     "clean": "rm -rf dist",
     "build": "npm run clean && webpack",
     "lint": "eslint src",
