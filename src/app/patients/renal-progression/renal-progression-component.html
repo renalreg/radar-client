@@ -13,6 +13,26 @@
       </tr>
 
       <tr>
+        <th>Stage 3A Moderate CKD</th>
+        <td>{{item.ckd3aDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Stage 3B Moderate CKD</th>
+        <td>{{item.ckd3bDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Stage 4 Severe CKD</th>
+        <td>{{item.ckd4Date | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Stage 5 End Stage CKD</th>
+        <td>{{item.ckd5Date | dateFormat}}</td>
+      </tr>
+
+      <tr>
         <th>Date of ESRF</th>
         <td>{{item.esrfDate | dateFormat}}</td>
       </tr>
@@ -38,10 +58,51 @@
       </div>
 
       <div frm-field frm-group>
+        <div frm-label>CKD 3A</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.ckd3aDate"></div>
+          <div frm-help>GFR = 45-59mL/min</div>
+          <div frm-errors errors="item.errors.ckd3aDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>CKD 3B</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.ckd3bDate"></div>
+          <div frm-help>GFR = 30-44mL/min</div>
+          <div frm-errors errors="item.errors.ckd3bDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>CKD 4</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.ckd4Date"></div>
+          <div frm-help>GFR = 15-29mL/min</div>
+          <div frm-errors errors="item.errors.ckd4Date"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>CKD 5</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.ckd5Date"></div>
+          <div frm-help>GFR = &lt;15mL/min</div>
+          <div frm-errors errors="item.errors.ckd5Date"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
         <div frm-label>Date of ESRF</div>
 
         <div frm-control>
           <div frm-date-field model="item.esrfDate"></div>
+          <div frm-help>Date of start of RRT</div>
           <div frm-errors errors="item.errors.esrfDate"></div>
         </div>
       </div>
