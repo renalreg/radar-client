@@ -7,7 +7,8 @@ function frmHospitalField(session, hospitalStore) {
     restrict: 'A',
     scope: {
       model: '=',
-      required: '&'
+      required: '&',
+      params: '='
     },
     templateUrl: templateUrl,
     link: function(scope) {
@@ -17,7 +18,7 @@ function frmHospitalField(session, hospitalStore) {
         if (user) {
           if (user.isAdmin) {
             setHospitals([]);
-            hospitalStore.findMany().then(setHospitals);
+            hospitalStore.findMany(scope.params).then(setHospitals);
           } else {
             var hospitals = user.getHospitals();
             setHospitals(hospitals);

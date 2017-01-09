@@ -38,8 +38,14 @@ function transplantsControllerFactory(
 
     $scope.create = function() {
       var item = store.create('transplants', {patient: $scope.patient.id});
+      item.params = {'isTransplantCentre': true};
       self.edit(item);
     };
+
+    $scope.edit = function(item) {
+      item.params = {'isTransplantCentre': true};
+      self.edit(item);
+    }
   }
 
   TransplantsController.$inject = ['$scope'];
