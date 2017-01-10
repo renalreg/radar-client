@@ -45,7 +45,7 @@ function transplantsControllerFactory(
     $scope.edit = function(item) {
       item.params = {'isTransplantCentre': true};
       self.edit(item);
-    }
+    };
   }
 
   TransplantsController.$inject = ['$scope'];
