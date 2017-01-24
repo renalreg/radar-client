@@ -6,8 +6,13 @@ function errorResponseFactory($q, notificationService) {
           title: 'Connection Problem',
           message: 'Unable to connect to the server. Please check your internet connection and then try reloading the page.'
         });
-      } else if (response.status === 500 || response.status === 502) {
+      } else if (response.status === 500) {
         notificationService.fatal();
+      } else if (response.status === 502) {
+        notificationService.fatal({
+          title: 'System is off',
+          message: 'System is temporarily shut down for maintenance, please try again later.'
+        });
       }
 
       return $q.reject(response);
