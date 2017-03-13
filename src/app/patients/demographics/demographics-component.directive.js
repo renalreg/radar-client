@@ -46,6 +46,9 @@ function patientDemographicsControllerFactory(
       }),
       store.findMany('ethnicities').then(function(ethnicities) {
         $scope.ethnicities = ethnicities;
+      }),
+      store.findMany('nationalities').then(function(nationalities) {
+        $scope.nationalities = nationalities;
       })
     ]));
   }
