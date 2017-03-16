@@ -65,7 +65,7 @@
 
         <tr ng-show="item.jointProblems">
           <th>Age First Noticed</th>
-          <td><span tick="item.jointProblemsAge"></span></td>
+          <td class="newlines">{{item.jointProblemsAge}}</td>
         </tr>
 
         <tr ng-show="item.jointProblems">
@@ -187,8 +187,8 @@
           <div frm-label>Age First Noticed</div>
 
           <div frm-control>
-            <div frm-integer-field model="item.ageFirstNoticed" required="item.jointProblems"></div>
-            <div frm-errors errors="item.errors.ageFirstNoticed"></div>
+            <div frm-integer-field model="item.jointProblemsAge" required="item.jointProblems"></div>
+            <div frm-errors errors="item.errors.jointProblemsAge"></div>
           </div>
         </div>
 
