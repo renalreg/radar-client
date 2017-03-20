@@ -23,7 +23,7 @@ function RecruitPatientController(
   init();
 
   function init() {
-    $q.all([loadGenders(), loadEthnicities(), loadNumberGroups()]).then(function() {
+    $q.all([loadGenders(), loadEthnicities(), loadNumberGroups(), loadNationalities()]).then(function() {
       $scope.loading = false;
     });
   }
@@ -102,6 +102,13 @@ function RecruitPatientController(
 
       // Set the options
       $scope.numberGroups = groups;
+    });
+  }
+
+  function loadNationalities() {
+    return store.findMany('nationalities').then(function(nationalities) {
+      nationalities = _.sortBy(nationalities, 'name');
+      $scope.nationalities = nationalities;
     });
   }
 }

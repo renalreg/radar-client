@@ -69,6 +69,11 @@
       </tr>
 
       <tr>
+        <th>Nationality</th>
+        <td>{{item.nationality.label | missing}}</td>
+      </tr>
+
+      <tr>
         <th>Ethnicity</th>
         <td>{{item.ethnicity.label | missing}}</td>
       </tr>
@@ -160,6 +165,15 @@
             <div frm-control>
               <div frm-select-field model="item.gender" required="true" options="genders"></div>
               <div frm-errors errors="item.errors.gender"></div>
+            </div>
+          </div>
+
+          <div frm-field frm-group>
+            <div frm-label>Nationality</div>
+
+            <div frm-control>
+              <div frm-select-field model="item.nationality" options="nationalities"></div>
+              <div frm-errors errors="item.errors.nationality"></div>
             </div>
           </div>
 
