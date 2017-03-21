@@ -44,6 +44,8 @@ function patientDemographicsControllerFactory(
      * We trust that patient can be in one and only one country,
      * so even if he/she belongs to multiple cohorts, it is enough
      * for us to find the first one.
+     *
+     * @returns {string} Country code
      */
     function findCohortCountry() {
       var groups = $scope.patient.groups;
