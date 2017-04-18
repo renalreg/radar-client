@@ -3,6 +3,7 @@ import angular from 'angular';
 import textEditor from './text-editor';
 import fatalError from './fatal-error';
 
+import autoFocus from './auto-focus.directive';
 import filterHelper from './filter-helper.directive';
 import {
   listHelper,
@@ -28,6 +29,7 @@ run.$inject = ['titleService', '$window'];
 
 export default angular.module('radar.ui', [textEditor, fatalError])
   .run(run)
+  .directive('autoFocus', autoFocus)
   .directive('filterHelper', filterHelper)
   .directive('listHelper', listHelper)
   .factory('ListHelperProxy', listHelperProxyFactory)
