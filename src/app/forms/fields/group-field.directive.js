@@ -7,11 +7,12 @@ function frmGroupField(store) {
     restrict: 'A',
     scope: {
       model: '=',
-      required: '&'
+      required: '&',
+      params: '='
     },
     templateUrl: templateUrl,
     link: function(scope) {
-      store.findMany('groups').then(function(groups) {
+      store.findMany('groups', scope.params).then(function(groups) {
         scope.groups = sortGroups(groups);
       });
     }
