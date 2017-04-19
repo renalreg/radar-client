@@ -62,10 +62,10 @@ function patientDemographicsControllerFactory(
       store.findMany('genders').then(function(genders) {
         $scope.genders = genders;
       }),
-      store.findMany('ethnicities', {groupCountry: findCohortCountry()}).then(function(ethnicities) {
+      store.findMany('ethnicities', {patient: $scope.patient.id}).then(function(ethnicities) {
         $scope.ethnicities = ethnicities;
       }),
-      store.findMany('nationalities', {groupCountry: findCohortCountry()}).then(function(nationalities) {
+      store.findMany('nationalities', {patient: $scope.patient.id}).then(function(nationalities) {
         $scope.nationalities = nationalities;
       }),
     ]));
