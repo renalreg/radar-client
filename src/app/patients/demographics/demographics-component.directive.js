@@ -39,33 +39,15 @@ function patientDemographicsControllerFactory(
       }
     });
 
-    /**
-     * Return id of the first found patient cohort.
-     * We trust that patient can be in one and only one country,
-     * so even if he/she belongs to multiple cohorts, it is enough
-     * for us to find the first one.
-     *
-     * @returns {string} Country code
-     */
-    function findCohortCountry() {
-      var groups = $scope.patient.groups;
-      for (var i = 0; i < groups.length; i++) {
-        if (groups[i].group.type === 'COHORT') {
-          return groups[i].group.countryCode;
-        }
-      }
-      return 'GB';
-    }
-
     self.load(firstPromise([
       store.findMany('patient-demographics', {patient: $scope.patient.id}),
       store.findMany('genders').then(function(genders) {
         $scope.genders = genders;
       }),
-      store.findMany('ethnicities', {groupCountry: findCohortCountry()}).then(function(ethnicities) {
+      store.findMany('ethnicities', {patient: $scope.patient.id}).then(function(ethnicities) {
         $scope.ethnicities = ethnicities;
       }),
-      store.findMany('nationalities', {groupCountry: findCohortCountry()}).then(function(nationalities) {
+      store.findMany('nationalities', {patient: $scope.patient.id}).then(function(nationalities) {
         $scope.nationalities = nationalities;
       }),
     ]));
