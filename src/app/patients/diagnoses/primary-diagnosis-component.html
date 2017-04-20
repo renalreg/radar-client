@@ -164,7 +164,7 @@
         </div>
       </div>
 
-      <div ng-if="item.biopsy" frm-field frm-group>
+      <div ng-if="item.biopsy && cohort.code === 'INS'" frm-field frm-group>
         <div frm-label>Biopsy Diagnosis</div>
 
         <div frm-control>
