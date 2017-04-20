@@ -90,7 +90,7 @@ function RecruitPatientController(
   }
 
   function loadEthnicities() {
-    return store.findMany('ethnicities').then(function(ethnicities) {
+    return store.findMany('ethnicities', {user: $scope.user.id}).then(function(ethnicities) {
       $scope.ethnicities = ethnicities;
     });
   }
@@ -106,7 +106,7 @@ function RecruitPatientController(
   }
 
   function loadNationalities() {
-    return store.findMany('nationalities').then(function(nationalities) {
+    return store.findMany('nationalities', {user: $scope.user.id}).then(function(nationalities) {
       nationalities = _.sortBy(nationalities, 'name');
       $scope.nationalities = nationalities;
     });
