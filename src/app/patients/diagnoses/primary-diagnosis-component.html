@@ -56,7 +56,7 @@
         <td><span tick="item.biopsy"></span></td>
       </tr>
 
-      <tr ng-if="item.biopsy">
+      <tr ng-if="item.biopsy && cohort === 'INS'">
         <th>Biopsy Diagnosis</th>
         <td>{{item.biopsyDiagnosis.label | missing}}</td>
       </tr>
