@@ -38,7 +38,7 @@ function observationSelector(store) {
       scope.isActive = isActive;
       scope.use = use;
       scope.setGroup = setGroup;
-
+      scope.saveResults = saveResults;
       /**
        * Called when the model is updated outside the directive.
        *
@@ -57,9 +57,37 @@ function observationSelector(store) {
        * @returns {array} - the list of observations for this group.
        */
       function getObservations(group) {
-        var key = group === null ? null : group.id;
+          var key = group === null ? null : group.id;
+          $("#div-group-date > input").val("");
+          if(key==null){
+              $("#div-edit-result-list").show();
+              $("#div-edit-result").hide();
+              $(".form-container").show();
+              
+          }
+          else{
+              $("#div-edit-result").show();
+              $("#div-edit-result-list").hide();
+              $(".form-container").hide();
+          }
 
-        return groupObservations[key] || [];
+          $("#div-group-date > input").change(function () {
+              var groupDate = $(this).val();
+
+              $(".div-observation-date  > input").each(function (i, obj) {
+
+                  $(this).val(groupDate);
+
+
+              });
+
+
+          });
+          
+
+
+
+          return groupObservations[key] || [];
       }
 
       /**
@@ -72,6 +100,200 @@ function observationSelector(store) {
         scope.group = group;
         scope.observations = getObservations(group);
       }
+
+      function isValidDate(datestr, msgstr){
+          return true;
+      }
+
+      function strToDateObj(datestr){
+          var dateobj = {};
+          dateobj.isEmpty = true;
+          dateobj.isValid = false;
+          dateobj.errMsg = "";
+          if(datestr !="")
+          {
+              dateobj.isEmpty = false;
+          }else{
+              dateobj.isValid = false;
+              dateobj.errMsg = " date required"; 
+              return dateobj;
+          }
+
+          var dateparts =datestr.split('/');
+          var realdate = new Date(dateparts[2],dateparts[1]-1,dateparts[0]); 
+          var today = new Date();
+
+          if (realdate > today){
+              dateobj.isValid = false;
+              dateobj.errMsg = " date must be in the past"; 
+              return dateobj;
+          }
+          dateobj.isValid = true;
+          return dateobj;
+      }
+
+      function objToValue(val,min,max){
+          var objval = {};
+          
+          objval.isValid = true;
+          objval.errMsg = "";
+
+          if(val < min){
+              objval.isValid = false;
+              objval.errMsg = " must be greater than or equal to " + min;
+              return objval;
+          }
+          if(val > max){
+              objval.isValid = false;
+              objval.errMsg = " must be less than or equal to " + max;
+              return objval;
+          }
+          return objval;
+      }
+
+
+      function convertToDate(datestr){
+          var dateparts =datestr.split('/');
+          return dateparts[2] + "-" +  dateparts[1] + "-" + dateparts[0] ;
+      }
+
+      function saveResults(patient) {
+
+
+          var errmsg = "";
+          var result = {};
+          result.patient = patient.id;
+          result.sourceGroup = $("#div-source-group > select").val();
+          var msg ="";
+          var observations = [];
+
+
+          $(' .result-item').each(function (k, obj) {
+              var obs = {};
+              var hasvalue = false;
+              var datatype = $(this).find(".observation-data-value").attr("data-observation-type");
+              
+              switch (datatype) {
+                  case "INTEGER":
+                      if($(this).find(".observation-data-value").find("input.form-control").val() === parseInt($(this).find(".observation-data-value").find("input.form-control").val(),10))
+                      {
+                          if($.isNumeric( $(this).find(".observation-data-value").find("input.form-control").val() ))
+                          {
+                              obs.value = parseInt($(this).find(".observation-data-value").find("input.form-control").val())
+                              hasvalue = true;
+                              //alert( obs.value);
+
+                              var objval = {};
+                              objval = objToValue(obs.value, parseInt($(this).attr("data-min-val")),parseInt($(this).attr("data-max-val")));
+                              if(!objval.isValid)
+                              {
+                                  errmsg += $(this).attr("data-observation-name") + objval.errMsg + "\n";
+                              }
+                            
+
+                          }
+                          else{
+                              errmsg += "Invalid " + $(this).attr("data-observation-name") + " entry \n";
+                          }
+                      }
+                      break;
+                  case  "REAL":
+                      if($(this).find(".observation-data-value").find("input.form-control").val() !="")
+                      {
+                          if($.isNumeric( $(this).find(".observation-data-value").find("input.form-control").val() ))
+                          {
+                              obs.value = parseFloat($(this).find(".observation-data-value").find("input.form-control").val())
+                              hasvalue = true;
+                              // alert( obs.value);
+                              var objval = {};
+                              objval = objToValue(obs.value, parseFloat($(this).attr("data-min-val")),parseFloat($(this).attr("data-max-val")));
+                              if(!objval.isValid)
+                              {
+                                  errmsg += $(this).attr("data-observation-name") + objval.errMsg + "\n";
+                              }
+                          }
+                          else{
+                              errmsg += "Invalid " + $(this).attr("data-observation-name") + " entry \n";
+                          }
+                      }
+                      break;
+                  case  "STRING":
+                      if($(this).find(".observation-data-value").find("input.form-control").val() !="")
+                      {
+                          
+                          obs.value = $(this).find(".observation-data-value").find("input.form-control").val()
+                          hasvalue = true;
+                          //alert( obs.value);
+                          
+                      }
+                     
+                      break;
+                  case   "ENUM":
+
+                      if($(this).find(".observation-data-value").find("select.form-control").val() !="")
+                      {
+
+                          var val = {};
+                          val.code =  $(this).find(".observation-data-value").find("select.form-control").val();
+                          val.description = $(this).find(".observation-data-value").find("select.form-control option:selected").text();
+                          
+                          obs.value = val;
+                          hasvalue = true;
+                          // alert( obs.value.code + " " + obs.value.description);
+                          
+                      }
+
+                      
+                      break;
+                  default:
+                      break;
+              } 
+
+              if(hasvalue)
+              {
+
+                  obs.observation = $(this).attr("data-observation");
+                  var obsdate = $(this).find(".div-observation-date").find("input.form-control").val(); 
+                  // alert(obsdate);
+
+                  var dateval = strToDateObj(obsdate);
+
+                  if(dateval.isValid)
+                  {
+                      obs.date = convertToDate(obsdate);
+                      observations.push(obs);
+                  }
+                  else{
+                      errmsg += $(this).attr("data-observation-name") + dateval.errMsg + "\n";
+                  }
+
+              }
+              
+
+             
+          });
+         
+          if(errmsg != "")
+          {
+              alert(errmsg);
+              return false;
+          }
+          result.observations = observations;
+
+          $.ajax({
+              url:  './api/results',
+              type: 'POST',
+              data: JSON.stringify(result),
+              contentType: 'application/json; charset=utf-8',
+              dataType: "json"
+          });
+
+   
+      }
+
+
+
+
 
       /**
        * Returns true if the group is selected.

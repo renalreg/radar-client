@@ -1,0 +1,83 @@
+﻿body {
+}
+    #div-edit-result .result-item {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+        min-width: 700px;
+        max-width: 700px;
+        float: left;
+        display: inline-block;
+        border-bottom: 1px solid #ddd;
+    }
+
+    #div-edit-result .form-control {
+        width: 100px !important;
+    }
+
+    #div-edit-result .col-md-9 {
+        width: 90%;
+    }
+
+    #div-edit-result .input-group-addon {
+        min-width: 60px !important;
+    }
+
+    #div-edit-result select.form-control {
+        width: 115px !important;
+    }
+
+    #div-source-group select {
+        min-width: 260px !important;
+    }
+
+    #div-group-date {
+        max-width: 100px;
+    }
+
+    #div-edit-result-bar {
+        float: left;
+        display: inline-block;
+        margin: 10px 0 !important;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        border-color: cadetblue;
+        padding-bottom: 10px;
+    }
+
+    .widthV20{width:20%; float:left; display:inline}
+    .widthV15{width:15%; float:right; display:inline}
+    .widthV11{width:11%; float:left; display:inline}
+    .widthV5{width:5%; float:left; display:inline}
+    .labelF{text-align:right; padding:5px}
+    .widthF100{min-width:100px; max-width:100px; float:left; display:inline-block}
+    .widthF120{min-width:120px!important; max-width:120px!important; float:left; display:inline-block}
+    .widthF180{min-width:180px; max-width:180px; float:left; display:inline-block}
+    .widthF200{min-width:200px; max-width:200px; float:left; display:inline-block}
+
+    @media screen and (min-width: 1447px) {
+
+        .result-item:nth-child(4n+1) {
+            background-color: #f9f9f9;
+        }
+
+        .result-item:nth-child(4n+4) {
+            background-color: #f9f9f9;
+        }
+
+        #div-edit-result-bar {
+            max-width: 1530px;
+            min-width: 1530px;
+        }
+    }
+
+    @media screen and (max-width: 1447px) {
+        .result-item:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        #div-edit-result-bar {
+            max-width: 720px;
+            min-width: 720px;
+        }
+    }
