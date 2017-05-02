@@ -166,10 +166,11 @@ function observationSelector(store) {
           result.sourceGroup = $("#div-source-group > select").val();
           var msg ="";
           var observations = [];
-
+          var observationsStr = "";
 
           $(' .result-item').each(function (k, obj) {
               var obs = {};
+              var obsStr = {};
               var hasvalue = false;
               var datatype = $(this).find(".observation-data-value").attr("data-observation-type");
               
@@ -180,6 +181,7 @@ function observationSelector(store) {
                           if($.isNumeric( $(this).find(".observation-data-value").find("input.form-control").val() ))
                           {
                               obs.value = parseInt($(this).find(".observation-data-value").find("input.form-control").val())
+                              obsStr.value = $(this).find(".observation-data-value").find("input.form-control").val();
                               hasvalue = true;
                               //alert( obs.value);
 
@@ -203,6 +205,7 @@ function observationSelector(store) {
                           if($.isNumeric( $(this).find(".observation-data-value").find("input.form-control").val() ))
                           {
                               obs.value = parseFloat($(this).find(".observation-data-value").find("input.form-control").val())
+                              obsStr.value = $(this).find(".observation-data-value").find("input.form-control").val();
                               hasvalue = true;
                               // alert( obs.value);
                               var objval = {};
@@ -221,7 +224,8 @@ function observationSelector(store) {
                       if($(this).find(".observation-data-value").find("input.form-control").val() !="")
                       {
                           
-                          obs.value = $(this).find(".observation-data-value").find("input.form-control").val()
+                          obs.value = $(this).find(".observation-data-value").find("input.form-control").val();
+                          obsStr.value = $(this).find(".observation-data-value").find("input.form-control").val();
                           hasvalue = true;
                           //alert( obs.value);
                           
@@ -236,7 +240,7 @@ function observationSelector(store) {
                           var val = {};
                           val.code =  $(this).find(".observation-data-value").find("select.form-control").val();
                           val.description = $(this).find(".observation-data-value").find("select.form-control option:selected").text();
-                          
+                          obsStr.value  = val.description;
                           obs.value = val;
                           hasvalue = true;
                           // alert( obs.value.code + " " + obs.value.description);
@@ -252,6 +256,8 @@ function observationSelector(store) {
               if(hasvalue)
               {
 
+                  obsStr.observation =  $(this).attr("data-observation-name");
+                  obsStr.unit =  $(this).attr("data-observation-unit");
                   obs.observation = $(this).attr("data-observation");
                   var obsdate = $(this).find(".div-observation-date").find("input.form-control").val(); 
                   // alert(obsdate);
@@ -262,6 +268,8 @@ function observationSelector(store) {
                   {
                       obs.date = convertToDate(obsdate);
                       observations.push(obs);
+                      obsStr.date = obsdate;
+                      observationsStr += ("\n" + obsStr.observation + " - " + obsStr.value +  obsStr.unit + " - " + obsStr.date );
                   }
                   else{
                       errmsg += $(this).attr("data-observation-name") + dateval.errMsg + "\n";
@@ -278,6 +286,12 @@ function observationSelector(store) {
               alert(errmsg);
               return false;
           }
+
+          if(observations.length < 1)
+          {
+              alert("No Result Sumbmitted");
+              return false;
+          }
           result.observations = observations;
 
           $.ajax({
@@ -285,7 +299,14 @@ function observationSelector(store) {
               type: 'POST',
               data: JSON.stringify(result),
               contentType: 'application/json; charset=utf-8',
-              dataType: "json"
+              dataType: "json",
+              success: function (data) {
+                  alert("Following result(s) have been saved : \n" + observationsStr);
+                  window.location.reload(true);
+
+          },
+              error: function (data, errorThrown) { alert("No Result Submitted : \n" + errorThrown) }
+
           });
 
    
