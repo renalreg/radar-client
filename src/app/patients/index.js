@@ -17,6 +17,7 @@ import genetics from './genetics';
 import hnf1b from './hnf1b';
 import hospitalisations from './hospitalisations';
 import hospitals from './hospitals';
+import indiaEthnicities from './india-ethnicities';
 import ins from './ins';
 import pkd from './pkd';
 import medications from './medications';
@@ -106,6 +107,7 @@ export default angular.module('radar.patients', [
   hnf1b,
   hospitalisations,
   hospitals,
+  indiaEthnicities,
   ins,
   pkd,
   medications,
