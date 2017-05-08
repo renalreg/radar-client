@@ -17,6 +17,7 @@ var PAGES = {
   HNF1B_CLINICAL_PICTURES: {name: 'Clinical Pictures', state: 'patient.hnf1bClinicalPictures'},
   HOSPITALISATIONS: {name: 'Hospitalisations', state: 'patient.hospitalisations'},
   HOSPITALS: {name: 'Hospitals', state: 'patient.hospitals'},
+  INDIA_ETHNICITIES: {name: 'Ethnicity', state: 'patient.indiaEthnicities'},
   INS_CLINICAL_PICTURES: {name: 'Clinical Pictures', state: 'patient.insClinicalPictures'},
   INS_RELAPSES: {name: 'Relapses', state: 'patient.insRelapses'},
   LIVER_DISEASES: {name: 'Liver Diseases', state: 'patient.liverDiseases'},
