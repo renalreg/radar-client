@@ -1,0 +1,128 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Ancestral state of Father</th>
+        <td>{{item.fatherAncestralState}}</td>
+      </tr>
+
+      <tr>
+        <th>Mother tongue of Father</th>
+        <td>{{item.fatherLanguage}}</td>
+      </tr>
+
+      <tr>
+        <th>Ancestral state of Mother</th>
+        <td>{{item.motherAncestralState}}</td>
+      </tr>
+
+      <tr>
+        <th>Mother tongue of Mother</th>
+        <td>{{item.motherLanguage}}</td>
+      </tr>
+
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <div frm-field frm-group>
+        <div frm-label>Ancestral state of Father</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.fatherAncestralState"></div>
+          <div frm-errors errors="item.errors.fatherAncestralState"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Mother tongue of Father</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.fatherLanguage"></div>
+          <div frm-errors errors="item.errors.fatherLanguage"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Ancestral state of Mother</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.motherAncestralState"></div>
+          <div frm-errors errors="item.errors.motherAncestralState"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Mother tongue of Mother</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.motherLanguage"></div>
+          <div frm-errors errors="item.errors.motherLanguage"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10}">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div filter-helper></div>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+      <tr>
+        <th></th>
+        <th sort-helper="fatherAncestralState">Ancestral state of Father</th>
+        <th sort-helper="fatherLanguage">Mother tongue of Father</th>
+        <th sort-helper="motherAncestralState">Ancestral state of Mother</th>
+        <th sort-helper="motherLanguage">Mother tongue of Mother</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <tr ng-repeat="item in page.getItems()">
+        <td>
+          <span crud-list-view-button item="item"></span>
+          <span crud-list-edit-button item="item"></span>
+        </td>
+
+        <td>{{item.fatherAncestralState}}</td>
+        <td>{{item.fatherLanguage}}</td>
+        <td>{{item.motherAncestralState}}</td>
+        <td>{{item.motherLanguage}}</td>
+
+        <td>
+          <span crud-list-remove-button item="item"></span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+  </div>
+</div>
