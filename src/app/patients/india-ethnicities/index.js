@@ -9,18 +9,18 @@ import {
 import templateUrl from './india-ethnicities.html';
 
 function config($stateProvider, storeProvider) {
-  storeProvider.registerMixin('india-ethnicities', 'SourceModelMixin')
+  storeProvider.registerMixin('india-ethnicities', 'SourceModelMixin');
 
-	$stateProvider.state('patient.indiaEthnicities', {
-		url: '/india-ethnicities',
-		templateUrl: templateUrl
-	});
+  $stateProvider.state('patient.indiaEthnicities', {
+    url: '/india-ethnicities',
+    templateUrl: templateUrl
+  });
 }
 
 config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.indiaEthnicities', [])
-	.config(config)
+  .config(config)
   .factory('IndiaEthnicityPermission', indiaEthnicityPermissionFactory)
   .factory('IndiaEthnicitiesController', indiaEthnicitiesControllerFactory)
   .directive('indiaEthnicitiesComponent', indiaEthnicitiesComponent)

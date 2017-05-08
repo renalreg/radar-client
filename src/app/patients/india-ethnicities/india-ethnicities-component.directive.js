@@ -15,20 +15,20 @@ function indiaEthnicitiesControllerFactory(
   store
 ) {
   /**
+   * A component for India patients to record their extended demographics
    *
-   *
-   *
-   *
+   * @class
+   * @param {Object} $scope - angular scope
    */
-	function IndiaEthnicitiesController($scope) {
-		var self = this;
+  function IndiaEthnicitiesController($scope) {
+    var self = this;
 
     $injector.invoke(ModelListDetailController, self, {
-			$scope: $scope,
-			params: {
+      $scope: $scope,
+      params: {
         permission: new IndiaEthnicityPermission($scope.patient)
       }
-		});
+    });
 
     $scope.sourceGroup = null;
 
@@ -46,7 +46,7 @@ function indiaEthnicitiesControllerFactory(
       });
       self.edit(item);
     };
-	}
+  }
 
   IndiaEthnicitiesController.$inject = ['$scope'];
   IndiaEthnicitiesController.prototype = Object.create(ModelListDetailController.prototype);
@@ -61,22 +61,22 @@ indiaEthnicitiesControllerFactory.$inject = [
   'getRadarGroup',
   '$injector',
   'store'
-]
+];
 
 function indiaEthnicitiesComponent(IndiaEthnicitiesController) {
-	return{
-		scope: {
-			patient: '='
-		},
+  return{
+    scope: {
+      patient: '='
+    },
     controller: IndiaEthnicitiesController,
-		templateUrl: templateUrl
-	};
+    templateUrl: templateUrl
+  };
 }
 
-indiaEthnicitiesComponent.$inject = ['IndiaEthnicitiesController']
+indiaEthnicitiesComponent.$inject = ['IndiaEthnicitiesController'];
 
 export {
   indiaEthnicitiesControllerFactory,
   indiaEthnicityPermissionFactory,
   indiaEthnicitiesComponent
-}
+};
