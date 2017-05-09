@@ -1,0 +1,29 @@
+<div crud>
+  <form class="form-horizontal form-container" crud-submit="saveAndList()" novalidate>
+    <div frm-field frm-group>
+
+      <div frm-label>No comorbidities</div>
+
+      <div frm-control required="true">
+        <div frm-checkbox-required-field model="item.checked"></div>
+        <div frm-errors errors="item.errors.checked"></div>
+      </div>
+    </div>
+
+
+<!--     <div frm-field frm-group>
+      <div frm-label>Date</div>
+
+      <div frm-control>
+        <div frm-date-field model="item.fromDate"></div>
+        <div frm-errors errors="item.errors.fromDate"></div>
+      </div>
+    </div>
+ -->
+
+    <div frm-buttons>
+      <span crud-save-button></span>
+    </div>
+
+  </form>
+</div>
