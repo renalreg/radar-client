@@ -2,6 +2,7 @@ import angular from 'angular';
 
 import frmBooleanField from './boolean-field.directive';
 import frmCheckboxField from './checkbox-field.directive';
+import frmCheckboxRequiredField from './checkbox-required-field.directive';
 import frmCohortField from './cohort-field.directive';
 import frmConfirmEmailField from './confirm-email-field.directive';
 import frmConfirmPasswordField from './confirm-password-field.directive';
@@ -34,6 +35,7 @@ import frmYesNoField from './yes-no-field.directive';
 export default angular.module('radar.forms.fields', [])
   .directive('frmBooleanField', frmBooleanField)
   .directive('frmCheckboxField', frmCheckboxField)
+  .directive('frmCheckboxRequiredField', frmCheckboxRequiredField)
   .directive('frmCohortField', frmCohortField)
   .directive('frmConfirmEmailField', frmConfirmEmailField)
   .directive('frmConfirmPasswordField', frmConfirmPasswordField)
