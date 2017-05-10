@@ -57,37 +57,37 @@ function observationSelector(store) {
        * @returns {array} - the list of observations for this group.
        */
       function getObservations(group) {
-          var key = group === null ? null : group.id;
-          $("#div-group-date > input").val("");
-          if(key==null){
-              $("#div-edit-result-list").show();
-              $("#div-edit-result").hide();
-              $(".form-container").show();
+        var key = group === null ? null : group.id;
+        $('#div-group-date > input').val('');
+        if(key==null){
+          $('#div-edit-result-list').show();
+          $('#div-edit-result').hide();
+          $('.form-container').show();
               
-          }
-          else{
-              $("#div-edit-result").show();
-              $("#div-edit-result-list").hide();
-              $(".form-container").hide();
-          }
+        }
+        else{
+          $('#div-edit-result').show();
+          $('#div-edit-result-list').hide();
+          $('.form-container').hide();
+        }
 
-          $("#div-group-date > input").change(function () {
-              var groupDate = $(this).val();
+        $('#div-group-date > input').change(function () {
+          var groupDate = $(this).val();
 
-              $(".div-observation-date  > input").each(function (i, obj) {
+          $('.div-observation-date  > input').each(function () {
 
-                  $(this).val(groupDate);
-
-
-              });
+            $(this).val(groupDate);
 
 
           });
+
+
+        });
           
 
 
 
-          return groupObservations[key] || [];
+        return groupObservations[key] || [];
       }
 
       /**
@@ -101,213 +101,210 @@ function observationSelector(store) {
         scope.observations = getObservations(group);
       }
 
-      function isValidDate(datestr, msgstr){
-          return true;
-      }
+
 
       function strToDateObj(datestr){
-          var dateobj = {};
-          dateobj.isEmpty = true;
+        var dateobj = {};
+        dateobj.isEmpty = true;
+        dateobj.isValid = false;
+        dateobj.errMsg = '';
+        if(datestr !='')
+        {
+          dateobj.isEmpty = false;
+        }else{
           dateobj.isValid = false;
-          dateobj.errMsg = "";
-          if(datestr !="")
-          {
-              dateobj.isEmpty = false;
-          }else{
-              dateobj.isValid = false;
-              dateobj.errMsg = " date required"; 
-              return dateobj;
-          }
-
-          var dateparts =datestr.split('/');
-          var realdate = new Date(dateparts[2],dateparts[1]-1,dateparts[0]); 
-          var today = new Date();
-
-          if (realdate > today){
-              dateobj.isValid = false;
-              dateobj.errMsg = " date must be in the past"; 
-              return dateobj;
-          }
-          dateobj.isValid = true;
+          dateobj.errMsg = ' date required'; 
           return dateobj;
+        }
+
+        var dateparts =datestr.split('/');
+        var realdate = new Date(dateparts[2],dateparts[1]-1,dateparts[0]); 
+        var today = new Date();
+
+        if (realdate > today){
+          dateobj.isValid = false;
+          dateobj.errMsg = ' date must be in the past'; 
+          return dateobj;
+        }
+        dateobj.isValid = true;
+        return dateobj;
       }
 
       function objToValue(val,min,max){
-          var objval = {};
+        var objval = {};
           
-          objval.isValid = true;
-          objval.errMsg = "";
+        objval.isValid = true;
+        objval.errMsg = '';
 
-          if(val < min){
-              objval.isValid = false;
-              objval.errMsg = " must be greater than or equal to " + min;
-              return objval;
-          }
-          if(val > max){
-              objval.isValid = false;
-              objval.errMsg = " must be less than or equal to " + max;
-              return objval;
-          }
+        if(val < min){
+          objval.isValid = false;
+          objval.errMsg = ' must be greater than or equal to ' + min;
           return objval;
+        }
+        if(val > max){
+          objval.isValid = false;
+          objval.errMsg = ' must be less than or equal to ' + max;
+          return objval;
+        }
+        return objval;
       }
 
 
       function convertToDate(datestr){
-          var dateparts =datestr.split('/');
-          return dateparts[2] + "-" +  dateparts[1] + "-" + dateparts[0] ;
+        var dateparts =datestr.split('/');
+        return dateparts[2] + '-' +  dateparts[1] + '-' + dateparts[0] ;
       }
 
       function saveResults(patient) {
 
 
-          var errmsg = "";
-          var result = {};
-          result.patient = patient.id;
-          result.sourceGroup = $("#div-source-group > select").val();
-          var msg ="";
-          var observations = [];
-          var observationsStr = "";
+        var errmsg = '';
+        var result = {};
+        result.patient = patient.id;
+        result.sourceGroup = $('#div-source-group > select').val();
+   
+        var observations = [];
+        var observationsStr = '';
 
-          $(' .result-item').each(function (k, obj) {
-              var obs = {};
-              var obsStr = {};
-              var hasvalue = false;
-              var datatype = $(this).find(".observation-data-value").attr("data-observation-type");
+        $(' .result-item').each(function () {
+          var obs = {};
+          var obsStr = {};
+          var hasvalue = false;
+          var datatype = $(this).find('.observation-data-value').attr('data-observation-type');
               
-              switch (datatype) {
-                  case "INTEGER":
-                      if($(this).find(".observation-data-value").find("input.form-control").val() === parseInt($(this).find(".observation-data-value").find("input.form-control").val(),10))
-                      {
-                          if($.isNumeric( $(this).find(".observation-data-value").find("input.form-control").val() ))
-                          {
-                              obs.value = parseInt($(this).find(".observation-data-value").find("input.form-control").val())
-                              obsStr.value = $(this).find(".observation-data-value").find("input.form-control").val();
-                              hasvalue = true;
-                              //alert( obs.value);
+          switch (datatype) {
+          case 'INTEGER':
+            if($(this).find('.observation-data-value').find('input.form-control').val() === parseInt($(this).find('.observation-data-value').find('input.form-control').val(),10))
+            {
+              if($.isNumeric( $(this).find('.observation-data-value').find('input.form-control').val() ))
+              {
+                obs.value = parseInt($(this).find('.observation-data-value').find('input.form-control').val());
+                obsStr.value = $(this).find('.observation-data-value').find('input.form-control').val();
+                hasvalue = true;
+                //alert( obs.value);
 
-                              var objval = {};
-                              objval = objToValue(obs.value, parseInt($(this).attr("data-min-val")),parseInt($(this).attr("data-max-val")));
-                              if(!objval.isValid)
-                              {
-                                  errmsg += $(this).attr("data-observation-name") + objval.errMsg + "\n";
-                              }
+                var objval = {};
+                objval = objToValue(obs.value, parseInt($(this).attr('data-min-val')),parseInt($(this).attr('data-max-val')));
+                if(!objval.isValid)
+                {
+                  errmsg += $(this).attr('data-observation-name') + objval.errMsg + '\n';
+                }
                             
 
-                          }
-                          else{
-                              errmsg += "Invalid " + $(this).attr("data-observation-name") + " entry \n";
-                          }
-                      }
-                      break;
-                  case  "REAL":
-                      if($(this).find(".observation-data-value").find("input.form-control").val() !="")
-                      {
-                          if($.isNumeric( $(this).find(".observation-data-value").find("input.form-control").val() ))
-                          {
-                              obs.value = parseFloat($(this).find(".observation-data-value").find("input.form-control").val())
-                              obsStr.value = $(this).find(".observation-data-value").find("input.form-control").val();
-                              hasvalue = true;
-                              // alert( obs.value);
-                              var objval = {};
-                              objval = objToValue(obs.value, parseFloat($(this).attr("data-min-val")),parseFloat($(this).attr("data-max-val")));
-                              if(!objval.isValid)
-                              {
-                                  errmsg += $(this).attr("data-observation-name") + objval.errMsg + "\n";
-                              }
-                          }
-                          else{
-                              errmsg += "Invalid " + $(this).attr("data-observation-name") + " entry \n";
-                          }
-                      }
-                      break;
-                  case  "STRING":
-                      if($(this).find(".observation-data-value").find("input.form-control").val() !="")
-                      {
+              }
+              else{
+                errmsg += 'Invalid ' + $(this).attr('data-observation-name') + ' entry \n';
+              }
+            }
+            break;
+          case  'REAL':
+            if($(this).find('.observation-data-value').find('input.form-control').val() !='')
+            {
+              if($.isNumeric( $(this).find('.observation-data-value').find('input.form-control').val() ))
+              {
+                obs.value = parseFloat($(this).find('.observation-data-value').find('input.form-control').val());
+                obsStr.value = $(this).find('.observation-data-value').find('input.form-control').val();
+                hasvalue = true;
+                // alert( obs.value);
+                       
+                objval = objToValue(obs.value, parseFloat($(this).attr('data-min-val')),parseFloat($(this).attr('data-max-val')));
+                if(!objval.isValid)
+                {
+                  errmsg += $(this).attr('data-observation-name') + objval.errMsg + '\n';
+                }
+              }
+              else{
+                errmsg += 'Invalid ' + $(this).attr('data-observation-name') + ' entry \n';
+              }
+            }
+            break;
+          case  'STRING':
+            if($(this).find('.observation-data-value').find('input.form-control').val() !='')
+            {
                           
-                          obs.value = $(this).find(".observation-data-value").find("input.form-control").val();
-                          obsStr.value = $(this).find(".observation-data-value").find("input.form-control").val();
-                          hasvalue = true;
-                          //alert( obs.value);
+              obs.value = $(this).find('.observation-data-value').find('input.form-control').val();
+              obsStr.value = $(this).find('.observation-data-value').find('input.form-control').val();
+              hasvalue = true;
                           
-                      }
+            }
                      
-                      break;
-                  case   "ENUM":
+            break;
+          case   'ENUM':
 
-                      if($(this).find(".observation-data-value").find("select.form-control").val() !="")
-                      {
+            if($(this).find('.observation-data-value').find('select.form-control').val() !='')
+            {
 
-                          var val = {};
-                          val.code =  $(this).find(".observation-data-value").find("select.form-control").val();
-                          val.description = $(this).find(".observation-data-value").find("select.form-control option:selected").text();
-                          obsStr.value  = val.description;
-                          obs.value = val;
-                          hasvalue = true;
-                          // alert( obs.value.code + " " + obs.value.description);
+              var val = {};
+              val.code =  $(this).find('.observation-data-value').find('select.form-control').val();
+              val.description = $(this).find('.observation-data-value').find('select.form-control option:selected').text();
+              obsStr.value  = val.description;
+              obs.value = val;
+              hasvalue = true;
+            
                           
-                      }
+            }
 
                       
-                      break;
-                  default:
-                      break;
-              } 
+            break;
+          default:
+            break;
+          } 
 
-              if(hasvalue)
-              {
+          if(hasvalue)
+          {
 
-                  obsStr.observation =  $(this).attr("data-observation-name");
-                  obsStr.unit =  $(this).attr("data-observation-unit");
-                  obs.observation = $(this).attr("data-observation");
-                  var obsdate = $(this).find(".div-observation-date").find("input.form-control").val(); 
-                  // alert(obsdate);
+            obsStr.observation =  $(this).attr('data-observation-name');
+            obsStr.unit =  $(this).attr('data-observation-unit');
+            obs.observation = $(this).attr('data-observation');
+            var obsdate = $(this).find('.div-observation-date').find('input.form-control').val(); 
+                // alert(obsdate);
 
-                  var dateval = strToDateObj(obsdate);
+            var dateval = strToDateObj(obsdate);
 
-                  if(dateval.isValid)
-                  {
-                      obs.date = convertToDate(obsdate);
-                      observations.push(obs);
-                      obsStr.date = obsdate;
-                      observationsStr += ("\n" + obsStr.observation + " - " + obsStr.value +  obsStr.unit + " - " + obsStr.date );
-                  }
-                  else{
-                      errmsg += $(this).attr("data-observation-name") + dateval.errMsg + "\n";
-                  }
+            if(dateval.isValid)
+            {
+              obs.date = convertToDate(obsdate);
+              observations.push(obs);
+              obsStr.date = obsdate;
+              observationsStr += ('\n' + obsStr.observation + ' - ' + obsStr.value +  obsStr.unit + ' - ' + obsStr.date );
+            }
+            else{
+              errmsg += $(this).attr('data-observation-name') + dateval.errMsg + '\n';
+            }
 
-              }
+          }
               
 
              
-          });
+        });
          
-          if(errmsg != "")
-          {
-              alert(errmsg);
-              return false;
-          }
+        if(errmsg != '')
+        {
+          alert(errmsg);
+          return false;
+        }
 
-          if(observations.length < 1)
-          {
-              alert("No Result Sumbmitted");
-              return false;
-          }
-          result.observations = observations;
+        if(observations.length < 1)
+        {
+          alert('No Result Sumbmitted');
+          return false;
+        }
+        result.observations = observations;
 
-          $.ajax({
-              url:  './api/results',
-              type: 'POST',
-              data: JSON.stringify(result),
-              contentType: 'application/json; charset=utf-8',
-              dataType: "json",
-              success: function (data) {
-                  alert("Following result(s) have been saved : \n" + observationsStr);
-                  window.location.reload(true);
+        $.ajax({
+          url:  './api/results',
+          type: 'POST',
+          data: JSON.stringify(result),
+          contentType: 'application/json; charset=utf-8',
+          dataType: 'json',
+          success: function () {
+            alert('Following result(s) have been saved : \n' + observationsStr);
+            window.location.reload(true);
 
           },
-              error: function (data, errorThrown) { alert("No Result Submitted : \n" + errorThrown) }
+          error: function (data, errorThrown) { alert('No Result Submitted : \n' + errorThrown + '\n ' + data ); }
 
-          });
+        });
 
    
       }
