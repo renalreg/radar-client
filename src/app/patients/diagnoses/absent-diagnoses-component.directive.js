@@ -1,32 +1,43 @@
 import templateUrl from './absent-diagnoses-component.html';
 
 function absentDiagnosesControllerFactory(
-  ModelListDetailController,
-  PatientDiagnosisPermission,
+  getRadarGroup,
   $injector,
+  $q,
+  store,
+  adapter,
+  $state
 ) {
   function AbsentDiagnosesController($scope) {
-    var self = this;
 
-    $injector.invoke(ModelListDetailController, self, {
-      $scope: $scope,
-      params: {
-        permission: new PatientDiagnosisPermission($scope.patient)
-      }
-    });
+    $scope.items = [];
+    $scope.item = {}
 
+    $scope.submit = function() {
+      var data = $scope.item;
+      data['patient'] = $scope.patient.id
+      data['group'] = $scope.item.sourceGroup.id;
+
+      return adapter.post('/absent-diagnoses', {}, data)
+        .catch()
+        .then(function() {
+          $state.reload();
+      });
+    }
   }
 
   AbsentDiagnosesController.$inject = ['$scope'];
-  AbsentDiagnosesController.prototype = Object.create(ModelListDetailController.prototype);
 
   return AbsentDiagnosesController;
 }
 
 absentDiagnosesControllerFactory.$inject = [
-  'ModelListDetailController',
-  'PatientDiagnosisPermission',
-  '$injector'
+  'getRadarGroup',
+  '$injector',
+  '$q',
+  'store',
+  'adapter',
+  '$state'
 ];
 
 function absentDiagnosesComponent(AbsentDiagnosesController) {
