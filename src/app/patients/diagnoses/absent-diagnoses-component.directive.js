@@ -1,10 +1,6 @@
 import templateUrl from './absent-diagnoses-component.html';
 
 function absentDiagnosesControllerFactory(
-  getRadarGroup,
-  $injector,
-  $q,
-  store,
   adapter,
   $state
 ) {
@@ -31,10 +27,6 @@ function absentDiagnosesControllerFactory(
 }
 
 absentDiagnosesControllerFactory.$inject = [
-  'getRadarGroup',
-  '$injector',
-  '$q',
-  'store',
   'adapter',
   '$state'
 ];
