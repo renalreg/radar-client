@@ -25,6 +25,7 @@ import metadata from './metadata';
 import mpgn from './mpgn';
 import navigation from './navigation';
 import nephrectomies from './nephrectomies';
+import nurtureSamples from './nurture-samples';
 import numbers from './numbers';
 import pathology from './pathology';
 import plasmapheresis from './plasmapheresis';
@@ -109,14 +110,15 @@ export default angular.module('radar.patients', [
   hospitals,
   indiaEthnicities,
   ins,
-  pkd,
   medications,
   metadata,
   mpgn,
   navigation,
   nephrectomies,
+  nurtureSamples,
   numbers,
   pathology,
+  pkd,
   plasmapheresis,
   pregnancies,
   renalProgression,

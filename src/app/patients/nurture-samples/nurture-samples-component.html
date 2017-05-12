@@ -1,0 +1,124 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Date</th>
+        <td>{{item.takenOn | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Barcode</th>
+        <td>{{item.barcode}}</td>
+      </tr>
+
+      <tr>
+        <th>Protocol</th>
+        <td>{{item.protocol.label}}</td>
+      </tr>
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+
+      <div frm-field frm-group>
+        <div frm-label>Date</div>
+        <div frm-control>
+          <div frm-date-field model="item.takenOn" required="true"></div>
+          <div frm-errors errors="item.errors.takenOn"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Barcode</div>
+        <div frm-control>
+          <div frm-integer-field model="item.barcode" required="true"></div>
+          <div frm-errors errors="item.errors.barcode"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Protocol</div>
+        <div frm-control>
+          <div frm-select-field model="item.protocol" options="protocolOptions" required="true"></div>
+          <div frm-errors errors="item.errors.protocol"></div>
+        </div>
+      </div>
+
+
+      <div frm-field frm-group ng-if="showEpa()">
+        <div frm-label>EDTA plasma (EP) Tube A 100μl</div>
+        <div frm-control>
+          <div frm-integer-field model="item.epa"></div>
+          <div frm-errors errors="item.errors.epa"></div>
+        </div>
+      </div>
+
+
+
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+
+
+  <div ng-if="!viewing && !editing" list-helper="items as page">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="takenOn">Date</th>
+          <th sort-helper="barcode">Barcode</th>
+          <th sort-helper="protocol">Protocol</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.takenOn | dateFormat}}</td>
+          <td>{{item.barcode}}</td>
+          <td>{{item.protocol.label}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+
+  </div>
+
+</div>
