@@ -5,7 +5,7 @@
         <li ng-repeat="group in groups" ng-class="{'active': isActive(group)}"><a href="" ng-click="setGroup(group)">{{group.shortName}}</a></li>
         <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
     </ul>
-    <div list-helper="observations as page" list-helper-options="{perPage: 10, sortBy: 'name'}" class="observation-selector">
+    <div list-helper="observations as page" list-helper-options="{perPage: 10, sortBy: 'weight'}" class="observation-selector">
 
         <div id="div-edit-result">
             <div id="div-edit-result-bar">

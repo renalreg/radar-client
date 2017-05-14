@@ -381,7 +381,7 @@ function observationSelector(store) {
           });
 
           // Get's patients groups sorted by name
-          scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
+          scope.groups = _.sortBy(scope.patient.getGroups(), 'weight');
 
           // Remove groups that don't have any observations
           scope.groups = _.filter(scope.groups, function(group) {
