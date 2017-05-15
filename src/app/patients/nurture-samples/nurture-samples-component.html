@@ -53,7 +53,13 @@
       <div frm-field frm-group>
         <div frm-label>Protocol</div>
         <div frm-control>
-          <div frm-select-field model="item.protocol" options="protocolOptions" required="true"></div>
+
+
+          <div
+            frm-select-field model="item.protocol"
+            options="protocolOptions"
+            options-id="protocol"
+            required="true"></div>
           <div frm-errors errors="item.errors.protocol"></div>
         </div>
       </div>
@@ -62,8 +68,8 @@
       <div frm-field frm-group ng-if="showEpa()">
         <div frm-label>EDTA plasma (EP) Tube A 100μl</div>
         <div frm-control>
-          <div frm-integer-field model="item.epa"></div>
-          <div frm-errors errors="item.errors.epa"></div>
+          <div frm-integer-field model="item.protocol.value"></div>
+          <div frm-errors errors="item.errors.protocol.value"></div>
         </div>
       </div>
 
@@ -74,7 +80,13 @@
         <span crud-save-button></span>
         <span crud-cancel-list-button></span>
       </div>
+      {{ item.protocol.value }}
+      {{ item.protocol }}
+      {{ protocolOptions }}
     </form>
+
+
+
   </div>
 
 
