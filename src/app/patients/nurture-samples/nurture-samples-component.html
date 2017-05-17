@@ -1,0 +1,271 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Date</th>
+        <td>{{item.takenOn | dateFormat}}</td>
+      </tr>
+
+      <tr>
+        <th>Barcode</th>
+        <td>{{item.barcode}}</td>
+      </tr>
+
+      <tr>
+        <th>Protocol</th>
+        <td>{{item.protocol.label}}</td>
+      </tr>
+
+      <tr ng-if="showEp()">
+        <th>EP Tube A</th>
+        <td>{{item.epa}}</td>
+      </tr>
+
+      <tr ng-if="showEp()">
+        <th>EP Tube B</th>
+        <td>{{item.epb}}</td>
+      </tr>
+
+      <tr ng-if="showLp()">
+        <th>LP Tube A</th>
+        <td>{{item.lpa}}</td>
+      </tr>
+
+      <tr ng-if="showLp()">
+        <th>LP Tube B</th>
+        <td>{{item.lpb}}</td>
+      </tr>
+
+      <tr ng-if="showU()">
+        <th>U Tube C</th>
+        <td>{{item.uc}}</td>
+      </tr>
+
+      <tr ng-if="showU()">
+        <th>U Tube B</th>
+        <td>{{item.ub}}</td>
+      </tr>
+
+      <tr ng-if="showU()">
+        <th>U Tube D</th>
+        <td>{{item.ud}}</td>
+      </tr>
+
+      <tr ng-if="showFub()">
+        <th>FU Tube B</th>
+        <td>{{item.fub}}</td>
+      </tr>
+
+      <tr ng-if="showSc()">
+        <th>Serum Tube C</th>
+        <td>{{item.sc}}</td>
+      </tr>
+
+      <tr ng-if="showSa()">
+        <th>Serum Tube A</th>
+        <td>{{item.sa}}</td>
+      </tr>
+
+      <tr ng-if="showSb()">
+        <th>Serum Tube B</th>
+        <td>{{item.sb}}</td>
+      </tr>
+
+      <tr ng-if="showRna()">
+        <th>RNA, PAXgene tube</th>
+        <td>{{item.rna}}</td>
+      </tr>
+
+      <tr ng-if="showWb()">
+        <th>WB</th>
+        <td>{{item.wb}}</td>
+      </tr>
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+
+      <div frm-field frm-group>
+        <div frm-label>Date</div>
+        <div frm-control>
+          <div frm-date-field model="item.takenOn" required="true"></div>
+          <div frm-errors errors="item.errors.takenOn"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Barcode</div>
+        <div frm-control>
+          <div frm-integer-field model="item.barcode" required="true"></div>
+          <div frm-errors errors="item.errors.barcode"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Protocol</div>
+        <div frm-control>
+
+          <div frm-select-field model="item.protocol"
+               options="protocolOptions"
+               required="true">
+          </div>
+          <div frm-errors errors="item.errors.protocol"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="showEp()">
+        <div frm-label>EDTA plasma (EP) Tube A 100μl</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.epa"></div>
+          <div frm-errors errors="item.errors.protocol.epa"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showEp()">
+        <div frm-label>EDTA plasma (EP) Tube B 1ml</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.epb"></div>
+          <div frm-errors errors="item.errors.protocol.epb"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showLp()">
+        <div frm-label>Li-Hep plasma (LP) Tube A 100μl</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.lpa"></div>
+          <div frm-errors errors="item.errors.protocol.lpb"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showLp()">
+        <div frm-label>Li-Hep plasma (LP) Tube B 1ml</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.lpb"></div>
+          <div frm-errors errors="item.errors.protocol.lpb"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showU()">
+        <div frm-label>Urine Complete (U) Tube C</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.uc"></div>
+          <div frm-errors errors="item.errors.protocol.uc"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showU()">
+        <div frm-label>Urine Complete (U) Tube B</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.ub"></div>
+          <div frm-errors errors="item.errors.protocol.ub"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showU()">
+        <div frm-label>Urine Complete (U) Tube D, 20ml</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.ud"></div>
+          <div frm-errors errors="item.errors.protocol.ud"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showFub()">
+        <div frm-label>Cell-Free Urine (FU) Tube B</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.fub"></div>
+          <div frm-errors errors="item.errors.protocol.fub"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showSc()">
+        <div frm-label>Serum Tube C</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.sc"></div>
+          <div frm-errors errors="item.errors.protocol.sc"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showSa()">
+        <div frm-label>Serum Tube A</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.sa"></div>
+          <div frm-errors errors="item.errors.protocol.sa"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showSb()">
+        <div frm-label>Serum Tube B</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.sb"></div>
+          <div frm-errors errors="item.errors.protocol.sb"></div>
+        </div>
+      </div>
+      <div frm-field frm-group ng-if="showRna()">
+        <div frm-label>RNA, PAXgene tube</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.rna"></div>
+          <div frm-errors errors="item.errors.protocol.rna"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="showWb()">
+        <div frm-label>Whole blood EDTA (WB)</div>
+        <div frm-control>
+          <div frm-integer-field model="item.protocol.wb"></div>
+          <div frm-errors errors="item.errors.protocol.wb"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="takenOn">Date</th>
+          <th sort-helper="barcode">Barcode</th>
+          <th sort-helper="protocol">Protocol</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.takenOn | dateFormat}}</td>
+          <td>{{item.barcode}}</td>
+          <td>{{item.protocol.label}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+
+  </div>
+
+</div>
