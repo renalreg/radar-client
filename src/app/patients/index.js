@@ -17,6 +17,7 @@ import genetics from './genetics';
 import hnf1b from './hnf1b';
 import hospitalisations from './hospitalisations';
 import hospitals from './hospitals';
+import indiaEthnicities from './india-ethnicities';
 import ins from './ins';
 import pkd from './pkd';
 import medications from './medications';
@@ -24,6 +25,7 @@ import metadata from './metadata';
 import mpgn from './mpgn';
 import navigation from './navigation';
 import nephrectomies from './nephrectomies';
+import nurtureSamples from './nurture-samples';
 import numbers from './numbers';
 import pathology from './pathology';
 import plasmapheresis from './plasmapheresis';
@@ -106,15 +108,17 @@ export default angular.module('radar.patients', [
   hnf1b,
   hospitalisations,
   hospitals,
+  indiaEthnicities,
   ins,
-  pkd,
   medications,
   metadata,
   mpgn,
   navigation,
   nephrectomies,
+  nurtureSamples,
   numbers,
   pathology,
+  pkd,
   plasmapheresis,
   pregnancies,
   renalProgression,
