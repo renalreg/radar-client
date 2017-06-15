@@ -285,6 +285,7 @@ registry.setDefaultView('string', 'basic');
 registry.setDefaultView('boolean', 'basic');
 registry.setDefaultView('date', 'basic');
 registry.setDefaultView('datetime', 'basic');
+registry.setDefaultView('array', 'basic');
 
 // Register functions
 registry.addRequired('js', jsHandler);
@@ -396,13 +397,29 @@ Field.prototype.getView = function() {
   return this.schema.registry.getView(this);
 };
 
+function _getOptionLabelByValue(options, value) {
+  for (var i = 0; i < options.length; i++) {
+    if (options[i].value === value) {
+      return options[i].label;
+    }
+  }
+}
+
 function _getDisplay(field, value) {
   if (value === undefined) {
     return null;
   } else if (field.options) {
-    for (var i = 0; i < field.options.length; i++) {
-      if (field.options[i].value === value) {
-        return field.options[i].label;
+    if (value.constructor === Array) {
+      var collected = [];
+      for (var j = 0; j < value.length; j++) {
+        collected.push(_getOptionLabelByValue(field.options, value[j]));
+      }
+      return collected.join('; ');
+    } else {
+      for (var i = 0; i < field.options.length; i++) {
+        if (field.options[i].value === value) {
+          return field.options[i].label;
+        }
       }
     }
 
