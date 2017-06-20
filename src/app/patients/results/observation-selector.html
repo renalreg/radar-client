@@ -1,73 +1,163 @@
 
 
 <div loading="loading">
-  <ul class="radar-tabs">
-      <li ng-repeat="group in groups" ng-class="{'active': isActive(group)}"><a href="" ng-click="setGroup(group)">{{group.shortName}}</a></li>
-      <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
-  </ul>
+    <ul class="radar-tabs">
+        <li ng-repeat="group in groups" ng-class="{'active': isActive(group)}"><a href="" ng-click="setGroup(group)">{{group.shortName}}</a></li>
+        <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
+    </ul>
+    <div list-helper="observations as page" list-helper-options="{perPage: 10, sortBy: 'weight'}" class="observation-selector">
 
-  <div list-helper="observations as page" list-helper-options="{perPage: 5, sortBy: 'name'}" class="observation-selector">
-    <table class="table table-condensed table-striped">
-      <thead>
-        <tr>
-          <th></th>
-          <th sort-helper="name">Name</th>
-          <th sort-helper="shortName">Short Name</th>
-          <th sort-helper="sampleType.label">Sample Type</th>
-          <th sort-helper="units">Units</th>
-          <th sort-helper="minValue">Min Value</th>
-          <th sort-helper="maxValue">Max Value</th>
-        </tr>
-      </thead>
+        <div id="div-edit-result">
+            <div id="div-edit-result-bar">
+                <div class="widthV15">
+                    <span>
+                        <a class="btn btn-success" ng-click="saveResults(patient)">
+                            <i class="fa fa-floppy-o"></i>
+                            <i class="fa fa-spinner fa-spin ng-hide"></i>
+                            Save List
+                        </a>
+                    </span>
+                </div>
+                <div class="widthV5">
 
-      <tbody>
-        <tr>
-          <th colspan="7">Selected</th>
-        </tr>
+                    <div class="labelF">Date</div>
 
-        <tr ng-if="!observation">
-          <td colspan="7" class="empty">Please choose an observation from the list below.</td>
-        </tr>
+                </div>
+                <div class="widthV20">
+                    <div frm-control>
+                        <div id="div-group-date" frm-date-field model="item.date"></div>
+                    </div>
+                </div>
+                <div class="widthV11">
 
-        <tr ng-if="observation">
-          <td></td>
-          <td>{{observation.name}}</td>
-          <td>{{observation.shortName}}</td>
-          <td>{{observation.sampleType.label}}</td>
-          <td>{{observation.units | missing}}</td>
-          <td>{{observation.minValue | missing}}</td>
-          <td>{{observation.maxValue | missing}}</td>
-        </tr>
+                    <div class="labelF">Source</div>
 
-        <tr>
-          <th colspan="7">Available</th>
-        </tr>
+                </div>
+                <div class="widthV20">
 
-        <tr>
-          <td colspan="7">
-            <div filter-helper></div>
-          </td>
-        </tr>
+                    <div frm-control>
+                        <div id="div-source-group" frm-source-group-field patient="patient" model="item.sourceGroup"></div>
+                        <div frm-errors errors="item.errors.sourceGroup"></div>
+                    </div>
 
-        <tr ng-if="!page.getCount()">
-          <td colspan="7" class="empty">No matching observations.</td>
-        </tr>
+                </div>
 
-        <tr ng-repeat="observation in page.getItems()">
-          <td>
-            <button type="button" ng-click="use(observation)" class="btn btn-primary btn-xs">Select</button>
-          </td>
+            </div>
 
-          <td>{{observation.name}}</td>
-          <td>{{observation.shortName}}</td>
-          <td>{{observation.sampleType.label}}</td>
-          <td>{{observation.units | missing}}</td>
-          <td>{{observation.minValue | missing}}</td>
-          <td>{{observation.maxValue | missing}}</td>
-        </tr>
-      </tbody>
-    </table>
+            <div style="clear:both"></div>
 
-    <div pagination-helper></div>
-  </div>
+            <div class="result-item" data-observation-name="{{observation.name}}" data-observation-unit="{{observation.units}}" data-min-val="{{observation.minValue}}" data-max-val="{{observation.maxValue}}" data-observation="{{observation.id}}" ng-repeat="observation in page.getItems()">
+
+                <div class="widthF180">
+                    {{observation.name}}
+                </div>
+                <div class="widthF100">
+                    {{observation.sampleType.label}}
+                </div>
+                <div class="widthF200">
+                    <div style="float:right" frm-control>
+                        <div ng-switch="observation.valueType.id">
+                            <div class="observation-data-value" ng-switch-when="INTEGER" data-observation-type="INTEGER" data-unit="{{observation.units}}"
+                                 frm-integer-field model="item.value"
+                                 units="{{observation.units}}"></div>
+
+                            <div class="observation-data-value" ng-switch-when="REAL"
+                                 frm-number-field model="item.value" data-observation-type="REAL" data-unit="{{observation.units}}"
+                                 units="{{observation.units}}"></div>
+
+                            <div class="observation-data-value" ng-switch-when="ENUM" data-observation-type="ENUM"
+                                 frm-select-field model="item.value"
+                                 options="observation.options"
+                                 options-id="code"
+                                 options-label="description"></div>
+
+                            <div class="observation-data-value" ng-switch-when="STRING" data-observation-type="STRING"
+                                 frm-text-field model="item.value"></div>
+                        </div>
+
+                        <div frm-errors errors="item.errors.value"></div>
+                    </div>
+                </div>
+                <div class="widthF120">
+                    <div frm-control>
+                        <div class="div-observation-date" frm-date-field model="item.date"></div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div style="clear:both"></div>
+        <div id="div-edit-result-list">
+            <table class="table table-condensed table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th sort-helper="name">Name</th>
+                        <th sort-helper="shortName">Short Name</th>
+                        <th sort-helper="sampleType.label">Sample Type</th>
+                        <th sort-helper="units">Units</th>
+                        <th sort-helper="minValue">Min Value</th>
+                        <th sort-helper="maxValue">Max Value</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <th colspan="7">Selected</th>
+                    </tr>
+
+                    <tr ng-if="!observation">
+                        <td colspan="7" class="empty">Please choose an observation from the list below.</td>
+                    </tr>
+
+                    <tr ng-if="observation">
+                        <td></td>
+                        <td>{{observation.name}}</td>
+                        <td>{{observation.shortName}}</td>
+                        <td>{{observation.sampleType.label}}</td>
+                        <td>{{observation.units | missing}}</td>
+                        <td>{{observation.minValue | missing}}</td>
+                        <td>{{observation.maxValue | missing}}</td>
+                    </tr>
+
+                    <tr>
+                        <th colspan="7">Available</th>
+                    </tr>
+
+                    <tr>
+                        <td colspan="7">
+                            <div filter-helper></div>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="!page.getCount()">
+                        <td colspan="7" class="empty">No matching observations.</td>
+                    </tr>
+
+                    <tr ng-repeat="observation in page.getItems()">
+                        <td>
+                            <button type="button" ng-click="use(observation)" class="btn btn-primary btn-xs">Select</button>
+                        </td>
+
+                        <td>{{observation.name}}</td>
+                        <td>{{observation.shortName}}</td>
+                        <td>{{observation.sampleType.label}}</td>
+                        <td>{{observation.units | missing}}</td>
+                        <td>{{observation.minValue | missing}}</td>
+                        <td>{{observation.maxValue | missing}}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+           
+        </div>
+        <div pagination-helper></div>
+    </div>
 </div>
+

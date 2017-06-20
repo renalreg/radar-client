@@ -10,11 +10,15 @@ var config = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
-        pathRewrite: {'^/api' : ''}
+          target: 'http://demo.radar.nhs.uk',
+          secure: false,
+          changeOrigin:true
+       
       },
       '/admin': {
-        target: 'http://localhost:5002'
+          target: 'http://demo.radar.nhs.uk',
+          secure: false,
+          changeOrigin: true
       }
     }
   },
