@@ -136,7 +136,7 @@ function observationSelector(store) {
 
             _.forEach(observation.groups, function(group) {
               // Add observation to group
-              add(group, observation);
+              add(group.group, observation);
             });
           });
 
