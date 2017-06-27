@@ -93,7 +93,7 @@ function nurtureSamplesControllerFactory(
       return $scope.item.protocol.id;
     }
 
-    $scope.showEp = function() {
+    $scope.showEpa = function() {
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
@@ -107,7 +107,21 @@ function nurtureSamplesControllerFactory(
       return false;
     };
 
-    $scope.showLp = function() {
+    $scope.showEpb = function() {
+      if ($scope.item && $scope.item.protocol) {
+        var protocol = getProtocol();
+        return (
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
+          protocol === 'CHILDREN30_B' ||
+          protocol === 'CHILDREN15_B'
+        );
+      }
+      return false;
+    };
+
+
+    $scope.showLpa = function() {
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
@@ -115,6 +129,18 @@ function nurtureSamplesControllerFactory(
           protocol === 'ADULT_CKD' ||
           protocol === 'CHILDREN30_B' ||
           protocol === 'CHILDREN30_2ND'
+        );
+      }
+      return false;
+    };
+
+    $scope.showLpb = function() {
+      if ($scope.item && $scope.item.protocol) {
+        var protocol = getProtocol();
+        return (
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
+          protocol === 'CHILDREN30_B'
         );
       }
       return false;
@@ -151,7 +177,7 @@ function nurtureSamplesControllerFactory(
 
     $scope.showSb = function() {
       if ($scope.item && $scope.item.protocol) {
-        var protocol = getProtocol()
+        var protocol = getProtocol();
         return (
           protocol === 'ADULT_NS' ||
           protocol === 'ADULT_CKD'
