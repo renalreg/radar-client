@@ -97,7 +97,8 @@ function nurtureSamplesControllerFactory(
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
-          protocol === 'ADULT' ||
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
           protocol === 'CHILDREN30_B' ||
           protocol === 'CHILDREN30_2ND' ||
           protocol === 'CHILDREN15_B'
@@ -110,7 +111,8 @@ function nurtureSamplesControllerFactory(
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
-          protocol === 'ADULT' ||
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
           protocol === 'CHILDREN30_B' ||
           protocol === 'CHILDREN30_2ND'
         );
@@ -122,7 +124,8 @@ function nurtureSamplesControllerFactory(
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
-          protocol === 'ADULT' ||
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
           protocol === 'CHILDREN30_B' ||
           protocol === 'CHILDREN15_B' ||
           protocol === 'CHILDREN_LESS_15_B'
@@ -148,7 +151,11 @@ function nurtureSamplesControllerFactory(
 
     $scope.showSb = function() {
       if ($scope.item && $scope.item.protocol) {
-        return getProtocol() === 'ADULT';
+        var protocol = getProtocol()
+        return (
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD'
+        );
       }
       return false;
     };
@@ -157,7 +164,8 @@ function nurtureSamplesControllerFactory(
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
-          protocol === 'ADULT' ||
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
           protocol === 'CHILDREN30_2ND'
         );
       }
@@ -168,7 +176,8 @@ function nurtureSamplesControllerFactory(
       if ($scope.item && $scope.item.protocol) {
         var protocol = getProtocol();
         return (
-          protocol === 'ADULT' ||
+          protocol === 'ADULT_NS' ||
+          protocol === 'ADULT_CKD' ||
           protocol === 'CHILDREN30_2ND' ||
           protocol === 'CHILDREN15_2ND' ||
           protocol === 'CHILDREN_LESS_15_2ND'

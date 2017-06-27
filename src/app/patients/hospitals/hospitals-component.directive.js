@@ -14,8 +14,8 @@ function patientHospitalPermissionFactory(hasPermission, hasPermissionForGroup, 
   PatientHospitalPermission.prototype.hasObjectPermission = function(obj) {
     // User must have the EDIT_PATIENT_MEMBERSHIP permission on the group and created group
     return (
-        hasPermissionForGroup(session.user, obj.group, 'EDIT_PATIENT_MEMBERSHIP') &&
-        hasPermissionForGroup(session.user, obj.createdGroup, 'EDIT_PATIENT_MEMBERSHIP')
+      hasPermissionForGroup(session.user, obj.group, 'EDIT_PATIENT_MEMBERSHIP') &&
+      hasPermissionForGroup(session.user, obj.createdGroup, 'EDIT_PATIENT_MEMBERSHIP')
     );
   };
 
