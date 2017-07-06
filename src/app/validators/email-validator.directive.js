@@ -1,4 +1,4 @@
-var EMAIL_REGEX = /^.+@[^\.@][^@]*\.[^\.@]+$/;
+var EMAIL_REGEX = /^.+@[^.@][^@]*\.[^.@]+$/;
 
 function emailValidator() {
   return {

@@ -245,18 +245,39 @@ function checkboxes() {
         return;
       }
 
-      function updateState() {
-        var value = ngModel.$viewValue;
+      function findOptionIndexByValue(value) {
         var options = scope.options || [];
-
         for (var i = 0; i < options.length; i++) {
-          scope.states[i] = options[i].value === value;
+          if (options[i].value === value) {
+            return i;
+          }
+        }
+        return -1;
+      }
+
+      function updateState() {
+        var values = ngModel.$viewValue || [];
+
+        for (var i = 0; i < values.length; i++) {
+          var index = findOptionIndexByValue(values[i]);
+          if (index >= 0) {
+            scope.states[index] = true;
+          }
         }
       }
 
       scope.update = function(index) {
+        var oldValue = ngModel.$viewValue || [];
         var value = scope.states[index] ? scope.options[index].value : null;
-        ngModel.$setViewValue(value);
+
+        if (value !== null) {
+          oldValue.push(value);
+        } else {
+          oldValue.splice(oldValue.indexOf(scope.options[index].value), 1);
+        }
+
+        oldValue = oldValue.length === 0? null: oldValue;
+        ngModel.$setViewValue(oldValue);
         updateState();
       };
 
