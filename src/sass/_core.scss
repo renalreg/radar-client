@@ -234,6 +234,15 @@ table.metadata {
   background-color: #333;
 }
 
+.old-browser-alert {
+  text-align: center;
+  font-size: 18px;
+  padding: 3px 15px;
+  color: #fff;
+  background-color: $radar-danger;
+}
+
+
 .header-alert a {
   color: #fff;
 }

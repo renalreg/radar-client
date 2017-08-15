@@ -1,6 +1,7 @@
-function SystemStore(store, $q) {
+function SystemStore(store, $q, session) {
   this.store = store;
   this.$q = $q;
+  this.session = session;
 
   this.promise = null;
 }
@@ -40,6 +41,11 @@ SystemStore.prototype._first = function(fn) {
 SystemStore.prototype._load = function() {
   var self = this;
 
+  var user = self.session.user;
+  if (user.forcePasswordChange) {
+    return self.$q.reject();
+  }
+
   // Only need to fetch the list of systems once as they are unlikely to change
   if (self.promise === null) {
     self.promise = self.store.findMany('groups', {type: 'SYSTEM'}).catch(function() {
@@ -52,6 +58,6 @@ SystemStore.prototype._load = function() {
   return self.promise;
 };
 
-SystemStore.$inject = ['store', '$q'];
+SystemStore.$inject = ['store', '$q', 'session'];
 
 export default SystemStore;
