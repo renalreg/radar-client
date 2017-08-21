@@ -14,6 +14,11 @@
         <th>Test Patient?</th>
         <td><span tick="item.test"></span></td>
       </tr>
+      <tr>
+        <th>Control Patient?</th>
+        <td><span tick="item.control"></span></td>
+      </tr>
+
     </table>
 
     <div metadata item="item"></div>
@@ -40,6 +45,15 @@
         <div frm-control>
           <div frm-boolean-field model="item.test"></div>
           <div frm-errors errors="item.errors.test"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Control Patient?</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.control"></div>
+          <div frm-errors errors="item.errors.control"></div>
         </div>
       </div>
 
