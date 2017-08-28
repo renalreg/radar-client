@@ -142,14 +142,19 @@
 }
 
 #div-edit-result .result-item {
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding-top: 2px;
+        padding-bottom: 2px;
         padding-left: 20px;
         min-width: 700px;
         max-width: 700px;
         float: left;
         display: inline-block;
         border-bottom: 1px solid #ddd;
+    }
+
+   #div-edit-result {
+        min-width: 705px !important;
+        max-width: 705px !important;
     }
 
     #div-edit-result .form-control {
@@ -195,8 +200,35 @@
     .widthF120{min-width:120px!important; max-width:120px!important; float:left; display:inline-block}
     .widthF180{min-width:180px; max-width:180px; float:left; display:inline-block}
     .widthF200{min-width:200px; max-width:200px; float:left; display:inline-block}
+    .result-item:nth-child(odd) { background-color: #f9f9f9;}
+    #div-edit-result-bar {
+            max-width: 1450px;
+            min-width: 1450px;
+        }
+     #div-edit-result-body {
+            max-width: 1450px;
+            min-width: 1450px;
+        }
+     #left-half{
+            float: left;
+            display: inline-block;
+            min-width: 710px;
+            max-width: 710px;
+            border-color:#00aa9e;
+            border-width:2px;
+            border-style:solid;
+        }
+     #right-half{
+            float: right;
+            display: inline-block;
+            min-width: 710px;
+            max-width: 710px;
+            border-color:#00aa9e;
+            border-width:2px;
+            border-style:solid;
+        }
 
-    @media screen and (min-width: 1447px) {
+    /*@media screen and (min-width: 1447px) {
 
         .result-item:nth-child(4n+1) {
             background-color: #f9f9f9;
@@ -221,4 +253,4 @@
             max-width: 720px;
             min-width: 720px;
         }
-    }
+    }*/

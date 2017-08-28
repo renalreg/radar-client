@@ -10,14 +10,14 @@ var config = {
   devServer: {
     proxy: {
       '/api': {
-          target: 'http://demo.radar.nhs.uk',
-          secure: false,
-          changeOrigin:true
+          target: 'https://demo.radar.nhs.uk',
+          secure: true,
+          changeOrigin: true
        
       },
       '/admin': {
-          target: 'http://demo.radar.nhs.uk',
-          secure: false,
+          target: 'https://demo.radar.nhs.uk',
+          secure: true,
           changeOrigin: true
       }
     }
