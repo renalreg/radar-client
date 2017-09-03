@@ -190,7 +190,8 @@
         border-color: cadetblue;
         padding-bottom: 10px;
     }
-
+    .clearboth{clear:both!important}
+    .floatright{float:right!important}
     .widthV20{width:20%; float:left; display:inline}
     .widthV15{width:15%; float:right; display:inline}
     .widthV11{width:11%; float:left; display:inline}
@@ -208,6 +209,7 @@
      #div-edit-result-body {
             max-width: 1450px;
             min-width: 1450px;
+            clear:both;
         }
      #left-half{
             float: left;
