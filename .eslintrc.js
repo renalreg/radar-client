@@ -12,7 +12,7 @@ module.exports = {
   },
   'rules': {
     'indent': [2, 2],
-    'linebreak-style': [2, 'windows'],
+    'linebreak-style': [2, 'unix'],
     'quotes': [2, 'single'],
     'semi': [2, 'always'],
     'valid-jsdoc': [1, {}]
