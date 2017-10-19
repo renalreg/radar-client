@@ -5,6 +5,7 @@ var PAGES = {
   ALIASES: {name: 'Aliases', state: 'patient.aliases'},
   ALPORT_CLINICAL_PICTURES: {name: 'Clinical Pictures', state: 'patient.alportClinicalPictures'},
   COHORTS: {name: 'Cohorts', state: 'patient.cohorts'},
+  CONSENTS: {name: 'Consents', state: 'patient.consents'},
   CONSULTANTS: {name: 'Consultants', state: 'patient.consultants'},
   DEMOGRAPHICS: {name: 'Demographics', state: 'patient.demographics'},
   DIAGNOSES: {name: 'Comorbidities', state: 'patient.diagnoses', cohort: true},
