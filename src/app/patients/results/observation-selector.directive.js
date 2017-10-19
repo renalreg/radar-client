@@ -289,7 +289,7 @@ function observationSelector(store) {
         if (groupObservations[key] === undefined) {
           groupObservations[key] = [];
         }
-
+    
         groupObservations[key].push(observation);
       }
 
@@ -302,16 +302,23 @@ function observationSelector(store) {
         store.findMany('observations').then(function(observations) {
           _.forEach(observations, function(observation) {
             // Add observation to all
+            observation['weight'] = 1000000000;
             add(null, observation);
 
             _.forEach(observation.groups, function(group) {
               // Add observation to group
+              if($.isNumeric(group['weight'])){
+                observation['weight'] = group['weight'];
+              }else{
+                observation['weight'] = 1000000000;
+              }
+
               add(group, observation);
             });
           });
 
           // Get's patients groups sorted by name
-          scope.groups = _.sortBy(scope.patient.getGroups(), 'weight');
+          scope.groups = _.sortBy(scope.patient.getGroups(), 'name');
 
           // Remove groups that don't have any observations
           scope.groups = _.filter(scope.groups, function(group) {
