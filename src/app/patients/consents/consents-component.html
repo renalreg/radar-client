@@ -1,25 +1,57 @@
 <div loading="loading" crud>
-    <div ng-if="viewing">
+
+
+
+
+
+    <!-- <div ng-if="viewing">
       <p>
         <span crud-list-button></span>
         <span crud-edit-button item="item"></span>
       </p>
 
       <div metadata item="item"></div>
-    </div>
+    </div> -->
 
     <div ng-if="editing">
-      <p>
+      <!-- <p>
         <span crud-list-button></span>
         <span crud-view-button item="originalItem"></span>
-      </p>
-      Recruited on: {{ patient.recruitedDate | dateFormat}}<br />
-      Recruited by: {{ patient.recruitedUser.firstName | missing }} {{ patient.recruitedUser.lastName | missing }}<br />
-      Recruited at: {{ patient.recruitedGroup.name }}
-
-
+      </p> -->
 
       <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+
+        <div frm-field frm-group>
+          <div frm-label>Patient</div>
+          <div frm-control>
+            <input type="text" class="form-control" value="{{ patient.firstName | missing }} {{ patient.lastName | missing }}" disabled/>
+          </div>
+        </div>
+
+
+        <div frm-field frm-group>
+          <div frm-label>Recruited on</div>
+          <div frm-control>
+            <input type="text" class="form-control" value="{{ patient.recruitedDate| dateFormat }}" disabled />
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Recruited by</div>
+          <div frm-control>
+            <input type="text" class="form-control" value="{{ patient.recruitedUser.firstName | missing }} {{ patient.recruitedUser.lastName | missing}}" disabled />
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Recruited at</div>
+          <div frm-control>
+            <input type="text" class="form-control" value="{{ patient.recruitedGroup.name }}" disabled />
+          </div>
+        </div>
+
+        <h3>Available consents</h3>
+
 
         <div frm-field frm-group>
           <div frm-label>Signed on:</div>
@@ -29,10 +61,9 @@
           </div>
         </div>
 
-
         <div ng-repeat="consent in consents" frm-field frm-group>
           <div frm-control label="false">
-            <div frm-checkbox-field model="item.consents[consent.id]">
+            <div frm-checkbox-field model="item.consents[consent.id]" disabled="consent.retired" checked="isChecked(consent.code)">
               {{consent.label}}
               <a ng-if="consent.linkUrl" href="{{consent.linkUrl}}" target="_blank">({{consent.code}})</a>
               <span ng-if="!consent.linkUrl">({{consent.code}})</span>
@@ -43,18 +74,18 @@
 
         </div>
 
-        - {{ item.getReconsentDate(patient) | dateFormat }}
+        <!-- - {{ item.getReconsentDate(patient) | dateFormat }} -->
 
         <div frm-buttons>
           <span crud-save-button></span>
-          <span crud-cancel-list-button></span>
+          <!-- <span crud-cancel-list-button></span> -->
         </div>
       </form>
 
 
     </div>
 
-    <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
+    <!-- <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
       <p>
         <span crud-create-button action="create()"></span>
       </p>
@@ -89,5 +120,5 @@
       </table>
 
       <div pagination-helper></div>
-    </div>
+    </div> -->
   </div>
