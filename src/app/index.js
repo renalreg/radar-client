@@ -90,15 +90,6 @@ function run(
       }
     }
   });
-
-
-  var CONSENT_PATIENT_STATE = 'patient.consents';
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-    if (!isPublicState(toState) && toState.name !== CONSENT_PATIENT_STATE && toState.name.indexOf('patient.') === 0) {
-      console.log('ok');
-    }
-  });
-
 }
 
 run.$inject = [

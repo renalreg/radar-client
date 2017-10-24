@@ -10,6 +10,7 @@
  */
 function PatientDetailController(
   $scope,
+  $state,
   patient,
   session,
   hasPermissionForPatient,
@@ -23,10 +24,18 @@ function PatientDetailController(
     // No demographics
     return patient.getName(false);
   }, titleService.setTitle);
+
+  var PATIENT_CONSENT_STATE = 'patient.consents';
+  $scope.$on('$stateChangeSuccess', function() {
+    if (!patient.consented) {
+      $state.go(PATIENT_CONSENT_STATE);
+    }
+  });
 }
 
 PatientDetailController.$inject = [
   '$scope',
+  '$state',
   'patient',
   'session',
   'hasPermissionForPatient',

@@ -32,10 +32,10 @@ function patientConsentsControllerFactory(
     self.load(firstPromise([
       store.findMany('patient-consents', {patient: $scope.patient.id}).then(function(patientConsents) {
         $scope.patientConsents = patientConsents;
-        $scope.consentedCodes = {}
-        _.each(patientConsents, function(patientConsent) {
-          $scope.consentedCodes[patientConsent.consent.code] = true;
-        });
+        $scope.consentedCodes = {};
+        // _.each(patientConsents, function(patientConsent) {
+        //   $scope.consentedCodes[patientConsent.consent.code] = true;
+        // });
 
       }),
       store.findMany('consents', {patient: $scope.patient.id}).then(function(consents) {
@@ -52,15 +52,15 @@ function patientConsentsControllerFactory(
       var item = store.create('patient-consents', {patient: $scope.patient.id});
       item.signedOnDate = new Date().toISOString();
       item.consents = {};
-      _.each($scope.patientConsents, function(patientConsent) {
-        item.consents[patientConsent.id] = true;
-      })
+      // _.each($scope.patientConsents, function(patientConsent) {
+      //   item.consents[patientConsent.id] = true;
+      // });
       self.edit(item);
-    };
+    }
 
     $scope.isChecked = function(code) {
       return $scope.consentedCodes[code] === true;
-    }
+    };
 
   }
 
