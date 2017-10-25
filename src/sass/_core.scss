@@ -130,9 +130,9 @@ th.right {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 900px) {
   .logo {
-    width: 20%;
+    width: 16.6%;
     float: left;
 
     position: relative;
@@ -233,6 +233,15 @@ table.metadata {
   color: #fff;
   background-color: #333;
 }
+
+.old-browser-alert {
+  text-align: center;
+  font-size: 18px;
+  padding: 3px 15px;
+  color: #fff;
+  background-color: $radar-danger;
+}
+
 
 .header-alert a {
   color: #fff;

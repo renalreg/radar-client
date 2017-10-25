@@ -289,7 +289,7 @@ function observationSelector(store) {
         if (groupObservations[key] === undefined) {
           groupObservations[key] = [];
         }
-    
+
         groupObservations[key].push(observation);
       }
 
@@ -301,24 +301,25 @@ function observationSelector(store) {
       function load() {
         store.findMany('observations').then(function(observations) {
           _.forEach(observations, function(observation) {
-            // Add observation to all
+            //set observation weight to highest possible integer for front end sorting
             observation['weight'] = 1000000000;
+            // Add observation to all
             add(null, observation);
 
             _.forEach(observation.groups, function(group) {
-              // Add observation to group
+              //set observation weight to corresponding group weight
               if($.isNumeric(group['weight'])){
                 observation['weight'] = group['weight'];
               }else{
                 observation['weight'] = 1000000000;
               }
-
-              add(group, observation);
+              // Add observation to group
+              add(group.group, observation);
             });
           });
 
           // Get's patients groups sorted by name
-          scope.groups = _.sortBy(scope.patient.getGroups(), 'name');
+          scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
 
           // Remove groups that don't have any observations
           scope.groups = _.filter(scope.groups, function(group) {
@@ -339,5 +340,7 @@ function observationSelector(store) {
     }
   };
 }
+
 observationSelector.$inject = ['store'];
+
 export default observationSelector;

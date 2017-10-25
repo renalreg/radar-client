@@ -37,8 +37,8 @@
       </div>
       <div id="div-edit-result-body">
         <div id="left-half">
-          <div class="result-item" data-observation-name="{{observation.name}}" data-observation-unit="{{observation.units}}" data-min-val="{{observation.minValue}}" data-max-val="{{observation.maxValue}}" data-observation="{{observation.id}}" ng-if="$index < 10" ng-repeat="observation in page.getItems()">
-            <div class="widthF180">{{observation.name}}</div>
+          <div class="result-item"   data-observation-name="{{observation.name}}" data-observation-unit="{{observation.units}}" data-min-val="{{observation.minValue}}" data-max-val="{{observation.maxValue}}" data-observation="{{observation.id}}" ng-if="$index < 10" ng-repeat="observation in page.getItems()">
+            <div class="widthF180">{{observation.name}} </div>
               <div class="widthF100">{{observation.sampleType.label}}</div>
               <div class="widthF200">
                 <div class="floatright" frm-control>
@@ -140,4 +140,7 @@
     <div pagination-helper></div>
   </div>
 </div>
+
+
+
 

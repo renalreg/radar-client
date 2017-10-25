@@ -1,6 +1,10 @@
 import angular from 'angular';
 
 import {
+  absentDiagnosesControllerFactory,
+  absentDiagnosesComponent
+} from './absent-diagnoses-component.directive';
+import {
   patientDiagnosesControllerFactory,
   patientDiagnosesComponent
 } from './diagnoses-component.directive';
@@ -43,6 +47,8 @@ config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.diagnoses', [])
   .config(config)
+  .factory('AbsentDiagnosesController', absentDiagnosesControllerFactory)
+  .directive('absentDiagnosesComponent', absentDiagnosesComponent)
   .factory('PatientDiagnosesController', patientDiagnosesControllerFactory)
   .directive('patientDiagnosesComponent', patientDiagnosesComponent)
   .directive('diagnosisSelector', diagnosisSelector)

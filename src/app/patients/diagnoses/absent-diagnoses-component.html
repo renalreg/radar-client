@@ -1,0 +1,40 @@
+<div crud>
+  <form class="form-horizontal form-container" submit-if-valid="submit()">
+
+    <div frm-field frm-group>
+      <div frm-label>Data Source</div>
+
+      <div frm-control>
+        <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+        <div frm-errors errors="item.errors.sourceGroup"></div>
+      </div>
+    </div>
+
+
+    <div frm-field frm-group>
+
+      <div frm-label>No comorbidities</div>
+
+      <div frm-control required="true">
+        <div frm-checkbox-required-field model="item.checked"></div>
+        <div frm-errors errors="item.errors.checked"></div>
+      </div>
+    </div>
+
+
+    <div frm-field frm-group>
+      <div frm-label>Date</div>
+
+      <div frm-control>
+        <div frm-date-field model="item.fromDate" required="true"></div>
+        <div frm-errors errors="item.errors.fromDate"></div>
+      </div>
+    </div>
+
+
+    <div frm-buttons>
+      <span submit-button>Submit</span>
+    </div>
+
+  </form>
+</div>

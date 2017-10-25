@@ -17,6 +17,7 @@ var PAGES = {
   HNF1B_CLINICAL_PICTURES: {name: 'Clinical Pictures', state: 'patient.hnf1bClinicalPictures'},
   HOSPITALISATIONS: {name: 'Hospitalisations', state: 'patient.hospitalisations'},
   HOSPITALS: {name: 'Hospitals', state: 'patient.hospitals'},
+  INDIA_ETHNICITIES: {name: 'Ethnicity', state: 'patient.indiaEthnicities'},
   INS_CLINICAL_PICTURES: {name: 'Clinical Pictures', state: 'patient.insClinicalPictures'},
   INS_RELAPSES: {name: 'Relapses', state: 'patient.insRelapses'},
   LIVER_DISEASES: {name: 'Liver Diseases', state: 'patient.liverDiseases'},
@@ -37,8 +38,29 @@ var PAGES = {
   RENAL_PROGRESSION: {name: 'Renal Disease Progression', state: 'patient.renalProgression'},
   RESULTS: {name: 'Lab Results', state: 'patient.results'},
   SALT_WASTING_CLINICAL_FEATURES: {name: 'Clinical Features', state: 'patient.saltWastingClinicalFeatures'},
+  SAMPLES: {name: 'Tube Samples', state: 'patient.nurtureSamples'},
   TRANSPLANTS: {name: 'Kidney Transplants', state: 'patient.transplants'},
 };
+
+
+/**
+ * Get a country code from patient groups. Assumption here is that
+ * patient can be in multiple hospitals, but all hospitals are in
+ * the same country, there we find the first group of type hospital
+ * and return that hospital's country.
+ *
+ * @param {Object} patient - a patient
+ * @returns {string} - two letter (ISO ALPHA-2) country code
+ */
+function getPatientCountry(patient) {
+  var groups = patient.groups;
+  for (var i = 0; i < groups.length; i++) {
+    var group = groups[i].group;
+    if (group.type === 'HOSPITAL') {
+      return group.countryCode;
+    }
+  }
+}
 
 
 /**
@@ -51,6 +73,12 @@ var PAGES = {
  */
 function getPage(code, patient, group) {
   var page = PAGES[code];
+
+  var country = getPatientCountry(patient);
+  // don't show india demographics if patient is not from india
+  if (country !== 'IN' && code === 'INDIA_ETHNICITIES') {
+    return null;
+  }
 
   // Unknown page
   if (!page) {
