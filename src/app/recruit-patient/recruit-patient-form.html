@@ -93,12 +93,21 @@
     </div>
   </div>
 
-  <div frm-field frm-group>
-    <div frm-control label="false">
-      <div frm-consent-field model="patient.consent">By ticking this box you confirm that the patient has completed all necessary <a href="http://rarerenal.org/radar-registry/criteria-and-consent/">consent forms</a>.</div>
-      <div frm-errors></div>
+  <h4 class="page-header">Consent forms</h4>
+
+  <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
+    <div class="checkbox graph" ng-repeat="consent in consents" ng-if="!consent.retired">
+      <label>
+        <input
+            type="checkbox"
+            id="consent.code"
+            ng-required="!someSelected(patient.consents)"
+            ng-model="patient.consents[consent.id]" />
+          {{ consent.label }}
+      </label>
     </div>
   </div>
+
 
   <div frm-buttons>
     <span submit-button>Recruit Patient</span>

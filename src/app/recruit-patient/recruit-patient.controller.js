@@ -20,11 +20,30 @@ function RecruitPatientController(
 
   $scope.backToSearch = backToSearch;
 
+  $scope.someSelected = someSelected;
+
   init();
 
   function init() {
-    $q.all([loadGenders(), loadEthnicities(), loadNumberGroups(), loadNationalities()]).then(function() {
+    $q.all([
+      loadGenders(),
+      loadEthnicities(),
+      loadNumberGroups(),
+      loadNationalities(),
+      loadConsents()
+    ]).then(function() {
       $scope.loading = false;
+      $state.go('recruitPatient.form');
+    });
+  }
+
+  function someSelected(object) {
+    if (!object) {
+      return false;
+    }
+
+    return Object.keys(object).some(function (key) {
+      return object[key];
     });
   }
 
@@ -109,6 +128,12 @@ function RecruitPatientController(
     return store.findMany('nationalities', {user: $scope.user.id}).then(function(nationalities) {
       nationalities = _.sortBy(nationalities, 'name');
       $scope.nationalities = nationalities;
+    });
+  }
+
+  function loadConsents() {
+    return store.findMany('consents').then(function(consents) {
+      $scope.consents = consents;
     });
   }
 }

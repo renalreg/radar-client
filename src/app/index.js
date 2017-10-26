@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import account from './account';
 import auth from './auth';
 import cohorts from './cohorts';
+import consents from './consents';
 import consultants from './consultants';
 import controllers from './controllers';
 import core from './core';
@@ -107,6 +108,7 @@ export default angular.module('radar', [
   account,
   auth,
   cohorts,
+  consents,
   consultants,
   controllers,
   core,
