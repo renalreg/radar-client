@@ -33,7 +33,6 @@ function RecruitPatientController(
       loadConsents()
     ]).then(function() {
       $scope.loading = false;
-      $state.go('recruitPatient.form');
     });
   }
 
