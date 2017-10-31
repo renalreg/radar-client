@@ -104,7 +104,10 @@
             ng-required="!someSelected(patient.consents)"
             ng-model="patient.consents[consent.id]" />
           {{ consent.label }}
+          <span ng-if="!consent.linkUrl">({{ consent.code }})</span>
       </label>
+
+      <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
     </div>
   </div>
 
