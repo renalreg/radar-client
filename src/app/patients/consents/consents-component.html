@@ -11,9 +11,13 @@
         <th>Signed on</th>
         <td>{{item.signedOnDate | dateFormat}}</td>
       </tr>
-      <tr>
+<!--       <tr>
         <th>Withdrawn on</th>
         <td>{{item.withdrawnOnDate | dateFormat}}</td>
+      </tr> -->
+      <tr>
+        <th>Recruited on</th>
+        <td>{{ patient.recruitedDate | dateFormat }}</td>
       </tr>
       <tr>
         <th>Consent</th>
@@ -59,7 +63,7 @@
           <div frm-errors errors="item.errors.signedOnDate"></div>
         </div>
       </div>
-
+<!--
       <div frm-field frm-group>
         <div frm-label>Withdrawn on</div>
 
@@ -68,7 +72,7 @@
           <div frm-errors errors="item.errors.withdrawnOnDate"></div>
         </div>
       </div>
-
+ -->
 
       <div frm-buttons>
         <span crud-save-button></span>
@@ -157,7 +161,7 @@
           <tr>
             <th></th>
             <th sort-helper="signedOnDate">Signed On</th>
-            <th sort-helper="withdrawnOnDate">Withdrawn On</th>
+            <!-- <th sort-helper="withdrawnOnDate">Withdrawn On</th> -->
             <th sort-helper="consent.toString()">Consent</th>
             <th></th>
           </tr>
@@ -170,7 +174,7 @@
               <span ng-if="!item.consent.retired" crud-list-edit-button item="item"></span>
             </td>
             <td>{{ item.signedOnDate | dateFormat }}</td>
-            <td>{{ item.withdrawnOnDate | dateFormat }}</td>
+            <!-- <td>{{ item.withdrawnOnDate | dateFormat }}</td> -->
             <td><a href="{{ item.consent.linkUrl }}" target="_blank">{{ item.consent.label }}</a></td>
             <td>
               <span crud-list-remove-button item="item"></span>
