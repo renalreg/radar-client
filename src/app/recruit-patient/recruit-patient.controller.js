@@ -46,6 +46,17 @@ function RecruitPatientController(
     });
   }
 
+  function isPaediatric(dateOfBirth) {
+    var today = new Date();
+    var birthDate = new Date(dateOfBirth);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age < 16;
+  }
+
   function search() {
     $scope.loading = true;
 
@@ -63,6 +74,7 @@ function RecruitPatientController(
           gender: $scope.searchParams.gender,
           numberGroup: $scope.searchParams.numberGroup,
           number: $scope.searchParams.number,
+          paediatric: isPaediatric($scope.searchParams.dateOfBirth)
         };
 
         $scope.searchErrors = {};
@@ -132,7 +144,7 @@ function RecruitPatientController(
 
   function loadConsents() {
     return store.findMany('consents').then(function(consents) {
-      $scope.consents = consents;
+      $scope.consents = _.sortBy(consents, ['weight', 'label']);
     });
   }
 }

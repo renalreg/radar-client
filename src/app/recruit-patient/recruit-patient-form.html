@@ -93,11 +93,14 @@
     </div>
   </div>
 
-  <h4 class="page-header">Consent forms</h4>
+  <h4 class="page-header">Adult consent forms</h4>
 
   <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
-    <div class="checkbox graph" ng-repeat="consent in consents" ng-if="!consent.retired">
-      <label>
+    <div class="checkbox graph" ng-repeat="consent in consents" ng-if="!consent.retired && !consent.paediatric">
+      <div ng-if="consent.consentType === 'INFORMATION_SHEET'">
+      <ul><li>{{ consent.label }}</li></ul>
+      </div>
+      <label ng-if="consent.consentType === 'FORM'">
         <input
             type="checkbox"
             id="consent.code"
@@ -110,6 +113,30 @@
       <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
     </div>
   </div>
+
+  <h4 class="page-header">Child consent forms</h4>
+
+  <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
+    <div class="checkbox graph" ng-repeat="consent in consents" ng-if="!consent.retired && consent.paediatric">
+      <div ng-if="consent.consentType === 'INFORMATION_SHEET'">
+      <ul><li>{{ consent.label }}</li></ul>
+      </div>
+      <label ng-if="consent.consentType === 'FORM'">
+        <input
+            type="checkbox"
+            id="consent.code"
+            ng-required="!someSelected(patient.consents)"
+            ng-model="patient.consents[consent.id]" />
+          {{ consent.label }}
+          <span ng-if="!consent.linkUrl">({{ consent.code }})</span>
+      </label>
+
+      <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
+    </div>
+  </div>
+
+
+
 
   <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
   For more information concerning consent forms, please visit <a href="http://rarerenal.org/radar-registry/criteria-and-consent/" target="_blank">rarerenal.org website</a>
