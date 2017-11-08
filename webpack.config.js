@@ -57,7 +57,7 @@ var config = {
         loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], {publicPath: '../'})
       },
       {
-        test: /\.(woff2?|ttf|eot|svg|png)(\?.*)?$/,
+        test: /\.(woff2?|ttf|eot|svg|png|jpg)(\?.*)?$/,
         loader: 'file',
         query: {
           name: 'assets/[name].[hash].[ext]'
