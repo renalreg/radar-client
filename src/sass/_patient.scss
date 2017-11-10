@@ -140,3 +140,119 @@
 .if-demographics-hidden, .if-demographics-visible {
   display: none;
 }
+
+#div-edit-result .result-item {
+  padding-top: 6px;
+  padding-bottom: 4px;
+  padding-left: 20px;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+ }
+
+#div-edit-result {
+  // min-width: 705px !important;
+  // max-width: 705px !important;
+}
+
+#div-edit-result .form-control {
+  width: 100%;
+}
+
+#div-edit-result .col-md-9 {
+  width: 100%;
+}
+
+#div-edit-result .input-group-addon {
+  min-width: 60px !important;
+}
+
+#div-source-group select {
+  min-width: 260px !important;
+}
+
+#div-group-date {
+  max-width: 100px;
+}
+
+#div-edit-result-bar {
+  float: left;
+  width: 100%;
+  min-width: 620px;
+  display: inline-block;
+  margin: 10px 0 !important;
+  border-bottom-style: solid;
+  border-bottom-width: thin;
+  border-color: cadetblue;
+  padding-bottom: 10px;
+}
+
+.clearboth {
+  clear: both!important;
+}
+
+.widthV20 {
+  width: 20%;
+  float: left;
+  display: inline;
+}
+
+.widthV15 {
+  width: 15%;
+  float: right;
+  display: inline;
+}
+
+.widthV11 {
+  width: 11%;
+  float: left;
+  display: inline;
+}
+
+.widthV5 {
+  width: 5%;
+  float: left;
+  display: inline;
+}
+
+.labelF {
+  padding-top: 8px;
+}
+
+.widthF100 {
+  min-width: 100px;
+  max-width: 100px;
+  float: left;
+  padding: 8px 0;
+}
+
+.widthF120 {
+  min-width: 120px!important;
+  max-width: 120px!important;
+  float: left;
+}
+
+.widthF180 {
+  width: 180px;
+  float: left;
+  padding: 8px 0;
+}
+
+.widthF200 {
+  min-width: 200px;
+  max-width: 200px;
+  float: left;
+  margin-right: 20px;
+}
+
+.result-item:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.observation-side {
+  float: left;
+  min-width: 710px;
+  max-width: 710px;
+  margin-right: 30px;
+  padding: 0;
+}
