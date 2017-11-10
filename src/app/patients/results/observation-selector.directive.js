@@ -78,11 +78,15 @@ function observationSelector(store) {
       }
 
       function findGroupWeightInObservation(group, obs) {
+        if (!group) {
+          return;
+        }
         for (var i = 0; i < obs.groups.length; i++) {
           if (obs.groups[i].group.id === group.id) {
             return obs.groups[i].weight;
           }
         }
+        return;
       }
 
       /**
