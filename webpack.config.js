@@ -19,7 +19,6 @@ var config = {
     }
   },
   entry: [
-    'babel-polyfill',
     './src/app/index.js',
     './src/sass/app.scss',
     'bootstrap-sass/assets/javascripts/bootstrap.js'
@@ -44,8 +43,7 @@ var config = {
         exclude: /node_modules/,
         loader: 'babel',
         query: {
-          presets: ['es2015'],
-          plugins: ['transform-es3-property-literals', 'transform-es3-member-expression-literals']
+          presets: ['es2015']
         }
       },
       {
@@ -82,18 +80,8 @@ var config = {
 
 if (production) {
   var uglify = new webpack.optimize.UglifyJsPlugin({
-    minify: {
-      screw_ie8: false
-    },
     compress: {
-      warnings: false,
-      screw_ie8: false
-    },
-    mangle: {
-      screw_ie8: false
-    },
-    output: {
-      screw_ie8: false
+      warnings: false
     }
   });
 
