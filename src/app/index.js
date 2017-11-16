@@ -35,12 +35,13 @@ import validators from './validators';
 
 import getValueAtPath from './utils/get-value-at-path';
 
-function config($urlRouterProvider, adapterProvider) {
+function config($urlRouterProvider, $locationProvider, adapterProvider) {
+  $locationProvider.hashPrefix('');
   adapterProvider.setBaseUrl('/api');
   $urlRouterProvider.otherwise('/');
 }
 
-config.$inject = ['$urlRouterProvider', 'adapterProvider'];
+config.$inject = ['$urlRouterProvider', '$locationProvider', 'adapterProvider'];
 
 function run(
   $rootScope,
