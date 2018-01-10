@@ -56,7 +56,7 @@
         <td><span tick="item.biopsy"></span></td>
       </tr>
 
-      <tr ng-if="item.biopsy && cohort === 'INS'">
+      <tr ng-if="item.biopsy && biopsyDiagnosis">
         <th>Biopsy Diagnosis</th>
         <td>{{item.biopsyDiagnosis.label | missing}}</td>
       </tr>
@@ -164,7 +164,7 @@
         </div>
       </div>
 
-      <div ng-if="item.biopsy && cohort.code === 'INS'" frm-field frm-group>
+      <div ng-if="item.biopsy && biopsyDiagnosis" frm-field frm-group>
         <div frm-label>Biopsy Diagnosis</div>
 
         <div frm-control>

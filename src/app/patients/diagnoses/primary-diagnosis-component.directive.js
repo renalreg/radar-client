@@ -20,6 +20,7 @@ function primaryPatientDiagnosisControllerFactory(
 
     // True if this cohort can have multiple primary diagnoses
     $scope.multiple = false;
+    $scope.biopsyDiagnosis = false;
 
     self.load(firstPromise([
       // List of primary diagnoses for this cohort
@@ -49,6 +50,7 @@ function primaryPatientDiagnosisControllerFactory(
       }
 
       $scope.multiple = multiple;
+      $scope.biopsyDiagnosis = $scope.cohort.code === 'INS' || $scope.cohort.code === 'INS-NEPHROS';
     });
 
     $scope.create = create;
