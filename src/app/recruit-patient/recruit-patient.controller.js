@@ -20,12 +20,41 @@ function RecruitPatientController(
 
   $scope.backToSearch = backToSearch;
 
+  $scope.someSelected = someSelected;
+
   init();
 
   function init() {
-    $q.all([loadGenders(), loadEthnicities(), loadNumberGroups(), loadNationalities()]).then(function() {
+    $q.all([
+      loadGenders(),
+      loadEthnicities(),
+      loadNumberGroups(),
+      loadNationalities(),
+      loadConsents()
+    ]).then(function() {
       $scope.loading = false;
     });
+  }
+
+  function someSelected(object) {
+    if (!object) {
+      return false;
+    }
+
+    return Object.keys(object).some(function (key) {
+      return object[key];
+    });
+  }
+
+  function isPaediatric(dateOfBirth) {
+    var today = new Date();
+    var birthDate = new Date(dateOfBirth);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age < 16;
   }
 
   function search() {
@@ -45,6 +74,7 @@ function RecruitPatientController(
           gender: $scope.searchParams.gender,
           numberGroup: $scope.searchParams.numberGroup,
           number: $scope.searchParams.number,
+          paediatric: isPaediatric($scope.searchParams.dateOfBirth)
         };
 
         $scope.searchErrors = {};
@@ -109,6 +139,12 @@ function RecruitPatientController(
     return store.findMany('nationalities', {user: $scope.user.id}).then(function(nationalities) {
       nationalities = _.sortBy(nationalities, 'name');
       $scope.nationalities = nationalities;
+    });
+  }
+
+  function loadConsents() {
+    return store.findMany('consents').then(function(consents) {
+      $scope.consents = _.sortBy(consents, ['weight', 'label']);
     });
   }
 }

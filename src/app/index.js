@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import account from './account';
 import auth from './auth';
 import cohorts from './cohorts';
+import consents from './consents';
 import consultants from './consultants';
 import controllers from './controllers';
 import core from './core';
@@ -34,12 +35,13 @@ import validators from './validators';
 
 import getValueAtPath from './utils/get-value-at-path';
 
-function config($urlRouterProvider, adapterProvider) {
+function config($urlRouterProvider, $locationProvider, adapterProvider) {
+  $locationProvider.hashPrefix('');
   adapterProvider.setBaseUrl('/api');
   $urlRouterProvider.otherwise('/');
 }
 
-config.$inject = ['$urlRouterProvider', 'adapterProvider'];
+config.$inject = ['$urlRouterProvider', '$locationProvider', 'adapterProvider'];
 
 function run(
   $rootScope,
@@ -107,6 +109,7 @@ export default angular.module('radar', [
   account,
   auth,
   cohorts,
+  consents,
   consultants,
   controllers,
   core,

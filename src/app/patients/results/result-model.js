@@ -10,7 +10,7 @@ function resultModelFactory(Model, lazyLoad) {
   ResultModel.prototype = Object.create(Model.prototype);
 
   ResultModel.prototype.getDisplayValue = function() {
-    return this.value.description || this.value;
+    return this.sentValue.description || this.sentValue;
   };
 
   return ResultModel;

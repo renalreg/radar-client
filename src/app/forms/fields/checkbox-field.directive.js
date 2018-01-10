@@ -4,7 +4,9 @@ function frmCheckboxField() {
   return {
     restrict: 'A',
     scope: {
-      model: '='
+      model: '=',
+      disabled: '=',
+      checked: '='
     },
     transclude: true,
     templateUrl: templateUrl

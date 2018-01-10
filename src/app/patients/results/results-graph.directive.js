@@ -22,11 +22,14 @@ function resultsGraph() {
         var data = [];
 
         _.forEach(results, function(x) {
-          data.push({
-            x: Date.parse(x.date),
-            y: x.value,
-            source: x.getSource()
-          });
+          var value = +x.sentValue;
+          if (!isNaN(value)) {
+            data.push({
+              x: Date.parse(x.date),
+              y: value,
+              source: x.getSource()
+            });
+          }
         });
 
         data = _.sortBy(data, 'x');

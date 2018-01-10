@@ -1,6 +1,8 @@
-<div class="checkbox">
+<div class="checkbox" ng-class="disabled?'disabled':''">
   <label>
     <input
+      ng-checked="checked"
+      ng-disabled="disabled"
       frm-model
       ng-model="model"
       type="checkbox"/>
