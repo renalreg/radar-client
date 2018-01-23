@@ -32,6 +32,17 @@
       </tr>
 
       <tr>
+        <th>Peak PCR</th>
+        <td>{{item.peakPcr | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Peak ACR</th>
+        <td>{{item.peakAcr | missing}}</td>
+      </tr>
+
+
+      <tr>
         <th>High Dose Oral Prednisolone</th>
         <td><span tick="item.highDoseOralPrednisolone"></span></td>
       </tr>
@@ -50,6 +61,17 @@
         <th>Remission Type</th>
         <td>{{item.remissionType.label | missing}}</td>
       </tr>
+
+      <tr>
+        <th>Remission PCR</th>
+        <td>{{item.remissionPcr | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Remission ACR</th>
+        <td>{{item.remissionAcr | missing}}</td>
+      </tr>
+
     </table>
 
     <div metadata item="item"></div>
@@ -107,6 +129,24 @@
         </div>
       </div>
 
+      <div frm-field frm-group>
+        <div frm-label>Peak PCR</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.peakPcr"></div>
+          <div frm-errors errors="item.errors.peakPcr"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Peak ACR</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.peakAcr"></div>
+          <div frm-errors errors="item.errors.peakAcr"></div>
+        </div>
+      </div>
+
       <h3>Drugs Given for Relapse</h3>
 
       <div frm-field frm-group>
@@ -144,6 +184,24 @@
         <div frm-control>
           <div frm-select-field model="item.remissionType" options="remissionTypes"></div>
           <div frm-errors errors="item.errors.remissionType"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Remission PCR</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.remissionPcr"></div>
+          <div frm-errors errors="item.errors.remissionPcr"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Remission ACR</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.remissionAcr"></div>
+          <div frm-errors errors="item.errors.remissionAcr"></div>
         </div>
       </div>
 
