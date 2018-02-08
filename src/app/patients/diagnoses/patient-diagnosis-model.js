@@ -19,10 +19,10 @@ function patientDiagnosisModelFactory(Model, store) {
     var name;
 
     // Check for a coded diagnosis
-    if (this.diagnosis) {
-      name = this.diagnosis.name;
-    } else {
+    if (this.diagnosisText) {
       name = this.diagnosisText;
+    } else {
+      name = this.diagnosis.name;
     }
 
     return name;

@@ -80,6 +80,7 @@ function primaryDiagnosisSelector(store) {
             return {
               diagnosis: x,
               edtaCode: x.getEdtaCode(),
+              orphaCode: x.getOrphaCode(),
               weight: [x.getWeight(scope.cohort.id), x.name]
             };
           });

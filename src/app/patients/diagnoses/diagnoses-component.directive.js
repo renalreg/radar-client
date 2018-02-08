@@ -33,6 +33,7 @@ function patientDiagnosesControllerFactory(
       // patient does not have anxiety").
       var item = store.create('patient-diagnoses', {
         patient: $scope.patient.id,
+        primary: false,
         status: true
       });
 

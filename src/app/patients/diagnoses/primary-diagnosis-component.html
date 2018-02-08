@@ -81,14 +81,33 @@
         <div frm-label>Diagnosis</div>
 
         <div frm-control>
-          <div frm-primary-diagnosis-field cohort="cohort" model="item.diagnosis" required="true"></div>
+          <div frm-primary-diagnosis-field cohort="cohort" model="item.diagnosis" required="!item.diagnosisText"></div>
           <div frm-help>
             Choose the most specific diagnosis.<br />
-            <a href="https://www.era-edta-reg.org/prd.jsp" target="_blank">ERA-EDTA PRD codes.</a>
+            <a href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN" target="_blank">Orpha codes.</a>
           </div>
           <div frm-errors errors="item.errors.diagnosis"></div>
         </div>
       </div>
+
+      <div frm-field frm-group>
+        <div frm-label>SWAN category</div>
+        <div frm-control>
+          <div frm-boolean-field model="item.swan"></div>
+          <div frm-errors errors="item.errors.swan"></div>
+        </div>
+      </div>
+
+      <div ng-if="!item.diagnosis" frm-field frm-group>
+        <div frm-label>Diagnosis Text</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis"></div>
+          <div frm-help>Please use a diagnosis from the list where possible.</div>
+          <div frm-errors errors="item.errors.diagnosisText"></div>
+        </div>
+      </div>
+
 
       <div frm-field frm-group>
         <div frm-label>Symptoms Date</div>

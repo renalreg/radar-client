@@ -7,7 +7,7 @@
         <tr>
           <th sort-helper="weight">#</th>
           <th sort-helper="diagnosis.name">Name</th>
-          <th sort-helper="edtaCode">EDTA</th>
+          <th sort-helper="orphaCode">Orpha</th>
         </tr>
       </thead>
 
@@ -28,7 +28,7 @@
           </td>
 
           <td>{{diagnosis.diagnosis.name}}</td>
-          <td>{{diagnosis.edtaCode | missing}}</td>
+          <td>{{diagnosis.orphaCode | missing}}</td>
         </tr>
       </tbody>
     </table>

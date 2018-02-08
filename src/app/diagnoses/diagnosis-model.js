@@ -15,7 +15,15 @@ function diagnosisModelFactory(Model) {
 
   DiagnosisModel.prototype.getEdtaCode = function() {
     var codes = this.getSystemCodes('ERA-EDTA PRD');
+    if (codes.length) {
+      return parseInt(codes[0].code);
+    } else {
+      return null;
+    }
+  };
 
+  DiagnosisModel.prototype.getOrphaCode = function() {
+    var codes = this.getSystemCodes('ORPHA');
     if (codes.length) {
       return parseInt(codes[0].code);
     } else {

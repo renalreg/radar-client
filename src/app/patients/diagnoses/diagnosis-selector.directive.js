@@ -136,6 +136,7 @@ function diagnosisSelector(store) {
         groupDiagnoses[key].push({
           diagnosis: diagnosis,
           edtaCode: diagnosis.getEdtaCode(),
+          orphaCode: diagnosis.getOrphaCode(),
           weight: weight
         });
       }

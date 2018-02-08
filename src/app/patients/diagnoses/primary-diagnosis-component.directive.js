@@ -47,6 +47,7 @@ function primaryPatientDiagnosisControllerFactory(
         self.list();
       } else {
         self.view($scope.items[0]);
+
       }
 
       $scope.multiple = multiple;
@@ -60,6 +61,7 @@ function primaryPatientDiagnosisControllerFactory(
       var item = store.create('patient-diagnoses', {
         patient: $scope.patient.id,
         sourceGroup: $scope.sourceGroup,
+        primary: true
       });
 
       self.edit(item);
