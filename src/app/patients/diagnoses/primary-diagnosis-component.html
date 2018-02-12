@@ -97,12 +97,11 @@
           <div frm-errors errors="item.errors.swan"></div>
         </div>
       </div>
-
-      <div ng-if="!item.diagnosis" frm-field frm-group>
+      <div ng-if="!item.diagnosis || item.diagnosis.name === 'Otherr'" frm-field frm-group>
         <div frm-label>Diagnosis Text</div>
 
         <div frm-control>
-          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis"></div>
+          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis || item.diagnosis.name === 'Otherr'"></div>
           <div frm-help>Please use a diagnosis from the list where possible.</div>
           <div frm-errors errors="item.errors.diagnosisText"></div>
         </div>
