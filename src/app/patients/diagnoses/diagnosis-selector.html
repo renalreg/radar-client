@@ -12,19 +12,19 @@
         <tr>
           <th sort-helper="weight">#</th>
           <th sort-helper="diagnosis.name">Name</th>
-          <th sort-helper="edtaCode">EDTA</th>
+          <!-- <th sort-helper="edtaCode">EDTA</th> -->
         </tr>
       </thead>
 
       <tbody>
         <tr>
-          <td colspan="3">
+          <td colspan="2">
             <div filter-helper></div>
           </td>
         </tr>
 
         <tr ng-show="!page.getCount()">
-          <td colspan="3" class="empty">No matching diagnoses.</td>
+          <td colspan="2" class="empty">No matching diagnoses.</td>
         </tr>
 
         <tr ng-repeat="diagnosis in page.getItems()">
@@ -33,7 +33,7 @@
           </td>
 
           <td>{{diagnosis.diagnosis.name}}</td>
-          <td>{{diagnosis.edtaCode | missing}}</td>
+          <!-- <td>{{diagnosis.edtaCode | missing}}</td> -->
         </tr>
       </tbody>
     </table>

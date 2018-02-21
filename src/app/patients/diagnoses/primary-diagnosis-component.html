@@ -84,8 +84,10 @@
           <div frm-primary-diagnosis-field cohort="cohort" model="item.diagnosis" required="!item.diagnosisText"></div>
           <div frm-help>
             Choose the most specific diagnosis.<br />
-            <a href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN" target="_blank">Orpha codes.</a>
+            <a href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN" target="_blank">Orpha codes.</a><br />
+            If nothing is applicable, please select 'Other diagnosis' and enter diagnosis manually below.
           </div>
+
           <div frm-errors errors="item.errors.diagnosis"></div>
         </div>
       </div>
@@ -97,11 +99,11 @@
           <div frm-errors errors="item.errors.swan"></div>
         </div>
       </div>
-      <div ng-if="!item.diagnosis || item.diagnosis.name === 'Otherr'" frm-field frm-group>
+      <div ng-if="!item.diagnosis || item.diagnosis.name === 'Other diagnosis'" frm-field frm-group>
         <div frm-label>Diagnosis Text</div>
 
         <div frm-control>
-          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis || item.diagnosis.name === 'Otherr'"></div>
+          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis || item.diagnosis.name === 'Other diagnosis'"></div>
           <div frm-help>Please use a diagnosis from the list where possible.</div>
           <div frm-errors errors="item.errors.diagnosisText"></div>
         </div>
