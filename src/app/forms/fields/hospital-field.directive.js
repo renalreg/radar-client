@@ -16,13 +16,8 @@ function frmHospitalField(session, hospitalStore) {
         return session.user;
       }, function(user) {
         if (user) {
-          if (user.isAdmin) {
-            setHospitals([]);
-            hospitalStore.findMany(scope.params).then(setHospitals);
-          } else {
-            var hospitals = user.getHospitals();
-            setHospitals(hospitals);
-          }
+          setHospitals([]);
+          hospitalStore.findMany(scope.params).then(setHospitals);
         } else {
           setHospitals([]);
         }
