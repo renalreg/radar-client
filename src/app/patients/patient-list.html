@@ -38,6 +38,8 @@
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a>
                 <i class="fa fa-link" ng-if="patient.ukrdc" title="Receiving data from UKRDC"></i>
+                <i class="fa fa-exclamation-triangle" ng-if="patient.consentStatus == 'SOON'"></i>
+                <i class="fa fa-ban" ng-if="patient.consentStatus == 'EXPIRED' || patient.consentStatus == 'MISSING'"></i>
               </td>
 
               <td>

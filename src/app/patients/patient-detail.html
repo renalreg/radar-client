@@ -5,6 +5,8 @@
         <a ui-sref="patient.demographics({patientId: patient.id})">
           <span if-demographics-visible ng-bind="patient.getName(true)"></span>
           <span if-demographics-hidden ng-bind="patient.getName(false)"></span>
+          <i class="fa fa-exclamation-triangle" ng-if="patient.consentStatus == 'SOON'"></i>
+          <i class="fa fa-ban" ng-if="patient.consentStatus == 'EXPIRED' || patient.consentStatus == 'MISSING'"></i>
         </a>
       </li>
 
