@@ -79,6 +79,24 @@ function marmosetStringWidget($compile) {
 
 marmosetStringWidget.$inject = ['$compile'];
 
+function marmosetTextWidget($compile) {
+  return {
+    scope: {
+      field: '=marmosetTextWidget'
+    },
+    link: function(scope, element) {
+      var e = angular.element('<textarea />');
+      e.attr('class', 'form-control');
+      e.attr('name', scope.field.name);
+      e.attr('ng-model', 'field.data[field.name]');
+      element.append(e);
+      $compile(e)(scope);
+    }
+  };
+}
+
+marmosetTextWidget.$inject = ['$compile'];
+
 function marmosetDateWidget($compile) {
   return {
     scope: {
@@ -340,6 +358,7 @@ export {
   marmosetWidget,
   marmosetIntWidget,
   marmosetStringWidget,
+  marmosetTextWidget,
   marmosetDateWidget,
   marmosetFloatWidget,
   marmosetSelectWidget,

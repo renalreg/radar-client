@@ -72,6 +72,14 @@ select {
   color: red;
 }
 
+.fa-ban {
+  color: red;
+}
+
+.fa-exclamation-triangle {
+  color: orange;
+}
+
 .ui-datepicker {
   z-index: 9999 !important;
 }
@@ -100,7 +108,7 @@ th.right {
   > thead, > tbody, & {
     > tr {
       > td, > th {
-          padding: 5px 10px;
+          padding: 5px 6px;
       }
     }
   }

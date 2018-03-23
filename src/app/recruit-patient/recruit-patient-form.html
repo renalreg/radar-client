@@ -98,7 +98,14 @@
   <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
     <div class="checkbox graph" ng-repeat="consent in consents" ng-if="!consent.retired && !consent.paediatric">
       <div ng-if="consent.consentType === 'INFORMATION_SHEET'">
-      <ul><li>{{ consent.label }}</li></ul>
+        <ul>
+          <li>
+            {{ consent.label }}
+            <span ng-if="!!consent.linkUrl">
+              (<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)
+            </span>
+          </li>
+        </ul>
       </div>
       <label ng-if="consent.consentType === 'FORM'">
         <input
@@ -108,9 +115,8 @@
             ng-model="patient.consents[consent.id]" />
           {{ consent.label }}
           <span ng-if="!consent.linkUrl">({{ consent.code }})</span>
+          <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
       </label>
-
-      <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
     </div>
   </div>
 
@@ -119,7 +125,14 @@
   <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
     <div class="checkbox graph" ng-repeat="consent in consents" ng-if="!consent.retired && consent.paediatric">
       <div ng-if="consent.consentType === 'INFORMATION_SHEET'">
-      <ul><li>{{ consent.label }}</li></ul>
+      <ul>
+        <li>
+          {{ consent.label }}
+          <span ng-if="!!consent.linkUrl">
+            (<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)
+          </span>
+        </li>
+      </ul>
       </div>
       <label ng-if="consent.consentType === 'FORM'">
         <input
@@ -129,9 +142,10 @@
             ng-model="patient.consents[consent.id]" />
           {{ consent.label }}
           <span ng-if="!consent.linkUrl">({{ consent.code }})</span>
+          <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
       </label>
 
-      <span ng-if="!!consent.linkUrl">(<a href="{{consent.linkUrl}}" target="_blank">{{consent.code}}</a>)</span>
+
     </div>
   </div>
 

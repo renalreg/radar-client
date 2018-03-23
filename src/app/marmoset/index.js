@@ -15,6 +15,7 @@ import {
   marmosetWidget,
   marmosetIntWidget,
   marmosetStringWidget,
+  marmosetTextWidget,
   marmosetDateWidget,
   marmosetFloatWidget,
   marmosetSelectWidget,
@@ -36,6 +37,7 @@ export default angular.module('radar.marmoset', [])
   .directive('marmosetWidget', marmosetWidget)
   .directive('marmosetIntWidget', marmosetIntWidget)
   .directive('marmosetStringWidget', marmosetStringWidget)
+  .directive('marmosetTextWidget', marmosetTextWidget)
   .directive('marmosetDateWidget', marmosetDateWidget)
   .directive('marmosetFloatWidget', marmosetFloatWidget)
   .directive('marmosetSelectWidget', marmosetSelectWidget)
