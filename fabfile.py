@@ -1,3 +1,4 @@
+import binascii
 import os
 import re
 from pkg_resources import parse_version
@@ -14,7 +15,9 @@ def deploy(archive=None, name='radar-client'):
     current_version = '/srv/{name}/current'.format(name=name)
     new_version = '/srv/{name}/{version}'.format(name=name, version=version)
 
-    tmp = '/tmp/radar-client-{0}'.format(os.urandom(20).encode('hex'))
+    randomstr = binascii.hexlify(os.urandom(20)).decode('utf-8')
+    tmp = '/tmp/radar-{0}'.format(randomstr)
+
     run('mkdir {0}'.format(tmp))
     remote_archive = '{0}/radar-client.tar.gz'.format(tmp)
     put(archive, remote_archive)
