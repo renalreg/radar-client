@@ -6,6 +6,7 @@ import alport from './alport';
 import cohorts from './cohorts';
 import consents from './consents';
 import consultants from './consultants';
+import currentMedications from './current-medications';
 import demographics from './demographics';
 import diagnoses from './diagnoses';
 import dialysis from './dialysis';
@@ -98,6 +99,7 @@ export default angular.module('radar.patients', [
   cohorts,
   consents,
   consultants,
+  currentMedications,
   demographics,
   diagnoses,
   dialysis,

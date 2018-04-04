@@ -7,6 +7,7 @@ var PAGES = {
   COHORTS: {name: 'Cohorts', state: 'patient.cohorts'},
   CONSENTS: {name: 'Consents', state: 'patient.consents'},
   CONSULTANTS: {name: 'Consultants', state: 'patient.consultants'},
+  CURRENT_MEDICATIONS: {name: 'Current Medications', state: 'patient.currentMedications'},
   DEMOGRAPHICS: {name: 'Demographics', state: 'patient.demographics'},
   DIAGNOSES: {name: 'Comorbidities', state: 'patient.diagnoses', cohort: true},
   DIALYSIS: {name: 'Dialysis', state: 'patient.dialysis'},
