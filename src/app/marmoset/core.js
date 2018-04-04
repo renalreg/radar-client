@@ -409,7 +409,7 @@ function _getOptionLabelByValue(options, value) {
 }
 
 function _getDisplay(field, value) {
-  if (value === undefined) {
+  if (value === undefined || value === null) {
     return null;
   } else if (field.options) {
     if (value.constructor === Array) {
