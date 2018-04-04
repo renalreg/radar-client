@@ -1,0 +1,189 @@
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties">
+      <tr>
+        <th>Data Source</th>
+        <td>{{item.getSource()}}</td>
+      </tr>
+
+      <tr>
+        <th>Drug</th>
+        <td>{{item.getDrug()}}</td>
+      </tr>
+
+      <tr>
+        <th>Recorded</th>
+        <td>{{item.date | dateFormat}}</td>
+      </tr>
+
+      <tr>
+          <th>Dose</th>
+          <td>{{item.getDose() | missing}}</td>
+        </tr>
+
+        <tr>
+          <th>Frequency</th>
+          <td>{{item.frequency | missing}}</td>
+        </tr>
+
+        <tr>
+          <th>Route</th>
+          <td>{{item.route.label | missing}}</td>
+        </tr>
+
+    </table>
+
+    <div metadata item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-list-button></span>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+      <div frm-field frm-group>
+        <div frm-label>Data Source</div>
+
+        <div frm-control>
+          <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+          <div frm-errors errors="item.errors.sourceGroup"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.dateRecorded" required="true"></div>
+          <div frm-errors errors="item.errors.dateRecorded"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Drug</div>
+
+        <div frm-control>
+          <div frm-drug-field model="item.drug"></div>
+          <div frm-errors errors="item.errors.drug"></div>
+        </div>
+      </div>
+
+      <div ng-if="!item.drug" frm-field frm-group>
+        <div frm-label>Drug Text</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.drugText"></div>
+          <div frm-help>Please use a drug from the list where possible.</div>
+          <div frm-errors errors="item.errors.drugText"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Dose Quantity</div>
+
+        <div frm-control>
+          <div frm-number-field model="item.doseQuantity"></div>
+          <div frm-errors errors="item.errors.doseQuantity"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Dose Unit</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.doseUnit" options="doseUnits"></div>
+          <div frm-errors errors="item.errors.doseUnit"></div>
+        </div>
+      </div>
+
+      <div ng-if="!item.doseQuantity" frm-field frm-group>
+        <div frm-label>Dose Text</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.doseText"></div>
+          <div frm-help>Please use dose quantity and dose unit for new medications.</div>
+          <div frm-errors errors="item.errors.doseText"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Frequency</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.frequency"></div>
+          <div frm-errors errors="item.errors.frequency"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Route</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.route" options="routes"></div>
+          <div frm-errors errors="item.errors.route"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-list-button></span>
+      </div>
+    </form>
+  </div>
+
+  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
+    <p>
+      <span crud-create-button action="create()"></span>
+    </p>
+
+    <div filter-helper></div>
+
+    <div ng-show="!page.getCount()">
+      <p>No results.</p>
+    </div>
+
+    <table class="table table-condensed table-striped" ng-if="page.getCount()">
+      <thead>
+        <tr>
+          <th></th>
+          <th sort-helper="dateRecorded">Date</th>
+          <th sort-helper="getDrug()">Drug</th>
+          <th sort-helper="getDose()">Dose</th>
+          <th sort-helper="frequency">Frequency</th>
+          <th sort-helper="route.label">Route</th>
+          <th sort-helper="getSource()">Data Source</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr ng-repeat="item in page.getItems()">
+          <td>
+            <span crud-list-view-button item="item"></span>
+            <span crud-list-edit-button item="item"></span>
+          </td>
+
+          <td>{{item.dateRecorded | dateFormat}}</td>
+          <td>{{item.getDrug()}}</td>
+          <td>{{item.getDose()}}</td>
+          <td>{{item.frequency | missing}}</td>
+          <td>{{item.route.label | missing}}</td>
+          <td class="source">{{item.getSource()}}</td>
+
+          <td>
+            <span crud-list-remove-button item="item"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div pagination-helper></div>
+  </div>
+</div>
