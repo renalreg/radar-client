@@ -41,7 +41,7 @@ function patientConsentsControllerFactory(
         $scope.activeConsents = [];
         for (var i=0; i < consents.length; i++) {
           var consent = consents[i];
-          if (!consent.retired) {
+          if (!consent.retired && consent.consentType === 'FORM') {
             $scope.activeConsents.push(consent);
           }
         }
