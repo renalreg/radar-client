@@ -343,6 +343,7 @@ function Field(schema, data) {
   self.type = data.type;
   self.label = data.label;
   self.help = data.help || null;
+  self.titleHelp = data.titleHelp || null;
   self.unit = data.unit || null;
   self.options = (data.options && data.options.length) ? data.options : null;
   self.widget = data.widget || {};

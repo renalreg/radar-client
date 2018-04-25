@@ -2,7 +2,11 @@
   class="form-group"
   ng-class="{'required': field.required(), 'has-error': !valid()}"
   ng-show="field.visible()">
-  <label class="control-label col-md-3">{{field.label}}</label>
+  <div class="col-md-3 control-label">
+    <label>{{field.label}}</label>
+    <span ng-if="field.titleHelp" class="help-block" ng-bind-html="field.titleHelp | unsafe"></span>
+  </div>
+
   <div class="col-md-9">
       <div marmoset-widget="field"></div>
 
