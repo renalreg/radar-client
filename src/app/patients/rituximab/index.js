@@ -20,8 +20,8 @@ function config($stateProvider) {
 config.$inject = ['$stateProvider'];
 
 export default angular.module('radar.patients.rituximab', [])
-//   .config(config)
+  .config(config)
 //   .factory('RenalImagingPermission', renalImagingPermissionFactory)
 //   .factory('RenalImagingController', renalImagingControllerFactory)
 //   .directive('renalImagingComponent', renalImagingComponent)
-   .name;
+  .name;

@@ -35,6 +35,7 @@ import pregnancies from './pregnancies';
 import renalProgression from './renal-progression';
 import renalImaging from './renal-imaging';
 import results from './results';
+import rituximab from './rituximab';
 import saltWasting from './salt-wasting';
 import transplants from './transplants';
 
@@ -128,6 +129,7 @@ export default angular.module('radar.patients', [
   renalProgression,
   renalImaging,
   results,
+  rituximab,
   saltWasting,
   transplants
 ])
