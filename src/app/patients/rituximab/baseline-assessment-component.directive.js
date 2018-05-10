@@ -7,8 +7,8 @@ function rituximabBaselineAssessmentPermissionFactory(PatientObjectPermission) {
 rituximabBaselineAssessmentPermissionFactory.$inject = ['PatientObjectPermission'];
 
 function rituximabBaselineAssessmentControllerFactory(
-  ModelListDetailController,
-  InsRelapsePermission,
+  ModelDetailController,
+  RituximabBaselineAssessmentPermission,
   firstPromise,
   $injector,
   store
@@ -16,38 +16,42 @@ function rituximabBaselineAssessmentControllerFactory(
   function RituximabBaselineAssessmentController($scope) {
     var self = this;
 
-    $injector.invoke(ModelListDetailController, self, {
+    $injector.invoke(ModelDetailController, self, {
       $scope: $scope,
       params: {
-        permission: new InsRelapsePermission($scope.patient)
+        permission: new RituximabBaselineAssessmentPermission($scope.patient)
       }
     });
 
-    self.load(firstPromise([
-      store.findMany('ins-relapses', {patient: $scope.patient.id}),
-      store.findMany('ins-kidney-types').then(function(kidneyTypes) {
-        $scope.kidneyTypes = kidneyTypes;
-      }),
-      store.findMany('ins-remission-types').then(function(remissionTypes) {
-        $scope.remissionTypes = remissionTypes;
-      })
-    ]));
+    $scope.multiple = false;
 
-    $scope.create = function() {
-      var item = store.create('ins-relapses', {patient: $scope.patient.id});
-      self.edit(item);
-    };
+    self.load(firstPromise([
+      store.findFirst('rituximab-baseline-assessment', {patient: $scope.patient.id}),
+      store.findMany('rituximab-treatment-options').then(function(rtxTreatmentOptions) {
+        $scope.rtxTreatmentOptions = rtxTreatmentOptions;
+      }),
+      store.findMany('rituximab-performance-options').then(function(rtxPerformanceOptions) {
+        $scope.rtxPerformanceOptions = rtxPerformanceOptions;
+      })
+    ])).then(function() {
+      self.view();
+    });
+
+    // $scope.create = function() {
+    //   var item = store.create('ins-relapses', {patient: $scope.patient.id});
+    //   self.edit(item);
+    // };
   }
 
   RituximabBaselineAssessmentController.$inject = ['$scope'];
-  RituximabBaselineAssessmentController.prototype = Object.create(ModelListDetailController.prototype);
+  RituximabBaselineAssessmentController.prototype = Object.create(ModelDetailController.prototype);
 
   return RituximabBaselineAssessmentController;
 }
 
 rituximabBaselineAssessmentControllerFactory.$inject = [
-  'ModelListDetailController',
-  'InsRelapsePermission',
+  'ModelDetailController',
+  'RituximabBaselineAssessmentPermission',
   'firstPromise',
   '$injector',
   'store'
@@ -63,7 +67,7 @@ function rituximabBaselineAssessmentComponent(RituximabBaselineAssessmentControl
   };
 }
 
-rituximabBaselineAssessmentComponent.$inject = ['rituximabBaselineAssessmentController'];
+rituximabBaselineAssessmentComponent.$inject = ['RituximabBaselineAssessmentController'];
 
 export {
   rituximabBaselineAssessmentPermissionFactory,

@@ -1,10 +1,10 @@
 import angular from 'angular';
 
-// import {
-  // renalImagingPermissionFactory,
-  // renalImagingControllerFactory,
-  // renalImagingComponent
-// } from './renal-imaging-component.directive';
+import {
+  rituximabBaselineAssessmentPermissionFactory,
+  rituximabBaselineAssessmentControllerFactory,
+  rituximabBaselineAssessmentComponent
+} from './baseline-assessment-component.directive';
 
 import templateUrl from './baseline.html';
 
@@ -21,7 +21,7 @@ config.$inject = ['$stateProvider'];
 
 export default angular.module('radar.patients.rituximab', [])
   .config(config)
-//   .factory('RenalImagingPermission', renalImagingPermissionFactory)
-//   .factory('RenalImagingController', renalImagingControllerFactory)
-//   .directive('renalImagingComponent', renalImagingComponent)
+  .factory('RituximabBaselineAssessmentPermission', rituximabBaselineAssessmentPermissionFactory)
+  .factory('RituximabBaselineAssessmentController', rituximabBaselineAssessmentControllerFactory)
+  .directive('rituximabBaselineAssessmentComponent', rituximabBaselineAssessmentComponent)
   .name;
