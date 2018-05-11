@@ -39,6 +39,7 @@ var PAGES = {
   RENAL_IMAGING: {name: 'Renal Imaging', state: 'patient.renalImaging'},
   RENAL_PROGRESSION: {name: 'Renal Disease Progression', state: 'patient.renalProgression'},
   RESULTS: {name: 'Lab Results', state: 'patient.results'},
+  RITUXIMAB_BASELINE_ASSESSMENT: {name: 'Baseline Clinical Assessment', state: 'patient.rituximabBaselineAssessment'},
   SALT_WASTING_CLINICAL_FEATURES: {name: 'Clinical Features', state: 'patient.saltWastingClinicalFeatures'},
   SAMPLES: {name: 'Tube Samples', state: 'patient.nurtureSamples'},
   TRANSPLANTS: {name: 'Kidney Transplants', state: 'patient.transplants'},
