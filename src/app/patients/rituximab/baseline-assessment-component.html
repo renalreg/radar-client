@@ -67,33 +67,31 @@
         </div>
 
         <div frm-field frm-group>
-            <div frm-label>Anticoaguliant</div>
+          <div frm-label>Anticoaguliant</div>
 
-            <div frm-control>
-              <div frm-checkbox-field model="item.supportiveMedication.anticoaguliant" checked="item.supportiveMedication.anticoaguliant"></div>
-              <div frm-errors errors="item.errors.supportiveMedication.anticoaguliant"></div>
-            </div>
+          <div frm-control>
+            <div frm-checkbox-field model="item.supportiveMedication.anticoaguliant" checked="item.supportiveMedication.anticoaguliant"></div>
+            <div frm-errors errors="item.errors.supportiveMedication.anticoaguliant"></div>
           </div>
+        </div>
 
-          <div frm-field frm-group>
-            <div frm-label>Statins</div>
+        <div frm-field frm-group>
+          <div frm-label>Statins</div>
 
-            <div frm-control>
-              <div frm-checkbox-field model="item.supportiveMedication.statins" checked="item.supportiveMedication.statins"></div>
-              <div frm-errors errors="item.errors.supportiveMedication.statins"></div>
-            </div>
+          <div frm-control>
+            <div frm-checkbox-field model="item.supportiveMedication.statins" checked="item.supportiveMedication.statins"></div>
+            <div frm-errors errors="item.errors.supportiveMedication.statins"></div>
           </div>
+        </div>
 
-          <div frm-field frm-group>
-              <div frm-label>Diuretics</div>
+        <div frm-field frm-group>
+          <div frm-label>Diuretics</div>
 
-            <div frm-control>
-              <div frm-checkbox-field model="item.supportiveMedication.diuretics" checked="item.supportiveMedication.diuretics"></div>
-              <div frm-errors errors="item.errors.supportiveMedication.diuretics"></div>
-            </div>
+          <div frm-control>
+            <div frm-checkbox-field model="item.supportiveMedication.diuretics" checked="item.supportiveMedication.diuretics"></div>
+            <div frm-errors errors="item.errors.supportiveMedication.diuretics"></div>
           </div>
-
-
+        </div>
 
       <h2>Previous Immunomodulatory Treatment</h2>
       <div ng-repeat="option in rtxTreatmentOptions track by option.id">
