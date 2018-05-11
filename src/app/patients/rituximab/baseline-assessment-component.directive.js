@@ -37,10 +37,21 @@ function rituximabBaselineAssessmentControllerFactory(
       self.view();
     });
 
-    // $scope.create = function() {
-    //   var item = store.create('ins-relapses', {patient: $scope.patient.id});
-    //   self.edit(item);
-    // };
+    $scope.create = function() {
+      var item = store.create('rituximab-baseline-assessment', {patient: $scope.patient.id});
+      self.edit(item);
+    };
+
+    var medMapping = {
+      'raasblockade': 'RAAS Blockade',
+      'anticoaguliant': 'Anticoaguliant',
+      'statins': 'Statins',
+      'diuretics': 'Diuretics'
+    };
+
+    $scope.getMedicationLabel = function(med) {
+      return medMapping[med];
+    };
   }
 
   RituximabBaselineAssessmentController.$inject = ['$scope'];

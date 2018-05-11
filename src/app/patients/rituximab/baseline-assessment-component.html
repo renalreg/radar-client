@@ -7,7 +7,34 @@
     </p>
 
     <div ng-if="item">
-      {{ item }}
+      <table class="table properties">
+        <tr>
+          <th>Date</th>
+          <td>{{item.date | dateFormat}}</td>
+        </tr>
+        <tr ng-repeat="(med, status) in item.supportiveMedication">
+          <th>{{ getMedicationLabel(med) }}</th>
+          <td><span tick="status"></span></td>
+        </tr>
+        <tr>
+          <th>WHO Performance status</th>
+          <td>{{item.performanceStatus}}</td>
+        </tr>
+      </table>
+
+      <table class="table properties">
+        <tr>
+          <td>Previous treatment</td>
+          <td>Start date</td>
+          <td>End date</td>
+        </tr>
+        <tr ng-repeat="option in rtxTreatmentOptions track by option.id" ng-if="item.previousTreatment[option.id][option.id]">
+          <th>{{option.label}}</th>
+          <td>{{item.previousTreatment[option.id].startDate}}</td>
+          <td>{{item.previousTreatment[option.id].endDate}}</td>
+        </tr>
+      </table>
+
     </div>
 
     <p ng-if="!item">Not entered.</p>
@@ -49,11 +76,11 @@
           </div>
 
           <div frm-field frm-group>
-            <div frm-label>Statin</div>
+            <div frm-label>Statins</div>
 
             <div frm-control>
-              <div frm-checkbox-field model="item.supportiveMedication.statin" checked="item.supportiveMedication.statin"></div>
-              <div frm-errors errors="item.errors.supportiveMedication.statin"></div>
+              <div frm-checkbox-field model="item.supportiveMedication.statins" checked="item.supportiveMedication.statins"></div>
+              <div frm-errors errors="item.errors.supportiveMedication.statins"></div>
             </div>
           </div>
 
@@ -69,17 +96,33 @@
 
 
       <h2>Previous Immunomodulatory Treatment</h2>
+      <div ng-repeat="option in rtxTreatmentOptions track by option.id">
 
         <div frm-field frm-group>
-          <div frm-label></div>
-
+          <div frm-label>{{option.label}}</div>
           <div frm-control>
-            <div frm-checkbox-field model="item.previousTreatment"></div>
+            <div frm-checkbox-field model="item.previousTreatment[option.id][option.id]" checked="item.previousTreatment[option.id][option.id]"></div>
             <div frm-errors errors="item.errors.previousTreatment"></div>
           </div>
         </div>
 
+        <div frm-field frm-group ng-if="item.previousTreatment[option.id][option.id]">
+          <div frm-label>Start Date</div>
+          <div frm-control>
+            <div frm-date-field model="item.previousTreatment[option.id]['startDate']" required="item.previousTreatment[option.id][option.id]"></div>
+            <div frm-errors errors="item.errors.previousTreatment[option.id]['startDate']"></div>
+          </div>
+        </div>
 
+        <div frm-field frm-group ng-if="item.previousTreatment[option.id][option.id]">
+          <div frm-label>End Date</div>
+          <div frm-control>
+            <div frm-date-field model="item.previousTreatment[option.id]['endDate']"></div>
+            <div frm-errors errors="item.errors.previousTreatment[option.id]['endDate']"></div>
+          </div>
+        </div>
+        <hr>
+      </div>
 
       <div frm-field frm-group>
         <div frm-label>WHO Performance status</div>
