@@ -28,6 +28,9 @@ function insRelapsesControllerFactory(
       store.findMany('ins-kidney-types').then(function(kidneyTypes) {
         $scope.kidneyTypes = kidneyTypes;
       }),
+      store.findMany('ins-dipstick-options').then(function(dipstickOptions) {
+        $scope.dipstickOptions = dipstickOptions;
+      }),
       store.findMany('ins-remission-types').then(function(remissionTypes) {
         $scope.remissionTypes = remissionTypes;
       })

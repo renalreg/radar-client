@@ -27,6 +27,11 @@
       </tr>
 
       <tr>
+          <th>Recurrence</th>
+          <td><span tick="item.recurrence"></span></td>
+      </tr>
+
+      <tr>
         <th>Date of Recurrence</th>
         <td>{{item.dateOfRecurrence | dateFormat}}</td>
       </tr>
@@ -110,6 +115,15 @@
         <div frm-control>
           <div frm-select-field model="item.modality" required="true" options="modalities"></div>
           <div frm-errors errors="item.errors.modality"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Recurrence</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.recurrence" nullable="false" required="false"></div>
+          <div frm-errors errors="item.errors.recurrence"></div>
         </div>
       </div>
 

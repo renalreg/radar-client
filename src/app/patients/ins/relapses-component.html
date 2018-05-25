@@ -41,6 +41,15 @@
         <td>{{item.peakAcr | missing}}</td>
       </tr>
 
+      <tr>
+        <th>Peak protein dipstick</th>
+        <td>{{item.peakProteinDipstick.label | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Remission protein dipstick</th>
+        <td>{{item.remissionProteinDipstick.label | missing}}</td>
+      </tr>
 
       <tr>
         <th>High Dose Oral Prednisolone</th>
@@ -103,7 +112,7 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Viral Trigger</div>
+        <div frm-label>Recent Viral infection</div>
 
         <div frm-control>
           <div frm-text-field model="item.viralTrigger"></div>
@@ -112,7 +121,7 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Immunisation Trigger</div>
+        <div frm-label>Recent Immunisation</div>
 
         <div frm-control>
           <div frm-text-field model="item.immunisationTrigger"></div>
@@ -145,6 +154,24 @@
           <div frm-text-field model="item.peakAcr"></div>
           <div frm-errors errors="item.errors.peakAcr"></div>
         </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Peak protein dipstick</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.peakProteinDipstick" options="dipstickOptions"></div>
+          <div frm-errors errors="item.errors.peakProteinDipstick"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+          <div frm-label>Remission protein dipstick</div>
+
+          <div frm-control>
+            <div frm-select-field model="item.remissionProteinDipstick" options="dipstickOptions"></div>
+            <div frm-errors errors="item.errors.remissionProteinDipstick"></div>
+          </div>
       </div>
 
       <h3>Drugs Given for Relapse</h3>
