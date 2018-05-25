@@ -1,11 +1,11 @@
 // import _ from 'lodash';
 import templateUrl from './consents-component.html';
 
-function patientConsentPermissionFactory(PatientObjectPermission) {
-  return PatientObjectPermission;
+function patientConsentPermissionFactory(PatientConsentPermission) {
+  return PatientConsentPermission;
 }
 
-patientConsentPermissionFactory.$inject = ['PatientObjectPermission'];
+patientConsentPermissionFactory.$inject = ['PatientConsentPermission'];
 
 function patientConsentsControllerFactory(
   ModelListDetailController,
@@ -41,7 +41,7 @@ function patientConsentsControllerFactory(
         $scope.activeConsents = [];
         for (var i=0; i < consents.length; i++) {
           var consent = consents[i];
-          if (!consent.retired) {
+          if (!consent.retired && consent.consentType === 'FORM') {
             $scope.activeConsents.push(consent);
           }
         }

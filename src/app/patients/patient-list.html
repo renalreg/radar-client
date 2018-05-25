@@ -2,7 +2,7 @@
   <h1 class="page-header">Patients <small>{{count}} patients</small></h1>
 
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-lg-8">
       <p recruit-patient-permission>
         <a ui-sref="recruitPatient.search" class="btn btn-primary">Recruit Patient</a>
       </p>
@@ -38,6 +38,8 @@
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a>
                 <i class="fa fa-link" ng-if="patient.ukrdc" title="Receiving data from UKRDC"></i>
+                <!-- <i class="fa fa-exclamation-triangle" ng-if="patient.consentStatus == 'SOON'"></i>
+                <i class="fa fa-ban" ng-if="patient.consentStatus == 'EXPIRED' || patient.consentStatus == 'MISSING'"></i> -->
               </td>
 
               <td>
@@ -117,7 +119,7 @@
       </div>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-lg-4">
       <h3>Search</h3>
 
       <p>Search patients belonging to your cohorts and hospitals.</p>
@@ -247,11 +249,11 @@
         </div>
 
         <div frm-field frm-group>
-          <div frm-label>UKRDC</div>
+          <div frm-label>Patient View</div>
 
           <div frm-control>
             <div frm-boolean-field model="filters.ukrdc"></div>
-            <div frm-help>Filter patients receiving data from the UKRDC.</div>
+            <div frm-help>Filter patients receiving data from the Patient View.</div>
             <div frm-errors></div>
           </div>
         </div>

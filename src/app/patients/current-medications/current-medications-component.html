@@ -17,29 +17,25 @@
       </tr>
 
       <tr>
-        <th>From Date</th>
-        <td>{{item.fromDate | dateFormat}}</td>
+        <th>Recorded</th>
+        <td>{{item.date | dateFormat}}</td>
       </tr>
 
       <tr>
-        <th>To Date</th>
-        <td>{{item.toDate | dateFormat}}</td>
-      </tr>
+          <th>Dose</th>
+          <td>{{item.getDose() | missing}}</td>
+        </tr>
 
-      <tr>
-        <th>Dose</th>
-        <td>{{item.getDose() | missing}}</td>
-      </tr>
+        <tr>
+          <th>Frequency</th>
+          <td>{{item.frequency | missing}}</td>
+        </tr>
 
-      <tr>
-        <th>Frequency</th>
-        <td>{{item.frequency | missing}}</td>
-      </tr>
+        <tr>
+          <th>Route</th>
+          <td>{{item.route.label | missing}}</td>
+        </tr>
 
-      <tr>
-        <th>Route</th>
-        <td>{{item.route.label | missing}}</td>
-      </tr>
     </table>
 
     <div metadata item="item"></div>
@@ -62,6 +58,15 @@
       </div>
 
       <div frm-field frm-group>
+        <div frm-label>Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.dateRecorded" required="true"></div>
+          <div frm-errors errors="item.errors.dateRecorded"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
         <div frm-label>Drug</div>
 
         <div frm-control>
@@ -77,24 +82,6 @@
           <div frm-text-field model="item.drugText"></div>
           <div frm-help>Please use a drug from the list where possible.</div>
           <div frm-errors errors="item.errors.drugText"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
-        <div frm-label>From Date</div>
-
-        <div frm-control>
-          <div frm-date-field model="item.fromDate" required="true"></div>
-          <div frm-errors errors="item.errors.fromDate"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
-        <div frm-label>To Date</div>
-
-        <div frm-control>
-          <div frm-date-field model="item.toDate" min-date="item.fromDate"></div>
-          <div frm-errors errors="item.errors.toDate"></div>
         </div>
       </div>
 
@@ -166,9 +153,8 @@
       <thead>
         <tr>
           <th></th>
+          <th sort-helper="dateRecorded">Date</th>
           <th sort-helper="getDrug()">Drug</th>
-          <th sort-helper="fromDate">From Date</th>
-          <th sort-helper="toDate">To Date</th>
           <th sort-helper="getDose()">Dose</th>
           <th sort-helper="frequency">Frequency</th>
           <th sort-helper="route.label">Route</th>
@@ -184,9 +170,8 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
+          <td>{{item.dateRecorded | dateFormat}}</td>
           <td>{{item.getDrug()}}</td>
-          <td>{{item.fromDate | dateFormat}}</td>
-          <td>{{item.toDate | dateFormat}}</td>
           <td>{{item.getDose()}}</td>
           <td>{{item.frequency | missing}}</td>
           <td>{{item.route.label | missing}}</td>

@@ -6,6 +6,7 @@ import alport from './alport';
 import cohorts from './cohorts';
 import consents from './consents';
 import consultants from './consultants';
+import currentMedications from './current-medications';
 import demographics from './demographics';
 import diagnoses from './diagnoses';
 import dialysis from './dialysis';
@@ -34,6 +35,7 @@ import pregnancies from './pregnancies';
 import renalProgression from './renal-progression';
 import renalImaging from './renal-imaging';
 import results from './results';
+import rituximab from './rituximab';
 import saltWasting from './salt-wasting';
 import transplants from './transplants';
 
@@ -98,6 +100,7 @@ export default angular.module('radar.patients', [
   cohorts,
   consents,
   consultants,
+  currentMedications,
   demographics,
   diagnoses,
   dialysis,
@@ -126,6 +129,7 @@ export default angular.module('radar.patients', [
   renalProgression,
   renalImaging,
   results,
+  rituximab,
   saltWasting,
   transplants
 ])

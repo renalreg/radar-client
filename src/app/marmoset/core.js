@@ -251,6 +251,7 @@ var registry = new Registry();
 
 // Register widgets
 registry.addWidget('string', 'marmoset-string-widget');
+registry.addWidget('text', 'marmoset-text-widget');
 registry.addWidget('date', 'marmoset-date-widget');
 registry.addWidget('int', 'marmoset-int-widget');
 registry.addWidget('float', 'marmoset-float-widget');
@@ -264,6 +265,7 @@ registry.addWidget('static', 'marmoset-static-widget');
 registry.setDefaultWidget('int', 'int');
 registry.setDefaultWidget('float', 'float');
 registry.setDefaultWidget('string', 'string');
+registry.setDefaultWidget('text', 'text');
 registry.setDefaultWidget('boolean', 'yesNoRadio');
 registry.setDefaultWidget('date', 'date');
 registry.setDefaultWidget('datetime', 'string');
@@ -282,6 +284,7 @@ registry.addView('basic', 'marmoset-basic-view');
 registry.setDefaultView('int', 'basic');
 registry.setDefaultView('float', 'basic');
 registry.setDefaultView('string', 'basic');
+registry.setDefaultView('text', 'basic');
 registry.setDefaultView('boolean', 'basic');
 registry.setDefaultView('date', 'basic');
 registry.setDefaultView('datetime', 'basic');
@@ -340,6 +343,7 @@ function Field(schema, data) {
   self.type = data.type;
   self.label = data.label;
   self.help = data.help || null;
+  self.titleHelp = data.titleHelp || null;
   self.unit = data.unit || null;
   self.options = (data.options && data.options.length) ? data.options : null;
   self.widget = data.widget || {};
@@ -406,7 +410,7 @@ function _getOptionLabelByValue(options, value) {
 }
 
 function _getDisplay(field, value) {
-  if (value === undefined) {
+  if (value === undefined || value === null) {
     return null;
   } else if (field.options) {
     if (value.constructor === Array) {

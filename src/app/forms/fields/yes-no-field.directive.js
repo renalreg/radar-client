@@ -3,7 +3,8 @@ function frmYesNoField() {
     restrict: 'A',
     scope: {
       required: '&',
-      model: '='
+      model: '=',
+      nullable: '='
     },
     template: '<div frm-radio-field model="data.model" options="options" required="data.required"></div>',
     link: function(scope) {
@@ -35,9 +36,11 @@ function frmYesNoField() {
 
       scope.options = [
         {label: 'Yes', id: true},
-        {label: 'No', id: false},
-        {label: 'Not Answered', id: null}
+        {label: 'No', id: false}
       ];
+      if (scope.nullable) {
+        scope.options.push({label: 'Not Answered', id: null});
+      }
     }
   };
 }
