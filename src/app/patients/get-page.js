@@ -25,7 +25,7 @@ var PAGES = {
   LIVER_DISEASES: {name: 'Liver Diseases', state: 'patient.liverDiseases'},
   LIVER_IMAGING: {name: 'Liver Imaging', state: 'patient.liverImaging'},
   LIVER_TRANSPLANTS: {name: 'Liver Transplants', state: 'patient.liverTransplants'},
-  MEDICATIONS: {name: 'Medications', state: 'patient.medications'},
+  MEDICATIONS: {name: 'Medications from P.V.', state: 'patient.medications'},
   META: {name: 'Metadata', state: 'patient.metadata'},
   MPGN_CLINICAL_PICTURES: {name: 'Clinical Pictures', state: 'patient.mpgnClinicalPictures'},
   NEPHRECTOMIES: {name: 'Nephrectomies', state: 'patient.nephrectomies'},
