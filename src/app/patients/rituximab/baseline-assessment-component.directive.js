@@ -32,6 +32,12 @@ function rituximabBaselineAssessmentControllerFactory(
       }),
       store.findMany('rituximab-performance-options').then(function(rtxPerformanceOptions) {
         $scope.rtxPerformanceOptions = rtxPerformanceOptions;
+      }),
+      store.findMany('rituximab-nephropathies-list').then(function(nephropathiesList) {
+        $scope.patientNephropathiesList = nephropathiesList;
+      }),
+      store.findMany('rituximab-supportive-medication-list').then(function(supportiveMedicationList) {
+        $scope.supportiveMedicationList = supportiveMedicationList;
       })
     ])).then(function() {
       self.view();
@@ -42,16 +48,6 @@ function rituximabBaselineAssessmentControllerFactory(
       self.edit(item);
     };
 
-    var medMapping = {
-      'raasblockade': 'RAAS Blockade',
-      'anticoaguliant': 'Anticoaguliant',
-      'statins': 'Statins',
-      'diuretics': 'Diuretics'
-    };
-
-    $scope.getMedicationLabel = function(med) {
-      return medMapping[med];
-    };
   }
 
   RituximabBaselineAssessmentController.$inject = ['$scope'];
