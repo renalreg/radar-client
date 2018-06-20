@@ -9,23 +9,18 @@
     <div ng-if="item">
       <table class="table properties">
         <tr>
+          <th>Data Source</th>
+          <td>{{item.getSource()}}</td>
+        </tr>
+
+        <tr>
           <th>Date</th>
           <td>{{item.date | dateFormat}}</td>
         </tr>
 
         <tr>
           <th>Native or Transplant</th>
-          <td>
-            <div ng-if="item.nephropathies.length == 0">-</div>
-            <ul ng-if="item.nephropathies.length > 0">
-                <li ng-repeat="nephropathy in item.nephropathies">{{nephropathy.label}}</li>
-            </ul>
-          </td>
-        </tr>
-
-        <tr>
-          <th>Relapsed in the last 6 months</th>
-          <td><span tick="item.relapsed"></span></td>
+          <td>{{ item.nephropathy.label }}</td>
         </tr>
 
         <tr>
@@ -44,16 +39,18 @@
         </tr>
       </table>
 
-      <table class="table properties">
+      <table class="table properties" ng-if="previousAvailable()">
         <tr>
-          <td>Previous treatment</td>
-          <td>Start date</td>
-          <td>End date</td>
+          <th>Previous treatment</th>
+          <th>Start date</th>
+          <th>End date</th>
+          <th>Total dose ever</th>
         </tr>
         <tr ng-repeat="option in rtxTreatmentOptions track by option.id" ng-if="item.previousTreatment[option.id][option.id]">
-          <th>{{option.label}}</th>
-          <td>{{item.previousTreatment[option.id].startDate}}</td>
-          <td>{{item.previousTreatment[option.id].endDate}}</td>
+          <th>{{ option.label }}</th>
+          <td>{{ item.previousTreatment[option.id].startDate }}</td>
+          <td>{{ item.previousTreatment[option.id].endDate }}</td>
+          <td>{{ item.previousTreatment[option.id].totalDose }}</td>
         </tr>
       </table>
 
@@ -70,6 +67,15 @@
 
     <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
       <div frm-field frm-group>
+        <div frm-label>Data Source</div>
+
+        <div frm-control>
+          <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+          <div frm-errors errors="item.errors.sourceGroup"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
         <div frm-label>Date</div>
 
         <div frm-control>
@@ -82,17 +88,8 @@
         <div frm-label>Does the patient have</div>
 
         <div frm-control>
-          <div frm-multiple-checkbox-field model="item.nephropathies" options="patientNephropathiesList"></div>
-          <div frm-errors errors="item.errors.nephropathies"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
-        <div frm-label>Relapsed in the last 6 months</div>
-
-        <div frm-control>
-          <div frm-yes-no-field model="item.relapsed"></div>
-          <div frm-errors errors="item.errors.relapsed"></div>
+          <div frm-radio-field model="item.nephropathy" options="patientNephropathiesList"></div>
+          <div frm-errors errors="item.errors.nephropathy"></div>
         </div>
       </div>
 
