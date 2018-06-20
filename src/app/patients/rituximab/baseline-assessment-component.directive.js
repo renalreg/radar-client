@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import templateUrl from './baseline-assessment-component.html';
 
 function rituximabBaselineAssessmentPermissionFactory(PatientObjectPermission) {
@@ -24,6 +26,10 @@ function rituximabBaselineAssessmentControllerFactory(
     });
 
     $scope.multiple = false;
+
+    $scope.previousAvailable = function() {
+      return !_.isEmpty($scope.item.previousTreatment);
+    };
 
     self.load(firstPromise([
       store.findFirst('rituximab-baseline-assessment', {patient: $scope.patient.id}),
