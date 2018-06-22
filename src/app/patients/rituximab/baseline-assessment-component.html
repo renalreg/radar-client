@@ -37,6 +37,16 @@
           <th>WHO Performance status</th>
           <td>{{item.performanceStatus}}</td>
         </tr>
+
+        <tr>
+          <th>Complete or Partial remission</th>
+          <td><span tick="item.pastRemission"></span></td>
+        </tr>
+
+        <tr>
+          <th>Steroids</th>
+          <td><span tick="item.steroids"></span></td>
+        </tr>
       </table>
 
       <table class="table properties" ng-if="previousAvailable()">
@@ -51,6 +61,12 @@
           <td>{{ item.previousTreatment[option.id].startDate }}</td>
           <td>{{ item.previousTreatment[option.id].endDate }}</td>
           <td>{{ item.previousTreatment[option.id].totalDose }}</td>
+        </tr>
+        <tr>
+          <th>{{ item.otherPreviousTreatment }}</th>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
       </table>
 
@@ -136,8 +152,24 @@
             <div frm-errors errors="item.errors.previousTreatment[option.id]['totalDose']"></div>
           </div>
         </div>
+      </div>
 
-        <hr>
+      <div frm-field frm-group>
+        <div frm-label>Steroids</div>
+
+        <div frm-control>
+          <div frm-yes-no-field nullable="true" model="item.steroids"></div>
+          <div frm-errors errors="item.errors.steroids"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Other Treatments</div>
+
+        <div frm-control>
+          <div frm-text-field model="item.otherPreviousTreatment"></div>
+          <div frm-errors errors="item.errors.otherPreviousTreatment"></div>
+        </div>
       </div>
 
       <div frm-field frm-group>

@@ -28,7 +28,7 @@ function rituximabBaselineAssessmentControllerFactory(
     $scope.multiple = false;
 
     $scope.previousAvailable = function() {
-      return !_.isEmpty($scope.item.previousTreatment);
+      return !_.isEmpty($scope.item.previousTreatment) || $scope.item.otherPreviousTreatment;
     };
 
     self.load(firstPromise([
