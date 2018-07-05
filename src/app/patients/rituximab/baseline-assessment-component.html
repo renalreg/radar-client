@@ -145,7 +145,7 @@
           </div>
         </div>
 
-        <div frm-field frm-group ng-if="item.previousTreatment[option.id][option.id] && (option.id === 'chlorambucil' || option.id === 'cyclophosphamide')">
+        <div frm-field frm-group ng-if="item.previousTreatment[option.id][option.id] && withTotalDose(option)">
           <div frm-label>Total dose ever</div>
           <div frm-control>
             <div frm-text-field model="item.previousTreatment[option.id]['totalDose']"></div>
