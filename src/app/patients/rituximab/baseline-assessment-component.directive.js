@@ -54,6 +54,13 @@ function rituximabBaselineAssessmentControllerFactory(
       self.edit(item);
     };
 
+    $scope.withTotalDose = function(option) {
+      return (
+        option.id === 'chlorambucil' ||
+        option.id === 'cyclophosphamide' ||
+        option.id === 'rituximab'
+      );
+    };
   }
 
   RituximabBaselineAssessmentController.$inject = ['$scope'];
