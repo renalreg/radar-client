@@ -6,7 +6,8 @@ function frmCheckboxField() {
     scope: {
       model: '=',
       disabled: '=',
-      checked: '='
+      checked: '=',
+      required: '&'
     },
     transclude: true,
     templateUrl: templateUrl
