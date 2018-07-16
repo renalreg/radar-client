@@ -72,22 +72,7 @@
       <div frm-field frm-group>
         <div frm-control label="false">
           <div frm-checkbox-field model="item.criteria5" required="true" checked="item.criteria5">
-
             Failure or intolerance of conventional immunomodulatory therapies.
-            <ol type="a">
-              <li>
-                For patients with eGFR greater than or equal to 60ml/min/1.73m2 this should be failure/intolerance of both an alkylating agent and a Calcineurin Inhibitor (CNI).
-              </li>
-              <li>
-                For patients with and eGFR of less than 60ml/min/1.73m2 only failure/intolerance to alkylating agents is a requirement.
-              </li>
-              <li>
-                Patients with threatened fertility if i) eGFR less than 60ml/min/1.73m2 or ii) eGFR greater than or equal to 60ml/min/1.73m2 AND have experienced failure/intolerance of CNI.
-              </li>
-              <li>
-                Recurrent MN after kidney transplantation (by definition these patients are already on CNI)
-              </li>
-            </ol>
             <div frm-errors errors="item.errors.criteria5"></div>
           </div>
 
@@ -98,6 +83,9 @@
         <div frm-control label="false">
           <div frm-checkbox-field model="item.criteria6" required="true" checked="item.criteria6">
             Measurement of anti-PLA2R prior to Rituximab therapy, quarterly in the first year and every 6 months thereafter.
+            <p class="small text-muted" style="padding-left: 15px;">
+              The PLA2R antibody assay used MUST be the Euroimmun ELISA and MUST be performed in a lab that has UKAS accreditation for the Euroimmun ELISA assay. If your laboratory does not use this assay then please contact the Protein Reference Unit in Sheffield to arrange for the assay to be done there.
+            </p>
           </div>
           <div frm-errors errors="item.errors.criteria6"></div>
         </div>
