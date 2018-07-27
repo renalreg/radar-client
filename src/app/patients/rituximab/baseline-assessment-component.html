@@ -54,7 +54,7 @@
           <th>Previous treatment</th>
           <th>Start date</th>
           <th>End date</th>
-          <th>Total dose ever</th>
+          <th>Total cumulative dose</th>
         </tr>
         <tr ng-repeat="option in rtxTreatmentOptions track by option.id" ng-if="item.previousTreatment[option.id][option.id]">
           <th>{{ option.label }}</th>
@@ -146,7 +146,7 @@
         </div>
 
         <div frm-field frm-group ng-if="item.previousTreatment[option.id][option.id] && withTotalDose(option)">
-          <div frm-label>Total dose ever</div>
+          <div frm-label>Total cumulative dose</div>
           <div frm-control>
             <div frm-text-field model="item.previousTreatment[option.id]['totalDose']"></div>
             <div frm-errors errors="item.errors.previousTreatment[option.id]['totalDose']"></div>
@@ -158,7 +158,7 @@
         <div frm-label>Steroids</div>
 
         <div frm-control>
-          <div frm-yes-no-field nullable="true" model="item.steroids"></div>
+          <div frm-yes-no-field model="item.steroids"></div>
           <div frm-errors errors="item.errors.steroids"></div>
         </div>
       </div>
