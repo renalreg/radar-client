@@ -7,13 +7,13 @@ import {
 } from './baseline-assessment-component.directive';
 
 import {
-  rituximabConsentPermissionFactory,
-  rituximabConsentControllerFactory,
-  rituximabConsentComponent
-} from './consent-component.directive';
+  rituximabCriteriaPermissionFactory,
+  rituximabCriteriaControllerFactory,
+  rituximabCriteriaComponent
+} from './criteria-component.directive';
 
 import baselineUrl from './baseline.html';
-import consentUrl from './consent.html';
+import criteriaUrl from './criteria.html';
 
 
 function config($stateProvider) {
@@ -24,9 +24,9 @@ function config($stateProvider) {
     templateUrl: baselineUrl
   });
 
-  $stateProvider.state('patient.rituximabConsent', {
-    url: '/rituximab-consent',
-    templateUrl: consentUrl
+  $stateProvider.state('patient.rituximabCriteria', {
+    url: '/rituximab-criteria',
+    templateUrl: criteriaUrl
   });
 
 }
@@ -38,8 +38,8 @@ export default angular.module('radar.patients.rituximab', [])
   .factory('RituximabBaselineAssessmentPermission', rituximabBaselineAssessmentPermissionFactory)
   .factory('RituximabBaselineAssessmentController', rituximabBaselineAssessmentControllerFactory)
   .directive('rituximabBaselineAssessmentComponent', rituximabBaselineAssessmentComponent)
-  .factory('RituximabConsentPermission', rituximabConsentPermissionFactory)
-  .factory('RituximabConsentController', rituximabConsentControllerFactory)
-  .directive('rituximabConsentComponent', rituximabConsentComponent)
+  .factory('RituximabCriteriaPermission', rituximabCriteriaPermissionFactory)
+  .factory('RituximabCriteriaController', rituximabCriteriaControllerFactory)
+  .directive('rituximabCriteriaComponent', rituximabCriteriaComponent)
 
   .name;
