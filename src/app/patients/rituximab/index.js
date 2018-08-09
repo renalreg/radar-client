@@ -7,39 +7,41 @@ import {
 } from './baseline-assessment-component.directive';
 
 import {
-  rituximabConsentPermissionFactory,
-  rituximabConsentControllerFactory,
-  rituximabConsentComponent
-} from './consent-component.directive';
+  rituximabCriteriaPermissionFactory,
+  rituximabCriteriaControllerFactory,
+  rituximabCriteriaComponent
+} from './criteria-component.directive';
 
 import baselineUrl from './baseline.html';
-import consentUrl from './consent.html';
+import criteriaUrl from './criteria.html';
+import rituximabCriteriaModelFactory from './criteria-model';
 
 
-function config($stateProvider) {
-  // storeProvider.registerMixin('renal-imaging', 'SourceModelMixin');
+function config($stateProvider, storeProvider) {
+  storeProvider.registerModel('rituximab-criteria', 'RituximabCriteriaModel');
 
   $stateProvider.state('patient.rituximabBaselineAssessment', {
     url: '/rituximab-baseline-assessment',
     templateUrl: baselineUrl
   });
 
-  $stateProvider.state('patient.rituximabConsent', {
-    url: '/rituximab-consent',
-    templateUrl: consentUrl
+  $stateProvider.state('patient.rituximabCriteria', {
+    url: '/rituximab-criteria',
+    templateUrl: criteriaUrl
   });
 
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.rituximab', [])
   .config(config)
   .factory('RituximabBaselineAssessmentPermission', rituximabBaselineAssessmentPermissionFactory)
   .factory('RituximabBaselineAssessmentController', rituximabBaselineAssessmentControllerFactory)
   .directive('rituximabBaselineAssessmentComponent', rituximabBaselineAssessmentComponent)
-  .factory('RituximabConsentPermission', rituximabConsentPermissionFactory)
-  .factory('RituximabConsentController', rituximabConsentControllerFactory)
-  .directive('rituximabConsentComponent', rituximabConsentComponent)
+  .factory('RituximabCriteriaModel', rituximabCriteriaModelFactory)
+  .factory('RituximabCriteriaPermission', rituximabCriteriaPermissionFactory)
+  .factory('RituximabCriteriaController', rituximabCriteriaControllerFactory)
+  .directive('rituximabCriteriaComponent', rituximabCriteriaComponent)
 
   .name;

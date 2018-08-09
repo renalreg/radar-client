@@ -105,6 +105,13 @@
       <div class="col-md-9 col-sm-offset-3">
         <h4><b>Definitions:</b></h4>
 
+        <p>
+          <strong>
+            <em>
+              Please tick as many boxes as apply below to indicate why Standard treatment Resistant
+            </em>
+          </strong>
+        </p>
 
         <p><b>Ongoing severe disease</b> is defined as either:</p>
 
@@ -117,78 +124,94 @@
           </li>
         </ol>
 
-
         <p>
           <b>Failure of therapy</b> is defined as:
         </p>
 
-        <ol>
-          <li>
-            Ongoing severe disease (as defined above) at least 3 months after completion of alkylating agent therapy or CNI therapy
-          </li>
-        </ol>
+        <div class="checkbox indent">
+          <label>
+            <input type="checkbox" ng-model="item.therapyFailure"> Ongoing severe disease (as defined above) at least 3 months after completion of alkylating agent therapy or CNI therapy.
+          </label>
+        </div>
 
-        <p>
+        <div class="checkbox">
           <b>Intolerance</b> is defined as:
-        </p>
+        </div>
 
-        <ol>
-          <li>
-            Type 1 hypersensitivity reactions
-          </li>
+        <div class="checkbox indent">
+          <label>
+            <input type="checkbox" ng-model="item.hypersensitivity"> Type 1 hypersensitivity reactions.
+          </label>
+        </div>
 
-          <li>
-            For alkylating agents:
-            <ol type="a">
-              <li>
-                Bone marrow suppression, hepatitis or other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events (CTCAE).
-              </li>
-              <li>
-                Previous hospitalisation with infectious complication of alkylating agent therapy.
-              </li>
-              <li>
-                Inability to comply with monitoring requirements.
-              </li>
-              <li>
-                Previous urothelial cancer or any current cancer (excluding squamous cell carcinoma of the skin).
-              </li>
-              <li>
-                People with threatened fertility
-              </li>
-            </ol>
-          </li>
+        <div class="checkbox indent">For alkylating agents:
+          <ul class="list-unstyled indent">
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.drugAssociatedToxicity"> Bone marrow suppression, hepatitis or other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events (CTCAE).
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.alkylatingComplication"> Previous hospitalisation with infectious complication of alkylating agent therapy.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.alkylatingFailureMonitoringRequirements"> Inability to comply with monitoring requirements.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.cancer"> Previous urothelial cancer or any current cancer (excluding squamous cell carcinoma of the skin).
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.threatenedFertility"> People with threatened fertility.
+              </label>
+            </li>
+          </ul>
+          </div>
 
-          <li>
-            For CNIs:
+          <div class="checkbox indent">For CNIs:
 
-            <ol type="a">
-              <li>
-                Fall in eGFR on CNI therapy of at least 20% or to below 60 ml/min/1.73m2
+          <ul class="list-unstyled indent">
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.fallInEgfr"> Fall in eGFR on CNI therapy of at least 20% or to below 60 ml/min/1.73m2.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.cniTherapyComplication"> Previous hospitalisation with infectious or metabolic complication of CNI therapy.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.cniFailureMonitoringRequirements"> Inability to comply with monitoring requirements.
+              </label>
+            </li>
+            </ul>
+          </div>
+
+          <div class="checkbox indent">For any therapy that utilises adjunctive steroids (i.e. in combination with cytotoxics or cyclosporine):
+            <ul class="list-unstyled indent">
+              <li class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="item.diabetes"> Diabetes.
+                </label>
               </li>
-              <li>
-                Previous hospitalisation with infectious or metabolic complication of CNI therapy
+              <li class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="item.riskFactors"> Risk factors for steroid induced diabetes: BMI greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of diabetes affecting at least one first-degree relative).
+                </label>
               </li>
-              <li>
-                Inability to comply with monitoring requirements.
-              </li>
-            </ol>
-          </li>
-          <li>
-            4. For any therapy that utilises adjunctive steroids (i.e. in combination with cytotoxics or cyclosporine):
-            <ol type="a">
-              <li>
-                Diabetes
-              </li>
-              <li>
-                Risk factors for steroid induced diabetes: BMI greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of diabetes affecting at least one first-degree relative)
-              </li>
-            </ol>
-          </li>
-        </ol>
+            </ul>
+          </div>
+
         <hr />
       </div>
-
-
 
       <div frm-buttons>
         <span crud-save-button></span>
