@@ -93,6 +93,14 @@
         </div>
       </div>
 
+      <div frm-field frm-group>
+        <div frm-control label="false">
+          <div frm-checkbox-field model="item.criteria7" required="true" checked="item.criteria7">
+            Patients can be retreated with Rituximab within the CTE scheme as long as they have had a sustained partial remission for greater than 6 months after previous Rituximab therapy
+          </div>
+          <div frm-errors errors="item.errors.criteria7"></div>
+        </div>
+      </div>
 
       <div class="col-md-9 col-sm-offset-3">
         <h4><b>Definitions:</b></h4>
@@ -114,104 +122,89 @@
         </p>
 
         <div class="checkbox indent">
-          <label><input type="checkbox" model="item.criteria7"> Ongoing severe disease (as defined above) at least 3 months after completion of alkylating agent therapy or CNI therapy</label>
+          <label>
+            <input type="checkbox" ng-model="item.therapyFailure"> Ongoing severe disease (as defined above) at least 3 months after completion of alkylating agent therapy or CNI therapy.
+          </label>
         </div>
-
-        <!-- <ol>
-          <li>
-            Ongoing severe disease (as defined above) at least 3 months after completion of alkylating agent therapy or CNI therapy
-          </li>
-        </ol> -->
 
         <div class="checkbox">
           <b>Intolerance</b> is defined as:
         </div>
 
-        <div class="checkbox indent"><label><input type="checkbox"> Type 1 hypersensitivity reactions</label></div>
+        <div class="checkbox indent">
+          <label>
+            <input type="checkbox" ng-model="item.hypersensitivity"> Type 1 hypersensitivity reactions.
+          </label>
+        </div>
 
         <div class="checkbox indent">For alkylating agents:
           <ul class="list-unstyled indent">
-            <li class="checkbox"><label><input type="checkbox"> Bone marrow suppression, hepatitis or other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events (CTCAE).</label></li>
-            <li class="checkbox"><label><input type="checkbox"> Previous hospitalisation with infectious complication of alkylating agent therapy.</label></li>
-            <li class="checkbox"><label><input type="checkbox"> Inability to comply with monitoring requirements.</label></li>
-            <li class="checkbox"><label><input type="checkbox"> Previous urothelial cancer or any current cancer (excluding squamous cell carcinoma of the skin).</label></li>
-            <li class="checkbox"><label><input type="checkbox"> People with threatened fertility</label></li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.drugAssociatedToxicity"> Bone marrow suppression, hepatitis or other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events (CTCAE).
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.alkylatingComplication"> Previous hospitalisation with infectious complication of alkylating agent therapy.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.alkylatingFailureMonitoringRequirements"> Inability to comply with monitoring requirements.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.cancer"> Previous urothelial cancer or any current cancer (excluding squamous cell carcinoma of the skin).
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.threatenedFertility"> People with threatened fertility.
+              </label>
+            </li>
           </ul>
           </div>
 
           <div class="checkbox indent">For CNIs:
 
           <ul class="list-unstyled indent">
-            <li class="checkbox"><label><input type="checkbox"> Fall in eGFR on CNI therapy of at least 20% or to below 60 ml/min/1.73m2</label></li>
-            <li class="checkbox"><label><input type="checkbox"> Previous hospitalisation with infectious or metabolic complication of CNI therapy</label></li>
-            <li class="checkbox"><label><input type="checkbox"> Inability to comply with monitoring requirements.</label></li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.fallInEgfr"> Fall in eGFR on CNI therapy of at least 20% or to below 60 ml/min/1.73m2.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.cniTherapyComplication"> Previous hospitalisation with infectious or metabolic complication of CNI therapy.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.cniFailureMonitoringRequirements"> Inability to comply with monitoring requirements.
+              </label>
+            </li>
             </ul>
           </div>
 
           <div class="checkbox indent">For any therapy that utilises adjunctive steroids (i.e. in combination with cytotoxics or cyclosporine):
             <ul class="list-unstyled indent">
-              <li class="checkbox"><label><input type="checkbox"> Diabetes</label></li>
-              <li class="checkbox"><label><input type="checkbox"> Risk factors for steroid induced diabetes: BMI greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of diabetes affecting at least one first-degree relative)</label></li>
+              <li class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="item.diabetes"> Diabetes.
+                </label>
+              </li>
+              <li class="checkbox">
+                <label>
+                  <input type="checkbox" ng-model="item.riskFactors"> Risk factors for steroid induced diabetes: BMI greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of diabetes affecting at least one first-degree relative).
+                </label>
+              </li>
             </ul>
           </div>
 
-        <!-- <ol>
-          <li>
-            Type 1 hypersensitivity reactions
-          </li>
-
-          <li>
-            For alkylating agents:
-            <ol type="a">
-              <li>
-                Bone marrow suppression, hepatitis or other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events (CTCAE).
-              </li>
-              <li>
-                Previous hospitalisation with infectious complication of alkylating agent therapy.
-              </li>
-              <li>
-                Inability to comply with monitoring requirements.
-              </li>
-              <li>
-                Previous urothelial cancer or any current cancer (excluding squamous cell carcinoma of the skin).
-              </li>
-              <li>
-                People with threatened fertility
-              </li>
-            </ol>
-          </li>
-
-          <li>
-            For CNIs:
-
-            <ol type="a">
-              <li>
-                Fall in eGFR on CNI therapy of at least 20% or to below 60 ml/min/1.73m2
-              </li>
-              <li>
-                Previous hospitalisation with infectious or metabolic complication of CNI therapy
-              </li>
-              <li>
-                Inability to comply with monitoring requirements.
-              </li>
-            </ol>
-          </li>
-          <li>
-            For any therapy that utilises adjunctive steroids (i.e. in combination with cytotoxics or cyclosporine):
-            <ol type="a">
-              <li>
-                Diabetes
-              </li>
-              <li>
-                Risk factors for steroid induced diabetes: BMI greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of diabetes affecting at least one first-degree relative)
-              </li>
-            </ol>
-          </li>
-        </ol> -->
         <hr />
       </div>
-
-
 
       <div frm-buttons>
         <span crud-save-button></span>
