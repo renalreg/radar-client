@@ -32,8 +32,7 @@ function patientDiagnosesControllerFactory(
       // Default to the patient having the diagnosis ("the patient has anxiety" rather than "the
       // patient does not have anxiety").
       var item = store.create('patient-diagnoses', {
-        patient: $scope.patient.id,
-        status: true
+        patient: $scope.patient.id
       });
 
       self.edit(item);
