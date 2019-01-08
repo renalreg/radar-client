@@ -97,13 +97,13 @@ function RecruitPatientController(
   function goToDiagnosis() {
     $scope.loading = true;
 
-    var promise = new Promise(function(resolve, reject) {
+    var promise = new Promise(function(resolve) {
       resolve();
     });
 
     store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
       $scope.biopsyDiagnoses = biopsyDiagnoses;
-    })
+    });
 
     return promise
       .then(function() {
@@ -111,7 +111,7 @@ function RecruitPatientController(
         $scope.loading = false;
         $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
         $state.go('recruitPatient.diagnosis');
-      })
+      });
   }
 
   function recruit() {
