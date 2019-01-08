@@ -18,7 +18,9 @@ function RecruitPatientController(
   $scope.search = search;
   $scope.recruit = recruit;
 
+  $scope.goToDiagnosis = goToDiagnosis;
   $scope.backToSearch = backToSearch;
+  $scope.backToDemographics = backToDemographics;
 
   $scope.someSelected = someSelected;
 
@@ -74,7 +76,8 @@ function RecruitPatientController(
           gender: $scope.searchParams.gender,
           numberGroup: $scope.searchParams.numberGroup,
           number: $scope.searchParams.number,
-          paediatric: isPaediatric($scope.searchParams.dateOfBirth)
+          paediatric: isPaediatric($scope.searchParams.dateOfBirth),
+          diagnosis: {}
         };
 
         $scope.searchErrors = {};
@@ -89,6 +92,26 @@ function RecruitPatientController(
       .finally(function() {
         $scope.loading = false;
       });
+  }
+
+  function goToDiagnosis() {
+    $scope.loading = true;
+
+    var promise = new Promise(function(resolve, reject) {
+      resolve();
+    });
+
+    store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
+      $scope.biopsyDiagnoses = biopsyDiagnoses;
+    })
+
+    return promise
+      .then(function() {
+        var cohortCode = $scope.patient.cohortGroup.code;
+        $scope.loading = false;
+        $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
+        $state.go('recruitPatient.diagnosis');
+      })
   }
 
   function recruit() {
@@ -111,6 +134,10 @@ function RecruitPatientController(
 
   function backToSearch() {
     $state.go('recruitPatient.search');
+  }
+
+  function backToDemographics() {
+    $state.go('recruitPatient.form');
   }
 
   function loadGenders() {

@@ -1,0 +1,121 @@
+<ol class="breadcrumb">
+  <li><a href="" ng-click="backToSearch()">Search</a></li>
+  <li><a href="" ng-click="backToDemographics()">Demographics</a></li>
+  <li class="active">Patient Diagnosis</li>
+</ol>
+
+<form class="form-horizontal form-container" submit-if-valid="recruit()" novalidate>
+    <div frm-field frm-group>
+        <div frm-label>Diagnosis</div>
+
+        <div frm-control>
+          <div frm-primary-diagnosis-field cohort="patient.cohortGroup" model="patient.diagnosis.diagnosisId" required="true"></div>
+          <div frm-help>
+            Choose the most specific diagnosis.<br />
+            <a href="https://www.era-edta-reg.org/prd.jsp" target="_blank">ERA-EDTA PRD codes.</a>
+          </div>
+          <div frm-errors errors="patient.errors.diagnosis.diagnosisId"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Symptoms Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="patient.diagnosis.symptomsDate"></div>
+          <div frm-help>Date of onset of symptoms.</div>
+          <div frm-errors errors="patient.errors.diagnosis.symptomsDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Diagnosis Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="patient.diagnosis.fromDate" required="true"></div>
+          <div frm-help>01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.</div>
+          <div frm-errors errors="patient.errors.diagnosis.fromDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>To Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="patient.diagnosis.toDate"></div>
+          <div frm-errors errors="patient.errors.diagnosis.toDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Prenatal Diagnosis</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="patient.diagnosis.prenatal"></div>
+          <div frm-errors errors="patient.errors.diagnosis.prenatal"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Confirmed by Gene Test</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="patient.diagnosis.geneTest"></div>
+          <div frm-errors errors="patient.errors.diagnosis.geneTest"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Confirmed by Biochemistry</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="patient.diagnosis.biochemistry"></div>
+          <div frm-errors errors="patient.errors.diagnosis.biochemistry"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Confirmed by Clinical Picture</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="patient.diagnosis.clinicalPicture"></div>
+          <div frm-errors errors="patient.errors.diagnosis.clinicalPicture"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Confirmed by Biopsy</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="patient.diagnosis.biopsy"></div>
+          <div frm-help>Please, fill biopsy details on pathology tab</div>
+          <div frm-errors errors="patient.errors.diagnosis.biopsy"></div>
+        </div>
+      </div>
+
+      <div ng-if="patient.diagnosis.biopsy && biopsyDiagnosisRequired" frm-field frm-group>
+        <div frm-label>Biopsy Diagnosis</div>
+
+        <div frm-control>
+          <div frm-select-field model="patient.diagnosis.biopsyDiagnosis" options="biopsyDiagnoses"></div>
+          <div frm-errors errors="patient.errors.diagnosis.biopsyDiagnosis"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Comments</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="patient.diagnosis.comments"></div>
+          <div frm-errors errors="patient.errors.diagnosis.comments"></div>
+        </div>
+      </div>
+
+
+
+  <div frm-buttons>
+    <span submit-button>Recruit Patient</span>
+  </div>
+
+
+</form>
