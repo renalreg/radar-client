@@ -5,7 +5,7 @@
 
 <h2>Patient Details</h2>
 
-<form class="form-horizontal form-container" submit-if-valid="recruit()" novalidate>
+<form class="form-horizontal form-container" submit-if-valid="goToDiagnosis()" novalidate>
   <div frm-field frm-group ng-if="patient.id">
     <div frm-label>RaDaR</div>
 
@@ -135,15 +135,16 @@
     </div>
   </div>
 
-
-
-
   <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
   For more information concerning consent forms, please visit <a href="http://rarerenal.org/radar-registry/criteria-and-consent/" target="_blank">rarerenal.org website</a>
   </div>
 
-
+  <div class="col-md-9 col-sm-offset-3 extra-bottom-space">
+    <strong><em>
+      You must fill the Diagnosis information to complete patient Registration on RADAR
+    </em></strong>
+  </div>
   <div frm-buttons>
-    <span submit-button>Recruit Patient</span>
+    <span submit-button>Fill Diagnosis</span>
   </div>
 </form>

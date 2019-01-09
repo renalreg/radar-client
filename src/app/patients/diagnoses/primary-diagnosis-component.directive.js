@@ -24,14 +24,14 @@ function primaryPatientDiagnosisControllerFactory(
 
     self.load(firstPromise([
       // List of primary diagnoses for this cohort
-      store.findMany('patient-diagnoses', {patient: $scope.patient.id, primaryGroup: $scope.cohort.id}),
-      store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
+      store.findMany('patient-diagnoses', { patient: $scope.patient.id, primaryGroup: $scope.cohort.id }),
+      store.findMany('biopsy-diagnoses').then(function (biopsyDiagnoses) {
         $scope.biopsyDiagnoses = biopsyDiagnoses;
       }),
-      getRadarGroup().then(function(group) {
+      getRadarGroup().then(function (group) {
         $scope.sourceGroup = group;
       })
-    ])).then(function() {
+    ])).then(function () {
       // TODO this won't handle a UKRDC primary diagnoses being entered before a RaDaR one
       var multiple = $scope.items.length > 1 || $scope.cohort.multipleDiagnoses;
 
@@ -60,8 +60,7 @@ function primaryPatientDiagnosisControllerFactory(
       // Default the source group to RADAR
       var item = store.create('patient-diagnoses', {
         patient: $scope.patient.id,
-        sourceGroup: $scope.sourceGroup,
-        primary: true
+        sourceGroup: $scope.sourceGroup
       });
 
       self.edit(item);

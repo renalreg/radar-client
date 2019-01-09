@@ -5,7 +5,8 @@ import recruitPatientPermission from './recruit-patient-permission.directive';
 
 import recruitPatientTemplateUrl from './recruit-patient.html';
 import recruitPatientSearchTemplateUrl from './recruit-patient-search.html';
-import recruitPatientFromTemplateUrl from './recruit-patient-form.html';
+import recruitPatientFormTemplateUrl from './recruit-patient-form.html';
+import recruitePatientDiagnosisFormTemplateUrl from './recruit-patient-diagnosis-form.html';
 
 function config($stateProvider) {
   $stateProvider.state('recruitPatient', {
@@ -22,7 +23,12 @@ function config($stateProvider) {
 
   $stateProvider.state('recruitPatient.form', {
     url: '',
-    templateUrl: recruitPatientFromTemplateUrl
+    templateUrl: recruitPatientFormTemplateUrl
+  });
+
+  $stateProvider.state('recruitPatient.diagnosis', {
+    url: '',
+    templateUrl: recruitePatientDiagnosisFormTemplateUrl
   });
 }
 
