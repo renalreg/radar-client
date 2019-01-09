@@ -59,7 +59,7 @@ function primaryPatientDiagnosisControllerFactory(
       // Default the source group to RADAR
       var item = store.create('patient-diagnoses', {
         patient: $scope.patient.id,
-        sourceGroup: $scope.sourceGroup,
+        sourceGroup: $scope.sourceGroup
       });
 
       self.edit(item);
