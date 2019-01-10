@@ -96,11 +96,20 @@ function RecruitPatientController(
 
   function goToDiagnosis() {
     $scope.loading = true;
-    var cohortCode = $scope.patient.cohortGroup.code;
-    $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
-
-    $state.go('recruitPatient.diagnosis');
-    $scope.loading = false;
+    return adapter.get('/environment')
+      .then(function() {
+        var cohortCode = $scope.patient.cohortGroup.code;
+        $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
+        $state.go('recruitPatient.diagnosis');
+      })
+      .catch(function(response) {
+        if (response.status === 422) {
+          $scope.patientErrors = response.data.errors || {};
+        }
+      })
+      .finally(function() {
+        $scope.loading = false;
+      });
   }
 
   function recruit() {
