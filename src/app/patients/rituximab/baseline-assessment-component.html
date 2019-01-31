@@ -24,6 +24,11 @@
         </tr>
 
         <tr>
+          <th>Comorbidities</th>
+          <td><span tick="item.comorbidities"></span></td>
+        </tr>
+
+        <tr>
           <th>Supportive medications</th>
           <td>
               <div ng-if="item.supportiveMedication.length == 0">-</div>
@@ -107,6 +112,20 @@
           <div frm-radio-field model="item.nephropathy" options="patientNephropathiesList"></div>
           <div frm-errors errors="item.errors.nephropathy"></div>
         </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Does the patient have any comorbidities</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.comorbidities" required="true"></div>
+          <div frm-help>
+            If yes, please, complete the comorbidities tab
+          </div>
+
+          <div frm-errors errors="item.errors.comorbidities"></div>
+        </div>
+
       </div>
 
       <div frm-field frm-group>
