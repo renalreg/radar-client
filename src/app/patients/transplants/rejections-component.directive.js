@@ -2,11 +2,21 @@ import templateUrl from './rejections-component.html';
 
 function transplantRejectionsControllerFactory(
   ListEditController,
-  $injector
+  firstPromise,
+  $injector,
+  store
 ) {
   function TransplantRejectionsController($scope) {
-    $injector.invoke(ListEditController, this, {$scope: $scope, params: {}});
-    this.load($scope.parent.rejections);
+    var self = this;
+
+    $injector.invoke(ListEditController, self, {$scope: $scope, params: {}});
+
+    self.load(firstPromise([
+      $scope.parent.rejections,
+      store.findMany('transplant-graft-loss-causes').then(function(graftLossCauses) {
+        $scope.graftLossCauses = graftLossCauses;
+      })
+    ]));
 
     $scope.create = function() {
       // Create a new rejection
@@ -22,7 +32,9 @@ function transplantRejectionsControllerFactory(
 
 transplantRejectionsControllerFactory.$inject = [
   'ListEditController',
-  '$injector'
+  'firstPromise',
+  '$injector',
+  'store'
 ];
 
 function transplantRejectionsComponent(TransplantRejectionsController) {

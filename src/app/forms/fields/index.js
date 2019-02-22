@@ -12,6 +12,7 @@ import frmDiagnosisField from './diagnosis-field.directive';
 import frmDrugField from './drug-field.directive';
 import frmEmailField from './email-field.directive';
 import frmGroupField from './group-field.directive';
+import frmHlaField from './hla-field.directive';
 import frmHospitalField from './hospital-field.directive';
 import frmIntegerField from './integer-field.directive';
 import frmMultipleCheckboxField from './multiple-checkbox-field.directive';
@@ -44,6 +45,7 @@ export default angular.module('radar.forms.fields', [])
   .directive('frmDrugField', frmDrugField)
   .directive('frmEmailField', frmEmailField)
   .directive('frmGroupField', frmGroupField)
+  .directive('frmHlaField', frmHlaField)
   .directive('frmHospitalField', frmHospitalField)
   .directive('frmIntegerField', frmIntegerField)
   .directive('frmMultipleCheckboxField', frmMultipleCheckboxField)
