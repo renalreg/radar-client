@@ -27,6 +27,21 @@
       </tr>
 
       <tr>
+        <th>Recipient HLA</th>
+        <td>{{item.recipientHla}}</td>
+      </tr>
+
+      <tr>
+        <th>Donor HLA</th>
+        <td>{{item.donorHla}}</td>
+      </tr>
+
+      <tr>
+        <th>Episode of CMV infection</th>
+        <td>{{item.dateOfCmvInfection | dateFormat}}</td>
+      </tr>
+
+      <tr>
           <th>Recurrence</th>
           <td><span tick="item.recurrence"></span></td>
       </tr>
@@ -46,12 +61,14 @@
       <thead>
         <tr>
           <th>Date of Rejection</th>
+          <th>Graft loss and cause</th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="rejection in item.rejections">
           <td>{{rejection.dateOfRejection | dateFormat}}</td>
+          <td>{{rejection.graftLossCause.label}}</td>
         </tr>
       </tbody>
     </table>
