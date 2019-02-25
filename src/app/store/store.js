@@ -272,9 +272,9 @@ function storeProvider() {
       self.broadcast(modelName, 'before_remove', obj);
 
       var promise = adapter.remove(modelName, id)
-        .catch(function() {
+        .catch(function(error) {
           obj.isDeleted = false;
-          return $q.reject();
+          return $q.reject(error);
         })
         .finally(function() {
           obj.isSaving = false;
