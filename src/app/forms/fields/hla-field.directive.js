@@ -13,9 +13,6 @@ function frmHlaField() {
     //   scope.lostFocus = function(event) {
     //     const input = event.target;
     //     const parts = input.value.match(/[a]\d{1,2}\/?|[b]\d{1,3}\/?|dr\d{1,3}/gi);
-
-
-
     //   };
     // }
   };
