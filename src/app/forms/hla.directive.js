@@ -19,9 +19,9 @@ function frmHla() {
           scope.hla.dr = null;
         } else {
           var parts = value.split('/');
-          scope.hla.a = parts[0];
-          scope.hla.b = parts[1];
-          scope.hla.dr = parts[2];
+          scope.hla.a = parts[0].substring(1);
+          scope.hla.b = parts[1].substring(1);
+          scope.hla.dr = parts[2].substring(2);
         }
       };
 
@@ -33,9 +33,11 @@ function frmHla() {
         var a = parseInt(scope.hla.a);
         var b = parseInt(scope.hla.b);
         var dr = parseInt(scope.hla.dr);
-
+        let value = null;
         if (a >= 0 && b >= 0 && dr >= 0) {
-          value = a + '/' + b + '/' + dr;
+          value = 'A' + a + '/B' + b + '/DR' + dr;
+        // } else if (a >= 0 || b >= 0 || dr >= 0)  {
+        //   ngModel.$setValidity('hla', false);
         } else {
           value = null;
         }
