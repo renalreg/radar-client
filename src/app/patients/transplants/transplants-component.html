@@ -27,6 +27,21 @@
       </tr>
 
       <tr>
+        <th>Recipient HLA</th>
+        <td>{{item.recipientHla | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Donor HLA</th>
+        <td>{{item.donorHla | missing}}</td>
+      </tr>
+
+      <tr>
+        <th>Episode of CMV infection</th>
+        <td>{{item.dateOfCmvInfection | dateFormat}}</td>
+      </tr>
+
+      <tr>
           <th>Recurrence</th>
           <td><span tick="item.recurrence"></span></td>
       </tr>
@@ -46,12 +61,14 @@
       <thead>
         <tr>
           <th>Date of Rejection</th>
+          <th>Graft loss and cause</th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="rejection in item.rejections">
           <td>{{rejection.dateOfRejection | dateFormat}}</td>
+          <td>{{rejection.graftLossCause.label}}</td>
         </tr>
       </tbody>
     </table>
@@ -119,13 +136,41 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Recurrence</div>
+        <div frm-label>Recipient HLA</div>
 
         <div frm-control>
-          <div frm-yes-no-field model="item.recurrence" nullable="false" required="false"></div>
-          <div frm-errors errors="item.errors.recurrence"></div>
+          <div frm-hla-field model="item.recipientHla"></div>
+          <div frm-errors errors="item.errors.recipientHla"></div>
         </div>
       </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Donor HLA</div>
+
+        <div frm-control>
+          <div frm-hla-field model="item.donorHla"></div>
+          <div frm-errors errors="item.errors.donorHla"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Episode of CMV infection</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.dateOfCmvInfection"></div>
+          <div frm-help>If there was a CMV infection enter date of it.</div>
+          <div frm-errors errors="item.errors.dateOfCmvInfection"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+          <div frm-label>Recurrence</div>
+
+          <div frm-control>
+            <div frm-yes-no-field model="item.recurrence" nullable="true" required="false"></div>
+            <div frm-errors errors="item.errors.recurrence"></div>
+          </div>
+        </div>
 
       <div frm-field frm-group>
         <div frm-label>Date of Recurrence</div>
