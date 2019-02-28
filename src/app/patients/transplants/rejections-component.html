@@ -6,12 +6,22 @@
 
     <div class="panel-body">
       <div ng-repeat="item in items track by $index">
+
         <div frm-field frm-group>
           <div frm-label>Date of Rejection</div>
 
           <div frm-control>
             <div frm-date-field model="item.dateOfRejection" required="true"></div>
             <div frm-errors errors="parent.errors.rejections[$index].dateOfRejection"></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Graft loss and cause</div>
+
+          <div frm-control>
+            <div frm-select-field model="item.graftLossCause" options="graftLossCauses"></div>
+            <div frm-errors errors="parent.errors.rejections[$index].graftLossCause"></div>
           </div>
         </div>
 
