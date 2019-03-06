@@ -55,20 +55,23 @@
         <th>Date of Failure</th>
         <td>{{item.dateOfFailure | dateFormat}}</td>
       </tr>
+      <tr>
+        <th>Graft loss and cause</th>
+        <td>{{item.graftLossCause.label | missing}}</td>
+      </tr>
+
     </table>
 
     <table class="table table-condensed table-striped" ng-if="item.rejections">
       <thead>
         <tr>
           <th>Date of Rejection</th>
-          <th>Graft loss and cause</th>
         </tr>
       </thead>
 
       <tbody>
         <tr ng-repeat="rejection in item.rejections">
           <td>{{rejection.dateOfRejection | dateFormat}}</td>
-          <td>{{rejection.graftLossCause.label}}</td>
         </tr>
       </tbody>
     </table>
@@ -188,6 +191,15 @@
         <div frm-control>
           <div frm-date-field model="item.dateOfFailure"></div>
           <div frm-errors errors="item.errors.dateOfFailure"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Graft loss and cause</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.graftLossCause" options="graftLossCauses"></div>
+          <div frm-errors errors="item.errors.graftLossCause"></div>
         </div>
       </div>
 

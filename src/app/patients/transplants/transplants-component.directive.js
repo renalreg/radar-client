@@ -33,6 +33,9 @@ function transplantsControllerFactory(
       store.findMany('transplants', {patient: $scope.patient.id}),
       store.findMany('transplant-modalities').then(function(modalities) {
         $scope.modalities = modalities;
+      }),
+      store.findMany('transplant-graft-loss-causes').then(function(graftLossCauses) {
+        $scope.graftLossCauses = graftLossCauses;
       })
     ]));
 
