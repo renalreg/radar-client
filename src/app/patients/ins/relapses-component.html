@@ -62,6 +62,11 @@
       </tr>
 
       <tr>
+        <th>Relapse sample taken</th>
+        <td><span tick="item.relapseSampleTaken"></span></td>
+      </tr>
+
+      <tr>
         <th>Date of Remission</th>
         <td>{{item.dateOfRemission | dateFormat}}</td>
       </tr>
@@ -191,6 +196,15 @@
         <div frm-control>
           <div frm-boolean-field model="item.ivMethylPrednisolone"></div>
           <div frm-errors errors="item.errors.ivMethylPrednisolone"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Relapse sample taken</div>
+
+        <div frm-control>
+          <div frm-yes-no-field model="item.relapseSampleTaken" nullable="true" required="false"></div>
+          <div frm-errors errors="item.errors.relapseSampleTaken"></div>
         </div>
       </div>
 

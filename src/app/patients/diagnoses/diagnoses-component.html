@@ -13,7 +13,7 @@
 
       <tr>
         <th>Diagnosis</th>
-        <td ng-class="{negative: !item.status}">{{item.getDiagnosis()}}</td>
+        <td>{{item.getDiagnosis()}}</td>
       </tr>
 
       <tr>
@@ -72,20 +72,11 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Status</div>
-
-        <div frm-control>
-          <div frm-diagnosis-status-field model="item.status" required="true"></div>
-          <div frm-errors errors="item.errors.status"></div>
-        </div>
-      </div>
-
-      <div frm-field frm-group>
         <div frm-label>Diagnosis Date</div>
 
         <div frm-control>
           <div frm-date-field model="item.fromDate" required="true"></div>
-          <div frm-help>Date of diagnosis.</div>
+          <div frm-help>01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.</div>
           <div frm-errors errors="item.errors.fromDate"></div>
         </div>
       </div>
@@ -148,7 +139,7 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td ng-class="{negative: !item.status}">{{item.getDiagnosis()}}</td>
+          <td>{{item.getDiagnosis()}}</td>
           <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
           <td>{{item.toDate | dateFormat}}</td>
           <td class="source">{{item.getSource()}}</td>

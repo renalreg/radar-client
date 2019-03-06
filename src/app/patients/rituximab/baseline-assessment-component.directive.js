@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import templateUrl from './baseline-assessment-component.html';
 
 function rituximabBaselineAssessmentPermissionFactory(PatientObjectPermission) {
@@ -25,6 +27,10 @@ function rituximabBaselineAssessmentControllerFactory(
 
     $scope.multiple = false;
 
+    $scope.previousAvailable = function() {
+      return !_.isEmpty($scope.item.previousTreatment) || $scope.item.otherPreviousTreatment;
+    };
+
     self.load(firstPromise([
       store.findFirst('rituximab-baseline-assessment', {patient: $scope.patient.id}),
       store.findMany('rituximab-treatment-options').then(function(rtxTreatmentOptions) {
@@ -32,6 +38,12 @@ function rituximabBaselineAssessmentControllerFactory(
       }),
       store.findMany('rituximab-performance-options').then(function(rtxPerformanceOptions) {
         $scope.rtxPerformanceOptions = rtxPerformanceOptions;
+      }),
+      store.findMany('rituximab-nephropathies-list').then(function(nephropathiesList) {
+        $scope.patientNephropathiesList = nephropathiesList;
+      }),
+      store.findMany('rituximab-supportive-medication-list').then(function(supportiveMedicationList) {
+        $scope.supportiveMedicationList = supportiveMedicationList;
       })
     ])).then(function() {
       self.view();
@@ -42,15 +54,12 @@ function rituximabBaselineAssessmentControllerFactory(
       self.edit(item);
     };
 
-    var medMapping = {
-      'raasblockade': 'RAAS Blockade',
-      'anticoaguliant': 'Anticoaguliant',
-      'statins': 'Statins',
-      'diuretics': 'Diuretics'
-    };
-
-    $scope.getMedicationLabel = function(med) {
-      return medMapping[med];
+    $scope.withTotalDose = function(option) {
+      return (
+        option.id === 'chlorambucil' ||
+        option.id === 'cyclophosphamide' ||
+        option.id === 'rituximab'
+      );
     };
   }
 

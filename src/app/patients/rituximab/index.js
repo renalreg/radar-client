@@ -6,22 +6,42 @@ import {
   rituximabBaselineAssessmentComponent
 } from './baseline-assessment-component.directive';
 
-import templateUrl from './baseline.html';
+import {
+  rituximabCriteriaPermissionFactory,
+  rituximabCriteriaControllerFactory,
+  rituximabCriteriaComponent
+} from './criteria-component.directive';
 
-function config($stateProvider) {
-  // storeProvider.registerMixin('renal-imaging', 'SourceModelMixin');
+import baselineUrl from './baseline.html';
+import criteriaUrl from './criteria.html';
+import rituximabCriteriaModelFactory from './criteria-model';
+
+
+function config($stateProvider, storeProvider) {
+  storeProvider.registerModel('rituximab-criteria', 'RituximabCriteriaModel');
 
   $stateProvider.state('patient.rituximabBaselineAssessment', {
     url: '/rituximab-baseline-assessment',
-    templateUrl: templateUrl
+    templateUrl: baselineUrl
   });
+
+  $stateProvider.state('patient.rituximabCriteria', {
+    url: '/rituximab-criteria',
+    templateUrl: criteriaUrl
+  });
+
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider', 'storeProvider'];
 
 export default angular.module('radar.patients.rituximab', [])
   .config(config)
   .factory('RituximabBaselineAssessmentPermission', rituximabBaselineAssessmentPermissionFactory)
   .factory('RituximabBaselineAssessmentController', rituximabBaselineAssessmentControllerFactory)
   .directive('rituximabBaselineAssessmentComponent', rituximabBaselineAssessmentComponent)
+  .factory('RituximabCriteriaModel', rituximabCriteriaModelFactory)
+  .factory('RituximabCriteriaPermission', rituximabCriteriaPermissionFactory)
+  .factory('RituximabCriteriaController', rituximabCriteriaControllerFactory)
+  .directive('rituximabCriteriaComponent', rituximabCriteriaComponent)
+
   .name;

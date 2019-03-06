@@ -367,3 +367,12 @@ a.delete-user, a.delete-patient {
 .extra-bottom-space {
   padding-bottom: 20px;
 }
+
+.checkbox>label>input[type="checkbox"] {
+  margin: 2px 0 0;
+  margin-left: -20px;
+}
+
+.indent {
+  margin-left: 20px;
+}

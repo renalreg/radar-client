@@ -18,7 +18,9 @@ function RecruitPatientController(
   $scope.search = search;
   $scope.recruit = recruit;
 
+  $scope.goToDiagnosis = goToDiagnosis;
   $scope.backToSearch = backToSearch;
+  $scope.backToDemographics = backToDemographics;
 
   $scope.someSelected = someSelected;
 
@@ -74,7 +76,8 @@ function RecruitPatientController(
           gender: $scope.searchParams.gender,
           numberGroup: $scope.searchParams.numberGroup,
           number: $scope.searchParams.number,
-          paediatric: isPaediatric($scope.searchParams.dateOfBirth)
+          paediatric: isPaediatric($scope.searchParams.dateOfBirth),
+          diagnosis: {}
         };
 
         $scope.searchErrors = {};
@@ -84,6 +87,24 @@ function RecruitPatientController(
       .catch(function(response) {
         if (response.status === 422) {
           $scope.searchErrors = response.data.errors || {};
+        }
+      })
+      .finally(function() {
+        $scope.loading = false;
+      });
+  }
+
+  function goToDiagnosis() {
+    $scope.loading = true;
+    return adapter.get('/environment')
+      .then(function() {
+        var cohortCode = $scope.patient.cohortGroup.code;
+        $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
+        $state.go('recruitPatient.diagnosis');
+      })
+      .catch(function(response) {
+        if (response.status === 422) {
+          $scope.patientErrors = response.data.errors || {};
         }
       })
       .finally(function() {
@@ -111,6 +132,10 @@ function RecruitPatientController(
 
   function backToSearch() {
     $state.go('recruitPatient.search');
+  }
+
+  function backToDemographics() {
+    $state.go('recruitPatient.form');
   }
 
   function loadGenders() {

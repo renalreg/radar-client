@@ -18,6 +18,10 @@
         <th>Control Patient?</th>
         <td><span tick="item.control"></span></td>
       </tr>
+      <tr>
+        <th>Data completeness maximized</th>
+        <td><span tick="item.signedOff"></span></td>
+      </tr>
 
     </table>
 
@@ -56,6 +60,16 @@
           <div frm-errors errors="item.errors.control"></div>
         </div>
       </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Data completeness maximized</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.signedOff"></div>
+          <div frm-errors errors="item.errors.signedOff"></div>
+        </div>
+      </div>
+
 
       <div frm-buttons>
         <span crud-save-button></span>

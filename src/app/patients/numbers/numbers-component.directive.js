@@ -12,7 +12,8 @@ function patientNumbersControllerFactory(
   firstPromise,
   getRadarGroup,
   $injector,
-  store
+  store,
+  notificationService
 ) {
   /**
    * A component for recording patient numbers (e.g. NHS numbers, local hosptial numbers, and study numbers).
@@ -71,13 +72,20 @@ function patientNumbersControllerFactory(
    * @param {Object} item - the item to remove.
    * @returns {Object} - a promise.
    */
+
   PatientNumbersController.prototype.remove = function(item) {
     var self = this;
 
-    return ModelListDetailController.prototype.remove.call(self, item).then(function() {
-      // Reload the patient incase the primary patient number has changed
-      self.scope.patient.reload();
-    });
+    return ModelListDetailController.prototype.remove.call(self, item)
+      .then(function() {
+        // Reload the patient incase the primary patient number has changed
+        self.scope.patient.reload();
+      })
+      .catch(function(response) {
+        if (response && response.errors && response.errors.number) {
+          notificationService.fail(response.errors.number);
+        }
+      });
   };
 
   return PatientNumbersController;
@@ -89,7 +97,8 @@ patientNumbersControllerFactory.$inject = [
   'firstPromise',
   'getRadarGroup',
   '$injector',
-  'store'
+  'store',
+  'notificationService'
 ];
 
 function patientNumbersComponent(PatientNumbersController) {
