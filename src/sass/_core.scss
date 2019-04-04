@@ -1,5 +1,5 @@
-@import "variables";
-@import "mixins";
+@import 'variables';
+@import 'mixins';
 
 html {
   // Footer
@@ -29,18 +29,23 @@ h1:first-child {
   text-align: center;
   font-size: 11px;
   background-color: #333;
-  color: #FFF;
+  color: #fff;
 
   p {
     margin-bottom: 0;
   }
 
   a {
-    color: #FFF;
+    color: #fff;
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   a {
     text-decoration: none;
     color: $headings-color;
@@ -55,7 +60,8 @@ a {
   text-decoration: underline;
 }
 
-a.btn, .nav a {
+a.btn,
+.nav a {
   text-decoration: none;
 }
 
@@ -68,7 +74,7 @@ select {
 }
 
 .form-group.required .control-label:after {
-  content: "*";
+  content: '*';
   color: red;
 }
 
@@ -105,17 +111,25 @@ th.right {
 }
 
 .table {
-  > thead, > tbody, & {
+  > thead,
+  > tbody,
+  & {
     > tr {
-      > td, > th {
-          padding: 5px 6px;
+      > td,
+      > th {
+        padding: 5px 6px;
       }
     }
   }
 }
 
 .latest-news-body {
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: bold;
     font-size: $font-size-base;
     margin: 0 0 9px 0;
@@ -168,6 +182,7 @@ th.right {
 
 textarea.form-control {
   width: 100%;
+  max-width: 768px;
 }
 
 .properties th {
@@ -228,7 +243,8 @@ table.metadata {
   border-collapse: collapse;
   margin: 0 0 9px;
 
-  th, td {
+  th,
+  td {
     border: 1px solid #eee;
     padding: 3px 5px;
   }
@@ -250,7 +266,6 @@ table.metadata {
   background-color: $radar-danger;
 }
 
-
 .header-alert a {
   color: #fff;
 }
@@ -269,7 +284,7 @@ table.metadata {
 
 // FIXME https://github.com/twbs/bootstrap-sass/issues/919
 .breadcrumb > li + li:before {
-    content: "/\00a0";
+  content: '/\00a0';
 }
 
 .text-editor-toolbar {
@@ -305,7 +320,9 @@ table.metadata {
   margin: 0 0 9px 0;
 }
 
-.observation-selector, .drug-selector, .diagnosis-selector {
+.observation-selector,
+.drug-selector,
+.diagnosis-selector {
   margin: 0 0 18px 0;
 
   .pagination {
@@ -335,11 +352,13 @@ table.metadata {
   white-space: pre-wrap;
 }
 
-a.delete-user, a.delete-patient {
+a.delete-user,
+a.delete-patient {
   color: #777;
 }
 
-.no-link, .no-link:hover {
+.no-link,
+.no-link:hover {
   text-decoration: none !important;
 }
 
@@ -347,12 +366,15 @@ a.delete-user, a.delete-patient {
   text-decoration: underline;
 }
 
-.dead, .dead a, .dead a .hidden-demographics {
+.dead,
+.dead a,
+.dead a .hidden-demographics {
   color: red;
 }
 
 /* More spacing between inline elements */
-.radio-inline + .radio-inline, .checkbox-inline + .checkbox-inline {
+.radio-inline + .radio-inline,
+.checkbox-inline + .checkbox-inline {
   margin-left: 30px;
 }
 
@@ -368,11 +390,16 @@ a.delete-user, a.delete-patient {
   padding-bottom: 20px;
 }
 
-.checkbox>label>input[type="checkbox"] {
+.checkbox > label > input[type='checkbox'] {
   margin: 2px 0 0;
   margin-left: -20px;
 }
 
 .indent {
   margin-left: 20px;
+}
+
+.pid-warning {
+  color: red;
+  font-weight: bold;
 }
