@@ -1,22 +1,20 @@
-<div
-  class="form-group"
-  ng-class="{'required': field.required(), 'has-error': !valid()}"
-  ng-show="field.visible()">
+<div class="form-group" ng-class="{'required': field.required(), 'has-error': !valid()}" ng-show="field.visible()">
   <div class="col-md-3 control-label">
-    <label>{{field.label}}</label>
+    <label>{{ field.label }}</label>
     <span ng-if="field.titleHelp" class="help-block" ng-bind-html="field.titleHelp | unsafe"></span>
   </div>
 
   <div class="col-md-9">
-      <div marmoset-widget="field"></div>
+    <div class="pid-warning" ng-show="field.warning" ng-bind-html="field.warning | unsafe"></div>
+    <div marmoset-widget="field"></div>
 
-      <div class="help-block" ng-show="field.help" ng-bind-html="field.help | unsafe"></div>
+    <div class="help-block" ng-show="field.help" ng-bind-html="field.help | unsafe"></div>
 
-      <div class="help-block" ng-show="error('required')">This field is required.</div>
-      <div class="help-block" ng-show="error('date')">Invalid date.</div>
-      <div class="help-block" ng-show="error('integer')">Not a number.</div>
-      <div class="help-block" ng-show="error('number')">Not a number.</div>
+    <div class="help-block" ng-show="error('required')">This field is required.</div>
+    <div class="help-block" ng-show="error('date')">Invalid date.</div>
+    <div class="help-block" ng-show="error('integer')">Not a number.</div>
+    <div class="help-block" ng-show="error('number')">Not a number.</div>
 
-      <div class="help-block" ng-repeat="error in field.errors[field.name]">{{error}}</div>
+    <div class="help-block" ng-repeat="error in field.errors[field.name]">{{ error }}</div>
   </div>
 </div>

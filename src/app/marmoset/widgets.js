@@ -86,6 +86,13 @@ function marmosetTextWidget($compile) {
     },
     link: function(scope, element) {
       var e = angular.element('<textarea />');
+
+      let rows = 5;
+      if (scope.field.widget) {
+        rows = scope.field.widget.rows || 5;
+      }
+      e.attr('rows', rows);
+
       e.attr('class', 'form-control');
       e.attr('name', scope.field.name);
       e.attr('ng-model', 'field.data[field.name]');
@@ -213,9 +220,9 @@ function marmosetYesNoRadioWidget($compile) {
     },
     link: function(scope, element) {
       scope.options = [
-        {value: true, label: 'Yes'},
-        {value: false, label: 'No'},
-        {value: null, label: 'Not Answered'}
+        { value: true, label: 'Yes' },
+        { value: false, label: 'No' },
+        { value: null, label: 'Not Answered' }
       ];
 
       var divElement = angular.element('<div></div>');
@@ -294,7 +301,7 @@ function checkboxes() {
           oldValue.splice(oldValue.indexOf(scope.options[index].value), 1);
         }
 
-        oldValue = oldValue.length === 0? null: oldValue;
+        oldValue = oldValue.length === 0 ? null : oldValue;
         ngModel.$setViewValue(oldValue);
         updateState();
       };
