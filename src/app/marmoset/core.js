@@ -343,9 +343,10 @@ function Field(schema, data) {
   self.type = data.type;
   self.label = data.label;
   self.help = data.help || null;
+  self.warning = data.warning || null;
   self.titleHelp = data.titleHelp || null;
   self.unit = data.unit || null;
-  self.options = (data.options && data.options.length) ? data.options : null;
+  self.options = data.options && data.options.length ? data.options : null;
   self.widget = data.widget || {};
   self.view = data.view || {};
   self.column = data.column === undefined ? false : data.column;
@@ -486,15 +487,18 @@ function builder(scope, element, transclude) {
 
     transclude(childScope, function(clone) {
       // Watch for changes in the field's visibility
-      childScope.$watch(function() {
-        return childScope.$field.visible();
-      }, function(visible) {
-        if (visible) {
-          clone.show();
-        } else {
-          clone.hide();
+      childScope.$watch(
+        function() {
+          return childScope.$field.visible();
+        },
+        function(visible) {
+          if (visible) {
+            clone.show();
+          } else {
+            clone.hide();
+          }
         }
-      });
+      );
 
       // Add after previous element
       last.after(clone);
@@ -618,9 +622,13 @@ function marmosetForm($compile) {
 
       var errors = {};
 
-      scope.$watch('errors', function(value) {
-        angular.copy(value || {}, errors);
-      }, true);
+      scope.$watch(
+        'errors',
+        function(value) {
+          angular.copy(value || {}, errors);
+        },
+        true
+      );
 
       // Note: add the container to the DOM here so we can $compile in the for loop
       var container = angular.element('<div></div>');
@@ -657,14 +665,17 @@ function marmosetField() {
       scope.form = formCtrl;
 
       // Set the field to null when it is hidden
-      scope.$watch(function() {
-        return scope.field.visible();
-      }, function(visible) {
-        // Hidden
-        if (!visible) {
-          scope.field.data[scope.field.name] = null;
+      scope.$watch(
+        function() {
+          return scope.field.visible();
+        },
+        function(visible) {
+          // Hidden
+          if (!visible) {
+            scope.field.data[scope.field.name] = null;
+          }
         }
-      });
+      );
 
       // Notify the field when other fields change
       scope.$watch('field.data', scope.field.update, true);
@@ -672,7 +683,7 @@ function marmosetField() {
       function getModelCtrl() {
         // frmCtrl (FormController) will be null if this directive isn't inside a form
         // modelCtrl (NgModelController) will be undefined on load
-        return formCtrl ? (formCtrl[scope.field.name] || null) : null;
+        return formCtrl ? formCtrl[scope.field.name] || null : null;
       }
 
       scope.error = function(name) {
@@ -708,10 +719,4 @@ function createSchema() {
   };
 }
 
-export {
-  marmosetColumns,
-  marmosetList,
-  marmosetForm,
-  marmosetField,
-  createSchema
-};
+export { marmosetColumns, marmosetList, marmosetForm, marmosetField, createSchema };
