@@ -8,58 +8,57 @@
     <table class="table properties">
       <tr>
         <th>Data Source</th>
-        <td>{{item.getSource()}}</td>
+        <td>{{ item.getSource() }}</td>
       </tr>
 
       <tr>
         <th>Date</th>
-        <td>{{item.date | dateFormat}}</td>
+        <td>{{ item.date | dateFormat }}</td>
       </tr>
 
       <tr>
         <th>Transplant Hospital</th>
-        <td>{{item.transplantGroup.name | missing}}</td>
+        <td>{{ item.transplantGroup.name | missing }}</td>
       </tr>
 
       <tr>
         <th>Type</th>
-        <td>{{item.modality.label}}</td>
+        <td>{{ item.modality.label }}</td>
       </tr>
 
       <tr>
         <th>Recipient HLA</th>
-        <td>{{item.recipientHla | missing}}</td>
+        <td>{{ item.recipientHla | missing }}</td>
       </tr>
 
       <tr>
         <th>Donor HLA</th>
-        <td>{{item.donorHla | missing}}</td>
+        <td>{{ item.donorHla | missing }}</td>
       </tr>
 
       <tr>
         <th>Episode of CMV infection</th>
-        <td>{{item.dateOfCmvInfection | dateFormat}}</td>
+        <td>{{ item.dateOfCmvInfection | dateFormat }}</td>
       </tr>
 
       <tr>
-          <th>Recurrence</th>
-          <td><span tick="item.recurrence"></span></td>
+        <th>Recurrence</th>
+        <td><span tick="item.recurrence"></span></td>
       </tr>
 
       <tr>
         <th>Date of Recurrence</th>
-        <td>{{item.dateOfRecurrence | dateFormat}}</td>
+        <td>{{ item.dateOfRecurrence | dateFormat }}</td>
       </tr>
 
       <tr>
         <th>Date of Failure</th>
-        <td>{{item.dateOfFailure | dateFormat}}</td>
+        <td>{{ item.dateOfFailure | dateFormat }}</td>
       </tr>
       <tr>
         <th>Graft loss and cause</th>
-        <td>{{item.graftLossCause.label | missing}}</td>
+        <td>{{ item.graftLossCause.label | missing }}</td>
       </tr>
-
     </table>
 
     <table class="table table-condensed table-striped" ng-if="item.rejections">
@@ -71,7 +70,7 @@
 
       <tbody>
         <tr ng-repeat="rejection in item.rejections">
-          <td>{{rejection.dateOfRejection | dateFormat}}</td>
+          <td>{{ rejection.dateOfRejection | dateFormat }}</td>
         </tr>
       </tbody>
     </table>
@@ -86,7 +85,7 @@
 
       <tbody>
         <tr ng-repeat="biopsy in item.biopsies">
-          <td>{{biopsy.dateOfBiopsy | dateFormat}}</td>
+          <td>{{ biopsy.dateOfBiopsy | dateFormat }}</td>
           <td><span tick="biopsy.recurrence"></span></td>
         </tr>
       </tbody>
@@ -167,13 +166,13 @@
       </div>
 
       <div frm-field frm-group>
-          <div frm-label>Recurrence</div>
+        <div frm-label>Recurrence</div>
 
-          <div frm-control>
-            <div frm-yes-no-field model="item.recurrence" nullable="true" required="false"></div>
-            <div frm-errors errors="item.errors.recurrence"></div>
-          </div>
+        <div frm-control>
+          <div frm-yes-no-field model="item.recurrence" nullable="true" required="false"></div>
+          <div frm-errors errors="item.errors.recurrence"></div>
         </div>
+      </div>
 
       <div frm-field frm-group>
         <div frm-label>Date of Recurrence</div>
@@ -213,7 +212,11 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'transplantDate', reverse: true}">
+  <div
+    ng-if="!viewing && !editing"
+    list-helper="items as page"
+    list-helper-options="{perPage: 10, sortBy: 'transplantDate', reverse: true}"
+  >
     <p>
       <span crud-create-button action="create()"></span>
     </p>
@@ -245,12 +248,12 @@
             <span crud-list-edit-button item="item"></span>
           </td>
 
-          <td>{{item.date | dateFormat}}</td>
-          <td>{{item.transplantGroup.shortName | missing}}</td>
-          <td>{{item.modality.label}}</td>
-          <td>{{item.dateOfRecurrence | dateFormat}}</td>
-          <td>{{item.dateOfFailure | dateFormat}}</td>
-          <td class="source">{{item.getSource()}}</td>
+          <td>{{ item.date | dateFormat }}</td>
+          <td>{{ item.transplantGroup.shortName | missing }}</td>
+          <td>{{ item.modality.label }}</td>
+          <td>{{ item.dateOfRecurrence | dateFormat }}</td>
+          <td>{{ item.dateOfFailure | dateFormat }}</td>
+          <td class="source">{{ item.getSource() }}</td>
 
           <td>
             <span crud-list-remove-button item="item"></span>

@@ -1,51 +1,46 @@
-<div
-frm-model
-frm-required
-frm-hla
-ng-required="required()"
-ng-model="model">
-<div class="row">
+<div frm-model frm-required frm-hla ng-required="required()" ng-model="model">
+  <div class="row">
+    <div class="col-md-9">
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">A</span>
+          <input frm-model integer-validator ng-model="hla.a1" type="text" class="form-control" />
+        </div>
+      </div>
 
-  <div class="col-md-3">
-    <div frm-field frm-group-inline>
-      <div class="input-group">
-        <span class="input-group-addon">A</span>
-        <input
-          frm-model
-          integer-validator
-          ng-model="hla.a"
-          type="text"
-          class="form-control"/>
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">A</span>
+          <input frm-model integer-validator ng-model="hla.a2" type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">B</span>
+          <input frm-model integer-validator ng-model="hla.b1" type="text" class="form-control" />
+        </div>
+      </div>
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">B</span>
+          <input frm-model integer-validator ng-model="hla.b2" type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">DR</span>
+          <input frm-model integer-validator ng-model="hla.dr1" type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">DR</span>
+          <input frm-model integer-validator ng-model="hla.dr2" type="text" class="form-control" />
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-md-3">
-    <div frm-field frm-group-inline>
-      <div class="input-group">
-        <span class="input-group-addon">B</span>
-        <input
-          frm-model
-          integer-validator
-          ng-model="hla.b"
-          type="text"
-          class="form-control">
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <div frm-field frm-group-inline>
-      <div class="input-group">
-        <span class="input-group-addon">DR</span>
-        <input
-          frm-model
-          integer-validator
-          ng-model="hla.dr"
-          type="text"
-          class="form-control">
-      </div>
-    </div>
-  </div>
-
 </div>
