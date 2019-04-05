@@ -403,3 +403,39 @@ a.delete-patient {
   color: red;
   font-weight: bold;
 }
+
+.hla {
+  float: left;
+  width: 15%;
+
+  span,
+  input {
+    padding: 6px;
+  }
+
+  &:nth-child(even) {
+    margin-right: 10px;
+  }
+
+  &:nth-child(odd) {
+    margin-right: -1px;
+  }
+
+  &:last-child {
+    margin-right: 0px;
+  }
+
+  &:nth-child(odd) input {
+    border-radius: 0;
+  }
+
+  &:nth-child(even) span {
+    border-radius: 0;
+    border-left: 0;
+  }
+
+  &:nth-child(5),
+  &:nth-child(6) {
+    width: 17%;
+  }
+}
