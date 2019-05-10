@@ -11,7 +11,7 @@ var config = {
     proxy: {
       '/api': {
         target: 'http://localhost:5000',
-        pathRewrite: {'^/api' : ''}
+        pathRewrite: { '^/api': '' }
       },
       '/admin': {
         target: 'http://localhost:5002'
@@ -28,9 +28,6 @@ var config = {
     filename: 'assets/bundle.[hash].js'
   },
   module: {
-    noParse: [
-      path.resolve('node_modules/quill/dist/quill.js') // TODO remove when upgrading to Quill 1.0
-    ],
     preLoaders: [
       {
         test: /\.handlebars$/,
@@ -52,7 +49,7 @@ var config = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], {publicPath: '../'})
+        loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], { publicPath: '../' })
       },
       {
         test: /\.(woff2?|ttf|eot|svg|png|jpg)(\?.*)?$/,
