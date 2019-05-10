@@ -12,6 +12,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import "~jquery-ui/themes/base/datepicker.css";
 @import "../jquery-ui/theme.css";
 
+// QuillJS
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
 @import "core";
 @import "navbar";
 @import "tabs";
