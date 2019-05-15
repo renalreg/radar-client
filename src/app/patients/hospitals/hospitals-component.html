@@ -22,6 +22,11 @@
       </tr>
 
       <tr>
+        <th>Discharged back to GP</th>
+        <td>{{item.dischargedDate | dateFormat}}</td>
+      </tr>
+
+      <tr>
         <th>Recruited By</th>
         <td>{{item.createdGroup.name}}</td>
       </tr>
@@ -65,10 +70,20 @@
       </div>
 
       <div frm-field frm-group>
+        <div frm-label>Discharged back to GP</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.dischargedDate"></div>
+          <div frm-errors errors="item.errors.dischargedDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
         <div frm-label>Recruited By</div>
 
         <div frm-control>
-          <div frm-group-field model="item.createdGroup" params="{type: 'HOSPITAL'}" required="true" user-only="true" type="HOSPITAL"></div>
+          <div frm-group-field model="item.createdGroup" params="{type: 'HOSPITAL'}" required="true" user-only="true"
+            type="HOSPITAL"></div>
           <div frm-errors errors="item.errors.createdGroup"></div>
         </div>
       </div>
