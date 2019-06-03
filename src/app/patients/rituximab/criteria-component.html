@@ -10,12 +10,9 @@
       <table class="table properties">
         <tr>
           <th>Date</th>
-          <td>{{item.date | dateFormat}}</td>
+          <td>{{ item.date | dateFormat }}</td>
         </tr>
-
       </table>
-
-
     </div>
 
     <p ng-if="!item">Not entered.</p>
@@ -28,7 +25,6 @@
     </p>
 
     <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
-
       <div frm-field frm-group>
         <div frm-label>Date</div>
 
@@ -38,26 +34,38 @@
         </div>
       </div>
 
-      <h4 class="col-md-9 col-sm-offset-3"><em><b>Rituximab will only be funded for the treatment of idiopathic MN where all of the following criteria are met:</b></em></h4>
+      <h4 class="col-md-9 col-sm-offset-3">
+        <em
+          ><b
+            >Rituximab will only be funded for the treatment of idiopathic MN where all of the following criteria are
+            met:</b
+          ></em
+        >
+      </h4>
 
       <div frm-field frm-group>
         <div frm-control label="false">
-          <div frm-checkbox-field model="item.criteria1" required="true" checked="item.criteria1">A proven diagnosis of Membranous Nephropathy and patient registered on RaDaR.</div>
+          <div frm-checkbox-field model="item.criteria1" required="true" checked="item.criteria1">
+            A proven diagnosis of Membranous Nephropathy and patient registered on RaDaR.
+          </div>
           <div frm-errors errors="item.errors.criteria1"></div>
         </div>
       </div>
 
       <div frm-field frm-group>
-
         <div frm-control label="false">
-          <div frm-checkbox-field model="item.criteria2" required="true" checked="item.criteria2">Maximum tolerated Renin Angiotensin Aldosterone System (RAAS) blockade.</div>
+          <div frm-checkbox-field model="item.criteria2" required="true" checked="item.criteria2">
+            Maximum tolerated Renin Angiotensin Aldosterone System (RAAS) blockade.
+          </div>
           <div frm-errors errors="item.errors.criteria2"></div>
         </div>
       </div>
 
       <div frm-field frm-group>
         <div frm-control label="false">
-          <div frm-checkbox-field model="item.criteria3" required="true" checked="item.criteria3">Exclusion of secondary causes.</div>
+          <div frm-checkbox-field model="item.criteria3" required="true" checked="item.criteria3">
+            Exclusion of secondary causes.
+          </div>
           <div frm-errors errors="item.errors.criteria3"></div>
         </div>
       </div>
@@ -77,16 +85,18 @@
             Failure or intolerance of conventional immunomodulatory therapies. <i class="text-muted">See below</i>
             <div frm-errors errors="item.errors.criteria5"></div>
           </div>
-
         </div>
       </div>
 
       <div frm-field frm-group>
         <div frm-control label="false">
           <div frm-checkbox-field model="item.criteria6" required="true" checked="item.criteria6">
-            Measurement of anti-PLA2R prior to Rituximab therapy, quarterly in the first year and every 6 months thereafter.
+            Measurement of anti-PLA2R prior to Rituximab therapy, quarterly in the first year and every 6 months
+            thereafter.
             <p class="small text-muted" style="padding-left: 15px;">
-              The PLA2R antibody assay used MUST be the Euroimmun ELISA and MUST be performed in a lab that has UKAS accreditation for the Euroimmun ELISA assay. If your laboratory does not use this assay then please contact the Protein Reference Unit in Sheffield to arrange for the assay to be done there.
+              The PLA2R antibody assay used MUST be the Euroimmun ELISA and MUST be performed in a lab that has UKAS
+              accreditation for the Euroimmun ELISA assay. If your laboratory does not use this assay then please
+              contact the Protein Reference Unit in Sheffield to arrange for the assay to be done there.
             </p>
           </div>
           <div frm-errors errors="item.errors.criteria6"></div>
@@ -96,7 +106,8 @@
       <div frm-field frm-group>
         <div frm-control label="false">
           <div frm-checkbox-field model="item.criteria7" required="true" checked="item.criteria7">
-            Patients can be retreated with Rituximab within the CTE scheme as long as they have had a sustained partial remission for greater than 6 months after previous Rituximab therapy
+            Patients can be retreated with Rituximab within the CTE scheme as long as they have had a sustained partial
+            remission for greater than 6 months after previous Rituximab therapy
           </div>
           <div frm-errors errors="item.errors.criteria7"></div>
         </div>
@@ -117,98 +128,122 @@
 
         <ol>
           <li>
-            Proteinuria of greater than 3.5g/day (or Protein Creatinine Ratio [PCR] of greater than 350mg/mmol) and a serum albumin of less than 30g/l.
+            Proteinuria greater than 3.5g/day (PCR&gt;350), serum albumin less than 30g/l and a current eGFR ≥20ml/min.
           </li>
           <li>
-            Fall in eGFR of at least 20% over at least 3 months or longer, based on a minimum of three measurements.
+            Fall in eGFR of at least 20% over 3 months or longer (up to a period of 3 years) based on a minimum of 3
+            measurements and current eGFR ≥20ml/min.
           </li>
         </ol>
 
-        <p>
-          <b>Failure of therapy</b> is defined as:
-        </p>
+        <p><b>Failure of therapy</b> is defined as:</p>
 
         <div class="checkbox indent">
           <label>
-            <input type="checkbox" ng-model="item.ongoingSevereDisease"> Ongoing severe disease (as defined above) at least 3 months after completion of alkylating agent therapy or CNI therapy.
+            <input type="checkbox" ng-model="item.ongoingSevereDisease" /> Ongoing severe disease (as defined above) at
+            least 3 months after completion of alkylating agent therapy or CNI therapy.
           </label>
         </div>
 
-        <div class="checkbox">
-          <b>Intolerance</b> is defined as:
+        <div class="checkbox"><b>Intolerance</b> is defined as:</div>
+
+        <div class="checkbox indent">
+          <label> <input type="checkbox" ng-model="item.hypersensitivity" /> Type 1 hypersensitivity reactions. </label>
         </div>
 
         <div class="checkbox indent">
-          <label>
-            <input type="checkbox" ng-model="item.hypersensitivity"> Type 1 hypersensitivity reactions.
-          </label>
-        </div>
-
-        <div class="checkbox indent">For alkylating agents:
+          For alkylating agents:
           <ul class="list-unstyled indent">
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.drugAssociatedToxicity"> Bone marrow suppression, hepatitis or other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events (CTCAE).
+                <input type="checkbox" ng-model="item.drugAssociatedToxicity" /> Bone marrow suppression, hepatitis or
+                other drug associated toxicity greater than Grade 3 by Common Terminology Criteria for Adverse Events
+                (CTCAE).
               </label>
             </li>
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.alkylatingComplication"> Previous hospitalisation with infectious complication of alkylating agent therapy.
+                <input type="checkbox" ng-model="item.alkylatingComplication" /> Previous hospitalisation with
+                infectious complication of alkylating agent therapy.
               </label>
             </li>
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.alkylatingFailureMonitoringRequirements"> Inability to comply with monitoring requirements.
+                <input type="checkbox" ng-model="item.alkylatingFailureMonitoringRequirements" /> Inability to comply
+                with monitoring requirements.
               </label>
             </li>
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.cancer"> Previous urothelial cancer or any current cancer (excluding squamous cell carcinoma of the skin).
+                <input type="checkbox" ng-model="item.cancer" /> Previous urothelial cancer or any current cancer
+                (excluding squamous cell carcinoma of the skin).
               </label>
             </li>
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.threatenedFertility"> People with threatened fertility.
+                <input type="checkbox" ng-model="item.threatenedFertility" /> People with threatened fertility.
               </label>
             </li>
           </ul>
-          </div>
+        </div>
 
-          <div class="checkbox indent">For CNIs:
+        <div class="checkbox indent">
+          For CNIs:
 
           <ul class="list-unstyled indent">
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.fallInEgfr"> Fall in eGFR on CNI therapy of at least 20% or to below 60 ml/min/1.73m2.
+                <input type="checkbox" ng-model="item.fallInEgfr" /> Fall in eGFR on CNI therapy of at least 20% or to
+                below 60 ml/min/1.73m2.
               </label>
             </li>
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.cniTherapyComplication"> Previous hospitalisation with infectious or metabolic complication of CNI therapy.
+                <input type="checkbox" ng-model="item.cniTherapyComplication" /> Previous hospitalisation with
+                infectious or metabolic complication of CNI therapy.
               </label>
             </li>
             <li class="checkbox">
               <label>
-                <input type="checkbox" ng-model="item.cniFailureMonitoringRequirements"> Inability to comply with monitoring requirements.
+                <input type="checkbox" ng-model="item.cniFailureMonitoringRequirements" /> Inability to comply with
+                monitoring requirements.
               </label>
             </li>
-            </ul>
-          </div>
+          </ul>
+        </div>
 
-          <div class="checkbox indent">For any therapy that utilises adjunctive steroids (i.e. in combination with cytotoxics or cyclosporine):
-            <ul class="list-unstyled indent">
-              <li class="checkbox">
-                <label>
-                  <input type="checkbox" ng-model="item.diabetes"> Diabetes.
-                </label>
-              </li>
-              <li class="checkbox">
-                <label>
-                  <input type="checkbox" ng-model="item.riskFactors"> Risk factors for steroid induced diabetes: BMI greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of diabetes affecting at least one first-degree relative).
-                </label>
-              </li>
-            </ul>
-          </div>
+        <div class="checkbox indent">
+          For any therapy that utilises adjunctive steroids (i.e. in combination with cytotoxics or cyclosporine):
+          <ul class="list-unstyled indent">
+            <li class="checkbox">
+              <label> <input type="checkbox" ng-model="item.diabetes" /> Diabetes. </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.riskFactors" /> Risk factors for steroid induced diabetes: BMI
+                greater than or equal to 30kg/m2 (or greater than or equal to 25kg/m2 if South Asian), family history of
+                diabetes affecting at least one first-degree relative).
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.previousHospitalization" /> Previous hospitalisation with
+                infectious complication of steroids.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.osteoporosisOsteopenia" /> Osteoporosis or osteopenia.
+              </label>
+            </li>
+            <li class="checkbox">
+              <label>
+                <input type="checkbox" ng-model="item.moodDisturbance" /> Previous history of significant mood
+                disturbance on steroids that in the opinion of the treating clinician precludes further use of steroids.
+              </label>
+            </li>
+          </ul>
+        </div>
 
         <hr />
       </div>
@@ -217,8 +252,6 @@
         <span crud-save-button></span>
         <span crud-cancel-button action="view(originalItem)"></span>
       </div>
-
     </form>
-
   </div>
 </div>
