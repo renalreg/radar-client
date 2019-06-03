@@ -7,7 +7,7 @@ function textEditor() {
     restrict: 'A',
     require: 'ngModel',
     templateUrl: templateUrl,
-    link: function (scope, element, attrs, ngModel) {
+    link: function(scope, element, attrs, ngModel) {
       var container = element.find('.text-editor').get(0);
       var toolbar = element.find('.text-editor-toolbar').get(0);
 
@@ -18,12 +18,12 @@ function textEditor() {
         theme: 'snow'
       });
 
-      ngModel.$render = function () {
+      ngModel.$render = function() {
         quill.root.innerHTML = ngModel.$viewValue || '';
       };
 
-      quill.on('text-change', function () {
-        scope.$apply(function () {
+      quill.on('text-change', function() {
+        scope.$apply(function() {
           var html = quill.root.innerHTML;
           ngModel.$setViewValue(html);
         });
