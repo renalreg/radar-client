@@ -37,12 +37,12 @@ The development server is available at [http://localhost:8080/](http://localhost
 
 ## npm scripts
 
-* `start` - start the development server.
-* `clean` - remove build output.
-* `build` - build the client in the `dist` folder.
-* `lint` - lint the source code with [ESLint](http://eslint.org/).
-* `test` - run the tests with [Karma](https://karma-runner.github.io/).
-* `sauce-labs` - run the tests on all supported browsers using [Sauce Labs](https://saucelabs.com/).
+- `start` - start the development server.
+- `clean` - remove build output.
+- `build` - build the client in the `dist` folder.
+- `lint` - lint the source code with [ESLint](http://eslint.org/).
+- `test` - run the tests with [Karma](https://karma-runner.github.io/).
+- `sauce-labs` - run the tests on all supported browsers using [Sauce Labs](https://saucelabs.com/).
 
 ## Development Guide
 
@@ -83,7 +83,9 @@ A HTML coverage report is saved to the `coverage/html` directory.
 
 ## Deployment Guide
 
-Bump the version in `package.json` and `git tag` the commit.
+Bump the version in `package.json` and `git tag` the commit. Checkout national (for
+national/demo/staging radar version) or international (for international version) branch and
+merge master changes to it.
 
 Build a `.tar.gz`:
 
@@ -106,19 +108,18 @@ fab -H nww.radar.nhs.uk -u root deploy
 
 The `--gateway` option is useful for tunneling through another server.
 
-
 ## Supported Browsers
 
 RADAR supports the following browsers:
 
-* Chrome
-* Firefox
-* Internet Explorer 8+ (we recommend using Internet Explorer 11)
+- Chrome
+- Firefox
+- Internet Explorer 9+ (we recommend using Internet Explorer 11)
 
 Browser usage on RADAR in August 2016 was:
 
 | Browser              | Usage % |
-| -------------------- | -------:|
+| -------------------- | ------: |
 | Chrome               |   41.1% |
 | Internet Explorer 11 |   27.8% |
 | Internet Explorer 8  |   13.9% |
@@ -142,6 +143,6 @@ Browser usage on RADAR in August 2016 was:
 
 ## License
 
-Copyright (c) 2016 UK Renal Registry.
+Copyright (c) 2019 UK Renal Registry.
 
 Licensed under the [AGPL](LICENSE.md) license.
