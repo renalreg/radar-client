@@ -1,12 +1,6 @@
 import _ from 'lodash';
 
-function RecruitPatientController(
-  $scope,
-  adapter,
-  $state,
-  $q,
-  store
-) {
+function RecruitPatientController($scope, adapter, $state, $q, store) {
   $scope.loading = true;
 
   $scope.searchParams = {};
@@ -32,7 +26,8 @@ function RecruitPatientController(
       loadEthnicities(),
       loadNumberGroups(),
       loadNationalities(),
-      loadConsents()
+      loadConsents(),
+      loadBiopsyDiagnoses()
     ]).then(function() {
       $scope.loading = false;
     });
@@ -43,7 +38,7 @@ function RecruitPatientController(
       return false;
     }
 
-    return Object.keys(object).some(function (key) {
+    return Object.keys(object).some(function(key) {
       return object[key];
     });
   }
@@ -62,7 +57,8 @@ function RecruitPatientController(
   function search() {
     $scope.loading = true;
 
-    return adapter.post('/recruit-patient-search', {}, $scope.searchParams)
+    return adapter
+      .post('/recruit-patient-search', {}, $scope.searchParams)
       .then(function(response) {
         var patient = response.data.patient;
 
@@ -96,7 +92,8 @@ function RecruitPatientController(
 
   function goToDiagnosis() {
     $scope.loading = true;
-    return adapter.get('/environment')
+    return adapter
+      .get('/environment')
       .then(function() {
         var cohortCode = $scope.patient.cohortGroup.code;
         $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
@@ -115,10 +112,11 @@ function RecruitPatientController(
   function recruit() {
     $scope.loading = true;
 
-    return adapter.post('/recruit-patient', {}, $scope.patient)
+    return adapter
+      .post('/recruit-patient', {}, $scope.patient)
       .then(function(response) {
         var patientId = response.data.id;
-        $state.go('patient.demographics', {patientId: patientId});
+        $state.go('patient.demographics', { patientId: patientId });
       })
       .catch(function(response) {
         if (response.status === 422) {
@@ -145,13 +143,13 @@ function RecruitPatientController(
   }
 
   function loadEthnicities() {
-    return store.findMany('ethnicities', {user: $scope.user.id}).then(function(ethnicities) {
+    return store.findMany('ethnicities', { user: $scope.user.id }).then(function(ethnicities) {
       $scope.ethnicities = ethnicities;
     });
   }
 
   function loadNumberGroups() {
-    return store.findMany('groups', {isRecruitmentNumberGroup: true}).then(function(groups) {
+    return store.findMany('groups', { isRecruitmentNumberGroup: true }).then(function(groups) {
       // Sort by name
       groups = _.sortBy(groups, 'name');
 
@@ -161,7 +159,7 @@ function RecruitPatientController(
   }
 
   function loadNationalities() {
-    return store.findMany('nationalities', {user: $scope.user.id}).then(function(nationalities) {
+    return store.findMany('nationalities', { user: $scope.user.id }).then(function(nationalities) {
       nationalities = _.sortBy(nationalities, 'name');
       $scope.nationalities = nationalities;
     });
@@ -172,14 +170,14 @@ function RecruitPatientController(
       $scope.consents = _.sortBy(consents, ['weight', 'label']);
     });
   }
+
+  function loadBiopsyDiagnoses() {
+    return store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
+      $scope.biopsyDiagnoses = biopsyDiagnoses;
+    });
+  }
 }
 
-RecruitPatientController.$inject = [
-  '$scope',
-  'adapter',
-  '$state',
-  '$q',
-  'store'
-];
+RecruitPatientController.$inject = ['$scope', 'adapter', '$state', '$q', 'store'];
 
 export default RecruitPatientController;
