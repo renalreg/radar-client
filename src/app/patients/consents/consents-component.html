@@ -6,16 +6,16 @@
         <span crud-edit-button item="item"></span>
       </p>
 
-    <!-- <table class="table properties" ng-if="item">
+    <table class="table properties" ng-if="item">
       <tr>
         <th>Signed on</th>
         <td>{{item.signedOnDate | dateFormat}}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>Withdrawn on</th>
         <td>{{item.withdrawnOnDate | dateFormat}}</td>
       </tr> -->
-    <table class="table properties" ng-if="item">
+
       <tr>
         <th>Recruited on</th>
         <td>{{ patient.recruitedDate | dateFormat }}</td>
@@ -77,8 +77,8 @@
           <div frm-label>Letter Sent On:</div>
 
           <div frm-control>
-            <div frm-date-field model="item.reconsent_letter_sent_date" required="false"></div>
-            <div frm-errors errors="item.errors.reconsent_letter_sent_date"></div>
+            <div frm-date-field model="item.reconsentLetterSentDate" required="false"></div>
+            <div frm-errors errors="item.errors.reconsentLetterSentDate"></div>
           </div>
         </div>
 
@@ -86,8 +86,8 @@
           <div frm-label>Letter Returned On:</div>
 
           <div frm-control>
-            <div frm-date-field model="item.reconsent_letter_returned_date" required="false"></div>
-            <div frm-errors errors="item.errors.reconsent_letter_returned_date"></div>
+            <div frm-date-field model="item.reconsentLetterReturnedDate" required="false"></div>
+            <div frm-errors errors="item.errors.reconsentLetterReturnedDate"></div>
           </div>
         </div>
       </fieldset>
@@ -173,7 +173,7 @@
 
     </div>
 
-    <dilv ng-if="!viewing && !editing && patient.consented" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
+    <div ng-if="!viewing && !editing && patient.consented" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
       <p>
         <span crud-create-button action="create()"></span>
       </p>
