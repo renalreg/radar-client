@@ -26,7 +26,7 @@
         <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
       </tr>
 
-      <tr>
+      <tr ng-if="showToDate">
         <th>To Date</th>
         <td>{{item.toDate | dateFormat}} <span ng-if="item.toDate">({{item.toAge | ageFormat}})</span></td>
       </tr>
@@ -110,7 +110,7 @@
         </div>
       </div>
 
-      <div frm-field frm-group>
+      <div ng-if="showToDate" frm-field frm-group>
         <div frm-label>To Date</div>
 
         <div frm-control>
@@ -209,7 +209,7 @@
           <th sort-helper="getDiagnosis()">Diagnosis</th>
           <th sort-helper="symptomsDate">Symptoms Date</th>
           <th sort-helper="fromDate">Diagnosis Date</th>
-          <th sort-helper="toDate">To Date</th>
+          <th ng-if="showToDate" sort-helper="toDate">To Date</th>
           <th sort-helper="getSource()">Data Source</th>
           <th></th>
         </tr>
@@ -225,7 +225,7 @@
           <td>{{item.getDiagnosis()}}</td>
           <td>{{item.symptomsDate | dateFormat}}</td>
           <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
-          <td>{{item.toDate | dateFormat}}</td>
+          <td ng-if="showToDate">{{item.toDate | dateFormat}}</td>
           <td class="source">{{item.getSource()}}</td>
 
           <td>
