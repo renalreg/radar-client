@@ -49,8 +49,6 @@ function primaryPatientDiagnosisControllerFactory(
         self.view($scope.items[0]);
       }
       
-      // Dealing with showing To Date or not using showToDate
-      $scope.showToDate = $scope.cohort.code === 'NURTURECKD' || $scope.cohort.code === 'NURTUREINS' ? false : true;
       $scope.multiple = multiple;
       $scope.biopsyDiagnosis = $scope.cohort.code === 'INS' || $scope.cohort.code === 'INS-NEPHROS';
     });

@@ -26,11 +26,6 @@
         <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
       </tr>
 
-      <tr ng-if="showToDate">
-        <th>To Date</th>
-        <td>{{item.toDate | dateFormat}} <span ng-if="item.toDate">({{item.toAge | ageFormat}})</span></td>
-      </tr>
-
       <tr>
         <th>Prenatal Diagnosis</th>
         <td><span tick="item.prenatal"></span></td>
@@ -107,15 +102,6 @@
           <div frm-date-field model="item.fromDate" required="true"></div>
           <div frm-help>01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.</div>
           <div frm-errors errors="item.errors.fromDate"></div>
-        </div>
-      </div>
-
-      <div ng-if="showToDate" frm-field frm-group>
-        <div frm-label>To Date</div>
-
-        <div frm-control>
-          <div frm-date-field model="item.toDate"></div>
-          <div frm-errors errors="item.errors.toDate"></div>
         </div>
       </div>
 
@@ -209,7 +195,6 @@
           <th sort-helper="getDiagnosis()">Diagnosis</th>
           <th sort-helper="symptomsDate">Symptoms Date</th>
           <th sort-helper="fromDate">Diagnosis Date</th>
-          <th ng-if="showToDate" sort-helper="toDate">To Date</th>
           <th sort-helper="getSource()">Data Source</th>
           <th></th>
         </tr>
@@ -225,7 +210,6 @@
           <td>{{item.getDiagnosis()}}</td>
           <td>{{item.symptomsDate | dateFormat}}</td>
           <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
-          <td ng-if="showToDate">{{item.toDate | dateFormat}}</td>
           <td class="source">{{item.getSource()}}</td>
 
           <td>
