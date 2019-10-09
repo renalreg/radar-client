@@ -34,7 +34,8 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="patient in items" ng-class="{dead: patient.dateOfDeath || patient.yearOfDeath}">
+            <tr ng-repeat="patient in items" 
+                ng-class="{dead: patient.dateOfDeath || patient.yearOfDeath || patient.radarDateOfDeath}">
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a>
                 <i class="fa fa-link" ng-if="patient.ukrdc" title="Receiving data from UKRDC"></i>
@@ -46,7 +47,6 @@
                 <a ui-sref="patient.demographics({patientId: patient.id})">
                   <span ng-if="patient.firstName !== undefined">
                     <span if-demographics-visible>{{patient.firstName | missing}}</span>
-                    <span if-demographics-visible>{{patient | json}}</span>
                     <span if-demographics-hidden class="hidden-demographics">Hidden</span>
                   </span>
 
@@ -73,7 +73,8 @@
 
                 <span ng-if="patient.dateOfBirth === undefined">{{patient.yearOfBirth | missing}}</span>
 
-                <span ng-if="patient.yearOfDeath || patient.dateOfDeath" title="Deceased"><i class="fa fa-exclamation-triangle"></i></span>
+                <span ng-if="patient.yearOfDeath || patient.dateOfDeath || patient.radarDateOfDeath" 
+                      title="Deceased"><i class="fa fa-exclamation-triangle"></i></span>
               </td>
 
               <td>{{patient.gender.label | missing}}</td>
