@@ -15,7 +15,7 @@
     "sauce-labs": "cross-env NODE_ENV=test karma start sauce-labs.conf.js"
   },
   "dependencies": {
-    "angular": "~1.6.6",
+    "angular": "~1.7.9",
     "angular-local-storage": "^0.6.0",
     "angular-ui-router": "^0.4.0",
     "bootstrap-sass": "^3.4.1",
