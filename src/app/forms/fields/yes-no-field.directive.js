@@ -7,7 +7,7 @@ function frmYesNoField() {
       nullable: '=',
       nullLabel: '@'
     },
-    template: '<div frm-radio-field model="data.model" options="options" required="data.required"></div>',
+    template: '<div frm-radio-field-inline model="data.model" options="options" required="data.required"></div>',
     link: function(scope) {
       scope.data = {};
 

@@ -26,10 +26,11 @@
               <th sort-helper="dateOfBirth">DOB</th>
               <th sort-helper="gender">Gender</th>
               <th sort-helper="primaryPatientNumber" ng-if="viewDemographicsPermission">Patient Number</th>
-              <th sort-helper="recruitedDate">Recruited On</th>
+              <th sort-helper="recruitedDate">Recruited On</th>              
               <th ng-repeat="group in groups" sort-helper="group_{{group.id}}">{{group.shortName}}</th>
               <th>Cohorts</th>
               <th>Hospitals</th>
+              <th></th>
             </tr>
           </thead>
 
@@ -95,7 +96,8 @@
               </td>
 
               <td>{{patient.recruitedDate | dateFormat}}</td>
-
+              
+              
               <td ng-repeat="group in groups">{{patient.getFromDate(group) | dateFormat}}</td>
 
               <td>
@@ -113,6 +115,12 @@
                   <br ng-if="!$last" />
                 </span>
               </td>
+
+              <td>                
+                <span tick=patient.signedOff.id>{{patient.signedOff.id}}</span>
+                <span class="tooltip">Test</span>
+              </td>
+
             </tr>
           </tbody>
         </table>
@@ -236,6 +244,15 @@
 
           <div frm-control>
             <div frm-hospital-field model="filters.hospital"></div>
+            <div frm-errors></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Data Completeness</div>
+
+          <div frm-control>
+            <div frm-select-field model="filters.signedOffState" options="signedOffStates"></div>
             <div frm-errors></div>
           </div>
         </div>
