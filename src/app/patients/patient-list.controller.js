@@ -48,11 +48,11 @@ function patientListControllerFactory(
     $scope.filters = angular.copy(DEFAULT_FILTERS);
 
     var 
-    proxy = new ListHelperProxy(update, {
-      perPage: 50,
-      sortBy: 'id',
-      reverse: true
-    });
+      proxy = new ListHelperProxy(update, {
+        perPage: 50,
+        sortBy: 'id',
+        reverse: true
+      });
     proxy.load();
 
     $scope.proxy = proxy;

@@ -35,7 +35,7 @@ function patientMetadataControllerFactory(
     self.load($scope.patient).then(function() {
       self.view();
     }),
-    signedOffStatesPromise
+    signedOffStatesPromise;
   }
 
   
