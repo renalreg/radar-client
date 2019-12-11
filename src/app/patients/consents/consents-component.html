@@ -29,11 +29,11 @@
         <td>{{ item.consent.code }}</td>
       </tr>
       <tr>
-        <th>Reconsent Letter Sent On</th>
+        <th>Reconsent Letter<br/> Sent On</th>
         <td>{{ item.reconsentLetterSentDate | dateFormat }}</td>
       </tr>
       <tr>
-        <th>Reconsent Letter Returned On</th>
+        <th>Reconsent Letter<br/> Returned On</th>
         <td>{{ item.reconsentLetterReturnedDate | dateFormat }}</td>
       </tr>
       <tr>
@@ -190,8 +190,8 @@
             <th sort-helper="signedOnDate">Signed On</th>
             <!-- <th sort-helper="withdrawnOnDate">Withdrawn On</th> -->
             <th sort-helper="consent.toString()">Consent</th>
-            <th sort-helper="reconsentLetterSentDate">Reconsent Letter Sent Date</th>
-            <th sort-helper="reconsentLetterReturnedDate">Reconsent Letter Returned Date</th>
+            <th sort-helper="reconsentLetterSentDate">Reconsent Letter<br/> Sent Date</th>
+            <th sort-helper="reconsentLetterReturnedDate">Reconsent Letter<br/> Returned Date</th>
             <th></th>
           </tr>
         </thead>
