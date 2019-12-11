@@ -23,7 +23,7 @@ function patientDiagnosesControllerFactory(
         permission: new PatientDiagnosisPermission($scope.patient)
       }
     });
-
+    
     // Fetch a list of diagnoses excluding any diagnosis that can also be a primary diagnosis
     // for this patient - these are entered on the primary diagnosis page instead.
     self.load(store.findMany('patient-diagnoses', {patient: $scope.patient.id, includePrimary: false}));

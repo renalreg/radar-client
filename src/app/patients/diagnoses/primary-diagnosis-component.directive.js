@@ -48,7 +48,7 @@ function primaryPatientDiagnosisControllerFactory(
       } else {
         self.view($scope.items[0]);
       }
-
+      
       $scope.multiple = multiple;
       $scope.biopsyDiagnosis = $scope.cohort.code === 'INS' || $scope.cohort.code === 'INS-NEPHROS';
     });

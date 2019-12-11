@@ -8,8 +8,9 @@ patientMetadataPermissionFactory.$inject = ['PatientObjectPermission'];
 
 function patientMetadataControllerFactory(
   ModelDetailController,
-  PatientMetadataPermission,
-  $injector
+  PatientMetadataPermission,  
+  $injector,
+  store
 ) {
   /**
    * A component for recording metadata about the patient (for example comments).
@@ -27,10 +28,17 @@ function patientMetadataControllerFactory(
       }
     });
 
+    var signedOffStatesPromise = store.findMany('signedOffStates').then(function(signedOffStates) {
+      $scope.signedOffStates = signedOffStates;
+    });
+
     self.load($scope.patient).then(function() {
       self.view();
-    });
+    }),
+    signedOffStatesPromise;
   }
+
+  
 
   PatientMetadataController.$inject = ['$scope'];
   PatientMetadataController.prototype = Object.create(ModelDetailController.prototype);
@@ -38,7 +46,7 @@ function patientMetadataControllerFactory(
   return PatientMetadataController;
 }
 
-patientMetadataControllerFactory.$inject = ['ModelDetailController', 'PatientMetadataPermission', '$injector'];
+patientMetadataControllerFactory.$inject = ['ModelDetailController', 'PatientMetadataPermission', '$injector', 'store'];
 
 function patientMetadataComponent(PatientMetadataController) {
   return {

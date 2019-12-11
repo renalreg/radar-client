@@ -11,10 +11,11 @@
         <th>Signed on</th>
         <td>{{item.signedOnDate | dateFormat}}</td>
       </tr>
-<!--       <tr>
+      <!-- <tr>
         <th>Withdrawn on</th>
         <td>{{item.withdrawnOnDate | dateFormat}}</td>
       </tr> -->
+
       <tr>
         <th>Recruited on</th>
         <td>{{ patient.recruitedDate | dateFormat }}</td>
@@ -28,6 +29,14 @@
         <td>{{ item.consent.code }}</td>
       </tr>
       <tr>
+        <th>Reconsent Letter<br/> Sent On</th>
+        <td>{{ item.reconsentLetterSentDate | dateFormat }}</td>
+      </tr>
+      <tr>
+        <th>Reconsent Letter<br/> Returned On</th>
+        <td>{{ item.reconsentLetterReturnedDate | dateFormat }}</td>
+      </tr>
+      <tr>
         <th>Consent link</th>
         <td>
           <a href="{{ item.consent.linkUrl }}" target="_blank">
@@ -36,7 +45,6 @@
         </td>
       </tr>
     </table>
-
       <div metadata item="item"></div>
     </div>
 
@@ -63,6 +71,26 @@
           <div frm-errors errors="item.errors.signedOnDate"></div>
         </div>
       </div>
+      <fieldset ng-if="editing && item.createdDate">
+        <legend>Reconsent Status:</legend>
+        <div frm-field frm-group>
+          <div frm-label>Letter Sent On:</div>
+
+          <div frm-control>
+            <div frm-date-field model="item.reconsentLetterSentDate" required="false"></div>
+            <div frm-errors errors="item.errors.reconsentLetterSentDate"></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Letter Returned On:</div>
+
+          <div frm-control>
+            <div frm-date-field model="item.reconsentLetterReturnedDate" required="false"></div>
+            <div frm-errors errors="item.errors.reconsentLetterReturnedDate"></div>
+          </div>
+        </div>
+      </fieldset>
 <!--
       <div frm-field frm-group>
         <div frm-label>Withdrawn on</div>
@@ -129,7 +157,6 @@
               {{consent.label}}
               <a ng-if="consent.linkUrl" href="{{consent.linkUrl}}" target="_blank">({{consent.code}})</a>
               <span ng-if="!consent.linkUrl">({{consent.code}})</span>
-
             </div>
             <div frm-errors></div>
           </div>
@@ -163,6 +190,8 @@
             <th sort-helper="signedOnDate">Signed On</th>
             <!-- <th sort-helper="withdrawnOnDate">Withdrawn On</th> -->
             <th sort-helper="consent.toString()">Consent</th>
+            <th sort-helper="reconsentLetterSentDate">Reconsent Letter<br/> Sent Date</th>
+            <th sort-helper="reconsentLetterReturnedDate">Reconsent Letter<br/> Returned Date</th>
             <th></th>
           </tr>
         </thead>
@@ -176,6 +205,8 @@
             <td>{{ item.signedOnDate | dateFormat }}</td>
             <!-- <td>{{ item.withdrawnOnDate | dateFormat }}</td> -->
             <td><a href="{{ item.consent.linkUrl }}" target="_blank">{{ item.consent.label }}</a></td>
+            <td>{{item.reconsentLetterSentDate | dateFormat}}</td>
+            <td>{{item.reconsentLetterReturnedDate | dateFormat}}</td>
             <td>
               <span crud-list-remove-button item="item"></span>
             </td>

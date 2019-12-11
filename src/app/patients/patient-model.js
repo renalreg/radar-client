@@ -86,7 +86,7 @@ function patientModelFactory(Model, store) {
     }
 
     // If the user doesn't have access to patient demographics
-    // the first name and last name properties will be undefined
+    // the first name and last name properties will be undefinedarray
     if (demographics && this.firstName && this.lastName) {
       return this.firstName + ' ' + this.lastName;
     } else if (this.getId() !== null) {
@@ -126,7 +126,7 @@ function patientModelFactory(Model, store) {
   /**
    * Get current memberships (using from and to date) for hospital groups.
    *
-   * @returns {array} - a list of current hospital memberships.
+   * @returns {array} - a list of current hospital memberships.l
    */
   PatientModel.prototype.getCurrentHospitalPatients = function() {
     return filterGroupPatientsByCurrent(this.getHospitalPatients());

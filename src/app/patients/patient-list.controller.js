@@ -47,11 +47,12 @@ function patientListControllerFactory(
     // Initialise the filter to the defaults
     $scope.filters = angular.copy(DEFAULT_FILTERS);
 
-    var proxy = new ListHelperProxy(update, {
-      perPage: 50,
-      sortBy: 'id',
-      reverse: true
-    });
+    var 
+      proxy = new ListHelperProxy(update, {
+        perPage: 50,
+        sortBy: 'id',
+        reverse: true
+      });
     proxy.load();
 
     $scope.proxy = proxy;
@@ -63,6 +64,10 @@ function patientListControllerFactory(
       $scope.genders = genders;
     });
 
+    var signedOffStatesPromise = store.findMany('signedOffStates').then(function(signedOffStates) {
+      $scope.signedOffStates = signedOffStates;
+    });
+    
     /**
      * Get the groups to filter by.
      *
@@ -90,14 +95,15 @@ function patientListControllerFactory(
         'dateOfBirth', 'yearOfBirth',
         'dateOfDeath', 'yearOfDeath',
         'gender', 'patientNumber',
-        'current', 'ukrdc', 'test'
+        'current', 'ukrdc', 'test',
+        'signedOffState'
       ];
 
       _.forEach(keys, function(key) {
         var value = filters[key];
 
         if (value !== undefined && value !== null && value !== '') {
-          if (key === 'gender') {
+          if (key === 'gender' || key === 'signedOffState') {
             params[key] = value.id;
           } else {
             params[key] = value;
@@ -151,7 +157,8 @@ function patientListControllerFactory(
           $scope.count = data.pagination.count;
           return data.data;
         }),
-        genderPromise
+        genderPromise,
+        signedOffStatesPromise
       ]));
     }
 
