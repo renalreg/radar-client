@@ -42,17 +42,16 @@ function patientListControllerFactory(
 
     $scope.viewDemographicsPermission = hasPermission(session.user, 'VIEW_DEMOGRAPHICS');
 
-    $injector.invoke(ListController, self, {$scope: $scope});
+    $injector.invoke(ListController, self, { $scope: $scope });
 
     // Initialise the filter to the defaults
     $scope.filters = angular.copy(DEFAULT_FILTERS);
 
-    var 
-      proxy = new ListHelperProxy(update, {
-        perPage: 50,
-        sortBy: 'id',
-        reverse: true
-      });
+    var proxy = new ListHelperProxy(update, {
+      perPage: 50,
+      sortBy: 'id',
+      reverse: true
+    });
     proxy.load();
 
     $scope.proxy = proxy;
@@ -60,14 +59,14 @@ function patientListControllerFactory(
     $scope.clear = clear;
     $scope.count = 0;
 
-    var genderPromise = store.findMany('genders').then(function(genders) {
+    var genderPromise = store.findMany('genders').then(function (genders) {
       $scope.genders = genders;
     });
 
-    var signedOffStatesPromise = store.findMany('signedOffStates').then(function(signedOffStates) {
+    var signedOffStatesPromise = store.findMany('signedOffStates').then(function (signedOffStates) {
       $scope.signedOffStates = signedOffStates;
     });
-    
+
     /**
      * Get the groups to filter by.
      *
@@ -75,7 +74,7 @@ function patientListControllerFactory(
      * @returns {array} - list of groups to filter by.
      */
     function getGroups(filters) {
-      return _.filter([filters.system, filters.cohort, filters.hospital], function(group) {
+      return _.filter([filters.system, filters.cohort, filters.hospital], function (group) {
         return group != null;
       });
     }
@@ -99,7 +98,7 @@ function patientListControllerFactory(
         'signedOffState'
       ];
 
-      _.forEach(keys, function(key) {
+      _.forEach(keys, function (key) {
         var value = filters[key];
 
         if (value !== undefined && value !== null && value !== '') {
@@ -113,7 +112,7 @@ function patientListControllerFactory(
 
       var groups = getGroups(filters);
 
-      var groupIds = _.map(groups, function(group) {
+      var groupIds = _.map(groups, function (group) {
         return group.id;
       });
 
@@ -135,7 +134,7 @@ function patientListControllerFactory(
       // List is currently sorted by group
       if (proxy.getSortBy().indexOf('group') === 0) {
         // Check if we are still filtering against the sorted group
-        var found = _.some($scope.groups, function(group) {
+        var found = _.some($scope.groups, function (group) {
           return 'group_' + group.id === proxy.getSortBy();
         });
 
@@ -151,7 +150,7 @@ function patientListControllerFactory(
       $scope.downloadUrl = getDownloadUrl(params);
 
       return self.load(firstPromise([
-        store.findMany('patients', params, true).then(function(data) {
+        store.findMany('patients', params, true).then(function (data) {
           proxy.setItems(data.data);
           proxy.setCount(data.pagination.count);
           $scope.count = data.pagination.count;
