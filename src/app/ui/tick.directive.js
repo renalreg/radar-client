@@ -28,6 +28,10 @@ function tick() {
         return scope.tick === 2;
       };
 
+      scope.signedOffIsThree = function () {
+        return scope.tick === 3;
+      };
+
       scope.signedOffIsNull = function () {
         return scope.tick == null;
       };
@@ -38,6 +42,7 @@ function tick() {
           && !scope.signedOffIsZero()
           && !scope.signedOffIsOne()
           && !scope.signedOffIsTwo()
+          && !scope.signedOffIsThree()
           && !scope.signedOffIsNull();
       };
     }
