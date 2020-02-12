@@ -1,13 +1,17 @@
 <div crud>
   <div ng-if="viewing || editing">
     <div loading="loading">
+
+      <!-- viewing -->
       <div ng-if="viewing">
+        <!-- crud buttons -->
         <p>
           <span crud-list-button></span>
           <span crud-edit-button item="item"></span>
           <span crud-remove-button item="item"></span>
         </p>
 
+        <!-- tabel to view exisitng observation -->
         <table class="table properties">
           <tr>
             <th>Observation</th>
@@ -29,25 +33,31 @@
             <td>{{item.getDisplayValue() | missing}}</td>
           </tr>
         </table>
-
+        <!-- metadata bottom of table -->
         <div metadata item="item"></div>
       </div>
+      <!-- viewing -->
 
+      <!-- editing -->
       <div ng-if="editing">
+        <!-- navigation buttons -->
         <p>
           <span crud-list-button></span>
           <span crud-view-button item="originalItem"></span>
         </p>
 
         <form class="form-horizontal" crud-submit="saveAndAddAnother()" novalidate>
-          <div frm-field>
-            <div frm-observation-field patient="patient" model="item.observation" required="true"></div>
-
-            <div frm-status>
-              <div frm-errors errors="item.errors.observation"></div>
+          <!-- new observation -->
+          <div ng-if='!item.observation'>
+            <div frm-field>
+              <div frm-observation-field patient="patient" model="item.observation" required="true"></div>
+              <div frm-status>
+                <div frm-errors errors="item.errors.observation"></div>
+              </div>
             </div>
           </div>
-
+          
+          <!-- exisiting observation -->
           <div class="form-container">
             <div ng-if="item.observation">
 
@@ -74,30 +84,16 @@
 
                 <div frm-control>
                   <div ng-switch="item.observation.valueType.id">
-                    <div
-                      ng-switch-when="INTEGER"
-                      frm-integer-field model="item.value"
-                      units="{{item.observation.units}}"
+                    <div ng-switch-when="INTEGER" frm-integer-field model="item.value"
+                      units="{{item.observation.units}}" required="true"></div>
+
+                    <div ng-switch-when="REAL" frm-number-field model="item.value" units="{{item.observation.units}}"
                       required="true"></div>
 
-                    <div
-                      ng-switch-when="REAL"
-                      frm-number-field model="item.value"
-                      units="{{item.observation.units}}"
-                      required="true"></div>
+                    <div ng-switch-when="ENUM" frm-select-field model="item.value" options="item.observation.options"
+                      options-id="code" options-label="description" required="true"></div>
 
-                    <div
-                      ng-switch-when="ENUM"
-                      frm-select-field model="item.value"
-                      options="item.observation.options"
-                      options-id="code"
-                      options-label="description"
-                      required="true"></div>
-
-                    <div
-                      ng-switch-when="STRING"
-                      frm-text-field model="item.value"
-                      required="true"></div>
+                    <div ng-switch-when="STRING" frm-text-field model="item.value" required="true"></div>
                   </div>
 
                   <div frm-errors errors="item.errors.value"></div>
@@ -125,13 +121,16 @@
 
     <div ng-show="selectedObservations.length">
       <ul class="radar-tabs">
-        <li ng-class="{active: viewingTable()}"><a href="" ng-click="viewTable()"><i class="fa fa-table"></i> Table</a></li>
-        <li ng-class="{active: viewingGraph()}"><a href="" ng-click="viewGraph()"><i class="fa fa-line-chart"></i> Graphs</a></li>
+        <li ng-class="{active: viewingTable()}"><a href="" ng-click="viewTable()"><i class="fa fa-table"></i> Table</a>
+        </li>
+        <li ng-class="{active: viewingGraph()}"><a href="" ng-click="viewGraph()"><i class="fa fa-line-chart"></i>
+            Graphs</a></li>
       </ul>
 
       <div class="radar-body" loading="loading">
         <div ng-show="viewingTable()">
-          <div list-helper="groupedResults as page" list-helper-options="{deep: false, perPage: 10, sortBy: 'date', reverse: true}">
+          <div list-helper="groupedResults as page"
+            list-helper-options="{deep: false, perPage: 10, sortBy: 'date', reverse: true}">
             <p>
               <span crud-create-button action="create()"></span>
             </p>
@@ -145,7 +144,8 @@
                 <tr>
                   <th sort-helper="date">Date</th>
 
-                  <th ng-repeat="observation in selectedObservations" sort-helper="results[observation.id].getDisplayValue()" sort-id="results.{{observation.id}}">
+                  <th ng-repeat="observation in selectedObservations"
+                    sort-helper="results[observation.id].getDisplayValue()" sort-id="results.{{observation.id}}">
                     {{observation.shortName}}<span ng-if="observation.units">&nbsp;({{observation.units}})</span>
                   </th>
 
@@ -164,11 +164,13 @@
                       <!-- Note: IE doesn't support ng-disabled on <a> -->
 
                       <span ng-if="viewEnabled(item.results[observation.id])">
-                        <a href="" ng-click="view(item.results[observation.id])">{{item.results[observation.id].getDisplayValue() | missing}}</a>
+                        <a href=""
+                          ng-click="view(item.results[observation.id])">{{item.results[observation.id].getDisplayValue() | missing}}</a>
                       </span>
 
                       <span ng-if="!viewEnabled(item.results[observation.id])">
-                        <a href="" ng-click="view(item.results[observation.id])">{{item.results[observation.id].getDisplayValue() | missing}}</a>
+                        <a href=""
+                          ng-click="view(item.results[observation.id])">{{item.results[observation.id].getDisplayValue() | missing}}</a>
                       </span>
                     </span>
                   </td>
