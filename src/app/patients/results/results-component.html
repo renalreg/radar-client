@@ -6,7 +6,6 @@
 
       <!-- viewing -->
       <div ng-if="viewing">
-
         <!-- crud buttons -->
         <p>
           <span crud-list-button></span>
@@ -15,8 +14,7 @@
         </p>
         <!-- crud buttons -->
 
-        <!-- table -->
-        <!-- this table displays the selected observation -->
+        <!-- tabel to view exisitng observation -->
         <table class="table properties">
           <tr>
             <th>Observation</th>
@@ -38,9 +36,7 @@
             <td>{{item.getDisplayValue() | missing}}</td>
           </tr>
         </table>
-        <!-- table -->
-        
-        <!-- meta data at the bottom of the table -->
+        <!-- metadata bottom of table -->
         <div metadata item="item"></div>
       </div>
       <!-- viewing -->
@@ -54,17 +50,17 @@
         </p>
 
         <form class="form-horizontal" crud-submit="saveAndAddAnother()" novalidate>
-          <!-- creating a new observation -->
-          <div  ng-if="!item.observation">
-              <div frm-field>
-                  <div frm-observation-field patient="patient" model="item.observation" required="true"></div>
-                  <div frm-status>
-                    <div frm-errors errors="item.errors.observation"></div>
-                  </div>
-                </div>
+          <!-- new observation -->
+          <div ng-if='!item.observation'>
+            <div frm-field>
+              <div frm-observation-field patient="patient" model="item.observation" required="true"></div>
+              <div frm-status>
+                <div frm-errors errors="item.errors.observation"></div>
+              </div>
+            </div>
           </div>
           
-          <!-- editing an existing observation -->
+          <!-- exisiting observation -->
           <div class="form-container">
             <div ng-if="item.observation">
 
@@ -107,11 +103,13 @@
                 </div>
               </div>
 
+              <!-- bottom crud buttons -->
               <div frm-buttons>
                 <span crud-save-button text="Save and Add Another"></span>
                 <span crud-save-button action="saveAndView()"></span>
                 <span crud-cancel-list-button></span>
               </div>
+
             </div>
           </div>
 
