@@ -64,7 +64,7 @@
           <div class="form-container">
             <div ng-if="item.observation">
 
-              <div frm-field frm-group>
+              <div frm-field frm-group ng-init="item.value = item.sentValue">
                 <div frm-label>Data Source</div>
 
                 <div frm-control>
@@ -98,7 +98,7 @@
 
                     <div ng-switch-when="STRING" frm-text-field model="item.value" required="true"></div>
                   </div>
-
+                  
                   <div frm-errors errors="item.errors.value"></div>
                 </div>
               </div>
