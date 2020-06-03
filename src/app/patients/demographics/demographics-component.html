@@ -63,6 +63,14 @@
         <td>{{item.yearOfDeath | missing}}</td>
       </tr>
 
+      <tr ng-if="item.causeOfDeath !== undefined">
+        <th>Cause Of Death</th>
+        <td>
+          <span if-demographics-visible>{{item.causeOfDeath | missing}}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
+      </tr>
+
       <tr>
         <th>Gender</th>
         <td>{{item.gender.label}}</td>
@@ -153,6 +161,16 @@
               <div frm-errors errors="item.errors.dateOfDeath"></div>
             </div>
           </div>
+
+          <div frm-field frm-group>
+            <div frm-label>Cause of Death</div>
+
+            <div frm-control>
+              <div frm-text-field model="item.causeOfDeath"></div>
+              <div frm-errors errors="item.errors.causeOfDeath"></div>
+            </div>
+          </div>
+
 
           <div frm-field frm-group>
             <div frm-label>Gender</div>
