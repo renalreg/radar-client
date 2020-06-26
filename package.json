@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@types/angular": "^1.6.54",
-    "angular-mocks": "^1.6.10",
+    "angular-mocks": "^1.8.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^6.2.5",
     "babel-plugin-istanbul": "^4.1.6",
