@@ -45,7 +45,7 @@ function patientConsentsControllerFactory(
             $scope.activeConsents.push(consent);
           }
         }
-        $scope.activeConsents.sort((a, b) => (a.weight > b.weight) ? 1 : -1).reverse();
+        $scope.activeConsents.sort((a, b) => (a.weight > b.weight) ? 1 : -1);
       })
     ])).then(function() {
       if (!$scope.patient.consented) {
