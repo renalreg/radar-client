@@ -1,8 +1,9 @@
 <i ng-show="isTrue()" class="fa fa-check"></i>
 <i ng-show="isFalse()" class="fa fa-remove"></i>
 <i ng-show="isNeither()" class="fa fa-question"></i>
-<i ng-show="signedOffIsZero()" class="fa fa-ban"></i>
-<i ng-show="signedOffIsOne()" class="fa fa-adjust"></i>
-<i ng-show="signedOffIsTwo()" class="fa fa-circle"></i>
-<i ng-show="signedOffIsThree()" class="fa fa-user-times"></i>
+<i ng-show="signedOffIsZero()" class="fa fa-ban" title="Not signed off"></i>
+<i ng-show="signedOffIsOne()" class="fa fa-adjust" title="Nurture baseline data complete"></i>
+<i ng-show="signedOffIsTwo()" class="fa fa-circle" title="Nurture baseline and follow up data complete"></i>
+<i ng-show="signedOffIsThree()" class="fa fa-user-times" title="Patient refused follow Up"></i>
+<i ng-show="signedOffIsFour()" class="fa fa-asterisk" aria-hidden="true" title="Baseline complete, no FUP as Tx"></i>
 <i ng-show="signedOffIsNull()"></i>
