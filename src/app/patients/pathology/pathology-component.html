@@ -48,6 +48,11 @@
         <th>EM Findings</th>
         <td class="newlines">{{item.emFindings | missing}}</td>
       </tr>
+
+      <tr>
+        <th>Report Cleaned</th>
+        <td class="newlines">{{item.reportCleaned | missing}}</td>
+      </tr>
     </table>
 
     <div metadata item="item"></div>
@@ -113,6 +118,15 @@
           <div frm-errors errors="item.errors.imageUrl"></div>
         </div>
       </div>
+      
+      <div frm-field frm-group>
+        <div frm-label>Report Cleaned Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.reportCleaned"></div>
+          <div frm-errors errors="item.errors.reportCleaned"></div>
+        </div>
+      </div>
 
       <div frm-field frm-group>
         <div frm-label>Histological Summary</div>
@@ -158,8 +172,10 @@
           <th></th>
           <th sort-helper="date">Date</th>
           <th sort-helper="kidneyType.label">Type</th>
-          <th sort-helper="kidneySide.label">Side</th>
+          <th sort-helper="kidneySide.label">Side</th>          
           <th sort-helper="getSource()">Data Source</th>
+          <th sort-helper="reportCleaned">Report Cleaned</th>
+
           <th></th>
         </tr>
       </thead>
@@ -173,8 +189,9 @@
 
           <td>{{item.date | dateFormat}}</td>
           <td>{{item.kidneyType.label | missing}}</td>
-          <td>{{item.kidneySide.label | missing}}</td>
+          <td>{{item.kidneySide.label | missing}}</td>          
           <td class="source">{{item.getSource()}}</td>
+          <td>{{item.reportCleaned | dateFormat}}</td>
 
           <td>
             <span crud-list-remove-button item="item"></span>
