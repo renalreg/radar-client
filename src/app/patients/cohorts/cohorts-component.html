@@ -68,12 +68,86 @@
         <div frm-label>Recruited By</div>
 
         <div frm-control>
-          <div frm-group-field model="item.createdGroup" params="{type: 'HOSPITAL'}" required="true" user-only="true" type="HOSPITAL"></div>
+          <div frm-group-field model="item.createdGroup" params="{type: 'HOSPITAL'}" required="true" user-only="true"
+            type="HOSPITAL"></div>
           <div frm-errors errors="item.errors.createdGroup"></div>
         </div>
       </div>
 
+      <div ng-if="item.group.shortName == 'CKD-Africa'">
+        <br>
+        <h1 class="page-header">
+          <em><b>CKD due to Genetic Factors in people of African ancestry</b></em>
+        </h1>
+
+        <h5 class="col-md-9 col-sm-offset-1">
+          <em><b>All boxes need to be ticked to be selected</b></em>
+        </h5>
+        <br>
+        <h5 class="col-md-9 col-sm-offset-2">
+          <em><b>Inclusion Criteria:</b></em>
+        </h5>
+
+        <div frm-field frm-group>
+          <div frm-control label="false">
+            <div frm-checkbox-field model="item.criteria1" required="true" checked="item.criteria1">
+              Patient has one or more parent of African or Afro Caribbean ancestry
+            </div>
+            <div frm-errors errors="item.errors.criteria1"></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-control label="false">
+            <div frm-checkbox-field model="item.criteria2" required="true" checked="item.criteria2">
+              Patient has one or more of the following conditions:<br><br>
+              <ul>
+                <li>Sickle Cell Nephropathy: Known Sickle Cell disease with reduced kidney function, and/or blood or
+                  protein in urine with no other cause for kidney disease identified.</li>
+                <li>Suspected or confirmed APOL1 disease including: Focal segmental glomerulosclerosis (primary or
+                  secondary)<br>
+                  on renal biopsy; Non-diabetic and non-immunological kidney disease with no other confirmed cause</li>
+                <li>Suspected or confirmed hypertensive kidney disease</li>
+                <li>End stage kidney disease of unknown cause</li>
+              </ul>
+            </div>
+            <div frm-errors errors="item.errors.criteria2"></div>
+          </div>
+        </div>
+
+        <h5 class="col-md-9 col-sm-offset-2">
+          <em><b>Exclusion Criteria:</b></em>
+        </h5>
+
+        <div frm-field frm-group>
+          <div frm-control label="false">
+            <div frm-checkbox-field model="item.criteria3" required="true" checked="item.criteria3">
+              Patient does NOT have any of the following conditions. Tick to confirm they don't have either.<br><br>
+              <ul>
+                <li>Suspected or confirmed Diabetic Nephropathy (Can have diabetes as a comorbidity but diabetes must
+                  not be considered the primary cause of kidney disease)
+                </li>
+                <li>Suspected or confirmed immunological cause of kidney disease
+                </li>
+              </ul>
+            </div>
+            <div frm-errors errors="item.errors.criteria3"></div>
+          </div>
+        </div>
+
+        <h5 class="col-md-9 col-sm-offset-2">
+          <em><b>Other considerations:</b></em>
+        </h5>
+        <ul class="col-md-9 col-sm-offset-4">
+          <li>For Sickle Cell Nephropathy group - Please provide genetics if available: Hb SS or Hb SC</li>
+          <li>For APOL1 group - Please provide genetics if available: G1/G1 or G1/G2 or G2/G2</li>
+          <li>Add Thrombotic Microangiopathy (TMA) as a comorbidity if there were ANY features of Thrombotic
+            Microangiopathy (low platelets, haemolysis) at any time</li>
+        </ul>
+      </div>
+
       <div frm-buttons>
+        <br>
         <span crud-save-button></span>
         <span crud-cancel-list-button></span>
       </div>
