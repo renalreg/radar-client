@@ -1,14 +1,14 @@
-import templateUrl from './metadata-component.html';
+import templateUrl from "./metadata-component.html";
 
 function patientMetadataPermissionFactory(PatientObjectPermission) {
   return PatientObjectPermission;
 }
 
-patientMetadataPermissionFactory.$inject = ['PatientObjectPermission'];
+patientMetadataPermissionFactory.$inject = ["PatientObjectPermission"];
 
 function patientMetadataControllerFactory(
   ModelDetailController,
-  PatientMetadataPermission,  
+  PatientMetadataPermission,
   $injector,
   store
 ) {
@@ -24,44 +24,60 @@ function patientMetadataControllerFactory(
     $injector.invoke(ModelDetailController, self, {
       $scope: $scope,
       params: {
-        permission: new PatientMetadataPermission($scope.patient)
-      }
+        permission: new PatientMetadataPermission($scope.patient),
+      },
     });
 
-    var signedOffStatesPromise = store.findMany('signedOffStates').then(function(signedOffStates) {
-      $scope.signedOffStates = signedOffStates;
-    });
+    var shortNames = [];
+    for (let group of $scope.patient.groups) {
+      shortNames.push(group.group.shortName);
+    }
+    $scope.groupShortNames = shortNames;
 
-    self.load($scope.patient).then(function() {
+    var signedOffStatesPromise = store
+      .findMany("signedOffStates")
+      .then(function (signedOffStates) {
+        $scope.signedOffStates = signedOffStates;
+        $scope.INSSignedOffStates = signedOffStates.filter(function (value) {
+          return value.label != "Baseline complete, no FUP as Tx or dialysis";
+        });
+      });
+
+    self.load($scope.patient).then(function () {
       self.view();
     }),
-    signedOffStatesPromise;
+      signedOffStatesPromise;
   }
 
-  
-
-  PatientMetadataController.$inject = ['$scope'];
-  PatientMetadataController.prototype = Object.create(ModelDetailController.prototype);
+  PatientMetadataController.$inject = ["$scope"];
+  PatientMetadataController.prototype = Object.create(
+    ModelDetailController.prototype
+  );
 
   return PatientMetadataController;
 }
 
-patientMetadataControllerFactory.$inject = ['ModelDetailController', 'PatientMetadataPermission', '$injector', 'store'];
+patientMetadataControllerFactory.$inject = [
+  "ModelDetailController",
+  "PatientMetadataPermission",
+  "$injector",
+  "store",
+];
 
 function patientMetadataComponent(PatientMetadataController) {
   return {
     scope: {
-      patient: '='
+      patient: "=",
     },
     controller: PatientMetadataController,
-    templateUrl: templateUrl
+    templateUrl: templateUrl,
   };
 }
 
-patientMetadataComponent.$inject = ['PatientMetadataController'];
+patientMetadataComponent.$inject = ["PatientMetadataController"];
 
 export {
   patientMetadataPermissionFactory,
   patientMetadataControllerFactory,
-  patientMetadataComponent
+  patientMetadataComponent,
 };
