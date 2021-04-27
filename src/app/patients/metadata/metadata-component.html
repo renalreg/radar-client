@@ -18,12 +18,11 @@
         <th>Control Patient?</th>
         <td><span tick="item.control"></span></td>
       </tr>
+      
       <tr ng-if="item.signedOffState != null">
         <th>Data completeness maximized</th>
         <td><span>{{item.signedOffState.label}}</span></td>
-        
       </tr>
-
     </table>
 
     <div metadata item="item"></div>
@@ -34,7 +33,11 @@
       <span crud-view-button item="originalItem"></span>
     </p>
 
-    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+    <form
+      class="form-horizontal form-container"
+      crud-submit="saveAndView()"
+      novalidate
+    >
       <div frm-field frm-group>
         <div frm-label>Comments</div>
 
@@ -60,16 +63,27 @@
           <div frm-errors errors="item.errors.control"></div>
         </div>
       </div>
+      
 
       <div frm-field frm-group ng-if="item.signedOffState != null">
         <div frm-label>Data completeness maximized</div>
-
+        
         <div frm-control>
-          <div frm-radio-field model="item.signedOffState" options="signedOffStates"></div>
+          <div
+            ng-if="groupShortNames.includes('NURTuRE - INS')"
+            frm-radio-field
+            model="item.signedOffState"
+            options="INSSignedOffStates"
+          ></div>
+          <div
+            ng-if="!groupShortNames.includes('NURTuRE - INS')"
+            frm-radio-field
+            model="item.signedOffState"
+            options="signedOffStates"
+          ></div>
           <div frm-errors errors="item.errors.signedOffState"></div>
         </div>
       </div>
-
 
       <div frm-buttons>
         <span crud-save-button></span>

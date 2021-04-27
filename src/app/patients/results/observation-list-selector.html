@@ -3,6 +3,15 @@
     <h3 class="panel-title">Observations to Display</h3>
   </div>
 
+  <ul class="radar-tabs">
+    <li ng-repeat="group in groups" ng-class="{'active': isActive(group)}">
+      <a href="" ng-click="setGroup(group)">{{group.shortName}}</a>
+    </li>
+    <li ng-class="{'active': isActive(null)}"><a href="" ng-click="setGroup(null)">All</a></li>
+  </ul>
+
+
+
   <div class="panel-body">
     <div loading="loading">
       <div list-helper="observations as page" list-helper-options="{perPage: 5, sortBy: 'name'}">
@@ -30,8 +39,10 @@
             </tr>
 
             <tr ng-repeat="observation in selectedObservations">
+
               <td>
-                <button type="button" ng-click="remove(observation)" class="btn btn-primary btn-xs"><i class="fa fa-minus"></i></button>
+                <button type="button" ng-click="remove(observation)" class="btn btn-primary btn-xs"><i
+                    class="fa fa-minus"></i></button>
               </td>
 
               <td>{{observation.name}}</td>
@@ -44,8 +55,10 @@
 
               <td>
                 <div class="btn-group">
-                  <button type="button" ng-click="up(observation)" class="btn btn-primary btn-xs"><i class="fa fa-arrow-up"></i></button>
-                  <button type="button" ng-click="down(observation)" class="btn btn-primary btn-xs"><i class="fa fa-arrow-down"></i></button>
+                  <button type="button" ng-click="up(observation)" class="btn btn-primary btn-xs"><i
+                      class="fa fa-arrow-up"></i></button>
+                  <button type="button" ng-click="down(observation)" class="btn btn-primary btn-xs"><i
+                      class="fa fa-arrow-down"></i></button>
                 </div>
               </td>
             </tr>
@@ -67,10 +80,10 @@
             <tr ng-if="observations.length && !page.getCount()">
               <td colspan="9" class="empty">No matching observations.</td>
             </tr>
-
-            <tr ng-repeat="observation in page.getItems()">
+            <tr ng-repeat="observation in observations">  
               <td>
-                <button type="button" ng-click="add(observation)" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></button>
+                <button type="button" ng-click="add(observation)" class="btn btn-primary btn-xs"><i
+                    class="fa fa-plus"></i></button>
               </td>
 
               <td>{{observation.name}}</td>

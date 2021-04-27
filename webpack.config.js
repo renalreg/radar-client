@@ -10,11 +10,11 @@ var config = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'http://radar-api:5000',
         pathRewrite: { '^/api': '' }
       },
       '/admin': {
-        target: 'http://localhost:5002'
+        target: 'http://radar-admin:5002'
       }
     }
   },
