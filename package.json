@@ -62,5 +62,9 @@
     "webpack": "^1.13.2",
     "webpack-dev-middleware": "^1.12.2",
     "webpack-dev-server": "^1.15.1"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true
   }
 }

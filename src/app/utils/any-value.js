@@ -12,7 +12,8 @@ function anyValue(x, callback) {
   var found = false;
   var value;
 
-  if (_.isArray(x)) { // Array
+  if (_.isArray(x)) {
+    // Array
     // Recurse with each item
     for (var i = 0; i < x.length; i++) {
       value = x[i];
@@ -22,7 +23,8 @@ function anyValue(x, callback) {
         break;
       }
     }
-  } else if (_.isObject(x)) { // Object
+  } else if (_.isObject(x)) {
+    // Object
     // Recurse with each property
     for (var key in x) {
       if (x.hasOwnProperty(key)) {
@@ -34,7 +36,8 @@ function anyValue(x, callback) {
         }
       }
     }
-  } else { // Primitive
+  } else {
+    // Primitive
     found = callback(x);
   }
 

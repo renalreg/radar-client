@@ -1,10 +1,10 @@
-import templateUrl from "./metadata-component.html";
+import templateUrl from './metadata-component.html';
 
 function patientMetadataPermissionFactory(PatientObjectPermission) {
   return PatientObjectPermission;
 }
 
-patientMetadataPermissionFactory.$inject = ["PatientObjectPermission"];
+patientMetadataPermissionFactory.$inject = ['PatientObjectPermission'];
 
 function patientMetadataControllerFactory(
   ModelDetailController,
@@ -35,21 +35,21 @@ function patientMetadataControllerFactory(
     $scope.groupShortNames = shortNames;
 
     var signedOffStatesPromise = store
-      .findMany("signedOffStates")
+      .findMany('signedOffStates')
       .then(function (signedOffStates) {
         $scope.signedOffStates = signedOffStates;
         $scope.INSSignedOffStates = signedOffStates.filter(function (value) {
-          return value.label != "Baseline complete, no FUP as Tx or dialysis";
+          return value.label != 'Baseline complete, no FUP as Tx or dialysis';
         });
       });
 
     self.load($scope.patient).then(function () {
       self.view();
-    }),
-      signedOffStatesPromise;
+    });
+    signedOffStatesPromise;
   }
 
-  PatientMetadataController.$inject = ["$scope"];
+  PatientMetadataController.$inject = ['$scope'];
   PatientMetadataController.prototype = Object.create(
     ModelDetailController.prototype
   );
@@ -58,23 +58,23 @@ function patientMetadataControllerFactory(
 }
 
 patientMetadataControllerFactory.$inject = [
-  "ModelDetailController",
-  "PatientMetadataPermission",
-  "$injector",
-  "store",
+  'ModelDetailController',
+  'PatientMetadataPermission',
+  '$injector',
+  'store',
 ];
 
 function patientMetadataComponent(PatientMetadataController) {
   return {
     scope: {
-      patient: "=",
+      patient: '=',
     },
     controller: PatientMetadataController,
     templateUrl: templateUrl,
   };
 }
 
-patientMetadataComponent.$inject = ["PatientMetadataController"];
+patientMetadataComponent.$inject = ['PatientMetadataController'];
 
 export {
   patientMetadataPermissionFactory,
