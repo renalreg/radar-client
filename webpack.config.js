@@ -10,11 +10,11 @@ var config = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5000',
-        pathRewrite: {'^/api' : ''}
+        target: 'http://radar-api:5000',
+        pathRewrite: { '^/api': '' }
       },
       '/admin': {
-        target: 'http://localhost:5002'
+        target: 'http://radar-admin:5002'
       }
     }
   },
@@ -52,7 +52,7 @@ var config = {
       },
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], {publicPath: '../'})
+        loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], { publicPath: '../' })
       },
       {
         test: /\.(woff2?|ttf|eot|svg|png|jpg)(\?.*)?$/,
