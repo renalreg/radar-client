@@ -14,7 +14,8 @@
 
         <div ng-if="items.length">
           <p ng-if="viewDemographicsPermission"><span toggle-demographics></span></p>
-          <p><a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span class="link">Download</span></a></p>
+          <p><a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span
+                class="link">Download</span></a></p>
         </div>
 
         <table class="table table-condensed table-striped" ng-if="items.length">
@@ -80,7 +81,8 @@
                   <span if-demographics-visible>
                     <span ng-if="patient.primaryPatientNumber === null">-</span>
                     <span ng-if="patient.primaryPatientNumber !== null">
-                      {{patient.primaryPatientNumber.number}} <small>({{patient.primaryPatientNumber.numberGroup.shortName}})</small>
+                      {{patient.primaryPatientNumber.number}}
+                      <small>({{patient.primaryPatientNumber.numberGroup.shortName}})</small>
                     </span>
                   </span>
 
@@ -129,7 +131,7 @@
         </div>
 
         <div frm-field frm-group>
-          <div frm-label>RaDaR ID</div>
+          <div frm-label>Star ID</div>
 
           <div frm-control>
             <div frm-integer-field model="filters.id"></div>
