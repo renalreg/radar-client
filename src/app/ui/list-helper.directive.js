@@ -13,7 +13,7 @@ var DEFAULT_PER_PAGE = 10;
 function listHelper($parse) {
   return {
     scope: false,
-    controller: ['$scope', '$attrs', function($scope, $attrs) {
+    controller: ['$scope', '$attrs', function ($scope, $attrs) {
       var self = this;
 
       var listHelper = $attrs.listHelper;
@@ -49,9 +49,9 @@ function listHelper($parse) {
         var search = '';
         var page = 1;
 
-        $scope.$watchCollection(function() {
+        $scope.$watchCollection(function () {
           return collectionGetter($scope);
-        }, function(value) {
+        }, function (value) {
           items = value || [];
           _filter();
           checkPage();
@@ -149,17 +149,17 @@ function listHelper($parse) {
 
           if (search) {
             var searchRegExp = new RegExp(escapeRegExp(search.trim()), 'i');
-            var searchMatcher = function(value) {
+            var searchMatcher = function (value) {
               return searchRegExp.test(value);
             };
 
             var dateMatcher = dateSearch(search);
 
-            var matcher = function(value) {
+            var matcher = function (value) {
               return searchMatcher(value) || dateMatcher(value);
             };
 
-            filteredItems = _.filter(filteredItems, function(x) {
+            filteredItems = _.filter(filteredItems, function (x) {
               return anyValue(x, matcher);
             });
           }
@@ -173,7 +173,7 @@ function listHelper($parse) {
           if (sortBy !== null) {
             var getter = $parse(sortBy);
 
-            sortedItems = stable(sortedItems, function(a, b) {
+            sortedItems = stable(sortedItems, function (a, b) {
               // Note: AngularJS doesn't check the prototype of the locals argument
               a = getter(a, sortScope);
               b = getter(b, sortScope);
@@ -203,9 +203,9 @@ function listHelper($parse) {
       function server(apiGetter) {
         var api = apiGetter($scope);
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
           return apiGetter($scope);
-        }, function(value) {
+        }, function (value) {
           api = value;
         });
 
@@ -307,7 +307,7 @@ function listHelperProxyFactory() {
     this.lastParams = null;
   }
 
-  ListHelperProxy.prototype.sort = function(sortBy, reverse, load) {
+  ListHelperProxy.prototype.sort = function (sortBy, reverse, load) {
     if (load === undefined) {
       load = true;
     }
@@ -321,55 +321,55 @@ function listHelperProxyFactory() {
     }
   };
 
-  ListHelperProxy.prototype.getSortBy = function() {
+  ListHelperProxy.prototype.getSortBy = function () {
     return this.sortBy;
   };
 
-  ListHelperProxy.prototype.getReverse = function() {
+  ListHelperProxy.prototype.getReverse = function () {
     return this.reverse;
   };
 
-  ListHelperProxy.prototype.getPage = function() {
+  ListHelperProxy.prototype.getPage = function () {
     return this.page;
   };
 
-  ListHelperProxy.prototype.setPage = function(page) {
+  ListHelperProxy.prototype.setPage = function (page) {
     if (page > 0 && page <= this.getTotalPages()) {
       this.page = page;
       this.load();
     }
   };
 
-  ListHelperProxy.prototype.getPerPage = function() {
+  ListHelperProxy.prototype.getPerPage = function () {
     return this.perPage;
   };
 
-  ListHelperProxy.prototype.setPerPage = function(perPage) {
+  ListHelperProxy.prototype.setPerPage = function (perPage) {
     this.perPage = perPage;
     this.load();
   };
 
-  ListHelperProxy.prototype.getTotalPages = function() {
+  ListHelperProxy.prototype.getTotalPages = function () {
     return Math.ceil(this.getCount() / this.getPerPage());
   };
 
-  ListHelperProxy.prototype.setCount = function(count) {
+  ListHelperProxy.prototype.setCount = function (count) {
     this.count = count;
   };
 
-  ListHelperProxy.prototype.getCount = function() {
+  ListHelperProxy.prototype.getCount = function () {
     return this.count;
   };
 
-  ListHelperProxy.prototype.setItems = function(items) {
+  ListHelperProxy.prototype.setItems = function (items) {
     this.items = items;
   };
 
-  ListHelperProxy.prototype.getItems = function() {
+  ListHelperProxy.prototype.getItems = function () {
     return this.items;
   };
 
-  ListHelperProxy.prototype.getParams = function() {
+  ListHelperProxy.prototype.getParams = function () {
     var params = {
       page: this.getPage(),
       perPage: this.getPerPage()
@@ -384,7 +384,7 @@ function listHelperProxyFactory() {
     return params;
   };
 
-  ListHelperProxy.prototype.load = function() {
+  ListHelperProxy.prototype.load = function () {
     var params = this.getParams();
 
     // Params have changed

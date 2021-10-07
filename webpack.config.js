@@ -16,6 +16,10 @@ var config = {
       '/admin': {
         target: 'http://radar-admin:5002'
       }
+    },
+    disableHostCheck: true,
+    watchOptions: {
+      poll: true // Or you can set a value in milliseconds.
     }
   },
   entry: [

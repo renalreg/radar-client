@@ -15,7 +15,7 @@ function diagnosisSelector(store) {
     scope: {
       'patient': '='
     },
-    link: function(scope, element, attrs, ngModel) {
+    link: function (scope, element, attrs, ngModel) {
       // Mapping between group id and secondary diagnoses
       var groupDiagnoses = {};
 
@@ -45,7 +45,7 @@ function diagnosisSelector(store) {
        *
        * @returns {undefined}
        */
-      ngModel.$render = function() {
+      ngModel.$render = function () {
         scope.diagnosis = ngModel.$viewValue;
       };
 
@@ -147,13 +147,19 @@ function diagnosisSelector(store) {
        * @returns {undefined}
        */
       function load() {
-        store.findMany('diagnoses').then(function(diagnoses) {
-          _.forEach(diagnoses, function(diagnosis) {
+        store.findMany('diagnoses').then(function (diagnoses) {
+          _.forEach(diagnoses, function (diagnosis) {
+            _.forEach(diagnosis.codes, function (code) {
+              if (code.system === 'ICD-10') {
+                add(null, diagnosis);
+              };
+            })
+
             // Add the diagnosis to the all list
-            add(null, diagnosis);
+
 
             // Add the diagnosis to each of its groups
-            _.forEach(diagnosis.groups, function(group) {
+            _.forEach(diagnosis.groups, function (group) {
               if (group.type.id === 'SECONDARY') {
                 // Add the diagnosis to the group's list
                 add(group.group, diagnosis);
@@ -165,7 +171,7 @@ function diagnosisSelector(store) {
           scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
 
           // Remove groups that don't have any diagnoses
-          scope.groups = _.filter(scope.groups, function(group) {
+          scope.groups = _.filter(scope.groups, function (group) {
             return getDiagnoses(group).length > 0;
           });
 
