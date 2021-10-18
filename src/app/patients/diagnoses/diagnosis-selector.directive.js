@@ -152,8 +152,8 @@ function diagnosisSelector(store) {
             _.forEach(diagnosis.codes, function (code) {
               if (code.system === 'ICD-10') {
                 add(null, diagnosis);
-              };
-            })
+              }
+            });
 
             // Add the diagnosis to the all list
 
