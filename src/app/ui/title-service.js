@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 function titleService($rootScope) {
-  var defaultTitle = 'RaDaR';
+  var defaultTitle = 'Star';
   var title = defaultTitle;
   var callbacks = [];
 
