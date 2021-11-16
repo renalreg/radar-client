@@ -149,8 +149,11 @@ function diagnosisSelector(store) {
       function load() {
         store.findMany('diagnoses').then(function (diagnoses) {
           _.forEach(diagnoses, function (diagnosis) {
+            if (diagnosis.codes.length == 0) {
+              add(null, diagnosis);
+            }
             _.forEach(diagnosis.codes, function (code) {
-              if (code.system === 'ICD-10') {
+              if (code.system !== 'ORPHA') {
                 add(null, diagnosis);
               }
             });
