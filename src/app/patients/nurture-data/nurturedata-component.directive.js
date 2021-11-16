@@ -28,6 +28,8 @@ function patientNurtureDataControllerFactory(
       },
     });
 
+    $scope.nurtureOptions = ["Yes", "No"]
+
     var shortNames = [];
     for (let group of $scope.patient.groups) {
       shortNames.push(group.group.shortName);
