@@ -1,5 +1,3 @@
-<div>{{item}}</div>
-<div>{{signedOffStates}}</div>
 <div loading="loading" crud>
   <div ng-if="viewing">
     <p>
@@ -37,11 +35,11 @@
     >
       <div frm-field frm-group>
         <div frm-label>Data completeness maximized</div>
-
         <div frm-control>
           <div
-            frm-radio-field
+            frm-select-field
             model="item.signedOffState"
+            required="true"
             options="signedOffStates"
           ></div>
           <div frm-errors errors="item.errors.signedOffState"></div>
