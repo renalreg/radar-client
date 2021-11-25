@@ -18,12 +18,20 @@
 
 <div patient-addresses-component patient="patient"></div>
 
-<h2 class="page-header">Nurture Information</h2>
+<h2 class="page-header" ng-if="patient.nurtureData">Nurture Information</h2>
 
-<div patient-nurture-data-component patient="patient"></div>
+<div
+  patient-nurture-data-component
+  patient="patient"
+  ng-if="patient.nurtureData"
+></div>
 
 <h2 class="page-header">Metadata</h2>
 
 <div patient-metadata-component patient="patient"></div>
 
-<p ng-if="user.isAdmin"><a ui-sref="patient.delete({patientId: patient.id})" class="delete-patient">Delete Patient</a></p>
+<p ng-if="user.isAdmin">
+  <a ui-sref="patient.delete({patientId: patient.id})" class="delete-patient"
+    >Delete Patient</a
+  >
+</p>
