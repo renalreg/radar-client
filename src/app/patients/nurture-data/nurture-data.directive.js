@@ -1,4 +1,4 @@
-import templateUrl from './nurturedata-component.html';
+import templateUrl from './nurture-data-component.html';
 
 function patientNurtureDataPermissionFactory(PatientObjectPermission) {
   return PatientObjectPermission;
@@ -13,7 +13,7 @@ function patientNurtureDataControllerFactory(
   store
 ) {
   /**
-   * A component for recording nurturedata about the patient (for example comments).
+   * A component for recording nurture-data about the patient (for example comments).
    *
    * @class
    * @param {Object} $scope - angular scope.
@@ -28,27 +28,22 @@ function patientNurtureDataControllerFactory(
       },
     });
 
-    $scope.nurtureOptions = ["Yes", "No"]
-
     var shortNames = [];
     for (let group of $scope.patient.groups) {
       shortNames.push(group.group.shortName);
     }
     $scope.groupShortNames = shortNames;
 
-    var signedOffStatesPromise = store
-      .findMany('signedOffStates')
-      .then(function (signedOffStates) {
-        $scope.signedOffStates = signedOffStates;
-        $scope.INSSignedOffStates = signedOffStates.filter(function (value) {
-          return value.label != 'Baseline complete, no FUP as Tx or dialysis';
-        });
+    self
+      .load(
+        store.findOne('nurture-data', $scope.patient.nurtureData.id),
+        store.findMany('signed-off-states').then(function (signedOffStates) {
+          $scope.signedOffStates = signedOffStates;
+        })
+      )
+      .then(function () {
+        self.view();
       });
-
-    self.load($scope.patient).then(function () {
-      self.view();
-    });
-    signedOffStatesPromise;
   }
 
   PatientNurtureDataController.$inject = ['$scope'];

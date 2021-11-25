@@ -1,0 +1,74 @@
+<div>{{item}}</div>
+<div>{{signedOffStates}}</div>
+<div loading="loading" crud>
+  <div ng-if="viewing">
+    <p>
+      <span crud-edit-button item="item"></span>
+    </p>
+
+    <table class="table properties" ng-if="item">
+      <tr>
+        <th>Data completeness maximized</th>
+        <td><span>{{signedOffStates[item.signedOffState].label}}</span></td>
+      </tr>
+
+      <tr>
+        <th>Follow up visits samples</th>
+        <td><span tick="item.bloodTests"></span></td>
+      </tr>
+      <tr>
+        <th>Follow up Interview</th>
+        <td><span tick="item.interviews"></span></td>
+      </tr>
+    </table>
+
+    <div nurture-data item="item"></div>
+  </div>
+
+  <div ng-if="editing">
+    <p>
+      <span crud-view-button item="originalItem"></span>
+    </p>
+
+    <form
+      class="form-horizontal form-container"
+      crud-submit="saveAndView()"
+      novalidate
+    >
+      <div frm-field frm-group>
+        <div frm-label>Data completeness maximized</div>
+
+        <div frm-control>
+          <div
+            frm-radio-field
+            model="item.signedOffState"
+            options="signedOffStates"
+          ></div>
+          <div frm-errors errors="item.errors.signedOffState"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Follow up visits samples</div>
+
+        <div frm-control>
+          <div frm-boolean-field model="item.bloodTests"></div>
+          <div frm-errors errors="item.errors.bloodTests"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Follow up Interview</div>
+        <div frm-control>
+          <div frm-boolean-field model="item.interviews"></div>
+          <div frm-errors errors="item.errors.interviews"></div>
+        </div>
+      </div>
+
+      <div frm-buttons>
+        <span crud-save-button></span>
+        <span crud-cancel-button action="view(originalItem)"></span>
+      </div>
+    </form>
+  </div>
+</div>

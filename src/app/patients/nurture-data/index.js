@@ -3,23 +3,23 @@ import angular from 'angular';
 import {
   patientNurtureDataPermissionFactory,
   patientNurtureDataControllerFactory,
-  patientNurtureDataComponent
-} from './nurturedata-component.directive';
+  patientNurtureDataComponent,
+} from './nurture-data.directive';
 
-import templateUrl from './nurturedata.html';
+import templateUrl from './nurture-data.html';
 
 function config($stateProvider) {
-  $stateProvider.state('patient.nurturedata', {
-    url: '/nurturedata',
-    templateUrl: templateUrl
+  $stateProvider.state('patient.nurture-data', {
+    url: '/nurture-data',
+    templateUrl: templateUrl,
   });
 }
 
 config.$inject = ['$stateProvider'];
 
-export default angular.module('radar.patients.nurturedata', [])
+export default angular
+  .module('radar.patients.nurture-data', [])
   .config(config)
   .factory('PatientNurtureDataPermission', patientNurtureDataPermissionFactory)
   .factory('PatientNurtureDataController', patientNurtureDataControllerFactory)
-  .directive('patientNurtureDataComponent', patientNurtureDataComponent)
-  .name;
+  .directive('patientNurtureDataComponent', patientNurtureDataComponent).name;

@@ -34,19 +34,9 @@ function patientMetadataControllerFactory(
     }
     $scope.groupShortNames = shortNames;
 
-    var signedOffStatesPromise = store
-      .findMany('signedOffStates')
-      .then(function (signedOffStates) {
-        $scope.signedOffStates = signedOffStates;
-        $scope.INSSignedOffStates = signedOffStates.filter(function (value) {
-          return value.label != 'Baseline complete, no FUP as Tx or dialysis';
-        });
-      });
-
     self.load($scope.patient).then(function () {
       self.view();
     });
-    signedOffStatesPromise;
   }
 
   PatientMetadataController.$inject = ['$scope'];
