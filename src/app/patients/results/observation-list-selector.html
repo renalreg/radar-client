@@ -80,7 +80,7 @@
             <tr ng-if="observations.length && !page.getCount()">
               <td colspan="9" class="empty">No matching observations.</td>
             </tr>
-            <tr ng-repeat="observation in observations">  
+            <tr ng-repeat="observation in page.getItems()">  
               <td>
                 <button type="button" ng-click="add(observation)" class="btn btn-primary btn-xs"><i
                     class="fa fa-plus"></i></button>

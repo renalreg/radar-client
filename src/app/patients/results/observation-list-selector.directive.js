@@ -15,7 +15,7 @@ function observationListSelector(store, adapter) {
   return {
     scope: {
       patient: '=patient',
-      selectedObservations: '=observations'
+      selectedObservations: '=observations',
     },
     templateUrl: templateUrl,
     link: function (scope) {
@@ -23,7 +23,7 @@ function observationListSelector(store, adapter) {
 
       // Mapping between group id and observations
       var groupObservations = {};
-      scope.groupObservations = groupObservations
+      scope.groupObservations = groupObservations;
 
       // Currently selected groups (all observations are displayed when set to null)
       scope.group = null;
@@ -55,71 +55,76 @@ function observationListSelector(store, adapter) {
        * @returns {undefined}
        */
       function load() {
-        adapter.get('/observation-counts', { patient: scope.patient.id }).then(function (response) {
-          var observations = [];
-          counts = {};
+        adapter
+          .get('/observation-counts', { patient: scope.patient.id })
+          .then(function (response) {
+            var observations = [];
+            counts = {};
 
-          _.forEach(response.data.data, function (x) {
-            var observation = store.pushToStore(store.create('observations', x.observation));
-            observations.push(observation);
-            counts[observation.id] = x.count;
-            _.forEach(observations, function (observation) {
-              addToGroupObs(null, observation);
+            _.forEach(response.data.data, function (x) {
+              var observation = store.pushToStore(
+                store.create('observations', x.observation)
+              );
+              observations.push(observation);
+              counts[observation.id] = x.count;
+              _.forEach(observations, function (observation) {
+                addToGroupObs(null, observation);
 
-              _.forEach(observation.groups, function (group) {
-                // Add observation to group
-                addToGroupObs(group.group, observation);
+                _.forEach(observation.groups, function (group) {
+                  // Add observation to group
+                  addToGroupObs(group.group, observation);
+                });
               });
             });
+
+            var unique_observations = new Set(observations);
+
+            scope.observations = Array.from(unique_observations);
+
+            // Get's patients groups sorted by name
+            scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
+
+            // Remove groups that aren't cohorts
+            scope.groups = _.filter(scope.groups, function (group) {
+              return filterGroups(group);
+            });
+
+            // Finished loading
+            scope.loading = false;
           });
-
-          var unique_observations = new Set(observations)
-
-          scope.observations = Array.from(unique_observations);
-
-          // Get's patients groups sorted by name
-          scope.groups = _.sortBy(scope.patient.getGroups(), 'shortName');
-
-          // Remove groups that aren't cohorts
-          scope.groups = _.filter(scope.groups, function (group) {
-            return filterGroups(group);
-          });
-
-          // Finished loading
-          scope.loading = false;
-        });
       }
 
-
       /**
-         * Fiter groups based on being a cohort
-         *
-         * @param {Object} group - the group to check for cohort.
-         * @returns {Object} group - the group if it is a cohort.
-         */
+       * Fiter groups based on being a cohort
+       *
+       * @param {Object} group - the group to check for cohort.
+       * @returns {Object} group - the group if it is a cohort.
+       */
       function filterGroups(group) {
         if (group.type == 'COHORT') {
           return group;
         }
       }
 
-
       /**
-      * Set the current group.
-      *
-      * @param {Object} group - the selected group.
-      * @returns {undefined}
-      */
+       * Set the current group.
+       *
+       * @param {Object} group - the selected group.
+       * @returns {undefined}
+       */
       function setGroup(group) {
         scope.group = group;
-        var unique_observations = new Set(getObservations(group))
+        var unique_observations = new Set(getObservations(group));
         var observations = Array.from(unique_observations);
-        
-        scope.observations = _.sortBy(observations, [function (obs) {
-          return findGroupWeightInObservation(group, obs);
-        }, function (obs) {          
-          return obs.name.toLowerCase();
-        }]);
+
+        scope.observations = _.sortBy(observations, [
+          function (obs) {
+            return findGroupWeightInObservation(group, obs);
+          },
+          function (obs) {
+            return obs.name.toLowerCase();
+          },
+        ]);
       }
 
       function findGroupWeightInObservation(group, obs) {
@@ -150,7 +155,7 @@ function observationListSelector(store, adapter) {
        * @param {Object} group - the group to get observations for.
        * @returns {array} - the list of observations for this group.
        */
-      function getObservations(group) {        
+      function getObservations(group) {
         var key = group === null ? null : group.id;
         return groupObservations[key] || [];
       }
@@ -235,7 +240,7 @@ function observationListSelector(store, adapter) {
           swap(scope.selectedObservations, index, index + 1);
         }
       }
-    }
+    },
   };
 }
 

@@ -3,7 +3,7 @@ import angular from 'angular';
 import {
   patientMetadataPermissionFactory,
   patientMetadataControllerFactory,
-  patientMetadataComponent
+  patientMetadataComponent,
 } from './metadata-component.directive';
 
 import templateUrl from './metadata.html';
@@ -11,15 +11,15 @@ import templateUrl from './metadata.html';
 function config($stateProvider) {
   $stateProvider.state('patient.metadata', {
     url: '/metadata',
-    templateUrl: templateUrl
+    templateUrl: templateUrl,
   });
 }
 
 config.$inject = ['$stateProvider'];
 
-export default angular.module('radar.patients.metadata', [])
+export default angular
+  .module('radar.patients.metadata', [])
   .config(config)
   .factory('PatientMetadataPermission', patientMetadataPermissionFactory)
   .factory('PatientMetadataController', patientMetadataControllerFactory)
-  .directive('patientMetadataComponent', patientMetadataComponent)
-  .name;
+  .directive('patientMetadataComponent', patientMetadataComponent).name;

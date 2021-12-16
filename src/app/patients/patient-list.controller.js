@@ -63,7 +63,7 @@ function patientListControllerFactory(
       $scope.genders = genders;
     });
 
-    var signedOffStatesPromise = store.findMany('signedOffStates').then(function (signedOffStates) {
+    var signedOffStatesPromise = store.findMany('signed-off-states').then(function (signedOffStates) {
       $scope.signedOffStates = signedOffStates;
     });
 

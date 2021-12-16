@@ -24,6 +24,7 @@ import ins from './ins';
 import pkd from './pkd';
 import medications from './medications';
 import metadata from './metadata';
+import nurtureData from './nurture-data';
 import mpgn from './mpgn';
 import navigation from './navigation';
 import nephrectomies from './nephrectomies';
@@ -117,6 +118,7 @@ export default angular.module('radar.patients', [
   ins,
   medications,
   metadata,
+  nurtureData,
   mpgn,
   navigation,
   nephrectomies,
