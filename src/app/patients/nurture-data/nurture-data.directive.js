@@ -39,6 +39,9 @@ function patientNurtureDataControllerFactory(
         store.findOne('nurture-data', $scope.patient.nurtureData.id),
         store.findMany('signed-off-states').then(function (signedOffStates) {
           $scope.signedOffStates = signedOffStates;
+          $scope.INSSignedOffStates = signedOffStates.filter(function (value) {
+            return value.label != 'Baseline complete, no FUP as Tx or dialysis';
+          });
         })
       )
       .then(function () {
