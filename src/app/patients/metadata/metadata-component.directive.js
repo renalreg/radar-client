@@ -9,8 +9,7 @@ patientMetadataPermissionFactory.$inject = ['PatientObjectPermission'];
 function patientMetadataControllerFactory(
   ModelDetailController,
   PatientMetadataPermission,
-  $injector,
-  store
+  $injector
 ) {
   /**
    * A component for recording metadata about the patient (for example comments).
@@ -34,19 +33,9 @@ function patientMetadataControllerFactory(
     }
     $scope.groupShortNames = shortNames;
 
-    var signedOffStatesPromise = store
-      .findMany('signedOffStates')
-      .then(function (signedOffStates) {
-        $scope.signedOffStates = signedOffStates;
-        $scope.INSSignedOffStates = signedOffStates.filter(function (value) {
-          return value.label != 'Baseline complete, no FUP as Tx or dialysis';
-        });
-      });
-
     self.load($scope.patient).then(function () {
       self.view();
     });
-    signedOffStatesPromise;
   }
 
   PatientMetadataController.$inject = ['$scope'];
@@ -61,7 +50,6 @@ patientMetadataControllerFactory.$inject = [
   'ModelDetailController',
   'PatientMetadataPermission',
   '$injector',
-  'store',
 ];
 
 function patientMetadataComponent(PatientMetadataController) {
