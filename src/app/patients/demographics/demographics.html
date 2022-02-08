@@ -18,6 +18,10 @@
 
 <div patient-addresses-component patient="patient"></div>
 
+<h2 class="page-header">Metadata</h2>
+
+<div patient-metadata-component patient="patient"></div>
+
 <h2 class="page-header" ng-if="patient.nurtureData">Nurture Information</h2>
 
 <div
@@ -25,10 +29,6 @@
   patient="patient"
   ng-if="patient.nurtureData"
 ></div>
-
-<h2 class="page-header">Metadata</h2>
-
-<div patient-metadata-component patient="patient"></div>
 
 <p ng-if="user.isAdmin">
   <a ui-sref="patient.delete({patientId: patient.id})" class="delete-patient"

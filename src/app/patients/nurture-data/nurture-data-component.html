@@ -9,14 +9,21 @@
         <th>Data completeness maximized</th>
         <td><span>{{signedOffStates[item.signedOffState].label}}</span></td>
       </tr>
-
       <tr ng-if="item.signedOffState !== 3 && item.signedOffState !== 4">
         <th>Follow up visits samples</th>
-        <td><span tick="item.bloodTests"></span></td>
+        <td><span tick="item.bloodTests"></td>
+      </tr>
+      <tr ng-if='item.bloodTests == false'>
+        <th>Samples refused date</th>
+        <td><span>{{item.bloodRefusedDate}}</span></td>
       </tr>
       <tr ng-if="item.signedOffState !== 3 && item.signedOffState !== 4">
         <th>Follow up Interview</th>
         <td><span tick="item.interviews"></span></td>
+      </tr>
+      <tr ng-if='item.interviews == false'>
+        <th>Interview refused date</th>
+        <td><span>{{item.interviewsRefusedDate}}</span></td>
       </tr>
     </table>
 
