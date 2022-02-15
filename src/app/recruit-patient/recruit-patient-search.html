@@ -50,6 +50,13 @@
         required="true"
       ></div>
       <div frm-errors errors="searchErrors.emailAddress"></div>
+      <div frm-help>
+        Radar may wish to contact the patient so it is important to include
+        e-mail where possible. If you are unable to provide an e-mail
+        <button ng-click="searchParams.emailAddress='radar@radar.radar'">
+          click here
+        </button>
+      </div>
     </div>
   </div>
 
