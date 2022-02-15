@@ -4,7 +4,11 @@
 
 <h2>Search</h2>
 
-<form class="form-horizontal form-container" submit-if-valid="search()" novalidate>
+<form
+  class="form-horizontal form-container"
+  submit-if-valid="search()"
+  novalidate
+>
   <div frm-field frm-group>
     <div frm-label>First Name</div>
 
@@ -27,8 +31,32 @@
     <div frm-label>Date of Birth</div>
 
     <div frm-control>
-      <div frm-date-field model="searchParams.dateOfBirth" required="true"></div>
+      <div
+        frm-date-field
+        model="searchParams.dateOfBirth"
+        required="true"
+      ></div>
       <div frm-errors errors="searchErrors.dateOfBirth"></div>
+    </div>
+  </div>
+
+  <div frm-field frm-group>
+    <div frm-label>Email Address</div>
+
+    <div frm-control>
+      <div
+        frm-email-field
+        model="searchParams.emailAddress"
+        required="true"
+      ></div>
+      <div frm-errors errors="searchErrors.emailAddress"></div>
+      <div frm-help>
+        Radar may wish to contact the patient so it is important to include
+        e-mail where possible. If you are unable to provide an e-mail
+        <button ng-click="searchParams.emailAddress='radar@radar.radar'">
+          click here
+        </button>
+      </div>
     </div>
   </div>
 
@@ -36,7 +64,12 @@
     <div frm-label>Gender</div>
 
     <div frm-control>
-      <div frm-select-field model="searchParams.gender" options="genders" required="true"></div>
+      <div
+        frm-select-field
+        model="searchParams.gender"
+        options="genders"
+        required="true"
+      ></div>
       <div frm-errors errors="searchErrors.gender"></div>
     </div>
   </div>
@@ -45,7 +78,13 @@
     <div frm-label>Patient Number</div>
 
     <div frm-control>
-      <div frm-select-field model="searchParams.numberGroup" options="numberGroups" options-label="shortName" required="true"></div>
+      <div
+        frm-select-field
+        model="searchParams.numberGroup"
+        options="numberGroups"
+        options-label="shortName"
+        required="true"
+      ></div>
       <div frm-errors errors="searchErrors.numberGroup"></div>
     </div>
   </div>
