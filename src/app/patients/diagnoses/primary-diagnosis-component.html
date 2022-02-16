@@ -18,7 +18,12 @@
 
       <tr>
         <th>Symptoms Date</th>
-        <td>{{item.symptomsDate | dateFormat}} <span ng-if="item.symptomsDate">({{item.symptomsAge | ageFormat}})</span></td>
+        <td>
+          {{item.symptomsDate | dateFormat}}
+          <span ng-if="item.symptomsDate"
+            >({{item.symptomsAge | ageFormat}})</span
+          >
+        </td>
       </tr>
 
       <tr>
@@ -28,7 +33,10 @@
 
       <tr>
         <th>To Date</th>
-        <td>{{item.toDate | dateFormat}} <span ng-if="item.toDate">({{item.toAge | ageFormat}})</span></td>
+        <td>
+          {{item.toDate | dateFormat}}
+          <span ng-if="item.toDate">({{item.toAge | ageFormat}})</span>
+        </td>
       </tr>
 
       <tr>
@@ -76,16 +84,30 @@
       <span crud-view-button item="originalItem"></span>
     </p>
 
-    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+    <form
+      class="form-horizontal form-container"
+      crud-submit="saveAndView()"
+      novalidate
+    >
       <div frm-field frm-group>
         <div frm-label>Diagnosis</div>
 
         <div frm-control>
-          <div frm-primary-diagnosis-field cohort="cohort" model="item.diagnosis" required="!item.diagnosisText"></div>
+          <div
+            frm-primary-diagnosis-field
+            cohort="cohort"
+            model="item.diagnosis"
+            required="!item.diagnosisText"
+          ></div>
           <div frm-help>
             Choose the most specific diagnosis.<br />
-            <a href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN" target="_blank">Orpha codes.</a><br />
-            If nothing is applicable, please select 'Other diagnosis' and enter diagnosis manually below.
+            <a
+              href="http://www.orpha.net/consor/cgi-bin/Disease_Search.php?lng=EN"
+              target="_blank"
+              >Orpha codes.</a
+            ><br />
+            If nothing is applicable, please select 'Other diagnosis' and enter
+            diagnosis manually below.
           </div>
 
           <div frm-errors errors="item.errors.diagnosis"></div>
@@ -99,16 +121,6 @@
           <div frm-errors errors="item.errors.swan"></div>
         </div>
       </div>
-      <div ng-if="!item.diagnosis || item.diagnosis.name === 'Other diagnosis'" frm-field frm-group>
-        <div frm-label>Diagnosis Text</div>
-
-        <div frm-control>
-          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis || item.diagnosis.name === 'Other diagnosis'"></div>
-          <div frm-help>Please use a diagnosis from the list where possible.</div>
-          <div frm-errors errors="item.errors.diagnosisText"></div>
-        </div>
-      </div>
-
 
       <div frm-field frm-group>
         <div frm-label>Symptoms Date</div>
@@ -125,7 +137,9 @@
 
         <div frm-control>
           <div frm-date-field model="item.fromDate" required="true"></div>
-          <div frm-help>01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.</div>
+          <div frm-help>
+            01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.
+          </div>
           <div frm-errors errors="item.errors.fromDate"></div>
         </div>
       </div>
@@ -179,7 +193,11 @@
         <div frm-label>Biopsy Diagnosis</div>
 
         <div frm-control>
-          <div frm-select-field model="item.biopsyDiagnosis" options="biopsyDiagnoses"></div>
+          <div
+            frm-select-field
+            model="item.biopsyDiagnosis"
+            options="biopsyDiagnoses"
+          ></div>
           <div frm-errors errors="item.errors.biopsyDiagnosis"></div>
         </div>
       </div>
@@ -200,7 +218,11 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
+  <div
+    ng-if="!viewing && !editing"
+    list-helper="items as page"
+    list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}"
+  >
     <p>
       <span crud-create-button action="create()"></span>
     </p>

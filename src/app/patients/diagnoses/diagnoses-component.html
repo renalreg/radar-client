@@ -23,7 +23,10 @@
 
       <tr>
         <th>To Date</th>
-        <td>{{item.toDate | dateFormat}} <span ng-if="item.toAge">({{item.toAge | ageFormat}})</span></td>
+        <td>
+          {{item.toDate | dateFormat}}
+          <span ng-if="item.toAge">({{item.toAge | ageFormat}})</span>
+        </td>
       </tr>
 
       <tr>
@@ -41,12 +44,21 @@
       <span crud-view-button item="originalItem"></span>
     </p>
 
-    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+    <form
+      class="form-horizontal form-container"
+      crud-submit="saveAndView()"
+      novalidate
+    >
       <div frm-field frm-group>
         <div frm-label>Data Source</div>
 
         <div frm-control>
-          <div frm-source-group-field patient="patient" model="item.sourceGroup" required="true"></div>
+          <div
+            frm-source-group-field
+            patient="patient"
+            model="item.sourceGroup"
+            required="true"
+          ></div>
           <div frm-errors errors="item.errors.sourceGroup"></div>
         </div>
       </div>
@@ -55,18 +67,13 @@
         <div frm-label>Diagnosis</div>
 
         <div frm-control>
-          <div frm-diagnosis-field patient="patient" model="item.diagnosis" required="!item.diagnosisText"></div>
+          <div
+            frm-diagnosis-field
+            patient="patient"
+            model="item.diagnosis"
+            required="!item.diagnosisText"
+          ></div>
           <div frm-errors errors="item.errors.diagnosis"></div>
-        </div>
-      </div>
-
-      <div ng-if="!item.diagnosis" frm-field frm-group>
-        <div frm-label>Diagnosis Text</div>
-
-        <div frm-control>
-          <div frm-text-field model="item.diagnosisText" required="!item.diagnosis"></div>
-          <div frm-help>Please use a diagnosis from the list where possible.</div>
-          <div frm-errors errors="item.errors.diagnosisText"></div>
         </div>
       </div>
 
@@ -74,7 +81,11 @@
         <div frm-label>Status</div>
 
         <div frm-control>
-          <div frm-diagnosis-status-field model="item.status" required="true"></div>
+          <div
+            frm-diagnosis-status-field
+            model="item.status"
+            required="true"
+          ></div>
           <div frm-errors errors="item.errors.status"></div>
         </div>
       </div>
@@ -105,9 +116,11 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page"
-    list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}">
-
+  <div
+    ng-if="!viewing && !editing"
+    list-helper="items as page"
+    list-helper-options="{perPage: 10, sortBy: 'fromDate', reverse: true}"
+  >
     <!--div ng-show="!page.getCount()" absent-diagnoses-component patient="patient"></div-->
 
     <p>
