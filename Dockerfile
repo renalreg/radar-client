@@ -1,4 +1,4 @@
-FROM node:13
+FROM node:15
 
 WORKDIR /app
 
@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . /app
 
-RUN apt-get update
+# RUN apt-get update
 
 # RUN apt install -y python3-venv python3-pip
 
