@@ -1,6 +1,7 @@
 import angular from 'angular';
 
 import frmBooleanField from './boolean-field.directive';
+import frmBooleanUnknownField from './boolean-unknown-field.directive';
 import frmCheckboxField from './checkbox-field.directive';
 import frmCheckboxRequiredField from './checkbox-required-field.directive';
 import frmCohortField from './cohort-field.directive';
@@ -32,8 +33,10 @@ import frmTextareaField from './textarea-field.directive';
 import frmWeeksAndDaysField from './weeks-and-days-field.directive';
 import frmYesNoField from './yes-no-field.directive';
 
-export default angular.module('radar.forms.fields', [])
+export default angular
+  .module('radar.forms.fields', [])
   .directive('frmBooleanField', frmBooleanField)
+  .directive('frmBooleanUnknownField', frmBooleanUnknownField)
   .directive('frmCheckboxField', frmCheckboxField)
   .directive('frmCheckboxRequiredField', frmCheckboxRequiredField)
   .directive('frmCohortField', frmCohortField)
@@ -63,5 +66,4 @@ export default angular.module('radar.forms.fields', [])
   .directive('frmTextField', frmTextField)
   .directive('frmTextareaField', frmTextareaField)
   .directive('frmWeeksAndDaysField', frmWeeksAndDaysField)
-  .directive('frmYesNoField', frmYesNoField)
-  .name;
+  .directive('frmYesNoField', frmYesNoField).name;

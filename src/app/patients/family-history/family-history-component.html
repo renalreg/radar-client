@@ -50,12 +50,19 @@
       <span crud-remove-button item="originalItem"></span>
     </p>
 
-    <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
+    <form
+      class="form-horizontal form-container"
+      crud-submit="saveAndView()"
+      novalidate
+    >
       <div frm-field frm-group>
         <div frm-label>Parental Consanguinity</div>
 
         <div frm-control>
-          <div frm-boolean-field model="item.parentalConsanguinity" required="true"></div>
+          <div
+            frm-boolean-unknown-field
+            model="item.parentalConsanguinity"
+          ></div>
           <div frm-errors errors="item.errors.parentalConsanguinity"></div>
         </div>
       </div>
@@ -64,7 +71,11 @@
         <div frm-label>Family History of Condition</div>
 
         <div frm-control>
-          <div frm-boolean-field model="item.familyHistory" required="true"></div>
+          <div
+            frm-boolean-field
+            model="item.familyHistory"
+            required="true"
+          ></div>
           <div frm-errors errors="item.errors.familyHistory"></div>
         </div>
       </div>
@@ -78,7 +89,11 @@
         </div>
       </div>
 
-      <div ng-show="item.familyHistory" family-history-relatives-component family-history="item"></div>
+      <div
+        ng-show="item.familyHistory"
+        family-history-relatives-component
+        family-history="item"
+      ></div>
 
       <div frm-buttons>
         <span crud-save-button></span>
