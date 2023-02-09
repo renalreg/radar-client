@@ -4,7 +4,9 @@
   <div class="row">
     <div class="col-lg-8">
       <p recruit-patient-permission>
-        <a ui-sref="recruitPatient.search" class="btn btn-primary">Recruit Patient</a>
+        <a ui-sref="recruitPatient.search" class="btn btn-primary"
+          >Recruit Patient</a
+        >
       </p>
 
       <div loading="loading" list-helper="proxy">
@@ -13,8 +15,15 @@
         </div>
 
         <div ng-if="items.length">
-          <p ng-if="viewDemographicsPermission"><span toggle-demographics></span></p>
-          <p><a ng-href="{{downloadUrl}}" class="no-link"><i class="fa fa-download"></i> <span class="link">Download</span></a></p>
+          <p ng-if="viewDemographicsPermission">
+            <span toggle-demographics></span>
+          </p>
+          <p>
+            <a ng-href="{{downloadUrl}}" class="no-link"
+              ><i class="fa fa-download"></i>
+              <span class="link">Download</span></a
+            >
+          </p>
         </div>
 
         <table class="table table-condensed table-striped" ng-if="items.length">
@@ -25,9 +34,16 @@
               <th sort-helper="lastName">Last Name</th>
               <th sort-helper="dateOfBirth">DOB</th>
               <th sort-helper="gender">Gender</th>
-              <th sort-helper="primaryPatientNumber" ng-if="viewDemographicsPermission">Patient Number</th>
-              <th sort-helper="recruitedDate">Recruited On</th>              
-              <th ng-repeat="group in groups" sort-helper="group_{{group.id}}">{{group.shortName}}</th>
+              <th
+                sort-helper="primaryPatientNumber"
+                ng-if="viewDemographicsPermission"
+              >
+                Patient Number
+              </th>
+              <th sort-helper="recruitedDate">Recruited On</th>
+              <th ng-repeat="group in groups" sort-helper="group_{{group.id}}">
+                {{group.shortName}}
+              </th>
               <th>Cohorts</th>
               <th>Hospitals</th>
               <th></th>
@@ -35,11 +51,19 @@
           </thead>
 
           <tbody>
-            <tr ng-repeat="patient in items" 
-                ng-class="{dead: patient.dateOfDeath || patient.yearOfDeath || patient.radarDateOfDeath}">
+            <tr
+              ng-repeat="patient in items"
+              ng-class="{dead: patient.dateOfDeath || patient.yearOfDeath || patient.radarDateOfDeath}"
+            >
               <td>
-                <a ui-sref="patient.demographics({patientId: patient.id})">{{patient.id}}</a>
-                <i class="fa fa-link" ng-if="patient.ukrdc" title="Receiving data from UKRDC"></i>
+                <a ui-sref="patient.demographics({patientId: patient.id})"
+                  >{{patient.id}}</a
+                >
+                <i
+                  class="fa fa-link"
+                  ng-if="patient.ukrdc"
+                  title="Receiving data from UKRDC"
+                ></i>
                 <!-- <i class="fa fa-exclamation-triangle" ng-if="patient.consentStatus == 'SOON'"></i>
                 <i class="fa fa-ban" ng-if="patient.consentStatus == 'EXPIRED' || patient.consentStatus == 'MISSING'"></i> -->
               </td>
@@ -47,35 +71,60 @@
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">
                   <span ng-if="patient.firstName !== undefined">
-                    <span if-demographics-visible>{{patient.firstName | missing}}</span>
-                    <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+                    <span if-demographics-visible
+                      >{{patient.firstName | missing}}</span
+                    >
+                    <span if-demographics-hidden class="hidden-demographics"
+                      >Hidden</span
+                    >
                   </span>
 
-                  <span ng-if="patient.firstName === undefined" class="hidden-demographics">Hidden</span>
+                  <span
+                    ng-if="patient.firstName === undefined"
+                    class="hidden-demographics"
+                    >Hidden</span
+                  >
                 </a>
               </td>
 
               <td>
                 <a ui-sref="patient.demographics({patientId: patient.id})">
                   <span ng-if="patient.lastName !== undefined">
-                    <span if-demographics-visible>{{patient.lastName | missing}}</span>
-                    <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+                    <span if-demographics-visible
+                      >{{patient.lastName | missing}}</span
+                    >
+                    <span if-demographics-hidden class="hidden-demographics"
+                      >Hidden</span
+                    >
                   </span>
 
-                  <span ng-if="patient.lastName === undefined" class="hidden-demographics">Hidden</span>
+                  <span
+                    ng-if="patient.lastName === undefined"
+                    class="hidden-demographics"
+                    >Hidden</span
+                  >
                 </a>
               </td>
 
               <td>
                 <span ng-if="patient.dateOfBirth !== undefined">
-                  <span if-demographics-visible>{{patient.dateOfBirth | dateFormat}}</span>
-                  <span if-demographics-hidden>{{patient.yearOfBirth | missing}}</span>
+                  <span if-demographics-visible
+                    >{{patient.dateOfBirth | dateFormat}}</span
+                  >
+                  <span if-demographics-hidden
+                    >{{patient.yearOfBirth | missing}}</span
+                  >
                 </span>
 
-                <span ng-if="patient.dateOfBirth === undefined">{{patient.yearOfBirth | missing}}</span>
+                <span ng-if="patient.dateOfBirth === undefined"
+                  >{{patient.yearOfBirth | missing}}</span
+                >
 
-                <span ng-if="patient.yearOfDeath || patient.dateOfDeath || patient.radarDateOfDeath" 
-                      title="Deceased"><i class="fa fa-exclamation-triangle"></i></span>
+                <span
+                  ng-if="patient.yearOfDeath || patient.dateOfDeath || patient.radarDateOfDeath"
+                  title="Deceased"
+                  ><i class="fa fa-exclamation-triangle"></i
+                ></span>
               </td>
 
               <td>{{patient.gender.label | missing}}</td>
@@ -85,24 +134,36 @@
                   <span if-demographics-visible>
                     <span ng-if="patient.primaryPatientNumber === null">-</span>
                     <span ng-if="patient.primaryPatientNumber !== null">
-                      {{patient.primaryPatientNumber.number}} <small>({{patient.primaryPatientNumber.numberGroup.shortName}})</small>
+                      {{patient.primaryPatientNumber.number}}
+                      <small
+                        >({{patient.primaryPatientNumber.numberGroup.shortName}})</small
+                      >
                     </span>
                   </span>
 
-                  <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+                  <span if-demographics-hidden class="hidden-demographics"
+                    >Hidden</span
+                  >
                 </span>
 
-                <span ng-if="patient.primaryPatientNumber === undefined" class="hidden-demographics">Hidden</span>
+                <span
+                  ng-if="patient.primaryPatientNumber === undefined"
+                  class="hidden-demographics"
+                  >Hidden</span
+                >
               </td>
 
               <td>{{patient.recruitedDate | dateFormat}}</td>
-              
-              
-              <td ng-repeat="group in groups">{{patient.getFromDate(group) | dateFormat}}</td>
+
+              <td ng-repeat="group in groups">
+                {{patient.getFromDate(group) | dateFormat}}
+              </td>
 
               <td>
                 <span ng-if="!patient.getCurrentCohorts().length">-</span>
-                <span ng-repeat="x in patient.getCurrentCohorts() | orderBy: 'shortName'">
+                <span
+                  ng-repeat="x in patient.getCurrentCohorts() | orderBy: 'shortName'"
+                >
                   {{x.shortName}}
                   <br ng-if="!$last" />
                 </span>
@@ -110,17 +171,20 @@
 
               <td>
                 <span ng-if="!patient.getCurrentHospitals().length">-</span>
-                <span ng-repeat="x in patient.getCurrentHospitals() | orderBy: 'shortName'">
+                <span
+                  ng-repeat="x in patient.getCurrentHospitals() | orderBy: 'shortName'"
+                >
                   {{x.shortName}}
                   <br ng-if="!$last" />
                 </span>
               </td>
 
-              <td>                
-                <span tick=patient.signedOffState.id>{{patient.signedOffState.id}}</span>
+              <td>
+                <span tick="patient.nurtureData.signedOffState"
+                  >{{patient.nurtureData.signedOffState}}</span
+                >
                 <span class="tooltip">Test</span>
               </td>
-
             </tr>
           </tbody>
         </table>
@@ -134,7 +198,11 @@
 
       <p>Search patients belonging to your cohorts and hospitals.</p>
 
-      <form class="form-horizontal form-container" submit-if-valid="search()" novalidate>
+      <form
+        class="form-horizontal form-container"
+        submit-if-valid="search()"
+        novalidate
+      >
         <div frm-buttons>
           <span submit-button>Search</span>
           <button ng-click="clear()" class="btn btn-link">Clear</button>
@@ -207,7 +275,11 @@
           <div frm-label>Gender</div>
 
           <div frm-control>
-            <div frm-select-field model="filters.gender" options="genders"></div>
+            <div
+              frm-select-field
+              model="filters.gender"
+              options="genders"
+            ></div>
             <div frm-errors></div>
           </div>
         </div>
@@ -252,7 +324,11 @@
           <div frm-label>Data Completeness</div>
 
           <div frm-control>
-            <div frm-select-field model="filters.signedOffState" options="signedOffStates"></div>
+            <div
+              frm-select-field
+              model="filters.signedOffState"
+              options="signedOffStates"
+            ></div>
             <div frm-errors></div>
           </div>
         </div>
@@ -268,11 +344,13 @@
         </div>
 
         <div frm-field frm-group>
-          <div frm-label>Patient View</div>
+          <div frm-label>Renal Link</div>
 
           <div frm-control>
             <div frm-boolean-field model="filters.ukrdc"></div>
-            <div frm-help>Filter patients receiving data from the Patient View.</div>
+            <div frm-help>
+              Filter patients who have received data from a renal link.
+            </div>
             <div frm-errors></div>
           </div>
         </div>

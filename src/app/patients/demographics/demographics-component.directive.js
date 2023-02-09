@@ -4,7 +4,9 @@ function patientDemographicsPermissionFactory(PatientSystemObjectPermission) {
   return PatientSystemObjectPermission;
 }
 
-patientDemographicsPermissionFactory.$inject = ['PatientSystemObjectPermission'];
+patientDemographicsPermissionFactory.$inject = [
+  'PatientSystemObjectPermission',
+];
 
 function patientDemographicsControllerFactory(
   ModelListDetailController,
@@ -35,39 +37,49 @@ function patientDemographicsControllerFactory(
       params: {
         createPermission: new DenyPermission(),
         editPermission: new PatientDemographicsPermission($scope.patient),
-        removePermission: new DenyPermission()
-      }
+        removePermission: new DenyPermission(),
+      },
     });
 
-    self.load(firstPromise([
-      store.findMany('patient-demographics', {patient: $scope.patient.id}),
-      store.findMany('genders').then(function(genders) {
-        $scope.genders = genders;
-      }),
-      store.findMany('ethnicities', {patient: $scope.patient.id}).then(function(ethnicities) {
-        $scope.ethnicities = ethnicities;
-      }),
-      store.findMany('nationalities', {patient: $scope.patient.id}).then(function(nationalities) {
-        $scope.nationalities = nationalities;
-      }),
-    ]));
+    self.load(
+      firstPromise([
+        store.findMany('patient-demographics', { patient: $scope.patient.id }),
+        store.findMany('genders').then(function (genders) {
+          $scope.genders = genders;
+        }),
+        store
+          .findMany('ethnicities', { patient: $scope.patient.id })
+          .then(function (ethnicities) {
+            $scope.ethnicities = ethnicities;
+          }),
+        store
+          .findMany('nationalities', { patient: $scope.patient.id })
+          .then(function (nationalities) {
+            $scope.nationalities = nationalities;
+          }),
+      ])
+    );
   }
 
   PatientDemographicsController.$inject = ['$scope'];
-  PatientDemographicsController.prototype = Object.create(ModelListDetailController.prototype);
+  PatientDemographicsController.prototype = Object.create(
+    ModelListDetailController.prototype
+  );
 
   /**
    * Called when the demographics are saved.
    *
    * @returns {Object} - a promise.
    */
-  PatientDemographicsController.prototype.save = function() {
+  PatientDemographicsController.prototype.save = function () {
     var self = this;
 
-    return ModelListDetailController.prototype.save.call(self).then(function() {
-      // Reload the patient with the latest demographics
-      self.scope.patient.reload();
-    });
+    return ModelListDetailController.prototype.save
+      .call(self)
+      .then(function () {
+        // Reload the patient with the latest demographics
+        self.scope.patient.reload();
+      });
   };
 
   return PatientDemographicsController;
@@ -79,16 +91,16 @@ patientDemographicsControllerFactory.$inject = [
   'firstPromise',
   'DenyPermission',
   '$injector',
-  'store'
+  'store',
 ];
 
 function patientDemographicsComponent(PatientDemographicsController) {
   return {
     scope: {
-      patient: '='
+      patient: '=',
     },
     controller: PatientDemographicsController,
-    templateUrl: templateUrl
+    templateUrl: templateUrl,
   };
 }
 
@@ -97,5 +109,5 @@ patientDemographicsComponent.$inject = ['PatientDemographicsController'];
 export {
   patientDemographicsPermissionFactory,
   patientDemographicsControllerFactory,
-  patientDemographicsComponent
+  patientDemographicsComponent,
 };

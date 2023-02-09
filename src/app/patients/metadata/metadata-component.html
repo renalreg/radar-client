@@ -18,11 +18,6 @@
         <th>Control Patient?</th>
         <td><span tick="item.control"></span></td>
       </tr>
-      
-      <tr ng-if="item.signedOffState != null">
-        <th>Data completeness maximized</th>
-        <td><span>{{item.signedOffState.label}}</span></td>
-      </tr>
     </table>
 
     <div metadata item="item"></div>
@@ -61,27 +56,6 @@
         <div frm-control>
           <div frm-boolean-field model="item.control"></div>
           <div frm-errors errors="item.errors.control"></div>
-        </div>
-      </div>
-      
-
-      <div frm-field frm-group ng-if="item.signedOffState != null">
-        <div frm-label>Data completeness maximized</div>
-        
-        <div frm-control>
-          <div
-            ng-if="groupShortNames.includes('NURTuRE - INS')"
-            frm-radio-field
-            model="item.signedOffState"
-            options="INSSignedOffStates"
-          ></div>
-          <div
-            ng-if="!groupShortNames.includes('NURTuRE - INS')"
-            frm-radio-field
-            model="item.signedOffState"
-            options="signedOffStates"
-          ></div>
-          <div frm-errors errors="item.errors.signedOffState"></div>
         </div>
       </div>
 

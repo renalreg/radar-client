@@ -27,8 +27,8 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
       loadNumberGroups(),
       loadNationalities(),
       loadConsents(),
-      loadBiopsyDiagnoses()
-    ]).then(function() {
+      loadBiopsyDiagnoses(),
+    ]).then(function () {
       $scope.loading = false;
     });
   }
@@ -38,7 +38,7 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
       return false;
     }
 
-    return Object.keys(object).some(function(key) {
+    return Object.keys(object).some(function (key) {
       return object[key];
     });
   }
@@ -59,7 +59,7 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
 
     return adapter
       .post('/recruit-patient-search', {}, $scope.searchParams)
-      .then(function(response) {
+      .then(function (response) {
         var patient = response.data.patient;
 
         var patientId = patient ? patient.id : null;
@@ -69,23 +69,24 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
           firstName: $scope.searchParams.firstName,
           lastName: $scope.searchParams.lastName,
           dateOfBirth: $scope.searchParams.dateOfBirth,
+          emailAddress: $scope.searchParams.emailAddress,
           gender: $scope.searchParams.gender,
           numberGroup: $scope.searchParams.numberGroup,
           number: $scope.searchParams.number,
           paediatric: isPaediatric($scope.searchParams.dateOfBirth),
-          diagnosis: {}
+          diagnosis: {},
         };
 
         $scope.searchErrors = {};
 
         $state.go('recruitPatient.form');
       })
-      .catch(function(response) {
+      .catch(function (response) {
         if (response.status === 422) {
           $scope.searchErrors = response.data.errors || {};
         }
       })
-      .finally(function() {
+      .finally(function () {
         $scope.loading = false;
       });
   }
@@ -94,17 +95,18 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
     $scope.loading = true;
     return adapter
       .get('/environment')
-      .then(function() {
+      .then(function () {
         var cohortCode = $scope.patient.cohortGroup.code;
-        $scope.biopsyDiagnosisRequired = cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
+        $scope.biopsyDiagnosisRequired =
+          cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
         $state.go('recruitPatient.diagnosis');
       })
-      .catch(function(response) {
+      .catch(function (response) {
         if (response.status === 422) {
           $scope.patientErrors = response.data.errors || {};
         }
       })
-      .finally(function() {
+      .finally(function () {
         $scope.loading = false;
       });
   }
@@ -114,16 +116,16 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
 
     return adapter
       .post('/recruit-patient', {}, $scope.patient)
-      .then(function(response) {
+      .then(function (response) {
         var patientId = response.data.id;
         $state.go('patient.demographics', { patientId: patientId });
       })
-      .catch(function(response) {
+      .catch(function (response) {
         if (response.status === 422) {
           $scope.patientErrors = response.data.errors || {};
         }
       })
-      .finally(function() {
+      .finally(function () {
         $scope.loading = false;
       });
   }
@@ -137,47 +139,59 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
   }
 
   function loadGenders() {
-    return store.findMany('genders').then(function(genders) {
+    return store.findMany('genders').then(function (genders) {
       $scope.genders = genders;
     });
   }
 
   function loadEthnicities() {
-    return store.findMany('ethnicities', { user: $scope.user.id }).then(function(ethnicities) {
-      $scope.ethnicities = ethnicities;
-    });
+    return store
+      .findMany('ethnicities', { user: $scope.user.id })
+      .then(function (ethnicities) {
+        $scope.ethnicities = ethnicities;
+      });
   }
 
   function loadNumberGroups() {
-    return store.findMany('groups', { isRecruitmentNumberGroup: true }).then(function(groups) {
-      // Sort by name
-      groups = _.sortBy(groups, 'name');
+    return store
+      .findMany('groups', { isRecruitmentNumberGroup: true })
+      .then(function (groups) {
+        // Sort by name
+        groups = _.sortBy(groups, 'name');
 
-      // Set the options
-      $scope.numberGroups = groups;
-    });
+        // Set the options
+        $scope.numberGroups = groups;
+      });
   }
 
   function loadNationalities() {
-    return store.findMany('nationalities', { user: $scope.user.id }).then(function(nationalities) {
-      nationalities = _.sortBy(nationalities, 'name');
-      $scope.nationalities = nationalities;
-    });
+    return store
+      .findMany('nationalities', { user: $scope.user.id })
+      .then(function (nationalities) {
+        nationalities = _.sortBy(nationalities, 'name');
+        $scope.nationalities = nationalities;
+      });
   }
 
   function loadConsents() {
-    return store.findMany('consents').then(function(consents) {
+    return store.findMany('consents').then(function (consents) {
       $scope.consents = _.sortBy(consents, ['weight', 'label']);
     });
   }
 
   function loadBiopsyDiagnoses() {
-    return store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
+    return store.findMany('biopsy-diagnoses').then(function (biopsyDiagnoses) {
       $scope.biopsyDiagnoses = biopsyDiagnoses;
     });
   }
 }
 
-RecruitPatientController.$inject = ['$scope', 'adapter', '$state', '$q', 'store'];
+RecruitPatientController.$inject = [
+  '$scope',
+  'adapter',
+  '$state',
+  '$q',
+  'store',
+];
 
 export default RecruitPatientController;
