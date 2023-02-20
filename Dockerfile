@@ -1,4 +1,4 @@
-FROM node:15
+FROM node:15 AS dev
 
 WORKDIR /app
 
@@ -8,12 +8,14 @@ RUN npm install
 
 COPY . /app
 
-RUN apt-get update
+# Deals with line endings
 
-RUN apt install -y python3-venv python3-pip
+RUN apt-get update && apt-get install -y dos2unix
 
-RUN python3 -m pip install fabric
+RUN dos2unix /app/build.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 8080
+RUN /app/build.sh
 
-CMD ["npm", "start"]
+FROM nginx:1.20.2 AS prod
+
+COPY --from=dev /app/dist/ /usr/share/nginx/html
