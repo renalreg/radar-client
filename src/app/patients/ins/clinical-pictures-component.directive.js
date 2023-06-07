@@ -22,10 +22,10 @@ function insClinicalPicturesControllerFactory(
       }
     });
 
-    self.load(store.findMany('ins-clinical-pictures', {patient: $scope.patient.id}));
+    self.load(store.findMany('ins-clinical-pictures', { patient: $scope.patient.id }));
 
-    $scope.create = function() {
-      var item = store.create('ins-clinical-pictures', {patient: $scope.patient.id});
+    $scope.create = function () {
+      var item = store.create('ins-clinical-pictures', { patient: $scope.patient.id });
       self.edit(item);
     };
   }

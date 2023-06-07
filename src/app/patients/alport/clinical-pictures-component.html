@@ -25,6 +25,12 @@
         <th>Date Started Using Hearing Aid</th>
         <td>{{item.hearingAidDate | dateFormat}}</td>
       </tr>
+
+      <tr>
+        <th>Comments</th>
+        <td class="newlines">{{item.comments | missing}}</td>
+      </tr>
+
     </table>
 
     <div metadata item="item"></div>
@@ -75,6 +81,15 @@
         </div>
       </div>
 
+      <div frm-field frm-group>
+        <div frm-label>Comments</div>
+
+        <div frm-control>
+          <div frm-textarea-field model="item.comments"></div>
+          <div frm-errors errors="item.errors.comments"></div>
+        </div>
+      </div>
+
       <div frm-buttons>
         <span crud-save-button></span>
         <span crud-cancel-list-button></span>
@@ -82,7 +97,8 @@
     </form>
   </div>
 
-  <div ng-if="!viewing && !editing" list-helper="items as page" list-helper-options="{perPage: 10, sortBy: 'dateOfPicture', reverse: true}">
+  <div ng-if="!viewing && !editing" list-helper="items as page"
+    list-helper-options="{perPage: 10, sortBy: 'dateOfPicture', reverse: true}">
     <p>
       <span crud-create-button action="create()"></span>
     </p>
