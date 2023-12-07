@@ -165,15 +165,15 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Comments</div>
+        <div frm-label>Comments <p ng-show="!item.comments.length" style="color: red;">Maximum 200 Characters</p></div>        
 
         <div frm-control>
-          <div frm-textarea-field model="item.comments"></div>
+          <div frm-textarea-field-restricted model="item.comments"></div>
           <div frm-errors errors="item.errors.comments"></div>
         </div>
       </div>
 
-      <div frm-buttons>
+      <div frm-buttons>        
         <span crud-save-button></span>
         <span crud-cancel-list-button></span>
       </div>
