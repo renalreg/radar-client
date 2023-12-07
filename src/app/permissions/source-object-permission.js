@@ -13,7 +13,7 @@ function sourceObjectPermissionFactory(session, hasPermissionForGroup) {
 
     var sourceType = obj.sourceType;
 
-    if (sourceType !== 'RADAR') {
+    if (sourceType !== 'RADAR' && sourceType !== 'BATCH') {
       return false;
     }
 
