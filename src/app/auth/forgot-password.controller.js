@@ -1,4 +1,4 @@
-var MESSAGE = 'Check your email for a link to reset your password.';
+var MESSAGE = 'If you have provided a valid email and username we will send you an email.';
 
 function ForgotPasswordController(
   $scope, $state, authService, notificationService
@@ -12,16 +12,11 @@ function ForgotPasswordController(
 
     return authService.forgotPassword($scope.data.username, $scope.data.email)
       .then(function() {
-        notificationService.success({message: MESSAGE, timeout: 30000});
+        notificationService.info({message: MESSAGE, timeout: 30000});
 
         // Redirect the login page
         $state.go('login');
       })
-      .catch(function(errors) {
-        if (errors) {
-          $scope.errors = errors;
-        }
-      });
   }
 }
 
