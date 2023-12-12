@@ -50,6 +50,11 @@
                 <th>Ultrasound Details</th>
                 <td class="newlines">{{item.rightUltrasoundDetails | missing}}</td>
               </tr>
+
+              <tr>
+                <th>MRI Details</th>
+                <td class="newlines">{{item.rightMriDetails | missing}}</td>
+              </tr>
             </table>
           </div>
         </div>
@@ -71,6 +76,11 @@
               <tr>
                 <th>Ultrasound Details</th>
                 <td class="newlines">{{item.leftUltrasoundDetails | missing}}</td>
+              </tr>
+
+              <tr>
+                <th>MRI Details</th>
+                <td class="newlines">{{item.leftMriDetails | missing}}</td>
               </tr>
             </table>
           </div>
@@ -205,8 +215,8 @@
                 <div frm-label>MRI Details</div>
 
                 <div frm-control>
-                  <div frm-textarea-field model="item.rightMRIDetails"></div>
-                  <div frm-errors errors="item.errors.rightMRIDetails"></div>
+                  <div frm-textarea-field model="item.rightMriDetails"></div>
+                  <div frm-errors errors="item.errors.rightMriDetails"></div>
                 </div>
               </div>
             </div>
@@ -242,8 +252,8 @@
                 <div frm-label>MRI Details</div>
 
                 <div frm-control>
-                  <div frm-textarea-field model="item.leftMRIDetails"></div>
-                  <div frm-errors errors="item.errors.leftMRIDetails"></div>
+                  <div frm-textarea-field model="item.leftMriDetails"></div>
+                  <div frm-errors errors="item.errors.leftMriDetails"></div>
                 </div>
               </div>
             </div>
