@@ -51,6 +51,11 @@
         <td><span tick="item.biopsy"></span></td>
       </tr>
 
+      <tr>
+        <th>Paraprotein</th>
+        <td><span tick="item.paraprotein"></span></td>
+      </tr>
+
       <tr ng-if="item.biopsy && biopsyDiagnosis">
         <th>Biopsy Diagnosis</th>
         <td>{{item.biopsyDiagnosis.label | missing}}</td>
