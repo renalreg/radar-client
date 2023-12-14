@@ -20,6 +20,7 @@
         <th>Imaging Type</th>
         <td>{{item.imagingType.label}}</td>
       </tr>
+
     </table>
 
     <div class="row">
@@ -64,6 +65,16 @@
               <tr ng-show="item.rightPresent">
                 <th>Calcification Present</th>
                 <td><span tick="item.rightCalcification"></span></td>
+              </tr>
+
+              <tr ng-show="item.rightPresent">
+                <th>Vesicoureteric Reflux</th>
+                <td><span tick="item.rightVesicouretericReflux"></span></td>
+              </tr>
+        
+              <tr ng-show="item.rightPresent">
+                <th>Hydronephrosis and/or Hydroureter</th>
+                <td><span tick="item.rightHydronephrosisHydroureter"></span></td>
               </tr>
 
               <tr ng-show="item.rightPresent && item.rightCalcification">
@@ -126,6 +137,16 @@
               <tr ng-show="item.leftPresent">
                 <th>Calcification Present</th>
                 <td><span tick="item.leftCalcification"></span></td>
+              </tr>
+
+              <tr ng-show="item.leftPresent">
+                <th>Vesicoureteric Reflux</th>
+                <td><span tick="item.leftVesicouretericReflux"></span></td>
+              </tr>
+        
+              <tr ng-show="item.leftPresent">
+                <th>Hydronephrosis and/or Hydroureter</th>
+                <td><span tick="item.leftHydronephrosisHydroureter"></span></td>
               </tr>
 
               <tr ng-show="item.leftPresent && item.leftCalcification">
@@ -256,6 +277,24 @@
                 </div>
               </div>
 
+              <div ng-show="item.rightPresent" frm-field frm-group>
+                <div frm-label>Vesicoureteric Reflux</div>
+
+                <div frm-control>
+                  <div frm-yes-no-field model="item.rightVesicouretericReflux" required="item.rightPresent"></div>
+                  <div frm-errors errors="item.errors.rightVesicouretericReflux"></div>
+                </div>
+              </div>
+
+              <div ng-show="item.rightPresent" frm-field frm-group>
+                <div frm-label>Hydronephrosis and/or Hydroureter</div>
+
+                <div frm-control>
+                  <div frm-yes-no-field model="item.rightHydronephrosisHydroureter" required="item.rightPresent"></div>
+                  <div frm-errors errors="item.errors.rightHydronephrosisHydroureter"></div>
+                </div>
+              </div>
+
               <div ng-show="item.rightPresent && item.rightCalcification" frm-field frm-group>
                 <div frm-label>Nephrocalcinosis</div>
 
@@ -353,6 +392,24 @@
                 <div frm-control>
                   <div frm-yes-no-field model="item.leftCalcification" required="item.leftPresent"></div>
                   <div frm-errors errors="item.errors.leftCalcification"></div>
+                </div>
+              </div>
+
+              <div ng-show="item.leftPresent" frm-field frm-group>
+                <div frm-label>Vesicoureteric Reflux</div>
+
+                <div frm-control>
+                  <div frm-yes-no-field model="item.leftVesicouretericReflux" required="item.leftPresent"></div>
+                  <div frm-errors errors="item.errors.leftVesicouretericReflux"></div>
+                </div>
+              </div>
+
+              <div ng-show="item.leftPresent" frm-field frm-group>
+                <div frm-label>Hydronephrosis and/or Hydroureter</div>
+
+                <div frm-control>
+                  <div frm-yes-no-field model="item.leftHydronephrosisHydroureter" required="item.leftPresent"></div>
+                  <div frm-errors errors="item.errors.leftHydronephrosisHydroureter"></div>
                 </div>
               </div>
 

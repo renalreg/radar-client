@@ -28,6 +28,7 @@ import frmSelectField from './select-field.directive';
 import frmSourceGroupField from './source-group-field.directive';
 import frmSystemField from './system-field.directive';
 import frmTextEditorField from './text-editor-field.directive';
+import frmTextareaFieldRestricted from './textarea-field-restricted.directive';
 import frmTextField from './text-field.directive';
 import frmTextareaField from './textarea-field.directive';
 import frmWeeksAndDaysField from './weeks-and-days-field.directive';
@@ -62,6 +63,7 @@ export default angular.module('radar.forms.fields', [])
   .directive('frmSourceGroupField', frmSourceGroupField)
   .directive('frmSystemField', frmSystemField)
   .directive('frmTextEditorField', frmTextEditorField)
+  .directive('frmTextareaFieldRestricted', frmTextareaFieldRestricted)
   .directive('frmTextField', frmTextField)
   .directive('frmTextareaField', frmTextareaField)
   .directive('frmWeeksAndDaysField', frmWeeksAndDaysField)

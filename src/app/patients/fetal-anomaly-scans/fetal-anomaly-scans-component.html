@@ -17,6 +17,11 @@
       </tr>
 
       <tr>
+        <th>Imaging Type</th>
+        <td>{{item.imagingType.label}}</td>
+      </tr>
+
+      <tr>
         <th>Gestational Age</th>
         <td>{{item.gestationalAge | weeksAndDaysFormat}}</td>
       </tr>
@@ -45,6 +50,11 @@
                 <th>Ultrasound Details</th>
                 <td class="newlines">{{item.rightUltrasoundDetails | missing}}</td>
               </tr>
+
+              <tr>
+                <th>MRI Details</th>
+                <td class="newlines">{{item.rightMriDetails | missing}}</td>
+              </tr>
             </table>
           </div>
         </div>
@@ -66,6 +76,11 @@
               <tr>
                 <th>Ultrasound Details</th>
                 <td class="newlines">{{item.leftUltrasoundDetails | missing}}</td>
+              </tr>
+
+              <tr>
+                <th>MRI Details</th>
+                <td class="newlines">{{item.leftMriDetails | missing}}</td>
               </tr>
             </table>
           </div>
@@ -144,6 +159,15 @@
       </div>
 
       <div frm-field frm-group>
+        <div frm-label>Imaging Type</div>
+
+        <div frm-control>
+          <div frm-select-field model="item.imagingType" options="imagingTypes" required="true"></div>
+          <div frm-errors errors="item.errors.imagingType"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
         <div frm-label>Gestational Age</div>
 
         <div frm-control>
@@ -186,6 +210,15 @@
                   <div frm-errors errors="item.errors.rightUltrasoundDetails"></div>
                 </div>
               </div>
+
+              <div frm-field frm-group>
+                <div frm-label>MRI Details</div>
+
+                <div frm-control>
+                  <div frm-textarea-field model="item.rightMriDetails"></div>
+                  <div frm-errors errors="item.errors.rightMriDetails"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -212,6 +245,15 @@
                 <div frm-control>
                   <div frm-textarea-field model="item.leftUltrasoundDetails"></div>
                   <div frm-errors errors="item.errors.leftUltrasoundDetails"></div>
+                </div>
+              </div>
+
+              <div frm-field frm-group>
+                <div frm-label>MRI Details</div>
+
+                <div frm-control>
+                  <div frm-textarea-field model="item.leftMriDetails"></div>
+                  <div frm-errors errors="item.errors.leftMriDetails"></div>
                 </div>
               </div>
             </div>
