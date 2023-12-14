@@ -1,26 +1,22 @@
-var MESSAGE = 'Check your email for a reminder of your username(s).';
+var MESSAGE = 'If you provided a valid email address we will have sent you an email';
 
 function ForgotUsernameController(
   $scope, $state, authService, notificationService
 ) {
   $scope.errors = {};
   $scope.data = {};
+  $scope.submit = submit;
 
-  $scope.submit = function() {
+  function submit() {
     $scope.errors = {};
 
     return authService.forgotUsername($scope.data.email)
       .then(function() {
-        notificationService.success({message: MESSAGE, timeout: 30000});
+        notificationService.info({message: MESSAGE, timeout: 30000});
 
         // Redirect the login page
         $state.go('login');
       })
-      .catch(function(errors) {
-        if (errors) {
-          $scope.errors = errors;
-        }
-      });
   };
 }
 
