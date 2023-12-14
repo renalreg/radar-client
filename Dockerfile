@@ -1,4 +1,4 @@
-FROM node:13
+FROM node:14 AS dev
 
 WORKDIR /app
 
@@ -8,6 +8,10 @@ RUN npm install
 
 COPY . /app
 
-EXPOSE 8080
+RUN apt-get update
 
-CMD ["npm", "start"]
+RUN apt-get install -y dos2unix
+
+RUN dos2unix /app/build.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
+
+RUN /app/build.sh
