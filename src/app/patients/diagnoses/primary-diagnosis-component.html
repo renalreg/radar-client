@@ -168,12 +168,8 @@
           <div frm-errors errors="item.errors.biopsyDiagnosis"></div>
         </div>
       </div>
-
+      
       <div frm-field frm-group>
-
-        <div frm-label>Comments <p ng-show="!item.comments.length" style="color: red;">Maximum 200 Characters</p></div>        
-        
-
         <div frm-label>Paraprotein</div>
         <div frm-control>
           <div frm-boolean-field model="item.paraprotein"></div>
@@ -181,10 +177,13 @@
         </div>
       </div>
 
+
       <div frm-field frm-group>
-        <div frm-label>Comments</div>
+               
+      </div>
 
-
+      <div frm-field frm-group>
+        <div frm-label>Comments<p ng-show="!item.comments.length" style="color: red;">Maximum 200 Characters</p></div>
         <div frm-control>
           <div from-help style="color: red; font-weight: bold;">Please add pathology reports to the Pathology Tab, do not add them here</div>
           <div frm-textarea-field-restricted model="item.comments"></div>
