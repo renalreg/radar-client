@@ -1,4 +1,4 @@
-FROM node:15 AS dev
+FROM node:15.14.0-buster AS dev
 
 WORKDIR /app
 
@@ -10,7 +10,11 @@ COPY . /app
 
 # Deals with line endings
 
-RUN apt-get update && apt-get install -y dos2unix
+# RUN echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" > /etc/apt/sources.list
+
+RUN apt-get update
+
+RUN apt-get install -y dos2unix
 
 RUN dos2unix /app/build.sh && apt-get --purge remove -y dos2unix && rm -rf /var/lib/apt/lists/*
 
