@@ -137,10 +137,18 @@
   </div>
 
   <div frm-field frm-group>
-    <div frm-label>Comments</div>
+    <div frm-label>
+      Comments
+      <p ng-show="!item.comments.length" style="color: red">
+        Maximum 200 Characters
+      </p>
+    </div>
 
     <div frm-control>
-      <div frm-textarea-field model="patient.diagnosis.comments"></div>
+      <div
+        frm-textarea-field-restricted
+        model="patient.diagnosis.comments"
+      ></div>
       <div frm-errors errors="patient.errors.diagnosis.comments"></div>
     </div>
   </div>
