@@ -137,14 +137,16 @@
   </div>
 
   <div frm-field frm-group>
+    
     <div frm-label>
       Comments
-      <p ng-show="!item.comments.length" style="color: red">
-        Maximum 200 Characters
+      <p ng-show="!item.comments.length" style="color: red; font-weight: bold;">
+        Maximum 500 Characters
       </p>
     </div>
 
     <div frm-control>
+      <div style="color: red; font-weight: bold;">If you have additional information that exceeds character limit please enter this under pathology tab if biopsy otherwise letters tab</div>
       <div
         frm-textarea-field-restricted
         model="patient.diagnosis.comments"
