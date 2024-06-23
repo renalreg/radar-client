@@ -39,11 +39,14 @@
     <form class="form-horizontal form-container" crud-submit="saveAndView()" novalidate>
       <div frm-field frm-group>
         <div frm-label>Cohort</div>
+        
 
         <div frm-control>
           <div frm-cohort-field model="item.group" required="true"></div>
           <div frm-errors errors="item.errors.group"></div>
+          <div style="color: red; font-weight: bold;" ng-if="item.group.code === 'MPGN'">Please do not recruit patients with Membranous Nephropathy to this cohort and check if unsure !  Only patients with Membranoproliferative Glomerulonephritis, Dense Deposit Disease, C3 Glomerulopathy/ C3 Glomerulonephritis should be added to this rare disease group. </div>
         </div>
+        
       </div>
 
       <div frm-field frm-group>
