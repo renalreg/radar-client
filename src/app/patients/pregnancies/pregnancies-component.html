@@ -37,6 +37,11 @@
       </tr>
 
       <tr>
+        <th>Infant DoB</th>
+        <td>{{item.infantDob | dateFormat}}</td>
+      </tr>
+
+      <tr>
         <th>Birth Weight (g)</th>
         <td>{{item.weight | missing}}</td>
       </tr>
@@ -88,10 +93,11 @@
       </div>
 
       <div frm-field frm-group>
-        <div frm-label>Date of LMP</div>
-
+        <div frm-label>Date of LMP</div>        
         <div frm-control>
-          <div frm-date-field model="item.dateOfLmp" required="true"></div>
+          <div from-help style="color: red; font-weight: bold">
+            Please ensure data added to 2 out of 3 of the following fields; LMP,  Infant’s date of birth, Gestational Age at Delivery</div>
+          <div frm-date-field model="item.dateOfLmp"></div>
           <div frm-errors errors="item.errors.dateOfLmp"></div>
         </div>
       </div>
@@ -129,6 +135,14 @@
         <div frm-control>
           <div frm-select-field model="item.outcome" options="outcomes"></div>
           <div frm-errors errors="item.errors.outcome"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group>
+        <div frm-label>Infant’s date of birth</div>        
+        <div frm-control>
+          <div frm-date-field model="item.infantDob"></div>
+          <div frm-errors errors="item.errors.infantDob"></div>
         </div>
       </div>
 

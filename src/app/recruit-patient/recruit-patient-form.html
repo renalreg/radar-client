@@ -77,6 +77,7 @@
 
     <div frm-control>
       <div frm-recruit-patient-cohort-field model="patient.cohortGroup" required="true"></div>
+      <div style="color: red; font-weight: bold;" ng-if="patient.cohortGroup.code === 'MPGN'">Please do not recruit patients with Membranous Nephropathy to this cohort and check if unsure !  Only patients with Membranoproliferative Glomerulonephritis, Dense Deposit Disease, C3 Glomerulopathy/ C3 Glomerulonephritis should be added to this rare disease group. </div>
       <div frm-errors errors="patientErrors.cohortGroup"></div>
       <div frm-help>
         <a href="https://nww.radar.nhs.uk/downloads/inclusion-exclusion.pdf">Inclusion and Exclusion Criteria</a>
