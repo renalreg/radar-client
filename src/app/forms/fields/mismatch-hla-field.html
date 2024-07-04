@@ -1,0 +1,27 @@
+<div frm-model frm-required frm-mismatch-hla ng-required="required()" ng-model="model">
+  <div class="row">
+    <div class="col-md-9">
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">A</span>
+          <input frm-model alpha-numeric-validator ng-model="hla.a1" type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">B</span>
+          <input frm-model alpha-numeric-validator ng-model="hla.b1" type="text" class="form-control" />
+        </div>
+      </div>
+
+      <div frm-field frm-group-inline class="hla">
+        <div class="input-group">
+          <span class="input-group-addon">DR</span>
+          <input frm-model alpha-numeric-validator ng-model="hla.dr1" type="text" class="form-control" />
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

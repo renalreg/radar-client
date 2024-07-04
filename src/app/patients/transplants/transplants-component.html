@@ -37,6 +37,11 @@
       </tr>
 
       <tr>
+        <th>Mismatch HLA</th>
+        <td>{{ item.mismatchHla | missing }}</td>
+      </tr>
+
+      <tr>
         <th>Episode of CMV infection</th>
         <td>{{ item.dateOfCmvInfection | dateFormat }}</td>
       </tr>
@@ -152,6 +157,14 @@
         <div frm-control>
           <div frm-hla-field model="item.donorHla"></div>
           <div frm-errors errors="item.errors.donorHla"></div>
+        </div>
+      </div>
+      <div frm-field frm-group>
+        <div frm-label>Mismatch HLA</div>
+
+        <div frm-control>
+          <div frm-mismatch-hla-field model="item.mismatchHla" ></div>
+          <div frm-errors errors="item.errors.mismatchHla"></div>
         </div>
       </div>
 

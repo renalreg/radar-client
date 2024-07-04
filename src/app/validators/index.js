@@ -7,6 +7,7 @@ import emailValidator from './email-validator.directive';
 import equalToValidator from './equal-to-validator.directive';
 import integerValidator from './integer-validator.directive';
 import numberValidator from './number-validator.directive';
+import alphanumericValidator from "./alphanumeric-validator";
 
 export default angular.module('radar.validators', [])
   .directive('checkboxRequiredValidator', checkboxRequiredValidator)
@@ -16,4 +17,5 @@ export default angular.module('radar.validators', [])
   .directive('equalToValidator', equalToValidator)
   .directive('integerValidator', integerValidator)
   .directive('numberValidator', numberValidator)
+  .directive('alphaNumericValidator', alphanumericValidator)
   .name;
