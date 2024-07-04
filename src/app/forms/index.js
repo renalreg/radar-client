@@ -21,6 +21,7 @@ import submitButton from './submit-button.directive';
 import submitIfValid from './submit-if-valid.directive';
 import frmWeeksAndDays from './weeks-and-days.directive';
 import frmHla from './hla.directive';
+import frmMismatchHla from './mismatchhla.directive';
 
 export default angular.module('radar.forms', [fields])
   .directive('frmButtons', frmButtons)
@@ -42,4 +43,5 @@ export default angular.module('radar.forms', [fields])
   .directive('submitIfValid', submitIfValid)
   .directive('frmWeeksAndDays', frmWeeksAndDays)
   .directive('frmHla', frmHla)
+  .directive('frmMismatchHla', frmMismatchHla)
   .name;
