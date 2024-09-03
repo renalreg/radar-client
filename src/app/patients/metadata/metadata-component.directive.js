@@ -11,6 +11,7 @@ function patientMetadataControllerFactory(
   PatientMetadataPermission,
   $injector,
   store,
+  session
 ) {
   /**
    * A component for recording metadata about the patient (for example comments).
@@ -33,16 +34,22 @@ function patientMetadataControllerFactory(
       shortNames.push(group.group.shortName);
     }
     $scope.groupShortNames = shortNames;
-    // Load the patient and then load the patient demographics
+
+    // Expose user to scope
+    $scope.user = session.user;
 
     self.load($scope.patient)
       .then(function() {
-        // Fetch patient demographics after patient data is loaded
-        return store.findMany('patient-demographics', { patient: $scope.patient.id });
+        // Only load patient demographics if the user is an admin
+        if (session.user.isAdmin) {
+          return store.findMany('patient-demographics', { patient: $scope.patient.id })
+            .then(function(patientDemographics) {
+              // Assign the resolved patient demographics to $scope
+              $scope.patientDemographics = patientDemographics[0];
+            });
+        }
       })
-      .then(function(patientDemographics) {
-        // Assign the resolved patient demographics to $scope
-        $scope.patientDemographics = patientDemographics[0];
+      .then(function() {
         // Call the view function if needed
         self.view();
       })
@@ -50,15 +57,30 @@ function patientMetadataControllerFactory(
         // Handle any errors from either load or findMany
         console.error('Error loading patient data or demographics:', error);
       })
-      .finally(function() {
-        // Ensure patientDemographics is logged after it is resolved
-        console.log($scope.patientDemographics);
-        console.log(store)
-        console.log($scope)
-      });
 
+    // Modify the save function to only save patientDemographics if the user is an admin
+    self.save = function() {
+      self.scope.saving = true;
+      console.log('saving model', self.user);
 
+      var savePromises = [
+        this.scope.item.save(), // Save the patient model
+      ];
 
+      if (session.user.isAdmin) {
+        // If the user is an admin, also save the patient demographics
+        savePromises.push(this.scope.patientDemographics.save());
+      }
+
+      return Promise.all(savePromises)
+        .then(function() {
+          // After saving, switch to view mode
+          self.view(self.scope.item);
+        })
+        .finally(function() {
+          self.scope.saving = false;
+        });
+    };
   }
 
   PatientMetadataController.$inject = ['$scope'];
@@ -73,7 +95,8 @@ patientMetadataControllerFactory.$inject = [
   'ModelDetailController',
   'PatientMetadataPermission',
   '$injector',
-  'store'
+  'store',
+  'session'
 ];
 
 function patientMetadataComponent(PatientMetadataController) {
