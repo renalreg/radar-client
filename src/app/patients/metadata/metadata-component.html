@@ -18,6 +18,16 @@
         <th>Control Patient?</th>
         <td><span tick="item.control"></span></td>
       </tr>
+      <div ng-if="user.isAdmin">
+        <tr>
+          <th>Opted out of surveys?</th>
+          <td><span tick="patientDemographics.optOutSurveys"></span></td>
+        </tr>
+        <tr>
+          <th>Opted out of newsletters?</th>
+          <td><span tick="patientDemographics.optOutNewsletters"></span></td>
+        </tr>
+      </div>
     </table>
 
     <div metadata item="item"></div>
@@ -59,10 +69,31 @@
         </div>
       </div>
 
+
+      <div ng-if="user.isAdmin">
+        <br>
+        <div frm-field frm-group>
+          <div frm-label>Opted out of surveys?</div>
+          <div frm-control>
+            <div frm-boolean-field model="patientDemographics.optOutSurveys"></div>
+            <div frm-errors errors="patientDemographics.errors.optOutSurveys"></div>
+          </div>
+        </div>
+
+        <div frm-field frm-group>
+          <div frm-label>Opted out of newsletters?</div>
+          <div frm-control>
+            <div frm-boolean-field model="patientDemographics.optOutNewsletters"></div>
+            <div frm-errors errors="patientDemographics.errors.optOutNewsletters"></div>
+          </div>
+        </div>
+      </div>
+
       <div frm-buttons>
         <span crud-save-button></span>
         <span crud-cancel-button action="view(originalItem)"></span>
       </div>
     </form>
+
   </div>
 </div>

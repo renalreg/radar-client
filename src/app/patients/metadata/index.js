@@ -8,14 +8,14 @@ import {
 
 import templateUrl from './metadata.html';
 
-function config($stateProvider) {
+function config($stateProvider,storeProvider) {
   $stateProvider.state('patient.metadata', {
     url: '/metadata',
     templateUrl: templateUrl,
   });
 }
 
-config.$inject = ['$stateProvider'];
+config.$inject = ['$stateProvider','storeProvider'];
 
 export default angular
   .module('radar.patients.metadata', [])
