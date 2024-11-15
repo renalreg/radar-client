@@ -31,6 +31,11 @@
         <td>{{item.fromDate | dateFormat}} ({{item.fromAge | ageFormat}})</td>
       </tr>
 
+      <tr ng-if="cohort.code == 'MPGN'">
+        <th>to Date</th>
+        <td>{{item.toDate | dateFormat}} </td>
+      </tr>
+
       <tr>
         <th>Prenatal Diagnosis</th>
         <td><span tick="item.prenatal"></span></td>
@@ -125,6 +130,18 @@
             01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.
           </div>
           <div frm-errors errors="item.errors.fromDate"></div>
+        </div>
+      </div>
+
+      <div frm-field frm-group ng-if="cohort.code == 'MPGN'">
+        <div frm-label>to Date</div>
+
+        <div frm-control>
+          <div frm-date-field model="item.toDate"></div>
+          <div frm-help>
+            01/MM/YYYY if day is not known, 01/01/YYYY if only a year known.
+          </div>
+          <div frm-errors errors="item.errors.toDate"></div>
         </div>
       </div>
 
