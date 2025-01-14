@@ -42,7 +42,7 @@ function patientMetadataControllerFactory(
       .then(function() {
         // Only load patient demographics if the user is an admin
         if (session.user.isAdmin) {
-          return store.findMany('patient-demographics', { patient: $scope.patient.id })
+          return store.findMany('patient-demographics', { patient: $scope.patient.id,sourceType: 'RADAR' })
             .then(function(patientDemographics) {
               // Assign the resolved patient demographics to $scope
               $scope.patientDemographics = patientDemographics[0];
