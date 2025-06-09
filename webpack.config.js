@@ -67,7 +67,8 @@ var config = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'handlebars!src/index.handlebars',
-      inject: false
+      inject: false,
+      favicon: './src/favicon.ico'
     }),
     new webpack.ProvidePlugin({
       $: 'jquery',
