@@ -61,6 +61,16 @@
         <td><span tick="item.biopsy"></span></td>
       </tr>
 
+      <tr ng-if="cohort.code == 'MEMNEPHRO' && item.biopsy==false">
+        <th>Proteinuria with positive antibody test</th>
+        <td><span tick="item.proteinuriaPositiveAntibody"></span></td>
+      </tr>
+
+      <tr ng-if="cohort.code == 'MEMNEPHRO' && item.biopsy==false">
+        <th>antibody</th>
+        <td>{{ item.antibodies.value }}</td>
+      </tr>
+
       <tr>
         <th>Paraprotein</th>
         <td><span tick="item.paraprotein"></span></td>
@@ -195,6 +205,23 @@
           <div frm-errors errors="item.errors.biopsy"></div>
         </div>
       </div>
+
+      <div ng-if="item.biopsy==false" frm-field frm-group>
+        <div frm-label>Proteinuria with positive antibody test</div>
+        <div frm-control>
+          <div frm-boolean-field model="item.proteinuriaPositiveAntibody" required="true"></div>
+          <div frm-errors errors="item.errors.proteinuriaPositiveAntibody"></div>
+        </div>
+      </div>
+
+      <div ng-if="item.biopsy == false" frm-field frm-group>
+        <div frm-label>Antibody</div>
+        <div frm-control>
+          <div frm-select-field model="item.antibodies.key" options="antibodies" required="true"></div>
+          <div frm-errors errors="item.errors.antibodies"></div>
+        </div>
+      </div>
+
 
       <div ng-if="item.biopsy && biopsyDiagnosis" frm-field frm-group>
         <div frm-label>Biopsy Diagnosis</div>
