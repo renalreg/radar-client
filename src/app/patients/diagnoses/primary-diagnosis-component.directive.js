@@ -28,13 +28,15 @@ function primaryPatientDiagnosisControllerFactory(
       store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
         $scope.biopsyDiagnoses = biopsyDiagnoses;
       }),
+      store.findMany('antibodies').then(function(antibodies) {
+        $scope.antibodies = antibodies;
+      }),
       getRadarGroup().then(function(group) {
         $scope.sourceGroup = group;
       })
     ])).then(function() {
       // TODO this won't handle a UKRDC primary diagnoses being entered before a RaDaR one
       var multiple = $scope.items.length > 1 || $scope.cohort.multipleDiagnoses;
-
       if ($scope.items.length === 0) { // No primary diagnoses entered
         // Create a new diagnosis if the user has permission, otherwise show
         // the empty list.
@@ -48,7 +50,6 @@ function primaryPatientDiagnosisControllerFactory(
       } else {
         self.view($scope.items[0]);
       }
-      
       $scope.multiple = multiple;
       $scope.biopsyDiagnosis = $scope.cohort.code === 'INS' || $scope.cohort.code === 'INS-NEPHROS';
     });
