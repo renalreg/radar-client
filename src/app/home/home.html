@@ -6,73 +6,26 @@
       ng-class="{'col-sm-8': !isAuthenticated, 'col-sm-12': isAuthenticated}"
     >
       <div class="about">
-        <p>
-          Welcome to the national Rare Disease Registry (RaDaR). In partnership
-          with Rare Disease Groups (RDGs), RaDaR facilitates translational and
-          epidemiological research into rare diseases through a comprehensive
-          clinical database. RaDaR is managed by the
-          <a href="https://www.renalreg.org/" target="_blank"
-            >UK Renal Registry</a
-          >
-          on behalf of the
-          <a href="https://ukkidney.org/" target="_blank"
-            >UK Kidney Association</a
+        <p ng-if="vm.isLive">
+          Welcome to the RaDaR National Registry of Rare Kidney Diseases. In partnership with Rare Disease Groups, RaDaR
+          facilitates translational and epidemiological research into rare diseases through a comprehensive clinical
+          database. RaDaR is managed by the <a href="https://ukkidney.org/" target="_blank"
+        >UK Kidney Association</a
+        >. For more information about RaDaR please go to
+          <a href="https://www.ukkidney.org/rare-renal" target="_blank"
+          >rarerenal.org</a
           >.
         </p>
+        <p ng-if="!vm.isLive">
+          This is the demo system for the RaDaR National Registry of Rare Kidney Diseases.
 
-        <p>
-          Recruitment to RaDaR is open to all UK hospitals. If your Trust would
-          like to take part please contact
-          <a href="mailto:nbn-tr.radar@nhs.net" target="_blank"
-            >nbn-tr.radar@nhs.net</a
-          >. If your Trust is already taking part and you require access to
-          RaDaR please contact your research team.
-        </p>
-
-        <p>
-          To find information about RaDaR and rare renal conditions, please
-          visit
-          <a href="http://rarerenal.org/radar-registry/" target="_blank"
-            >RareRenal.org</a
-          >.
-        </p>
-        <p>
-          For specific information about patient eligibility and current consent
-          documents, please visit
-          <a href="https://ukkidney.org/rare-renal/recruitment" target="_blank"
-            >Recruitment Resources</a
-          >
-        </p>
-
-        <p>
-          <b>
-            It is a requirement, where possible, that the renal unit system is
-            flagged to send data. This enables the blood results and medications
-            that are on the renal unit system to feed into RaDaR, which
-            considerably enhances the dataset and avoids manual data entry.
-          </b>
-        </p>
-
-        <p>
-          <b> </b>
-        </p>
-
-        <p>
-          For data entry instructions refer to the
-          <a
-            href="https://ukkidney.org/rare-renal/radar-recruitment-guide"
-            target="_blank"
-            >RaDaR Recruitment Guide</a
-          >.
-        </p>
-
-        <p>
-          For technical support please contact
-          <a href="mailto:radar@ukkidney.org">radar@ukkidney.org</a>.
+          For more information about RaDaR please go to <a href="https://www.ukkidney.org/rare-renal" target="_blank"
+        >rarerenal.org</a
+        >.
         </p>
       </div>
 
-      <hr />
+      <hr/>
 
       <div latest-posts></div>
     </div>
@@ -84,48 +37,48 @@
     </div>
   </div>
 
-  <hr />
+  <hr/>
 
   <div class="row">
     <div class="logo">
       <a href="https://www.kidneycareuk.org/" target="_blank"
-        ><img src="kcuk.png" alt="Kidney Care UK" title="Kidney Care UK"
+      ><img src="kcuk.png" alt="Kidney Care UK" title="Kidney Care UK"
       /></a>
     </div>
 
     <div class="logo">
       <a href="http://www.kidneyresearchuk.org/" target="_blank"
-        ><img
-          src="kruk.png"
-          alt="Kidney Research UK"
-          title="Kidney Research UK"
+      ><img
+        src="kruk.png"
+        alt="Kidney Research UK"
+        title="Kidney Research UK"
       /></a>
     </div>
 
     <div class="logo">
       <a href="https://www.england.nhs.uk/" target="_blank"
-        ><img src="nhs_england.png" alt="NHS England" title="NHS England"
+      ><img src="nhs_england.png" alt="NHS England" title="NHS England"
       /></a>
     </div>
 
     <div class="logo">
       <a href="https://pkdcharity.org.uk/" target="_blank"
-        ><img src="pkd_charity.jpg" alt="PKD Charity" title="PKD Charity"
+      ><img src="pkd_charity.jpg" alt="PKD Charity" title="PKD Charity"
       /></a>
     </div>
 
     <div class="logo">
       <a href="https://ukkidney.org/" target="_blank"
-        ><img
-          src="uka.jpg"
-          alt="The UK Kidney Association"
-          title="The UK Kidney Association"
+      ><img
+        src="uka.jpg"
+        alt="The UK Kidney Association"
+        title="The UK Kidney Association"
       /></a>
     </div>
 
     <div class="logo">
       <a href="https://www.renalreg.org/" target="_blank"
-        ><img src="ukrr.png" alt="UK Renal Registry" title="UK Renal Registry"
+      ><img src="ukrr.png" alt="UK Renal Registry" title="UK Renal Registry"
       /></a>
     </div>
   </div>
