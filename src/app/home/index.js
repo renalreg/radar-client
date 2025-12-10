@@ -17,8 +17,11 @@ function HomeController($window) {
 
   const url = $window.location.href.toLowerCase();
 
-  // isLive = true unless URL contains demo or staging
-  vm.isLive = !(url.includes('demo') || url.includes('staging')|| url.includes('local'));
+  vm.isDemo = url.includes('demo');
+  vm.isStaging = url.includes('staging');
+  vm.isLocal = url.includes('local');
+
+  vm.isLive = !(vm.isDemo || vm.isStaging || vm.isLocal);
 }
 
 HomeController.$inject = ['$window'];

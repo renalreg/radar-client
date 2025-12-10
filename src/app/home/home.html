@@ -16,15 +16,31 @@
           >rarerenal.org</a
           >.
         </p>
-        <p ng-if="!vm.isLive">
-          This is the demo system for the RaDaR National Registry of Rare Kidney Diseases.
-
+        <p ng-if="vm.isDemo || vm.isStaging || vm.isLocal">
+          This is the <strong ng-if="vm.isDemo">Demo</strong><strong ng-if="vm.isStaging || vm.isLocal">Staging</strong>
+          system for the RaDaR National Registry of Rare Kidney Diseases.
           For more information about RaDaR please go to <a href="https://www.ukkidney.org/rare-renal" target="_blank"
         >rarerenal.org</a
         >.
         </p>
-      </div>
+        <p>
+          <b> </b>
+        </p>
 
+        <p>
+          For data entry instructions refer to the
+          <a
+            href="https://ukkidney.org/rare-renal/radar-recruitment-guide"
+            target="_blank"
+          >RaDaR Recruitment Guide</a
+          >.
+        </p>
+
+        <p>
+          For technical support please contact
+          <a href="mailto:radar@ukkidney.org">radar@ukkidney.org</a>.
+        </p>
+      </div>
       <hr/>
 
       <div latest-posts></div>
