@@ -214,7 +214,7 @@
         </div>
       </div>
 
-      <div ng-if="item.biopsy == false" frm-field frm-group>
+      <div ng-if="item.biopsy == false && item.proteinuriaPositiveAntibody == true " frm-field frm-group>
         <div frm-label>Antibody</div>
         <div frm-control>
           <div frm-select-field model="item.antibodies.key" options="antibodies" required="true"></div>

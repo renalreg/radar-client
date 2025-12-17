@@ -100,6 +100,9 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
         $scope.biopsyDiagnosisRequired =
           cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
         $state.go('recruitPatient.diagnosis');
+      store.findMany('antibodies').then(function(antibodies) {
+        $scope.antibodies = antibodies;
+      });
       })
       .catch(function (response) {
         if (response.status === 422) {

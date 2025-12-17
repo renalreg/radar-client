@@ -119,6 +119,63 @@
     </div>
   </div>
 
+<div
+  frm-field
+  frm-group
+  ng-if="
+    patient.diagnosis.diagnosisId.id == 174 &&
+    patient.diagnosis.biopsy == false
+  "
+>
+  <div frm-label>
+    Proteinuria with positive antibody test
+  </div>
+
+  <div frm-control>
+      <div
+        frm-boolean-field
+        model="patient.diagnosis.proteinuriaPositiveAntibody"
+        required="true"
+      ></div>
+
+    <div frm-errors
+      errors="patient.errors.diagnosis.proteinuriaPositiveAntibody"
+    ></div>
+  </div>
+</div>
+<div
+  frm-field
+  frm-group
+  ng-if="
+    patient.diagnosis.diagnosisId.id == 174 &&
+    patient.diagnosis.biopsy == false &&
+    patient.diagnosis.proteinuriaPositiveAntibody == true
+  "
+>
+  <div frm-label>
+    Antibody
+  </div>
+
+  <div frm-control>
+    <div
+      frm-select-field
+      model="patient.diagnosis.antibodies.key"
+      options="antibodies"
+      required="true"
+    ></div>
+
+    <div
+      frm-errors
+      errors="patient.errors.diagnosis.antibodies"
+    ></div>
+  </div>
+</div>
+
+
+
+
+
+
   <div
     ng-if="patient.diagnosis.biopsy && biopsyDiagnosisRequired"
     frm-field
@@ -137,7 +194,7 @@
   </div>
 
   <div frm-field frm-group>
-    
+
     <div frm-label>
       Comments
       <p ng-show="!item.comments.length" style="color: red; font-weight: bold;">
