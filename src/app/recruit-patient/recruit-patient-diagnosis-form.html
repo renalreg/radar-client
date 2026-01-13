@@ -20,9 +20,9 @@
         required="true"
       ></div>
       <div frm-help>
-        Choose the most specific diagnosis.<br />
+        Choose the most specific diagnosis.<br/>
         <a href="https://www.era-edta-reg.org/prd.jsp" target="_blank"
-          >ERA-EDTA PRD codes.</a
+        >ERA-EDTA PRD codes.</a
         >
       </div>
       <div frm-errors errors="patient.errors.diagnosis.diagnosisId"></div>
@@ -119,61 +119,80 @@
     </div>
   </div>
 
-<div
-  frm-field
-  frm-group
-  ng-if="
+  <div
+    frm-field
+    frm-group
+    ng-if="
     patient.diagnosis.diagnosisId.id == 174 &&
     patient.diagnosis.biopsy == false
   "
->
-  <div frm-label>
-    Proteinuria with positive antibody test
-  </div>
+  >
+    <div frm-label>
+      Proteinuria with positive antibody test
+    </div>
 
-  <div frm-control>
+    <div frm-control>
       <div
         frm-boolean-field
         model="patient.diagnosis.proteinuriaPositiveAntibody"
         required="true"
       ></div>
 
-    <div frm-errors
-      errors="patient.errors.diagnosis.proteinuriaPositiveAntibody"
-    ></div>
+      <div frm-errors
+           errors="patient.errors.diagnosis.proteinuriaPositiveAntibody"
+      ></div>
+    </div>
   </div>
-</div>
-<div
-  frm-field
-  frm-group
-  ng-if="
+  <div
+    frm-field
+    frm-group
+    ng-if="
     patient.diagnosis.diagnosisId.id == 174 &&
     patient.diagnosis.biopsy == false &&
     patient.diagnosis.proteinuriaPositiveAntibody == true
   "
->
-  <div frm-label>
-    Antibody
+  >
+    <div frm-label>
+      Antibody
+    </div>
+
+    <div frm-control>
+      <div
+        frm-select-field
+        model="patient.diagnosis.antibodyId"
+        options="antibodies"
+        required="true"
+      ></div>
+
+      <div
+        frm-errors
+        errors="patient.errors.diagnosis.antibodyId"
+      ></div>
+    </div>
   </div>
 
-  <div frm-control>
-    <div
-      frm-select-field
-      model="patient.diagnosis.antibodies.key"
-      options="antibodies"
-      required="true"
-    ></div>
+  <div ng-if="
+        patient.diagnosis.diagnosisId.id == 174 &&
+        patient.diagnosis.biopsy == false &&
+        patient.diagnosis.proteinuriaPositiveAntibody == true &&
+        patient.diagnosis.antibodyId == 'OTHER'" frm-field frm-group>
+    <div frm-label>Custom Antibody</div>
 
-    <div
-      frm-errors
-      errors="patient.errors.diagnosis.antibodies"
-    ></div>
+    <div frm-control>
+          <input
+            type="text"
+            frm-text-field
+            ng-model="patient.diagnosis.antibodyCustom"
+            ng-required="true"
+            ng-pattern="/^[a-z0-9\/-]*$/"
+          />
+      <div frm-help>input the antibody if known and not in the above list or 'n/a' if not, only use lowercase and
+        ('/'or'-')
+      </div>
+      <div frm-errors errors="patient.diagnosis.errors.antibodyCustom"></div>
+    </div>
+
   </div>
-</div>
-
-
-
-
 
 
   <div
@@ -203,7 +222,9 @@
     </div>
 
     <div frm-control>
-      <div style="color: red; font-weight: bold;">If you have additional information that exceeds character limit please enter this under pathology tab if biopsy otherwise letters tab</div>
+      <div style="color: red; font-weight: bold;">If you have additional information that exceeds character limit please
+        enter this under pathology tab if biopsy otherwise letters tab
+      </div>
       <div
         frm-textarea-field-restricted
         model="patient.diagnosis.comments"
