@@ -28,8 +28,11 @@ function primaryPatientDiagnosisControllerFactory(
       store.findMany('biopsy-diagnoses').then(function(biopsyDiagnoses) {
         $scope.biopsyDiagnoses = biopsyDiagnoses;
       }),
-      store.findMany('antibodies').then(function(antibodies) {
-        $scope.antibodies = antibodies;
+      store.findMany('antibodies', { group_id: $scope.cohort.id }).then(function(antibodies) {
+
+          $scope.antibodies = antibodies.map(function (a) {
+      return a.id;
+    });
       }),
       getRadarGroup().then(function(group) {
         $scope.sourceGroup = group;

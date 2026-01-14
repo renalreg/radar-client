@@ -66,9 +66,9 @@
         <td><span tick="item.proteinuriaPositiveAntibody"></span></td>
       </tr>
 
-      <tr ng-if="cohort.code == 'MEMNEPHRO' && item.biopsy==false">
+      <tr ng-if="cohort.code == 'MEMNEPHRO' && item.biopsy==false && item.proteinuriaPositiveAntibody">
         <th>antibody</th>
-        <td>{{ item.antibodies.value }}</td>
+        <td>{{ item.antibodyId }}</td>
       </tr>
 
       <tr>
@@ -214,13 +214,46 @@
         </div>
       </div>
 
-      <div ng-if="item.biopsy == false && item.proteinuriaPositiveAntibody == true && cohort.code == 'MEMNEPHRO'" frm-field frm-group>
+      <div ng-if="item.biopsy == false && item.proteinuriaPositiveAntibody == true && cohort.code == 'MEMNEPHRO'" frm-field frm-group
+           ng-init="antibodyOptions = antibodies.includes(item.antibodyId) ? antibodies : (item.antibodyId ? [item.antibodyId].concat(antibodies) : antibodies)">
         <div frm-label>Antibody</div>
         <div frm-control>
-          <div frm-select-field model="item.antibodies.key" options="antibodies" required="true"></div>
-          <div frm-errors errors="item.errors.antibodies"></div>
+          <div frm-select-field
+               model="item.antibodyId"
+               options="antibodyOptions"
+               required="true">
+          </div>
+          <div frm-errors errors="item.errors.antibodyId"></div>
         </div>
       </div>
+
+
+      <div ng-if="item.antibodyId == 'OTHER' && item.proteinuriaPositiveAntibody == true && cohort.code == 'MEMNEPHRO'" frm-field frm-group>
+        <div frm-label>
+          Custom Antibody
+        </div>
+
+        <div frm-control>
+          <input
+            type="text"
+            frm-text-field
+            ng-model="item.antibodyCustom"
+            ng-required="true"
+            ng-pattern="/^[a-z0-9\/-]*$/"
+          />
+
+          <div frm-help>
+            input the antibody if known and not in the above list or 'n/a' if not,
+            only use lowercase and ('/' or '-')
+          </div>
+
+          <div frm-errors errors="item.errors.antibodyCustom"></div>
+        </div>
+
+      </div>
+
+
+
 
 
       <div ng-if="item.biopsy && biopsyDiagnosis" frm-field frm-group>
