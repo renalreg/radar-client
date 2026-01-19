@@ -239,12 +239,10 @@
             frm-text-field
             ng-model="item.antibodyCustom"
             ng-required="true"
-            ng-pattern="/^[a-z0-9\/-]*$/"
           />
 
           <div frm-help>
-            input the antibody if known and not in the above list or 'n/a' if not,
-            only use lowercase and ('/' or '-')
+            input the antibody if known
           </div>
 
           <div frm-errors errors="item.errors.antibodyCustom"></div>
