@@ -5,7 +5,8 @@ function frmTextField() {
     restrict: 'A',
     scope: {
       required: '&',
-      model: '='
+      model: '=',
+      maxlength: '@?'
     },
     templateUrl: templateUrl
   };

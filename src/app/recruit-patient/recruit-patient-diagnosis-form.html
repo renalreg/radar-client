@@ -179,14 +179,14 @@
     <div frm-label>Custom Antibody</div>
 
     <div frm-control>
-          <input
+          <div
             type="text"
             frm-text-field
-            ng-model="patient.diagnosis.antibodyCustom"
-            ng-required="true"
-          />
-      <div frm-help>input the antibody if known and not in the above list or 'n/a' if not, only use lowercase and
-        ('/'or'-')
+            model="patient.diagnosis.antibodyCustom"
+            required="true"
+            maxlength="50"
+          ></div>
+      <div frm-help>input the antibody if known
       </div>
       <div frm-errors errors="patient.diagnosis.errors.antibodyCustom"></div>
     </div>

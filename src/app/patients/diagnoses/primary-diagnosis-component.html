@@ -214,8 +214,21 @@
         </div>
       </div>
 
-      <div ng-if="item.biopsy == false && item.proteinuriaPositiveAntibody == true && cohort.code == 'MEMNEPHRO'" frm-field frm-group
-           ng-init="antibodyOptions = antibodies.includes(item.antibodyId) ? antibodies : (item.antibodyId ? [item.antibodyId].concat(antibodies) : antibodies)">
+<div ng-if="item.biopsy == false && item.proteinuriaPositiveAntibody == true && cohort.code == 'MEMNEPHRO'"
+     frm-field
+     frm-group
+     ng-init="
+       isKnownAntibody = antibodies.includes(item.antibodyId);
+       hasOther = antibodies.includes('OTHER');
+
+       antibodyOptions = isKnownAntibody
+         ? antibodies
+         : (hasOther ? antibodies : ['OTHER'].concat(antibodies));
+
+       (!isKnownAntibody && item.antibodyId) && (item.antibodyCustom = item.antibodyId);
+       (!isKnownAntibody && item.antibodyId) && (item.antibodyId = 'OTHER');
+     ">
+
         <div frm-label>Antibody</div>
         <div frm-control>
           <div frm-select-field
@@ -234,12 +247,12 @@
         </div>
 
         <div frm-control>
-          <input
-            type="text"
+          <div
             frm-text-field
-            ng-model="item.antibodyCustom"
-            ng-required="true"
-          />
+            model="item.antibodyCustom"
+            required="true"
+            maxlength="50"
+          ></div>
 
           <div frm-help>
             input the antibody if known
