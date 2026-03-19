@@ -112,6 +112,14 @@
           <span if-demographics-hidden class="hidden-demographics">Hidden</span>
         </td>
       </tr>
+      <tr ng-if="item.emailAddress == 'radar@radar.radar'">
+        <th>Email Reason</th>
+        <td>
+          <span if-demographics-visible>{{ getEmailReasonLabel(item.emailReason) }}</span>
+          <span if-demographics-hidden class="hidden-demographics">Hidden</span>
+        </td>
+      </tr>
+      </tr>
     </table>
 
     <div metadata item="item"></div>
@@ -227,6 +235,21 @@
               <div frm-errors errors="item.errors.emailAddress"></div>
             </div>
           </div>
+
+          <div frm-field frm-group ng-if="item.emailAddress=='radar@radar.radar'">
+            <div frm-label>Reason for not providing an email address</div>
+                <div frm-control>
+              <div
+                frm-select-field
+                model="item.emailReason"
+                options="emailreasons"
+                required="true"
+              ></div>
+              <div frm-errors errors="item.errors.emailReason"></div>
+            </div>
+          </div>
+
+
         </div>
       </div>
 
