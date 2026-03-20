@@ -51,12 +51,28 @@
       ></div>
       <div frm-errors errors="searchErrors.emailAddress"></div>
       <div frm-help>
-        Radar may wish to contact the patient so it is important to include
-        e-mail where possible. If you are unable to provide an e-mail
+        RaDaR emails patients to offer them opportunities to
+        participate in research and to comply with our requirement
+        to inform patients about how their data is being used. If this
+        patient does not have an email address or has explicitly
+        refused to provide one because they do not want to be contacted/ please
         <button ng-click="searchParams.emailAddress='radar@radar.radar'">
           click here
         </button>
       </div>
+    </div>
+  </div>
+
+  <div frm-field frm-group ng-if="searchParams.emailAddress=='radar@radar.radar'">
+    <div frm-label>Reason for not providing an email address</div>
+        <div frm-control>
+      <div
+        frm-select-field
+        model="searchParams.emailReason"
+        options="emailreasons"
+        required="true"
+      ></div>
+      <div frm-errors errors="searchErrors.emailReason"></div>
     </div>
   </div>
 

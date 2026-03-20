@@ -41,6 +41,18 @@ function patientDemographicsControllerFactory(
       },
     });
 
+    $scope.emailreasons = [
+      { id: "no_email", label: "Patient does not have an email address" },
+      { id: "refused", label: "Patient has explicitly refused to provide an email address" },
+      ];
+
+    $scope.getEmailReasonLabel = function (id) {
+      var match = ($scope.emailreasons || []).find(function (r) {
+        return r.id === id;
+      });
+      return match ? match.label : id;
+    };
+
     self.load(
       firstPromise([
         store.findMany('patient-demographics', { patient: $scope.patient.id }),

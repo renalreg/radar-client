@@ -23,6 +23,7 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
   function init() {
     $q.all([
       loadGenders(),
+      loadEmailReasons(),
       loadEthnicities(),
       loadNumberGroups(),
       loadNationalities(),
@@ -75,6 +76,7 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
           number: $scope.searchParams.number,
           paediatric: isPaediatric($scope.searchParams.dateOfBirth),
           diagnosis: {},
+          emailReason:$scope.searchParams.emailReason
         };
 
         $scope.searchErrors = {};
@@ -118,7 +120,6 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
 
   function recruit() {
     $scope.loading = true;
-
     return adapter
       .post('/recruit-patient', {}, $scope.patient)
       .then(function (response) {
@@ -147,6 +148,13 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
     return store.findMany('genders').then(function (genders) {
       $scope.genders = genders;
     });
+  }
+
+  function loadEmailReasons(){
+    $scope.emailreasons = [
+      { id: "no_email", label: "Patient does not have an email address" },
+      { id: "refused", label: "Patient has explicitly refused to provide an email address" },
+    ];
   }
 
   function loadEthnicities() {
