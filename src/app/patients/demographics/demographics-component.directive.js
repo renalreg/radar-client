@@ -43,7 +43,7 @@ function patientDemographicsControllerFactory(
 
     $scope.emailreasons = [
       { id: "no_email", label: "Patient does not have an email address" },
-      { id: "refused", label: "Patient has explicitly refused to provide an email address" },
+      { id: "refused", label: "Patient does not wish to be contacted by email" },
       ];
 
     $scope.getEmailReasonLabel = function (id) {
