@@ -113,7 +113,7 @@ function patientHospitalsComponent(PatientHospitalsController) {
       patient: '='
     },
     controller: PatientHospitalsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

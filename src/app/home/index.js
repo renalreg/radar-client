@@ -4,7 +4,7 @@ import templateUrl from './home.html';
 function config($stateProvider) {
   $stateProvider.state('index', {
     url: '/',
-    templateUrl: templateUrl,
+    template: templateUrl,
     controller: 'HomeController as vm',
     data: { public: true }
   });

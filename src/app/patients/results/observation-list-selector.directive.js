@@ -17,7 +17,7 @@ function observationListSelector(store, adapter) {
       patient: '=patient',
       selectedObservations: '=observations',
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function (scope) {
       var counts = {};
 

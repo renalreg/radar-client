@@ -59,7 +59,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patients', {
     url: '/patients',
-    templateUrl: patientListTemplateUrl,
+    template: patientListTemplateUrl,
     controller: ['$scope', '$controller', 'PatientListController', function($scope, $controller, PatientListController) {
       $controller(PatientListController, {$scope: $scope});
     }]
@@ -68,7 +68,7 @@ function config($stateProvider, storeProvider) {
   $stateProvider.state('patient', {
     url: '/patients/:patientId',
     abstract: true,
-    templateUrl: patientDetailTemplateUrl,
+    template: patientDetailTemplateUrl,
     controller: 'PatientDetailController',
     resolve: {
       patient: ['$stateParams', 'store', function($stateParams, store) {
@@ -82,12 +82,12 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.all', {
     url: '/all',
-    templateUrl: allTemplateUrl
+    template: allTemplateUrl
   });
 
   $stateProvider.state('patient.delete', {
     url: '/delete',
-    templateUrl: deletePatientTemplateUrl,
+    template: deletePatientTemplateUrl,
     controller: 'DeletePatientController'
   });
 }

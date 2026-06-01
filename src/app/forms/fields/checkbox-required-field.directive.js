@@ -7,7 +7,7 @@ function frmCheckboxRequiredField() {
       model: '='
     },
     transclude: true,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

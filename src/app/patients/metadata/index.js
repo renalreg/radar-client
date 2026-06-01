@@ -11,7 +11,7 @@ import templateUrl from './metadata.html';
 function config($stateProvider,storeProvider) {
   $stateProvider.state('patient.metadata', {
     url: '/metadata',
-    templateUrl: templateUrl,
+    template: templateUrl,
   });
 }
 

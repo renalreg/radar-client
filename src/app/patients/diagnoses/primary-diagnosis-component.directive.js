@@ -92,7 +92,7 @@ function primaryPatientDiagnosisComponent(PrimaryPatientDiagnosisController) {
       cohort: '='
     },
     controller: PrimaryPatientDiagnosisController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

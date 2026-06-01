@@ -105,7 +105,7 @@ function patientMetadataComponent(PatientMetadataController) {
       patient: '=',
     },
     controller: PatientMetadataController,
-    templateUrl: templateUrl,
+    template: templateUrl,
   };
 }
 

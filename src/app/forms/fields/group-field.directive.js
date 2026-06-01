@@ -12,7 +12,7 @@ function frmGroupField(store, session) {
       userOnly: '&?',
       type: '@?'
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       var user = session.user;
       if (scope.userOnly && !user.isAdmin) {

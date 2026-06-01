@@ -7,7 +7,7 @@ function frmPasswordField() {
       required: '&',
       model: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

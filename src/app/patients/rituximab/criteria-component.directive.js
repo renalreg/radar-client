@@ -55,7 +55,7 @@ function rituximabCriteriaComponent(RituximabCriteriaController) {
       patient: '='
     },
     controller: RituximabCriteriaController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

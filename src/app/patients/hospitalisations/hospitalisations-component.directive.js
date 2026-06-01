@@ -55,7 +55,7 @@ function hospitalisationsComponent(HospitalisationsController) {
       patient: '='
     },
     controller: HospitalisationsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

@@ -53,7 +53,7 @@ function fetalAnomalyScansComponent(FetalAnomalyScansController) {
       patient: '='
     },
     controller: FetalAnomalyScansController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

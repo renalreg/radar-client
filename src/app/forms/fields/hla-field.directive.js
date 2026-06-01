@@ -7,7 +7,7 @@ function frmHlaField() {
       model: '=',
       required: '&'
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

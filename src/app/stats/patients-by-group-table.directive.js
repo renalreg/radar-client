@@ -8,7 +8,7 @@ function patientsByGroupTable(adapter) {
       group: '=',
       groupType: '@',
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.loading = true;
 

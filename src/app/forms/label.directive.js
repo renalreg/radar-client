@@ -3,7 +3,7 @@ import templateUrl from './label.html';
 function frmLabel() {
   return {
     require: ['^frmField', '?^frmLayout'],
-    templateUrl: templateUrl,
+    template: templateUrl,
     replace: true,
     transclude: true,
     link: function(scope, element, attrs, ctrls) {

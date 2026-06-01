@@ -14,7 +14,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.consents', {
     url: '/consents',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

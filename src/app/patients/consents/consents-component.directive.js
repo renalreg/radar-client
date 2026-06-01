@@ -106,7 +106,7 @@ function patientConsentsComponent(PatientConsentsController) {
       patient: '='
     },
     controller: PatientConsentsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

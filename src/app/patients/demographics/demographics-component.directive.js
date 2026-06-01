@@ -112,7 +112,7 @@ function patientDemographicsComponent(PatientDemographicsController) {
       patient: '=',
     },
     controller: PatientDemographicsController,
-    templateUrl: templateUrl,
+    template: templateUrl,
   };
 }
 

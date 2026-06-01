@@ -8,7 +8,7 @@ function frmTextField() {
       model: '=',
       maxlength: '@?'
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

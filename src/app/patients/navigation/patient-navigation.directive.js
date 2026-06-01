@@ -9,7 +9,7 @@ function patientNavigation() {
     scope: {
       patient: '=',
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.$watchCollection(function() {
         return scope.patient.getSystems();

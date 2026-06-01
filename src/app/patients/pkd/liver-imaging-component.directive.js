@@ -56,7 +56,7 @@ function liverImagingComponent(LiverImagingController) {
       patient: '='
     },
     controller: LiverImagingController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

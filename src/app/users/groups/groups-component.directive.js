@@ -92,7 +92,7 @@ function userGroupsComponent(UserGroupsController) {
       user: '='
     },
     controller: UserGroupsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

@@ -58,7 +58,7 @@ function familyHistoryComponent(FamilyHistoryController) {
       cohort: '='
     },
     controller: FamilyHistoryController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

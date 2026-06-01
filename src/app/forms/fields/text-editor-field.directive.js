@@ -7,7 +7,7 @@ function frmTextEditorField() {
       required: '&',
       model: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

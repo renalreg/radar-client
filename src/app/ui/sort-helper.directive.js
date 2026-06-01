@@ -8,7 +8,7 @@ function sortHelper() {
       sortId: '@'
     },
     transclude: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, listHelperCtrl) {
       scope.sort = function() {
         var sortBy = getSortBy();

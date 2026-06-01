@@ -11,7 +11,7 @@ import templateUrl from './nurture-samples.html';
 function config($stateProvider) {
   $stateProvider.state('patient.nurtureSamples', {
     url: '/samples',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

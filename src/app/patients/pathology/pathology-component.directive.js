@@ -65,7 +65,7 @@ function pathologyComponent(PathologyController) {
       patient: '='
     },
     controller: PathologyController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

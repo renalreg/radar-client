@@ -70,7 +70,7 @@ function patientAliasesComponent(PatientAliasesController) {
       patient: '='
     },
     controller: PatientAliasesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

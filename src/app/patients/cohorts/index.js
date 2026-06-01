@@ -12,12 +12,12 @@ import cohortTemplateUrl from './cohort.html';
 function config($stateProvider) {
   $stateProvider.state('patient.cohorts', {
     url: '/cohorts',
-    templateUrl: cohortsTemplateUrl
+    template: cohortsTemplateUrl
   });
 
   $stateProvider.state('patient.cohort', {
     url: '/cohorts/:cohortId',
-    templateUrl: cohortTemplateUrl,
+    template: cohortTemplateUrl,
     controller: ['$scope', 'cohort', function($scope, cohort) {
       $scope.cohort = cohort;
     }],

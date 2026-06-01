@@ -8,7 +8,7 @@ function frmConfirmEmailField() {
       model: '=',
       email: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 
