@@ -1,3 +1,4 @@
+@use 'sass:color';
 @import "variables";
 
 $navbar-radar-color: #FFF;
@@ -76,7 +77,7 @@ $navbar-radar-toggle-icon-bar-bg: #FFF;
 
   .navbar-collapse,
   .navbar-form {
-    border-color: darken($navbar-radar-bg, 7%);
+    border-color: color.adjust($navbar-radar-bg, $lightness: -7%);
   }
 
   .navbar-nav {

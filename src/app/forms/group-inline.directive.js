@@ -4,7 +4,7 @@ function frmGroupInline() {
   return {
     require: 'frmField',
     transclude: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     scope: {},
     link: function(scope, element, attrs, fieldCtrl) {
       scope.isValid = function() {

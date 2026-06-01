@@ -51,7 +51,7 @@ function changeEmailComponent(ChangeEmailController) {
       user: '='
     },
     controller: ChangeEmailController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

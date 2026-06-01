@@ -6,7 +6,7 @@ function navbar(session, hasPermission, systemStore) {
   return {
     restrict: 'A',
     scope: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.$watch(function() {
         return session.user;

@@ -5,6 +5,7 @@ module.exports = {
     jasmine: true,
     commonjs: true,
     jquery: true,
+    node: true
   },
   extends: 'eslint:recommended',
   parserOptions: {
@@ -12,7 +13,7 @@ module.exports = {
   },
   rules: {
     indent: [2, 2],
-    'linebreak-style': [2, 'unix'],
+    'linebreak-style': 'off',
     quotes: [2, 'single'],
     semi: [2, 'always'],
     'valid-jsdoc': [1, {}],
