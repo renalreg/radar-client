@@ -7,16 +7,17 @@
 
   <title>RaDaR</title>
 
-  <!-- Webpack will inject CSS automatically -->
+  <!-- Font Awesome (for spinner) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <!-- IE9 support (keep if you still need it) -->
-  <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+  <!-- Prevent Angular flash before bootstrap -->
+  <style>
+    [ng-cloak] { display: none !important; }
+  </style>
 </head>
 
-<body>
+<body ng-cloak>
 
   <div live-warning></div>
 
@@ -41,18 +42,20 @@
     </div>
   </div>
 
-  <!-- APP -->
-  <div ng-if="ready">
-    <div class="ui-view"></div>
+  <div ng-show="!ready" class="app-loading">
+    <div class="loading-card">
+      <div class="spinner">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+      </div>
+      <div class="loading-text">
+        Loading RaDaR…
+      </div>
+    </div>
   </div>
 
-  <!-- LOADING -->
-  <div ng-if="!ready" class="content">
-    <div class="well">
-      <strong>
-        Loading <i class="fa fa-spinner fa-spin"></i>
-      </strong>
-    </div>
+  <!-- APP -->
+  <div ng-show="ready">
+    <div class="ui-view"></div>
   </div>
 
   <!-- FOOTER -->
