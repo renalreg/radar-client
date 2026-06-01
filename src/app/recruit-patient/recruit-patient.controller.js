@@ -102,11 +102,11 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
         $scope.biopsyDiagnosisRequired =
           cohortCode === 'INS' || cohortCode === 'INS-NEPHROS';
         $state.go('recruitPatient.diagnosis');
-      store.findMany('antibodies', { group_id: $scope.patient.cohortGroup.id }).then(function(antibodies) {
-        $scope.antibodies = antibodies.map(function (a) {
-      return a.id;
-    });
-      });
+        store.findMany('antibodies', { group_id: $scope.patient.cohortGroup.id }).then(function(antibodies) {
+          $scope.antibodies = antibodies.map(function (a) {
+            return a.id;
+          });
+        });
       })
       .catch(function (response) {
         if (response.status === 422) {
@@ -152,8 +152,8 @@ function RecruitPatientController($scope, adapter, $state, $q, store) {
 
   function loadEmailReasons(){
     $scope.emailreasons = [
-      { id: "no_email", label: "Patient does not have an email address" },
-      { id: "refused", label: "Patient does not wish to be contacted by email" },
+      { id: 'no_email', label: 'Patient does not have an email address' },
+      { id: 'refused', label: 'Patient does not wish to be contacted by email' },
     ];
   }
 

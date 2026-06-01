@@ -26,7 +26,7 @@ function fetalAnomalyScansControllerFactory(
       store.findMany('fetal-anomaly-scans', {patient: $scope.patient.id}),
       store.findMany('fetal-anomaly-imaging-types').then(function(imagingTypes) {
         $scope.imagingTypes = imagingTypes;
-    }));
+      }));
 
     $scope.create = function() {
       var item = store.create('fetal-anomaly-scans', {patient: $scope.patient.id});
