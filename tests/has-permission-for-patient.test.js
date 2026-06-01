@@ -1,43 +1,86 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '..';
+import hasPermissionForPatientFactory from '../src/app/permissions/has-permission-for-patient';
 
-describe('hasPermissionForPatient', function() {
-  beforeEach(angular.mock.module('radar'));
+const hasPermissionForPatient = hasPermissionForPatientFactory();
 
-  var hasPermissionForPatient;
-  var store;
+const makeGroup = (id) => ({ id });
 
-  beforeEach(angular.mock.inject(function(_hasPermissionForPatient_, _store_) {
-    hasPermissionForPatient = _hasPermissionForPatient_;
-    store = _store_;
-  }));
+const makeUser = ({ isAdmin = false, groups = [] } = {}) => ({
+  isAdmin,
+  groups,
+});
 
-  it('denies when the user and patient are in disjoint groups', function() {
-    var group1 = store.create('groups', {id: 1});
-    var group2 = store.create('groups', {id: 2});
-    var user = store.create('users', {groups: [{group: group1, permissions: ['VIEW_PATIENT']}]});
-    var patient = store.create('patient', {groups: [{group: group2}]});
-    expect(hasPermissionForPatient(user, patient, 'VIEW_PATIENT')).toBe(false);
+const makePatient = ({ groups = [] } = {}) => ({
+  groups,
+});
+
+// helper that matches production expectation
+const makeUserGroup = (group, permissions = []) => ({
+  group,
+  hasPermission: (perm) => permissions.includes(perm),
+});
+
+describe('hasPermissionForPatient', () => {
+  test('denies when the user and patient share no groups', () => {
+    const group1 = makeGroup(1);
+    const group2 = makeGroup(2);
+
+    const user = makeUser({
+      groups: [
+        makeUserGroup(group1, ['VIEW_PATIENT']),
+      ],
+    });
+
+    const patient = makePatient({
+      groups: [{ group: group2 }],
+    });
+
+    expect(
+      hasPermissionForPatient(user, patient, 'VIEW_PATIENT')
+    ).toBe(false);
   });
 
-  it('denies when the user lacks the permission', function() {
-    var group = store.create('groups', {id: 1});
-    var user = store.create('users', {groups: [{group: group, permissions: []}]});
-    var patient = store.create('patient', {groups: [{group: group}]});
-    expect(hasPermissionForPatient(user, patient, 'VIEW_PATIENT')).toBe(false);
+  test('denies when the user is in a shared group but lacks the permission', () => {
+    const group = makeGroup(1);
+
+    const user = makeUser({
+      groups: [
+        makeUserGroup(group, []),
+      ],
+    });
+
+    const patient = makePatient({
+      groups: [{ group }],
+    });
+
+    expect(
+      hasPermissionForPatient(user, patient, 'VIEW_PATIENT')
+    ).toBe(false);
   });
 
-  it('grants when the user is an admin', function() {
-    var user = store.create('users', {isAdmin: true});
-    var patient = store.create('patient', {});
-    expect(hasPermissionForPatient(user, patient, 'VIEW_PATIENT')).toBe(true);
+  test('grants when the user is an admin', () => {
+    const user = makeUser({ isAdmin: true });
+    const patient = makePatient();
+
+    expect(
+      hasPermissionForPatient(user, patient, 'VIEW_PATIENT')
+    ).toBe(true);
   });
 
-  it('grants when the user has the permission', function() {
-    var group = store.create('groups', {id: 1});
-    var user = store.create('users', {groups: [{group: group, permissions: ['VIEW_PATIENT']}]});
-    var patient = store.create('patient', {groups: [{group: group}]});
-    expect(hasPermissionForPatient(user, patient, 'VIEW_PATIENT')).toBe(true);
+  test('grants when the user shares a group with the patient and has the permission', () => {
+    const group = makeGroup(1);
+
+    const user = makeUser({
+      groups: [
+        makeUserGroup(group, ['VIEW_PATIENT']),
+      ],
+    });
+
+    const patient = makePatient({
+      groups: [{ group }],
+    });
+
+    expect(
+      hasPermissionForPatient(user, patient, 'VIEW_PATIENT')
+    ).toBe(true);
   });
 });

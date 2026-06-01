@@ -1,43 +1,48 @@
-import anyValue from './any-value';
+import anyValue from '../src/app/utils/any-value';
 
-describe('any value', function() {
-  function matcher(x) {
-    return x === 'hello';
-  }
+describe('anyValue', () => {
+  const matcher = (x) => x === 'hello';
 
-  it('match input', function() {
-    expect(anyValue('hello', matcher)).toBe(true);
+  test.each([
+    ['direct match', 'hello', true],
+    ['direct no-match', 'world', false],
+  ])('%s', (_desc, input, expected) => {
+    expect(anyValue(input, matcher)).toBe(expected);
   });
 
-  it('match in list', function() {
-    expect(anyValue(['hello', 'world'], matcher)).toBe(true);
+  describe('arrays', () => {
+    test('matches when item is present', () => {
+      expect(anyValue(['hello', 'world'], matcher)).toBe(true);
+    });
+
+    test('returns false when no item matches', () => {
+      expect(anyValue(['foo', 'bar'], matcher)).toBe(false);
+    });
+
+    test('matches in nested arrays', () => {
+      expect(anyValue(['foo', ['hello', 'world']], matcher)).toBe(true);
+    });
   });
 
-  it('no match in list', function() {
-    expect(anyValue(['foo', 'bar'], matcher)).toBe(false);
-  });
+  describe('objects', () => {
+    test('matches on a value', () => {
+      expect(anyValue({ foo: 'hello' }, matcher)).toBe(true);
+    });
 
-  it('match in object value', function() {
-    expect(anyValue({foo: 'hello'}, matcher)).toBe(true);
-  });
+    test('returns false when no value matches', () => {
+      expect(anyValue({ foo: 'world' }, matcher)).toBe(false);
+    });
 
-  it('no match in object value', function() {
-    expect(anyValue({foo: 'world'}, matcher)).toBe(false);
-  });
+    test('does not match on keys', () => {
+      expect(anyValue({ hello: 'world' }, matcher)).toBe(false);
+    });
 
-  it('match in nested lists', function() {
-    expect(anyValue(['foo', ['hello', 'world']], matcher)).toBe(true);
-  });
+    test('matches in nested objects', () => {
+      expect(anyValue({ foo: { bar: 'hello' } }, matcher)).toBe(true);
+    });
 
-  it('match in nested objects', function() {
-    expect(anyValue({foo: {bar: 'hello'}}, matcher)).toBe(true);
-  });
-
-  it('match in list in object', function() {
-    expect(anyValue({foo: ['hello', 'world']}, matcher)).toBe(true);
-  });
-
-  it('should not match keys', function() {
-    expect(anyValue({hello: 'world'}, matcher)).toBe(false);
+    test('matches in a list inside an object', () => {
+      expect(anyValue({ foo: ['hello', 'world'] }, matcher)).toBe(true);
+    });
   });
 });

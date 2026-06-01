@@ -1,45 +1,23 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import weeksAndDaysFormat from '../src/app/filters/weeks-and-days-format.filter';
 
-describe('weeks and days format', function() {
-  beforeEach(angular.mock.module('radar.filters'));
+const format = weeksAndDaysFormat(); // 👈 IMPORTANT
 
-  var filter;
-
-  beforeEach(angular.mock.inject(function(_$filter_) {
-    filter = _$filter_('weeksAndDaysFormat');
-  }));
-
-  it('handles null', function() {
-    expect(filter(null)).toBe('-');
+describe('weeksAndDaysFormat filter', () => {
+  test.each([
+    [null, '-'],
+    [undefined, '-'],
+  ])('returns "-" for %s', (input, expected) => {
+    expect(format(input)).toBe(expected);
   });
 
-  it('handles undefined', function() {
-    expect(filter(undefined)).toBe('-');
-  });
-
-  it('handles zero', function() {
-    expect(filter(0)).toBe('0 days');
-  });
-
-  it('handles one day', function() {
-    expect(filter(1)).toBe('1 day');
-  });
-
-  it('handles two days', function() {
-    expect(filter(2)).toBe('2 days');
-  });
-
-  it('handles one week', function() {
-    expect(filter(7)).toBe('1 week');
-  });
-
-  it('handles two weeks', function() {
-    expect(filter(14)).toBe('2 weeks');
-  });
-
-  it('handles weeks and days', function() {
-    expect(filter(123)).toBe('17 weeks, 4 days');
+  test.each([
+    [0, '0 days'],
+    [1, '1 day'],
+    [2, '2 days'],
+    [7, '1 week'],
+    [14, '2 weeks'],
+    [123, '17 weeks, 4 days'],
+  ])('formats %d days as "%s"', (days, expected) => {
+    expect(format(days)).toBe(expected);
   });
 });

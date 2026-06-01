@@ -1,27 +1,22 @@
-import compare from './compare';
+import compare from '../src/app/utils/compare';
 
-describe('compare', function() {
-  function sort(x) {
-    return x.sort(compare);
-  }
+describe('compare', () => {
+  const sort = (x) => [...x].sort(compare);
 
-  it('sorts an empty array', function() {
-    expect(sort([])).toEqual(sort([]));
+  test('sorts an empty array', () => {
+    expect(sort([])).toEqual([]);
   });
 
-  it('sorts numbers', function() {
-    expect(sort([3, 2, 1])).toEqual([1, 2, 3]);
-  });
-
-  it('sorts strings', function() {
-    expect(sort(['c', 'a', 'b'])).toEqual(['a', 'b', 'c']);
-  });
-
-  it('sorts arrays', function() {
-    expect(sort([[101, 'b'], [11, 'c'], [101, 'a']])).toEqual([[11, 'c'], [101, 'a'], [101, 'b']]);
-  });
-
-  it('sorts arrays of uneven length', function() {
-    expect(sort([[1, 2, 3], [1, 2]])).toEqual([[1, 2], [1, 2, 3]]);
+  test.each([
+    ['numbers', [3, 2, 1], [1, 2, 3]],
+    ['strings', ['c', 'a', 'b'], ['a', 'b', 'c']],
+    [
+      'arrays (lexicographic)',
+      [[101, 'b'], [11, 'c'], [101, 'a']],
+      [[11, 'c'], [101, 'a'], [101, 'b']],
+    ],
+    ['arrays of uneven length', [[1, 2, 3], [1, 2]], [[1, 2], [1, 2, 3]]],
+  ])('sorts %s', (_desc, input, expected) => {
+    expect(sort(input)).toEqual(expected);
   });
 });

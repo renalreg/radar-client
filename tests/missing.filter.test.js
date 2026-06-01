@@ -1,29 +1,18 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import missingFactory from '../src/app/filters/missing.filter';
 
-describe('missing', function() {
-  beforeEach(angular.mock.module('radar.filters'));
+// instantiate factory (no Angular needed)
+const missing = missingFactory();
 
-  var filter;
-
-  beforeEach(angular.mock.inject(function(_$filter_) {
-    filter = _$filter_('missing');
-  }));
-
-  it('handles null', function() {
-    expect(filter(null)).toBe('-');
+describe('missing filter', () => {
+  test.each([
+    [null, '-'],
+    [undefined, '-'],
+    ['', '-'],
+  ])('returns "-" for %s', (input, expected) => {
+    expect(missing(input)).toBe(expected);
   });
 
-  it('handles undefined', function() {
-    expect(filter(undefined)).toBe('-');
-  });
-
-  it('handles blank', function() {
-    expect(filter('')).toBe('-');
-  });
-
-  it('handles zero', function() {
-    expect(filter(0)).toBe(0);
+  test('passes zero through unchanged', () => {
+    expect(missing(0)).toBe(0);
   });
 });

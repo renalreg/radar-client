@@ -1,149 +1,88 @@
-import { snakeCaseKeys, camelCaseKeys } from './transform-keys';
+import { camelCaseKeys, snakeCaseKeys } from '../src/app/utils/transform-keys';
 
-describe('camel case keys', function() {
-  it('handles an empty object', function() {
-    expect(camelCaseKeys({})).toEqual({});
+
+describe('camelCaseKeys', () => {
+  test.each([
+    ['empty object', {}, {}],
+    ['empty array',  [], []],
+  ])('handles %s', (_desc, input, expected) => {
+    expect(camelCaseKeys(input)).toEqual(expected);
   });
 
-  it('handles an empty list', function() {
-    expect(camelCaseKeys([])).toEqual([]);
-  });
-
-  it('handles a flat object', function() {
-    expect(camelCaseKeys({
-      key_one: 'key_one',
-      key_two: 'key_two'
-    })).toEqual({
+  test('converts snake_case keys on a flat object', () => {
+    expect(camelCaseKeys({ key_one: 'key_one', key_two: 'key_two' })).toEqual({
       keyOne: 'key_one',
-      keyTwo: 'key_two'
+      keyTwo: 'key_two',
     });
   });
 
-  it('handles nested objects', function() {
+  test('converts keys recursively in nested objects', () => {
     expect(camelCaseKeys({
-      key_one: {
-        key_one_one: 'value_one_one',
-        key_one_two: 'value_one_two'
-      },
-      key_two: {
-        key_two_one: 'value_two_one',
-        key_two_two: 'value_two_two'
-      }
+      key_one: { key_one_one: 'value_one_one', key_one_two: 'value_one_two' },
+      key_two: { key_two_one: 'value_two_one', key_two_two: 'value_two_two' },
     })).toEqual({
-      keyOne: {
-        keyOneOne: 'value_one_one',
-        keyOneTwo: 'value_one_two'
-      },
-      keyTwo: {
-        keyTwoOne: 'value_two_one',
-        keyTwoTwo: 'value_two_two'
-      }
+      keyOne: { keyOneOne: 'value_one_one', keyOneTwo: 'value_one_two' },
+      keyTwo: { keyTwoOne: 'value_two_one', keyTwoTwo: 'value_two_two' },
     });
   });
 
-  it('handles a list of objects', function() {
+  test('converts keys in a list of objects', () => {
     expect(camelCaseKeys([
-      {
-        item_one_key_one: 'item_one_value_one',
-        item_one_key_two: 'item_one_value_two'
-      },
-      {
-        item_two_key_one: 'item_two_value_one',
-        item_two_key_two: 'item_two_value_two'
-      }
+      { item_one_key_one: 'item_one_value_one', item_one_key_two: 'item_one_value_two' },
+      { item_two_key_one: 'item_two_value_one', item_two_key_two: 'item_two_value_two' },
     ])).toEqual([
-      {
-        itemOneKeyOne: 'item_one_value_one',
-        itemOneKeyTwo: 'item_one_value_two'
-      },
-      {
-        itemTwoKeyOne: 'item_two_value_one',
-        itemTwoKeyTwo: 'item_two_value_two'
-      }
+      { itemOneKeyOne: 'item_one_value_one', itemOneKeyTwo: 'item_one_value_two' },
+      { itemTwoKeyOne: 'item_two_value_one', itemTwoKeyTwo: 'item_two_value_two' },
     ]);
   });
 
-  it('skips constants', function() {
-    expect(camelCaseKeys({
+  test('leaves SCREAMING_SNAKE_CASE constants unchanged', () => {
+    expect(camelCaseKeys({ KEY_1: 'value_1', KEY_2: 'value_2' })).toEqual({
       KEY_1: 'value_1',
-      KEY_2: 'value_2'
-    })).toEqual({
-      KEY_1: 'value_1',
-      KEY_2: 'value_2'
+      KEY_2: 'value_2',
     });
   });
 });
 
-describe('snake case keys', function() {
-  it('handles an empty object', function() {
-    expect(snakeCaseKeys({})).toEqual({});
+describe('snakeCaseKeys', () => {
+  test.each([
+    ['empty object', {}, {}],
+    ['empty array',  [], []],
+  ])('handles %s', (_desc, input, expected) => {
+    expect(snakeCaseKeys(input)).toEqual(expected);
   });
 
-  it('handles an empty list', function() {
-    expect(snakeCaseKeys([])).toEqual([]);
-  });
-
-  it('handles a flat object', function() {
-    expect(snakeCaseKeys({
-      keyOne: 'keyOne',
-      keyTwo: 'keyTwo'
-    })).toEqual({
+  test('converts camelCase keys on a flat object', () => {
+    expect(snakeCaseKeys({ keyOne: 'keyOne', keyTwo: 'keyTwo' })).toEqual({
       key_one: 'keyOne',
-      key_two: 'keyTwo'
+      key_two: 'keyTwo',
     });
   });
 
-  it('handles nested objects', function() {
+  test('converts keys recursively in nested objects', () => {
     expect(snakeCaseKeys({
-      keyOne: {
-        keyOneOne: 'valueOneOne',
-        keyOneTwo: 'valueOneTwo'
-      },
-      keyTwo: {
-        keyTwoOne: 'valueTwoOne',
-        keyTwoTwo: 'valueTwoTwo'
-      }
+      keyOne: { keyOneOne: 'valueOneOne', keyOneTwo: 'valueOneTwo' },
+      keyTwo: { keyTwoOne: 'valueTwoOne', keyTwoTwo: 'valueTwoTwo' },
     })).toEqual({
-      key_one: {
-        key_one_one: 'valueOneOne',
-        key_one_two: 'valueOneTwo'
-      },
-      key_two: {
-        key_two_one: 'valueTwoOne',
-        key_two_two: 'valueTwoTwo'
-      }
+      key_one: { key_one_one: 'valueOneOne', key_one_two: 'valueOneTwo' },
+      key_two: { key_two_one: 'valueTwoOne', key_two_two: 'valueTwoTwo' },
     });
   });
 
-  it('handles a list of objects', function() {
+  test('converts keys in a list of objects', () => {
     expect(snakeCaseKeys([
-      {
-        itemOneKeyOne: 'itemOneValueOne',
-        itemOneKeyTwo: 'itemOneValueTwo'
-      },
-      {
-        itemTwoKeyOne: 'itemTwoValueOne',
-        itemTwoKeyTwo: 'itemTwoValueTwo'
-      }
+      { itemOneKeyOne: 'itemOneValueOne', itemOneKeyTwo: 'itemOneValueTwo' },
+      { itemTwoKeyOne: 'itemTwoValueOne', itemTwoKeyTwo: 'itemTwoValueTwo' },
     ])).toEqual([
-      {
-        item_one_key_one: 'itemOneValueOne',
-        item_one_key_two: 'itemOneValueTwo'
-      },
-      {
-        item_two_key_one: 'itemTwoValueOne',
-        item_two_key_two: 'itemTwoValueTwo'
-      }
+      { item_one_key_one: 'itemOneValueOne', item_one_key_two: 'itemOneValueTwo' },
+      { item_two_key_one: 'itemTwoValueOne', item_two_key_two: 'itemTwoValueTwo' },
     ]);
   });
 
-  it('skips constants', function() {
-    expect(snakeCaseKeys({
+  test('leaves ALL_CAPS constants unchanged', () => {
+    expect(snakeCaseKeys({ KEY1: 'value1', KEY2: 'value2' })).toEqual({
       KEY1: 'value1',
-      KEY2: 'value2'
-    })).toEqual({
-      KEY1: 'value1',
-      KEY2: 'value2'
+      KEY2: 'value2',
     });
   });
 });

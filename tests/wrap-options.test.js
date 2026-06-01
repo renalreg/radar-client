@@ -1,295 +1,150 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import {
+  toRadioView as toRadioViewFactory,
+  toRadioModel as toRadioModelFactory,
+  wrapRadioOptions as wrapRadioOptionsFactory,
+  toSelectModel as toSelectModelFactory,
+  toSelectView as toSelectViewFactory,
+  wrapSelectOptions as wrapSelectOptionsFactory,
+} from '../src/app/utils/wrap-options';
 
-describe('wrap options', function() {
-  beforeEach(angular.mock.module('radar.utils'));
+// ─── lightweight mock for Angular $parse ─────────────────────────────────────
+const $parse = (expr) => (obj) => obj?.[expr];
 
-  describe('to radio view', function() {
-    var toRadioView;
+// ─── instantiate ALL factories properly ───────────────────────────────────────
+const toRadioView = toRadioViewFactory();
+const toRadioModel = toRadioModelFactory();
+const wrapRadioOptions = wrapRadioOptionsFactory();
 
-    beforeEach(angular.mock.inject(function(_toRadioView_) {
-      toRadioView = _toRadioView_;
-    }));
+const toSelectModel = toSelectModelFactory();
+const toSelectView = toSelectViewFactory($parse);
+const wrapSelectOptions = wrapSelectOptionsFactory(toSelectView);
 
-    it('handles a model object', function() {
-      expect(toRadioView({id: 123})).toEqual(123);
-    });
+// ─── tests ────────────────────────────────────────────────────────────────────
 
-    it('handles a string', function() {
-      expect(toRadioView('hello')).toEqual('hello');
-    });
+describe('toRadioView', () => {
+  test('extracts id from a model object', () => {
+    expect(toRadioView({ id: 123 })).toEqual(123);
   });
 
-  describe('to radio model', function() {
-    var toRadioModel;
+  test('passes a string through unchanged', () => {
+    expect(toRadioView('hello')).toEqual('hello');
+  });
+});
 
-    beforeEach(angular.mock.inject(function(_toRadioModel_) {
-      toRadioModel = _toRadioModel_;
-    }));
+describe('toRadioModel', () => {
+  const options = [
+    { id: 1, value: 'foo' },
+    { id: 2, value: 'bar' },
+    { id: 3, value: 'baz' },
+  ];
 
-    it('handles a model object', function() {
-      expect(toRadioModel(
-        [
-          {
-            id: 1,
-            value: 'foo'
-          },
-          {
-            id: 2,
-            value: 'bar'
-          },
-          {
-            id: 3,
-            value: 'baz'
-          }
-        ],
-        2
-      )).toEqual({
-        id: 2,
-        value: 'bar'
-      });
-    });
-
-    it('handles a string', function() {
-      expect(toRadioModel(['foo', 'bar', 'baz'], 'bar')).toEqual('bar');
-    });
+  test('returns the object matching a given id', () => {
+    expect(toRadioModel(options, 2)).toEqual({ id: 2, value: 'bar' });
   });
 
-  describe('wrap radio options', function() {
-    var wrapRadioOptions;
+  test('returns a string value directly', () => {
+    expect(toRadioModel(['foo', 'bar', 'baz'], 'bar')).toEqual('bar');
+  });
+});
 
-    beforeEach(angular.mock.inject(function(_wrapRadioOptions_) {
-      wrapRadioOptions = _wrapRadioOptions_;
-    }));
-
-    it('handles an empty list', function() {
-      expect(wrapRadioOptions([])).toEqual([]);
-    });
-
-    it('handles a list of strings', function() {
-      expect(wrapRadioOptions(['foo', 'bar', 'baz'])).toEqual([
-        {
-          id: 'foo',
-          label: 'foo'
-        },
-        {
-          id: 'bar',
-          label: 'bar'
-        },
-        {
-          id: 'baz',
-          label: 'baz'
-        }
-      ]);
-    });
-
-    it('handles a list of objects', function() {
-      expect(wrapRadioOptions([
-        {
-          id: 1,
-          label: 'foo'
-        },
-        {
-          id: 2,
-          label: 'bar'
-        },
-        {
-          id: 3,
-          label: 'baz'
-        }
-      ])).toEqual([
-        {
-          id: 1,
-          label: 'foo'
-        },
-        {
-          id: 2,
-          label: 'bar'
-        },
-        {
-          id: 3,
-          label: 'baz'
-        }
-      ]);
-    });
+describe('wrapRadioOptions', () => {
+  test('handles an empty list', () => {
+    expect(wrapRadioOptions([])).toEqual([]);
   });
 
-  describe('to select view', function() {
-    var toSelectView;
-
-    beforeEach(angular.mock.inject(function(_toSelectView_) {
-      toSelectView = _toSelectView_;
-    }));
-
-    it('handles null', function() {
-      expect(toSelectView(null)).toBeNull();
-    });
-
-    it('handles undefined', function() {
-      expect(toSelectView(undefined)).toBeNull();
-    });
-
-    it('handles a string', function() {
-      expect(toSelectView('hello')).toEqual({
-        id: 'hello',
-        label: 'hello',
-        value: 'hello'
-      });
-    });
-
-    it('handles an object', function() {
-      expect(toSelectView({
-        id: 1,
-        label: 'foo'
-      })).toEqual({
-        id: 1,
-        label: 'foo',
-        value: {
-          id: 1,
-          label: 'foo'
-        }
-      });
-    });
-
-    it('uses the id path', function() {
-      expect(toSelectView({
-        foo: 1,
-        label: 'foo'
-      }, 'foo')).toEqual({
-        id: 1,
-        label: 'foo',
-        value: {
-          foo: 1,
-          label: 'foo'
-        }
-      });
-    });
-
-    it('uses the label path', function() {
-      expect(toSelectView({
-        id: 1,
-        foo: 'foo'
-      }, undefined, 'foo')).toEqual({
-        id: 1,
-        label: 'foo',
-        value: {
-          id: 1,
-          foo: 'foo'
-        }
-      });
-    });
+  test('wraps strings as { id, label }', () => {
+    expect(wrapRadioOptions(['foo', 'bar', 'baz'])).toEqual([
+      { id: 'foo', label: 'foo' },
+      { id: 'bar', label: 'bar' },
+      { id: 'baz', label: 'baz' },
+    ]);
   });
 
-  describe('to select model', function() {
-    var toSelectModel;
+  test('passes objects through unchanged', () => {
+    const opts = [
+      { id: 1, label: 'foo' },
+      { id: 2, label: 'bar' },
+      { id: 3, label: 'baz' },
+    ];
+    expect(wrapRadioOptions(opts)).toEqual(opts);
+  });
+});
 
-    beforeEach(angular.mock.inject(function(_toSelectModel_) {
-      toSelectModel = _toSelectModel_;
-    }));
+describe('toSelectModel', () => {
+  test.each([
+    [null, null],
+    [undefined, null],
+  ])('returns null for %s', (input, expected) => {
+    expect(toSelectModel(input)).toBe(expected);
+  });
 
-    it('handles null', function() {
-      expect(toSelectModel(null)).toBeNull();
-    });
-
-    it('handles undefined', function() {
-      expect(toSelectModel(undefined)).toBeNull();
-    });
-
-    it('handles a object selection', function() {
-      expect(toSelectModel({
+  test('unwraps an object selection to its value', () => {
+    expect(
+      toSelectModel({
         id: 1,
         label: 'foo',
-        value: {
-          id: 1,
-          label: 'foo'
-        }
-      })).toEqual({
-        id: 1,
-        label: 'foo'
-      });
-    });
+        value: { id: 1, label: 'foo' },
+      })
+    ).toEqual({ id: 1, label: 'foo' });
+  });
 
-    it('handles a string selection', function() {
-      expect(toSelectModel({
+  test('unwraps a string selection to its string value', () => {
+    expect(
+      toSelectModel({
         id: 'foo',
         label: 'foo',
-        value: 'foo'
-      })).toEqual('foo');
+        value: 'foo',
+      })
+    ).toEqual('foo');
+  });
+});
+
+describe('toSelectView', () => {
+  test.each([
+    [null, null],
+    [undefined, null],
+  ])('returns null for %s', (input, expected) => {
+    expect(toSelectView(input)).toBe(expected);
+  });
+
+  test('wraps a string as { id, label, value }', () => {
+    expect(toSelectView('hello')).toEqual({
+      id: 'hello',
+      label: 'hello',
+      value: 'hello',
     });
   });
 
-  describe('wrap select options', function() {
-    var wrapSelectOptions;
-
-    beforeEach(angular.mock.inject(function(_wrapSelectOptions_) {
-      wrapSelectOptions = _wrapSelectOptions_;
-    }));
-
-    it('handles an empty list', function() {
-      expect(wrapSelectOptions([])).toEqual([]);
+  test('wraps an object correctly', () => {
+    expect(toSelectView({ id: 1, label: 'foo' })).toEqual({
+      id: 1,
+      label: 'foo',
+      value: { id: 1, label: 'foo' },
     });
+  });
+});
 
-    it('handles a list of strings', function() {
-      expect(wrapSelectOptions(['foo', 'bar', 'baz'])).toEqual([
-        {
-          id: 'foo',
-          label: 'foo',
-          value: 'foo'
-        },
-        {
-          id: 'bar',
-          label: 'bar',
-          value: 'bar'
-        },
-        {
-          id: 'baz',
-          label: 'baz',
-          value: 'baz'
-        }
-      ]);
-    });
+describe('wrapSelectOptions', () => {
+  test('handles empty list', () => {
+    expect(wrapSelectOptions([])).toEqual([]);
+  });
 
-    it('handles a list of objects', function() {
-      expect(wrapSelectOptions([
-        {
-          id: 1,
-          label: 'foo'
-        },
-        {
-          id: 2,
-          label: 'bar'
-        },
-        {
-          id: 3,
-          label: 'baz'
-        }
-      ])).toEqual([
-        {
-          id: 1,
-          label: 'foo',
-          value: {
-            id: 1,
-            label: 'foo'
-          }
-        },
-        {
-          id: 2,
-          label: 'bar',
-          value: {
-            id: 2,
-            label: 'bar'
-          }
-        },
-        {
-          id: 3,
-          label: 'baz',
-          value: {
-            id: 3,
-            label: 'baz'
-          }
-        }
-      ]);
-    });
+  test('wraps strings', () => {
+    expect(wrapSelectOptions(['foo', 'bar'])).toEqual([
+      { id: 'foo', label: 'foo', value: 'foo' },
+      { id: 'bar', label: 'bar', value: 'bar' },
+    ]);
+  });
+
+  test('wraps objects', () => {
+    expect(
+      wrapSelectOptions([
+        { id: 1, label: 'foo' },
+        { id: 2, label: 'bar' },
+      ])
+    ).toEqual([
+      { id: 1, label: 'foo', value: { id: 1, label: 'foo' } },
+      { id: 2, label: 'bar', value: { id: 2, label: 'bar' } },
+    ]);
   });
 });

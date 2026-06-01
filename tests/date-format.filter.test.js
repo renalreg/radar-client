@@ -1,25 +1,16 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import dateFormatFilter from '../src/app/filters/date-format.filter';
 
-describe('date format', function() {
-  beforeEach(angular.mock.module('radar.filters'));
+const dateFormat = dateFormatFilter();
 
-  var filter;
-
-  beforeEach(angular.mock.inject(function(_$filter_) {
-    filter = _$filter_('dateFormat');
-  }));
-
-  it('handles null', function() {
-    expect(filter(null)).toBe('-');
+describe('dateFormat filter', () => {
+  test.each([
+    [null,      '-'],
+    [undefined, '-'],
+  ])('returns "-" for %s', (input, expected) => {
+    expect(dateFormat(input)).toBe(expected);
   });
 
-  it('handles undefined', function() {
-    expect(filter(undefined)).toBe('-');
-  });
-
-  it('displays a date', function() {
-    expect(filter('2003-02-01')).toBe('01/02/2003');
+  test('formats an ISO date as DD/MM/YYYY', () => {
+    expect(dateFormat('2003-02-01')).toBe('01/02/2003');
   });
 });

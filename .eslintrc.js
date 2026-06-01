@@ -5,7 +5,8 @@ module.exports = {
     jasmine: true,
     commonjs: true,
     jquery: true,
-    node: true
+    node: true,
+    jest: true
   },
   extends: 'eslint:recommended',
   parserOptions: {

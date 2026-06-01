@@ -1,39 +1,17 @@
-import escapeRegExp from './escape-reg-exp';
+import escapeRegExp from '../src/app/utils/escape-reg-exp';
 
-describe('escape reg exp', function() {
-  it('escapes .', function() {
-    expect(escapeRegExp('.')).toBe('\\.');
-  });
-
-  it('escapes *', function() {
-    expect(escapeRegExp('.*')).toBe('\\.\\*');
-  });
-
-  it('escapes ?', function() {
-    expect(escapeRegExp('.?')).toBe('\\.\\?');
-  });
-
-  it('escapes [...]', function() {
-    expect(escapeRegExp('[abc]')).toBe('\\[abc\\]');
-  });
-
-  it('escapes (...)', function() {
-    expect(escapeRegExp('(abc)')).toBe('\\(abc\\)');
-  });
-
-  it('escapes {x}', function() {
-    expect(escapeRegExp('a{42}')).toBe('a\\{42\\}');
-  });
-
-  it('escapes {x,y}', function() {
-    expect(escapeRegExp('a{1,42}')).toBe('a\\{1,42\\}');
-  });
-
-  it('escapes ^', function() {
-    expect(escapeRegExp('^')).toBe('\\^');
-  });
-
-  it('escapes $', function() {
-    expect(escapeRegExp('$')).toBe('\\$');
+describe('escapeRegExp', () => {
+  test.each([
+    ['.',     '\\.'],
+    ['.*',    '\\.\\*'],
+    ['.?',    '\\.\\?'],
+    ['[abc]', '\\[abc\\]'],
+    ['(abc)', '\\(abc\\)'],
+    ['a{42}',   'a\\{42\\}'],
+    ['a{1,42}', 'a\\{1,42\\}'],
+    ['^', '\\^'],
+    ['$', '\\$'],
+  ])('escapes %s', (input, expected) => {
+    expect(escapeRegExp(input)).toBe(expected);
   });
 });

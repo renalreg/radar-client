@@ -1,65 +1,49 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '.';
+import firstPromiseFactory from '../src/app/utils/first-promise';
 
-describe('store', function() {
-  beforeEach(angular.mock.module('radar.store'));
+// minimal AngularJS $q mock
+const $q = {
+  all: Promise.all.bind(Promise),
 
-  var store;
-  var Model;
+  defer() {
+    let resolve, reject;
 
-  beforeEach(angular.mock.inject(function(_store_, _Model_) {
-    store = _store_;
-    Model = _Model_;
-  }));
+    const promise = new Promise((res, rej) => {
+      resolve = res;
+      reject = rej;
+    });
 
-  it('detects changes', function() {
-    var x = store.pushToStore(new Model('foo', {
-      id: 1,
-      name: 'Foo'
-    }));
+    return {
+      promise,
+      resolve,
+      reject,
+    };
+  },
+};
 
-    expect(x.isPristine()).toBe(true);
-    expect(store.isPristine(x)).toBe(true);
+const firstPromise = firstPromiseFactory($q);
 
-    expect(x.isDirty()).toBe(false);
-    expect(store.isDirty(x)).toBe(false);
-
-    x.name = 'Bar';
-
-    expect(x.isPristine()).toBe(false);
-    expect(store.isPristine(x)).toBe(false);
-
-    expect(x.isDirty()).toBe(true);
-    expect(store.isDirty(x)).toBe(true);
-
-    store.pushToStore(x);
-
-    expect(x.isPristine()).toBe(true);
-    expect(store.isPristine(x)).toBe(true);
-
-    expect(x.isDirty()).toBe(false);
-    expect(store.isDirty(x)).toBe(false);
+describe('firstPromise', () => {
+  test('resolves to undefined for an empty list', async () => {
+    await expect(firstPromise([])).resolves.toBeUndefined();
   });
 
-  it('ignores changes to metadata', function() {
-    var x = store.pushToStore(new Model('foo', {
-      id: 1,
-      name: 'Foo'
-    }));
+  test('resolves to the value of a single promise', async () => {
+    await expect(firstPromise([Promise.resolve(42)])).resolves.toBe(42);
+  });
 
-    expect(x.isPristine()).toBe(true);
-    expect(store.isPristine(x)).toBe(true);
+  test('resolves to the value of the first promise to settle', async () => {
+    let resolveFirst;
 
-    expect(x.isDirty()).toBe(false);
-    expect(store.isDirty(x)).toBe(false);
+    const first = new Promise((res) => {
+      resolveFirst = res;
+    });
 
-    x.isSaving = true;
+    const second = Promise.resolve(999); // never resolves
 
-    expect(x.isPristine()).toBe(true);
-    expect(store.isPristine(x)).toBe(true);
+    const result = firstPromise([first, second]);
 
-    expect(x.isDirty()).toBe(false);
-    expect(store.isDirty(x)).toBe(false);
+    resolveFirst(123);
+
+    await expect(result).resolves.toBe(123);
   });
 });

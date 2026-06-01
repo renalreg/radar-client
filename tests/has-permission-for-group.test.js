@@ -1,47 +1,57 @@
-import angular from 'angular';
-import 'angular-mocks';
-import '..';
+import hasPermissionForGroupFactory from '../src/app/permissions/has-permission-for-group';
 
-describe('hasPermissionForGroup', function() {
-  beforeEach(angular.mock.module('radar'));
+const hasPermissionForGroup = hasPermissionForGroupFactory();
+const makeGroup = (id) => ({ id });
 
-  var hasPermissionForGroup;
-  var store;
+const makeUser = ({ isAdmin = false, groups = [] } = {}) => ({ isAdmin, groups });
 
-  beforeEach(angular.mock.inject(function(_hasPermissionForGroup_, _store_) {
-    hasPermissionForGroup = _hasPermissionForGroup_;
-    store = _store_;
-  }));
+const makeGroupMembership = (group, permissions = []) => ({
+  group,
+  hasPermission: (perm) => permissions.includes(perm),
+});
 
-  it('denies when the user is not in the group', function() {
-    var user = store.create('users', {});
-    expect(hasPermissionForGroup(user, 'VIEW_PATIENT')).toBe(false);
+describe('hasPermissionForGroup', () => {
+  test('denies when the user is not in the group', () => {
+    const user = makeUser();
+
+    expect(
+      hasPermissionForGroup(user, makeGroup(1), 'VIEW_PATIENT')
+    ).toBe(false);
   });
 
-  it('denies when the user is in the group without the permission', function() {
-    var group = store.create('groups', {id: 1});
-    var user = store.create('users', {groups: [
-      {
-        group: group,
-        permissions: []
-      }
-    ]});
-    expect(hasPermissionForGroup(user, group, 'VIEW_PATIENT')).toBe(false);
+  test('denies when the user is in the group but lacks the permission', () => {
+    const group = makeGroup(1);
+
+    const user = makeUser({
+      groups: [
+        makeGroupMembership(group, [])
+      ],
+    });
+
+    expect(
+      hasPermissionForGroup(user, group, 'VIEW_PATIENT')
+    ).toBe(false);
   });
 
-  it('grants when the user is an admin', function() {
-    var user = store.create('users', {isAdmin: true});
-    expect(hasPermissionForGroup(user, 'VIEW_PATIENT')).toBe(true);
+  test('grants when the user is an admin (group membership irrelevant)', () => {
+    const user = makeUser({ isAdmin: true });
+
+    expect(
+      hasPermissionForGroup(user, makeGroup(1), 'VIEW_PATIENT')
+    ).toBe(true);
   });
 
-  it('grants when the user is the group with the permission', function() {
-    var group = store.create('groups', {id: 1});
-    var user = store.create('users', {groups: [
-      {
-        group: group,
-        permissions: ['VIEW_PATIENT']
-      }
-    ]});
-    expect(hasPermissionForGroup(user, group, 'VIEW_PATIENT')).toBe(true);
+  test('grants when the user is in the group with the permission', () => {
+    const group = makeGroup(1);
+
+    const user = makeUser({
+      groups: [
+        makeGroupMembership(group, ['VIEW_PATIENT'])
+      ],
+    });
+
+    expect(
+      hasPermissionForGroup(user, group, 'VIEW_PATIENT')
+    ).toBe(true);
   });
 });
