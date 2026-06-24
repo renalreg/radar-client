@@ -6,9 +6,15 @@ The application communicates with the [RADAR API](https://github.com/renalreg/ra
 
 ## Build Status
 
-[![Travis](https://img.shields.io/travis/renalreg/radar-client/master.svg)](https://travis-ci.org/renalreg/radar-client) [![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client) [![David](https://img.shields.io/david/dev/renalreg/radar-client.svg)](https://david-dm.org/renalreg/radar-client?type=dev)
+<div class="badges">
 
-[![Sauce Labs](https://saucelabs.com/browser-matrix/radar.svg)](https://saucelabs.com/u/radar)
+[![Issues](https://img.shields.io/github/issues/renalreg/radar-client)](https://github.com/renalreg/radar-client/issues)
+[![License](https://img.shields.io/github/license/renalreg/radar-client)](https://github.com/renalreg/radar-client/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/renalreg/radar-client)](https://github.com/renalreg/radar-client/stargazers)
+[![Dependencies](https://img.shields.io/librariesio/github/renalreg/radar-client)](https://libraries.io/github/renalreg/radar-client)
+[![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client)
+
+</div>
 
 ## Getting Started
 
