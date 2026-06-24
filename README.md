@@ -6,7 +6,15 @@ The application communicates with the [RADAR API](https://github.com/renalreg/ra
 
 ## Build Status
 
-<div class="badges"></div>
+<div class="badges">
+
+[![Issues](https://img.shields.io/github/issues/renalreg/radar-client)](https://github.com/renalreg/radar-client/issues)
+[![License](https://img.shields.io/github/license/renalreg/radar-client)](https://github.com/renalreg/radar-client/blob/main/LICENSE)
+[![Stars](https://img.shields.io/github/stars/renalreg/radar-client)](https://github.com/renalreg/radar-client/stargazers)
+[![Dependencies](https://img.shields.io/librariesio/github/renalreg/radar-client)](https://libraries.io/github/renalreg/radar-client)
+[![Coveralls](https://img.shields.io/coveralls/renalreg/radar-client.svg)](https://coveralls.io/github/renalreg/radar-client)
+
+</div>
 
 ## Getting Started
 
