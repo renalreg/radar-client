@@ -9,7 +9,7 @@ function paginationHelper() {
   return {
     require: '^listHelper',
     scope: {},
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, listHelperCtrl) {
       scope.getPage = getPage;
       scope.setPage = setPage;

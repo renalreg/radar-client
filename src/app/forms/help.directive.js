@@ -2,7 +2,7 @@ import templateUrl from './help.html';
 
 function frmHelp() {
   return {
-    templateUrl: templateUrl,
+    template: templateUrl,
     transclude: true
   };
 }

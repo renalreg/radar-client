@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="radar" lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>RaDaR</title>
+
+  <!-- Font Awesome (for spinner) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Prevent Angular flash before bootstrap -->
+  <style>
+    [ng-cloak] { display: none !important; }
+  </style>
+</head>
+
+<body ng-cloak>
+
+  <div live-warning></div>
+
+  <!-- IE warning -->
+  <!--[if lte IE 9]>
+    <div class="old-browser-alert" ng-if="!live">
+      <i class="fa fa-exclamation-circle"></i>
+      You are using an old version of Internet Explorer. RaDaR works best in modern browsers.
+    </div>
+  <![endif]-->
+
+  <!-- NAVBAR -->
+  <div navbar>
+    <div class="navbar navbar-static-top navbar-radar">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            <img src="radar.png" width="111" height="30" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div ng-show="!ready" class="app-loading">
+    <div class="loading-card">
+      <div class="spinner">
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+      </div>
+      <div class="loading-text">
+        Loading RaDaR…
+      </div>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div ng-show="ready">
+    <div class="ui-view"></div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>
+      &copy;
+      <a href="http://www.renalreg.org">UK Renal Registry</a>,
+      <a href="http://www.renal.org">The Renal Association</a>
+    </p>
+  </div>
+
+  <div fatal-error></div>
+
+</body>
+</html>

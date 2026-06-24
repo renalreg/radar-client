@@ -9,7 +9,7 @@ function frmCohortField(session, cohortStore) {
       model: '=',
       required: '&'
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       cohortStore.findMany().then(function(cohorts) {
         scope.cohorts = sortGroups(cohorts);

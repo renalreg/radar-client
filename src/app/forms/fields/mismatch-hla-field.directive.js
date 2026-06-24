@@ -7,7 +7,7 @@ function frmMismatchHlaField() {
       model: '=',
       required: '&'
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

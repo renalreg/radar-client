@@ -56,7 +56,7 @@ function fetalUltrasoundsComponent(FetalUltrasoundsController) {
       patient: '='
     },
     controller: FetalUltrasoundsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

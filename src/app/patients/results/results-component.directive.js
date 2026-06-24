@@ -156,7 +156,7 @@ function resultsComponent(ResultsController) {
       patient: '='
     },
     controller: ResultsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

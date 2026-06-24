@@ -62,7 +62,7 @@ function insRelapsesComponent(InsRelapsesController) {
       patient: '='
     },
     controller: InsRelapsesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

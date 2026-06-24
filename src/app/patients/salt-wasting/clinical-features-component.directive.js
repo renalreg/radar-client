@@ -51,7 +51,7 @@ function saltWastingClinicalFeaturesComponent(SaltWastingClinicalFeaturesControl
       patient: '='
     },
     controller: SaltWastingClinicalFeaturesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

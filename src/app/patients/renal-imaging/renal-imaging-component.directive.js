@@ -65,7 +65,7 @@ function renalImagingComponent(RenalImagingController) {
       patient: '='
     },
     controller: RenalImagingController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

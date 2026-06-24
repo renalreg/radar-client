@@ -76,7 +76,7 @@ function patientAddressesComponent(PatientAddressesController) {
       patient: '='
     },
     controller: PatientAddressesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

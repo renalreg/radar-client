@@ -19,7 +19,7 @@ import resetPasswordTemplateUrl from './reset-password.html';
 function config($stateProvider) {
   $stateProvider.state('login', {
     url: '/login',
-    templateUrl: loginTemplateUrl,
+    template: loginTemplateUrl,
     data: {
       public: true
     }
@@ -28,7 +28,7 @@ function config($stateProvider) {
   $stateProvider.state('forgotUsername', {
     url: '/forgot-username',
     controller: 'ForgotUsernameController',
-    templateUrl: forgotUsernameTemplateUrl,
+    template: forgotUsernameTemplateUrl,
     data: {
       public: true
     }
@@ -37,7 +37,7 @@ function config($stateProvider) {
   $stateProvider.state('forgotPassword', {
     url: '/forgot-password',
     controller: 'ForgotPasswordController',
-    templateUrl: forgotPasswordTemplateUrl,
+    template: forgotPasswordTemplateUrl,
     data: {
       public: true
     }
@@ -46,7 +46,7 @@ function config($stateProvider) {
   $stateProvider.state('resetPassword', {
     url: '/reset-password/:token',
     controller: 'ResetPasswordController',
-    templateUrl: resetPasswordTemplateUrl,
+    template: resetPasswordTemplateUrl,
     data: {
       public: true
     }

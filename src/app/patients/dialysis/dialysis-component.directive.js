@@ -63,7 +63,7 @@ function dialysisComponent(DialysisController) {
       patient: '='
     },
     controller: DialysisController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

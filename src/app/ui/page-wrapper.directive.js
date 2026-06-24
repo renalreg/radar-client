@@ -4,7 +4,7 @@ function pageWrapper() {
   return {
     restrict: 'A',
     transclude: true,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

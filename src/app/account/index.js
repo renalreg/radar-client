@@ -13,7 +13,7 @@ import templateUrl from './account.html';
 function config($stateProvider) {
   $stateProvider.state('account', {
     url: '/account',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

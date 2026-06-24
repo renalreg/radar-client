@@ -16,8 +16,8 @@ function ForgotUsernameController(
 
         // Redirect the login page
         $state.go('login');
-      })
-  };
+      });
+  }
 }
 
 ForgotUsernameController.$inject = [

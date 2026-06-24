@@ -118,7 +118,7 @@ function loading(session) {
       loading: '='
     },
     transclude: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.$watch('loading', function() {
         if (session.user !== null && session.user.isAdmin) {

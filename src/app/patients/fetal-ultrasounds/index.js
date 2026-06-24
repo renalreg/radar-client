@@ -13,7 +13,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.fetalUltrasounds', {
     url: '/fetal-ultrasounds',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

@@ -439,3 +439,38 @@ a.delete-patient {
     width: 17%;
   }
 }
+
+
+.app-loading {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #f5f7fb, #e9eef7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.loading-card {
+  padding: 40px 50px;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.loading-logo {
+  width: 140px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.spinner {
+  font-size: 26px;
+  color: #337ab7;
+  margin-bottom: 10px;
+}
+
+.loading-text {
+  font-size: 15px;
+  color: #555;
+}

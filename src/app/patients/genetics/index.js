@@ -11,7 +11,7 @@ import templateUrl from './genetics.html';
 function config($stateProvider) {
   $stateProvider.state('patient.genetics', {
     url: '/genetics/:cohortId',
-    templateUrl: templateUrl,
+    template: templateUrl,
     controller: ['$scope', 'cohort', function($scope, cohort) {
       $scope.cohort = cohort;
     }],

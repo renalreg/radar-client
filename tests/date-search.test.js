@@ -1,4 +1,4 @@
-import dateSearch from './date-search';
+import dateSearch from '../src/app/utils/date-search';
 
 describe('date search', function() {
   it('empty string', function() {

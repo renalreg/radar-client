@@ -31,7 +31,7 @@ function transplantRejectionsComponent(TransplantRejectionsController) {
       parent: '=transplant'
     },
     controller: TransplantRejectionsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

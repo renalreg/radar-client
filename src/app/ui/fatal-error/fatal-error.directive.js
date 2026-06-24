@@ -4,7 +4,7 @@ import templateUrl from './fatal-error.html';
 
 function fatalError($window, notificationService) {
   return {
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.notification = null;
 

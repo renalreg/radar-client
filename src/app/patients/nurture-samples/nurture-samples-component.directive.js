@@ -233,7 +233,7 @@ function nurtureSamplesComponent(NurtureSamplesController) {
       patient: '='
     },
     controller: NurtureSamplesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

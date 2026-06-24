@@ -4,7 +4,7 @@ function liveWarning(adapter) {
   return {
     restrict: 'A',
     scope: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.live = true;
 

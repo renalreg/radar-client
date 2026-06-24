@@ -8,7 +8,7 @@ function frmPrimaryDiagnosisField() {
       required: '&',
       cohort: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

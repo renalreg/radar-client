@@ -33,7 +33,7 @@ import frmTextField from './text-field.directive';
 import frmTextareaField from './textarea-field.directive';
 import frmWeeksAndDaysField from './weeks-and-days-field.directive';
 import frmYesNoField from './yes-no-field.directive';
-import frmMismatchHlaField from "./mismatch-hla-field.directive";
+import frmMismatchHlaField from './mismatch-hla-field.directive';
 
 export default angular.module('radar.forms.fields', [])
   .directive('frmBooleanField', frmBooleanField)

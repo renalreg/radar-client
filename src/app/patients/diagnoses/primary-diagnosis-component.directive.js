@@ -30,9 +30,9 @@ function primaryPatientDiagnosisControllerFactory(
       }),
       store.findMany('antibodies', { group_id: $scope.cohort.id }).then(function(antibodies) {
 
-          $scope.antibodies = antibodies.map(function (a) {
-      return a.id;
-    });
+        $scope.antibodies = antibodies.map(function (a) {
+          return a.id;
+        });
       }),
       getRadarGroup().then(function(group) {
         $scope.sourceGroup = group;
@@ -92,7 +92,7 @@ function primaryPatientDiagnosisComponent(PrimaryPatientDiagnosisController) {
       cohort: '='
     },
     controller: PrimaryPatientDiagnosisController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 
