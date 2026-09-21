@@ -8,7 +8,7 @@ function frmObservationField() {
       required: '&',
       patient: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

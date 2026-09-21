@@ -11,7 +11,7 @@ import templateUrl from './stats.html';
 function config($stateProvider) {
   $stateProvider.state('stats', {
     url: '/stats/{systemId:int}',
-    templateUrl: templateUrl,
+    template: templateUrl,
     controller: ['$scope', 'system', function($scope, system) {
       $scope.system = system;
     }],

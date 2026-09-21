@@ -22,7 +22,7 @@ function latestPosts(LatestPostsController) {
   return {
     scope: {},
     controller: LatestPostsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

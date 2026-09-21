@@ -22,12 +22,12 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.rituximabBaselineAssessment', {
     url: '/rituximab-baseline-assessment',
-    templateUrl: baselineUrl
+    template: baselineUrl
   });
 
   $stateProvider.state('patient.rituximabCriteria', {
     url: '/rituximab-criteria',
-    templateUrl: criteriaUrl
+    template: criteriaUrl
   });
 
 }

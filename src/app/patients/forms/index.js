@@ -20,7 +20,7 @@ import formTemplateUrl from './form.html';
 function config($stateProvider) {
   $stateProvider.state('patient.questionnaires', {
     url: '/questionnaires/:cohortId',
-    templateUrl: questionnairesTemplateUrl,
+    template: questionnairesTemplateUrl,
     resolve: {
       forms: ['$stateParams', 'formStore', function($stateParams, formStore) {
         return formStore.getQuestionnaires($stateParams.cohortId, $stateParams.patientId);
@@ -35,7 +35,7 @@ function config($stateProvider) {
   $stateProvider.state('patient.questionnaire', {
     parent: 'patient.questionnaires',
     url: '/{formSlug:[a-z0-9-]+}',
-    templateUrl: questionnaireTemplateUrl,
+    template: questionnaireTemplateUrl,
     resolve: {
       form: ['$stateParams', 'formStore', function($stateParams, formStore) {
         return formStore.getForm($stateParams.formSlug);
@@ -48,7 +48,7 @@ function config($stateProvider) {
 
   $stateProvider.state('patient.form', {
     url: '/forms/:formSlug',
-    templateUrl: formTemplateUrl,
+    template: formTemplateUrl,
     resolve: {
       form: ['$stateParams', 'formStore', function($stateParams, formStore) {
         return formStore.getForm($stateParams.formSlug);

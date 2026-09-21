@@ -14,13 +14,13 @@ import cohortDetailTemplateUrl from './cohort-detail.html';
 function config($stateProvider) {
   $stateProvider.state('cohorts', {
     url: '/cohorts',
-    templateUrl: cohortListTemplateUrl,
+    template: cohortListTemplateUrl,
     controller: 'CohortListController'
   });
 
   $stateProvider.state('cohort', {
     url: '/cohorts/:cohortId',
-    templateUrl: cohortDetailTemplateUrl,
+    template: cohortDetailTemplateUrl,
     controller: 'CohortDetailController',
     resolve: {
       cohort: ['$stateParams', 'cohortStore', function($stateParams, cohortStore) {

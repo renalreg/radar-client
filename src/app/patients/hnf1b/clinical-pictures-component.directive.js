@@ -49,7 +49,7 @@ function hnf1bClinicalPicturesComponent(Hnf1bClinicalPicturesController) {
       patient: '='
     },
     controller: Hnf1bClinicalPicturesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

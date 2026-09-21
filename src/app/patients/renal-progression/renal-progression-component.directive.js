@@ -57,7 +57,7 @@ function renalProgressionComponent(RenalProgressionController) {
       patient: '='
     },
     controller: RenalProgressionController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

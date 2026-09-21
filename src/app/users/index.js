@@ -26,7 +26,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('users', {
     url: '/users',
-    templateUrl: userListTemplateUrl,
+    template: userListTemplateUrl,
     controller: ['$scope', '$controller', 'UserListController', function($scope, $controller, UserListController) {
       $controller(UserListController, {$scope: $scope});
     }]
@@ -34,12 +34,12 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('createUser', {
     url: '/users/create',
-    templateUrl: createUserTemplateUrl
+    template: createUserTemplateUrl
   });
 
   $stateProvider.state('user', {
     url: '/users/:userId',
-    templateUrl: userDetailTemplateUrl,
+    template: userDetailTemplateUrl,
     controller: ['$scope', 'user', 'session', function($scope, user, session) {
       $scope.user = user;
       $scope.currentUser = session.user;
@@ -53,7 +53,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('deleteUser', {
     url: '/users/:userId/delete',
-    templateUrl: deleteUserTemplateUrl,
+    template: deleteUserTemplateUrl,
     controller: 'DeleteUserController',
     resolve: {
       user: ['$stateParams', 'store', function($stateParams, store) {

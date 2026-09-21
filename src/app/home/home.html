@@ -5,8 +5,9 @@
     <div
       ng-class="{'col-sm-8': !isAuthenticated, 'col-sm-12': isAuthenticated}"
     >
-      <div class="about">
-        <p ng-if="vm.isLive">
+      <div class="about" ng-switch="vm.env.environment">
+        <!-- Live (UK) -->
+        <p ng-switch-when="live">
           Welcome to the RaDaR National Registry of Rare Kidney Diseases. In partnership with Rare Disease Groups, RaDaR
           facilitates translational and epidemiological research into rare diseases through a comprehensive clinical
           database. RaDaR is managed by the <a href="https://ukkidney.org/" target="_blank"
@@ -16,18 +17,78 @@
           >rarerenal.org</a
           >.
         </p>
-        <p ng-if="vm.isDemo || vm.isStaging || vm.isLocal">
-          This is the <strong ng-if="vm.isDemo">Demo</strong><strong ng-if="vm.isStaging || vm.isLocal">Staging</strong>
+
+        <!-- International -->
+        <div ng-switch-when="international">
+          <p>
+            Welcome to International RaDaR - the home page for the International Renal Rare Disease Registry. This
+            resource is based on UK RaDaR, a web based national renal rare disease registry that is now embedded as
+            part of UK renal medicine management and research pathways. UK RaDaR currently has over 20 rare diseases
+            registered, and over 10,000 patients recruited.
+          </p>
+          <p>
+            The International RaDaR site is designed to use the knowledge and expertise gained from UK RaDaR, to permit
+            international collaborators (clinicians and researchers) to join UK renal rare disease groups, and build
+            extensive patient cohorts both for local and internationally collaborative initiatives.
+          </p>
+          <p>
+            Data is securely held, anonymised, and governed by both local ethical approvals and UK Renal Registry rules
+            covering data visibility.
+          </p>
+          <p>
+            Two pilot studies will be the first part of International RaDaR, with the aim of growing the number of
+            diseases included according to enthusiasm from disease groups:
+          </p>
+          <ul>
+            <li>
+              <a href="#ins" data-toggle="collapse" aria-expanded="false" aria-controls="ins">Idiopathic Nephrotic Syndrome (International NephroS)</a>
+            </li>
+          </ul>
+          <div id="ins" class="collapse">
+            <div class="well">
+              <p>
+                This is funded by the UK Medical Research Council, and involves 4 international sites - AIIMS, Delhi, India;
+                St John’s Medical Centre, Bangalore, India; University of Witwatersrand, Johannesburg, South Africa; Cairo
+                University Children’s Hospital, Egypt.
+              </p>
+              <p>
+                <b>Kidney disease</b> in Low and Middle income countries (LMICs) is <b>under recognised and severely under
+                resourced</b>. The reasons include lack of clinical expertise, diagnostic capabilities, and even if recognised
+                the means to treat <b>chronic, remitting disease</b> without specialist drugs and technology is rarely
+                possible. On top of this the <b>incidence</b> of one of the commonest types of renal disease (in adults and
+                children), <b>idiopathic nephrotic syndrome (INS)</b>, appears considerably higher in LMICs than in the
+                developed world. This is likely contributed to by a combination of infectious triggers and genetic background,
+                though other factors remain unknown.
+              </p>
+              <p>
+                The <b>biological understanding of glomerular disease</b> has been revolutionised in recent years by <b>study
+                of the glomerular podocyte</b>, the target cell in INS, alongside <b>genetic advances</b>. The field is ripe
+                for translational research on larger patient cohorts to exploit <b>compelling biological hypotheses</b>
+                arising from the discovery science work.
+              </p>
+              <p>
+                This project will build powerful trans-national cohorts of INS, with collaborative analyses of biomarkers,
+                genetics and patient demographics and disease course.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo, staging and local -->
+        <p ng-switch-default>
+          This is the <strong>{{ vm.env.label }}</strong>
           system for the RaDaR National Registry of Rare Kidney Diseases.
           For more information about RaDaR please go to <a href="https://www.ukkidney.org/rare-renal" target="_blank"
         >rarerenal.org</a
         >.
         </p>
-        <p>
+
+        <!-- UK-only content: not shown on International RaDaR -->
+        <p ng-if="!vm.env.isInternational">
           <b> </b>
         </p>
 
-        <p>
+        <p ng-if="!vm.env.isInternational">
           For data entry instructions refer to the
           <a
             href="https://ukkidney.org/rare-renal/radar-recruitment-guide"
@@ -36,7 +97,7 @@
           >.
         </p>
 
-        <p>
+        <p ng-if="!vm.env.isInternational">
           For technical support please contact
           <a href="mailto:radar@ukkidney.org">radar@ukkidney.org</a>.
         </p>
@@ -83,12 +144,21 @@
       /></a>
     </div>
 
-    <div class="logo">
+    <div class="logo" ng-if="!vm.env.isInternational">
       <a href="https://ukkidney.org/" target="_blank"
       ><img
         src="uka.jpg"
         alt="The UK Kidney Association"
         title="The UK Kidney Association"
+      /></a>
+    </div>
+
+    <div class="logo" ng-if="vm.env.isInternational">
+      <a href="http://www.renal.org/" target="_blank"
+      ><img
+        src="ra.png"
+        alt="The Renal Organisation"
+        title="The Renal Organisation"
       /></a>
     </div>
 

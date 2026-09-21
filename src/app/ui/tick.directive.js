@@ -6,7 +6,7 @@ function tick() {
     scope: {
       tick: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function (scope) {
       scope.isTrue = function () {
         return scope.tick === true;

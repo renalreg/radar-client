@@ -33,7 +33,7 @@ function createUserComponent(CreateUserController) {
   return {
     scope: {},
     controller: CreateUserController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

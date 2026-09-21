@@ -8,7 +8,7 @@ function frmRadioFieldInline(wrapRadioOptions, toRadioView, toRadioModel) {
       required: '&',
       options: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       // Note: ng-repeat creates a child scope which breaks ng-model="model". The model variable is a primitive type
       // (i.e. not an object) so when the value is updated in the child scope it won't be updated in the parent scope

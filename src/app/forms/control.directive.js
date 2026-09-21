@@ -3,7 +3,7 @@ import templateUrl from './control.html';
 function frmControl() {
   return {
     require: ['^frmField', '?^frmLayout'],
-    templateUrl: templateUrl,
+    template: templateUrl,
     replace: true,
     transclude: true,
     scope: true,

@@ -3,7 +3,7 @@ import templateUrl from './error.html';
 function frmError() {
   return {
     require: '^frmErrors',
-    templateUrl: templateUrl,
+    template: templateUrl,
     transclude: true,
     scope: {
       key: '@',

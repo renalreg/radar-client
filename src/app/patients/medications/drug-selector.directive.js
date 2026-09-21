@@ -9,7 +9,7 @@ import templateUrl from './drug-selector.html';
 function drugSelector(store) {
   return {
     require: 'ngModel',
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, ngModel) {
       // Currently selected drug
       scope.drug = null;

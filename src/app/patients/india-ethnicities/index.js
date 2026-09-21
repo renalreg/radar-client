@@ -13,7 +13,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.indiaEthnicities', {
     url: '/india-ethnicities',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

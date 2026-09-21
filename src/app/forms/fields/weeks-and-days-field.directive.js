@@ -7,7 +7,7 @@ function frmWeeksAndDaysField() {
       required: '&',
       model: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

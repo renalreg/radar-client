@@ -8,7 +8,7 @@ function frmDiagnosisField() {
       required: '&',
       patient: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

@@ -63,7 +63,7 @@ function geneticsComponent(GeneticsController) {
       cohort: '='
     },
     controller: GeneticsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

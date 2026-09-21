@@ -3,7 +3,7 @@ import templateUrl from './toggle-demographics.html';
 function toggleDemographics(toggleDemographicsService) {
   return {
     scope: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.visible = toggleDemographicsService.isVisible();
 

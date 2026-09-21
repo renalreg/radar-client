@@ -8,7 +8,7 @@ function frmNumberField() {
       model: '=',
       units: '@'
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

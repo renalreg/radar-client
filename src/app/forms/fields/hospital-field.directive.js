@@ -10,7 +10,7 @@ function frmHospitalField(session, hospitalStore) {
       required: '&',
       params: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.$watch(function() {
         return session.user;

@@ -11,7 +11,7 @@ import templateUrl from './diagnosis-selector.html';
 function diagnosisSelector(store) {
   return {
     require: 'ngModel',
-    templateUrl: templateUrl,
+    template: templateUrl,
     scope: {
       'patient': '='
     },

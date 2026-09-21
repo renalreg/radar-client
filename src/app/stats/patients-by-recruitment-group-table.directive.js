@@ -7,7 +7,7 @@ function patientsByRecruitmentGroupTable(adapter) {
     scope: {
       group: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.loading = true;
 

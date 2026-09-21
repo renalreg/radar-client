@@ -17,12 +17,12 @@ import relapsesTemplateUrl from './relapses.html';
 function config($stateProvider) {
   $stateProvider.state('patient.insClinicalPictures', {
     url: '/ins-clinical-pictures',
-    templateUrl: clinicalPicturesTemplateUrl
+    template: clinicalPicturesTemplateUrl
   });
 
   $stateProvider.state('patient.insRelapses', {
     url: '/ins-relapses',
-    templateUrl: relapsesTemplateUrl
+    template: relapsesTemplateUrl
   });
 }
 

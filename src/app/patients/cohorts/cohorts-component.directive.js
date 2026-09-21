@@ -98,7 +98,7 @@ function patientCohortsComponent(PatientCohortsController) {
       patient: '='
     },
     controller: PatientCohortsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

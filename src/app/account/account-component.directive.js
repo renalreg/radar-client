@@ -40,7 +40,7 @@ function accountComponent(AccountController) {
       user: '='
     },
     controller: AccountController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

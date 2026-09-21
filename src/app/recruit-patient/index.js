@@ -13,22 +13,22 @@ function config($stateProvider) {
     url: '/recruit-patient',
     abstract: true,
     controller: 'RecruitPatientController',
-    templateUrl: recruitPatientTemplateUrl
+    template: recruitPatientTemplateUrl
   });
 
   $stateProvider.state('recruitPatient.search', {
     url: '',
-    templateUrl: recruitPatientSearchTemplateUrl
+    template: recruitPatientSearchTemplateUrl
   });
 
   $stateProvider.state('recruitPatient.form', {
     url: '',
-    templateUrl: recruitPatientFormTemplateUrl
+    template: recruitPatientFormTemplateUrl
   });
 
   $stateProvider.state('recruitPatient.diagnosis', {
     url: '',
-    templateUrl: recruitePatientDiagnosisFormTemplateUrl
+    template: recruitePatientDiagnosisFormTemplateUrl
   });
 }
 

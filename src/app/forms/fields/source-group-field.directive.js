@@ -12,7 +12,7 @@ function frmSourceGroupField(store, session) {
       model: '=',
       required: '&'
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       var user = session.user;
       var isAdmin = user.isAdmin;

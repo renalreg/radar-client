@@ -68,7 +68,7 @@ function pregnanciesComponent(PregnanciesController) {
       patient: '='
     },
     controller: PregnanciesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

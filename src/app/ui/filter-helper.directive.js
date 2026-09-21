@@ -4,7 +4,7 @@ function filterHelper() {
   return {
     require: '^listHelper',
     scope: {},
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, listHelperCtrl) {
       scope.search = '';
 

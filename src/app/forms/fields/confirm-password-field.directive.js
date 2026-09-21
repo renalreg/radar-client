@@ -8,7 +8,7 @@ function frmConfirmPasswordField() {
       model: '=',
       password: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

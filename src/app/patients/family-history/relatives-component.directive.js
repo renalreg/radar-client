@@ -41,7 +41,7 @@ function familyHistoryRelativesComponent(FamilyHistoryRelativesController) {
       parent: '=familyHistory'
     },
     controller: FamilyHistoryRelativesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

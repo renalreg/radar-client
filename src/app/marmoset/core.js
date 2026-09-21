@@ -660,7 +660,7 @@ function marmosetField() {
     scope: {
       field: '=marmosetField'
     },
-    templateUrl: fieldTemplateUrl,
+    template: fieldTemplateUrl,
     link: function(scope, element, attr, formCtrl) {
       scope.form = formCtrl;
 

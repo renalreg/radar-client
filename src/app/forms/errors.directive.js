@@ -5,7 +5,7 @@ import templateUrl from './errors.html';
 function frmErrors() {
   return {
     require: ['frmErrors', '^frmField'],
-    templateUrl: templateUrl,
+    template: templateUrl,
     transclude: true,
     scope: {
       errors: '='

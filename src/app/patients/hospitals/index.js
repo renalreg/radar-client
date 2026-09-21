@@ -11,7 +11,7 @@ import templateUrl from './hospitals.html';
 function config($stateProvider) {
   $stateProvider.state('patient.hospitals', {
     url: '/hospitals',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

@@ -8,7 +8,7 @@ function frmIntegerField() {
       model: '=',
       units: '@'
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

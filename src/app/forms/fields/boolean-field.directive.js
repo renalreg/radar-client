@@ -8,7 +8,7 @@ function frmBooleanField() {
       required: '&',
       model: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.options = [
         {

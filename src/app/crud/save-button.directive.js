@@ -8,7 +8,7 @@ function crudSaveButton() {
       action: '&',
       text: '@'
     },
-    templateUrl: function(element, attrs) {
+    template: function(element, attrs) {
       return attrs.action ? saveButtonTemplateUrl : saveSubmitButtonTemplateUrl;
     },
     link: function(scope, element, attrs, ctrls) {

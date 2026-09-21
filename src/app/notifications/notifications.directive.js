@@ -11,7 +11,7 @@ var TYPE_TO_CLASS = {
 function notifications(notificationService) {
   return {
     scope: {},
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.notifications = notificationService.notifications;
 

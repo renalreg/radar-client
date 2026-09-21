@@ -12,13 +12,13 @@ import hospitalDetailTemplateUrl from './hospital-detail.html';
 function config($stateProvider) {
   $stateProvider.state('hospitals', {
     url: '/hospitals',
-    templateUrl: hospitalListTemplateUrl,
+    template: hospitalListTemplateUrl,
     controller: 'HospitalListController'
   });
 
   $stateProvider.state('hospital', {
     url: '/hospitals/:hospitalId',
-    templateUrl: hospitalDetailTemplateUrl,
+    template: hospitalDetailTemplateUrl,
     controller: 'HospitalDetailController',
     resolve: {
       hospital: ['$stateParams', 'store', '$q', function($stateParams, store, $q) {

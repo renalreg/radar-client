@@ -10,7 +10,7 @@ function frmCheckboxField() {
       required: '&'
     },
     transclude: true,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

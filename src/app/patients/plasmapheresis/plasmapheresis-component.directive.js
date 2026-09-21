@@ -65,7 +65,7 @@ function plasmapheresisComponent(PlasmapheresisController) {
       patient: '='
     },
     controller: PlasmapheresisController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

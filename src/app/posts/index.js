@@ -17,7 +17,7 @@ import postDetailTemplateUrl from './post-detail.html';
 function config($stateProvider) {
   $stateProvider.state('posts', {
     url: '/news',
-    templateUrl: postListTemplateUrl,
+    template: postListTemplateUrl,
     controller: ['$scope', '$controller', 'PostListController', function($scope, $controller, PostListController) {
       $controller(PostListController, {$scope: $scope});
     }],
@@ -28,7 +28,7 @@ function config($stateProvider) {
 
   $stateProvider.state('createPost', {
     url: '/news/create',
-    templateUrl: postDetailTemplateUrl,
+    template: postDetailTemplateUrl,
     controller: ['$scope', '$controller', 'PostDetailController', 'post', function($scope, $controller, PostDetailController, post) {
       $scope.post = post;
       $controller(PostDetailController, {$scope: $scope});
@@ -42,7 +42,7 @@ function config($stateProvider) {
 
   $stateProvider.state('post', {
     url: '/news/:postId',
-    templateUrl: postDetailTemplateUrl,
+    template: postDetailTemplateUrl,
     controller: ['$scope', '$controller', 'PostDetailController', 'post', function($scope, $controller, PostDetailController, post) {
       $scope.post = post;
       $controller(PostDetailController, {$scope: $scope});

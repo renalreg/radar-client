@@ -11,7 +11,7 @@ function frmRecruitPatientHospitalField(session, hospitalStore, hasPermissionFor
       model: '=',
       required: '&'
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.$watch(function() {
         return session.user;

@@ -8,7 +8,7 @@ function frmTextareaField() {
       model: '=',
       rows: '@'
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

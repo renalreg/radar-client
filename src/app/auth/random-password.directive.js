@@ -5,7 +5,7 @@ function randomPasswordDirective(randomPassword) {
     restrict: 'A',
     require: 'ngModel',
     scope: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, ngModel) {
       scope.loading = false;
       scope.generate = generate;

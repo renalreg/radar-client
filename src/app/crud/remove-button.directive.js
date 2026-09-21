@@ -6,7 +6,7 @@ function crudRemoveButton($timeout) {
     scope: {
       item: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, crudCtrl) {
       scope.clicked = false;
       scope.confirmEnabled = false;

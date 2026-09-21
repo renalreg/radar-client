@@ -1,6 +1,5 @@
 import angular from 'angular';
 import _ from 'lodash';
-import stable from 'stable';
 
 import compare from '../utils/compare';
 import anyValue from '../utils/any-value';
@@ -173,8 +172,7 @@ function listHelper($parse) {
           if (sortBy !== null) {
             var getter = $parse(sortBy);
 
-            sortedItems = stable(sortedItems, function(a, b) {
-              // Note: AngularJS doesn't check the prototype of the locals argument
+            sortedItems = sortedItems.sort(function(a, b) {
               a = getter(a, sortScope);
               b = getter(b, sortScope);
 

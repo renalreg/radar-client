@@ -18,7 +18,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.familyHistory', {
     url: '/family-history/:cohortId',
-    templateUrl: templateUrl,
+    template: templateUrl,
     controller: ['$scope', 'cohort', function($scope, cohort) {
       $scope.cohort = cohort;
     }],

@@ -9,7 +9,7 @@ function frmSystemField(session, systemStore) {
       model: '=',
       required: '&'
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       systemStore.getAll().then(function(systems) {
         scope.systems = sortGroups(systems);

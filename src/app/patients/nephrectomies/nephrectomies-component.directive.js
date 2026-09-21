@@ -68,7 +68,7 @@ function nephrectomiesComponent(NephrectomiesController) {
       patient: '='
     },
     controller: NephrectomiesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

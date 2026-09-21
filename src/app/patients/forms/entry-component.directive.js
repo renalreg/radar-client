@@ -70,7 +70,7 @@ function entryComponent(EntryController) {
       form: '='
     },
     controller: EntryController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

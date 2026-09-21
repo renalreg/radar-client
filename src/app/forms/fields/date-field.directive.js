@@ -10,7 +10,7 @@ function frmDateField() {
       maxDate: '=',
       defaultDate: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

@@ -33,22 +33,22 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.liverImaging', {
     url: '/liver-imaging',
-    templateUrl: liverImagingTemplateUrl
+    template: liverImagingTemplateUrl
   });
 
   $stateProvider.state('patient.liverTransplants', {
     url: '/liver-transplants',
-    templateUrl: liverTransplantsTemplateUrl
+    template: liverTransplantsTemplateUrl
   });
 
   $stateProvider.state('patient.liverDiseases', {
     url: '/liver-diseases',
-    templateUrl: liverDiseasesTemplateUrl
+    template: liverDiseasesTemplateUrl
   });
 
   $stateProvider.state('patient.nutrition', {
     url: '/nutrition',
-    templateUrl: nutritionTemplateUrl
+    template: nutritionTemplateUrl
   });
 }
 

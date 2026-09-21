@@ -10,7 +10,7 @@ import templateUrl from './change-password.html';
 function config($stateProvider) {
   $stateProvider.state('changePassword', {
     url: '/change-password',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

@@ -10,7 +10,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('logs', {
     url: '/logs',
-    templateUrl: templateUrl,
+    template: templateUrl,
     controller: ['$scope', '$controller', 'LogListController', function($scope, $controller, LogListController) {
       $controller(LogListController, {$scope: $scope});
     }]

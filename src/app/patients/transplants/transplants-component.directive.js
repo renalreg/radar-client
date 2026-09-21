@@ -71,7 +71,7 @@ function transplantsComponent(TransplantsController) {
       patient: '='
     },
     controller: TransplantsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 
