@@ -42,7 +42,7 @@
     </div>
   </div>
 
-  <div ng-show="!ready" class="app-loading">
+  <div ng-if="!ready" class="app-loading">
     <div class="loading-card">
       <div class="spinner">
         <i class="fa fa-circle-o-notch fa-spin"></i>
@@ -53,8 +53,8 @@
     </div>
   </div>
 
-  <!-- APP -->
-  <div ng-show="ready">
+  <!-- APP: ng-if (not ng-show) so nothing renders until the session user is loaded -->
+  <div ng-if="ready">
     <div class="ui-view"></div>
   </div>
 

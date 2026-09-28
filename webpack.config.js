@@ -15,6 +15,10 @@ module.exports = {
       directory: path.join(__dirname, 'dist')
     },
 
+    // Serve index.html for unknown routes so refreshing a client-side route works
+    // (dev equivalent of nginx's try_files ... /index.html)
+    historyApiFallback: true,
+
     proxy: [
       {
         context: ['/api'],
@@ -27,8 +31,20 @@ module.exports = {
       }
     ],
 
-    watchFiles: ['src/**/*'],
+    // Poll for changes: file events from Windows bind mounts don't reach the container
+    watchFiles: {
+      paths: ['src/**/*'],
+      options: {
+        usePolling: true,
+        interval: 1000
+      }
+    },
     hot: true
+  },
+
+  watchOptions: {
+    poll: 1000,
+    ignored: /node_modules/
   },
 
   entry: [
@@ -39,6 +55,8 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'dist'),
+    // Absolute asset URLs so bundles still load from nested routes
+    publicPath: '/',
     filename: 'assets/bundle.[contenthash].js',
     clean: true
   },
