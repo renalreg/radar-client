@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/renalreg/radar-client/compare/v2.43.0...v3.0.0) (2026-09-28)
+
+
+### ⚠ BREAKING CHANGES
+
+* bump to new version
+
+### Features
+
+* bump to new version ([7afd485](https://github.com/renalreg/radar-client/commit/7afd48528f93f89bcc029cb3cbae0eeda8d98dea))
+
 ## [3.0.0](https://github.com/renalreg/radar-client/compare/v2.42.0...v3.0.0) (2026-09-28)
 
 
