@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.43.0](https://github.com/renalreg/radar-client/compare/v2.42.0...v2.43.0) (2026-09-28)
+## [3.0.0](https://github.com/renalreg/radar-client/compare/v2.42.0...v3.0.0) (2026-09-28)
 
 
 ### Features
