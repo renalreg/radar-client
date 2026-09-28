@@ -16,7 +16,7 @@ The application communicates with the [RADAR API](https://github.com/renalreg/ra
 
 </div>
 
-## Getting Started
+## Getting Started (need to rewrite to new version)
 
 Make sure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed (npm is included with Node.js).
 
