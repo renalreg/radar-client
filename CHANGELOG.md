@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/renalreg/radar-client/compare/v3.0.0...v3.0.1) (2026-09-28)
+
+
+### Bug Fixes
+
+* **script:** add nginx.conf ([db89947](https://github.com/renalreg/radar-client/commit/db89947fd82d2f39828429627828dc79a688fcb8))
+
 ## [3.0.0](https://github.com/renalreg/radar-client/compare/v2.43.0...v3.0.0) (2026-09-28)
 
 
