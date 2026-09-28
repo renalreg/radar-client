@@ -56,7 +56,7 @@ function nutritionComponent(NutritionController) {
       patient: '='
     },
     controller: NutritionController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

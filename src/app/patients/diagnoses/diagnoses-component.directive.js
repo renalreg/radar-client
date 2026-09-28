@@ -58,7 +58,7 @@ function patientDiagnosesComponent(PatientDiagnosesController) {
       patient: '='
     },
     controller: PatientDiagnosesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

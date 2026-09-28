@@ -51,7 +51,7 @@ function liverDiseasesComponent(LiverDiseasesController) {
       patient: '='
     },
     controller: LiverDiseasesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

@@ -16,7 +16,7 @@ function ForgotPasswordController(
 
         // Redirect the login page
         $state.go('login');
-      })
+      });
   }
 }
 

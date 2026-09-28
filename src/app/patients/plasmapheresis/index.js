@@ -13,7 +13,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.plasmapheresis', {
     url: '/plasmapheresis',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

@@ -6,7 +6,7 @@ function textEditor() {
   return {
     restrict: 'A',
     require: 'ngModel',
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, ngModel) {
       var container = element.find('.text-editor').get(0);
       var toolbar = element.find('.text-editor-toolbar').get(0);

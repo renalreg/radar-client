@@ -5,7 +5,7 @@ function metadata() {
     scope: {
       item: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

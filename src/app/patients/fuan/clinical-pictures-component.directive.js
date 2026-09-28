@@ -59,7 +59,7 @@ function fuanClinicalPicturesComponent(FuanClinicalPicturesController) {
       patient: '='
     },
     controller: FuanClinicalPicturesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

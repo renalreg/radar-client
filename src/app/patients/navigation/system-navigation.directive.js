@@ -8,7 +8,7 @@ function systemNavigation() {
       system: '=',
       patient: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.items = getLinks(scope.system, scope.patient);
     }

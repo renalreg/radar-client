@@ -18,7 +18,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.results', {
     url: '/results',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

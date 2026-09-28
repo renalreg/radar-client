@@ -11,7 +11,7 @@ import templateUrl from './renal-progression.html';
 function config($stateProvider) {
   $stateProvider.state('patient.renalProgression', {
     url: '/renal-progression',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

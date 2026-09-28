@@ -39,7 +39,7 @@ function frmMismatchHla() {
           (b1 !== null && String(b1).length > 0) ||
           (dr1 !== null && String(dr1).length > 0)) {
           value = 'A' + a1 + '/B' + b1 + '/DR' + dr1;
-          console.log(value)
+          console.log(value);
         } else {
           value = null;
         }

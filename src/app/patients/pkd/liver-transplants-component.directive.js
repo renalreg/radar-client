@@ -62,7 +62,7 @@ function liverTransplantsComponent(LiverTransplantsController) {
       patient: '='
     },
     controller: LiverTransplantsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

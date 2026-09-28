@@ -11,7 +11,7 @@ import templateUrl from './primary-diagnosis-selector.html';
 function primaryDiagnosisSelector(store) {
   return {
     require: 'ngModel',
-    templateUrl: templateUrl,
+    template: templateUrl,
     scope: {
       cohort: '='
     },

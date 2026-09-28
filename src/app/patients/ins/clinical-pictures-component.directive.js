@@ -49,7 +49,7 @@ function insClinicalPicturesComponent(InsClinicalPicturesController) {
       patient: '='
     },
     controller: InsClinicalPicturesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

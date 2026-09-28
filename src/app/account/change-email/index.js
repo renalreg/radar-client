@@ -10,7 +10,7 @@ import templateUrl from './change-email.html';
 function config($stateProvider) {
   $stateProvider.state('changeEmail', {
     url: '/change-email',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

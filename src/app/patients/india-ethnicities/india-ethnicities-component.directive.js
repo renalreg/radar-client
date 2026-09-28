@@ -69,7 +69,7 @@ function indiaEthnicitiesComponent(IndiaEthnicitiesController) {
       patient: '='
     },
     controller: IndiaEthnicitiesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

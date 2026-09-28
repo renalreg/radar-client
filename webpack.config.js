@@ -1,92 +1,113 @@
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 var production = process.env.NODE_ENV === 'production';
 
-var config = {
+module.exports = {
+  mode: production ? 'production' : 'development',
+
   devtool: production ? 'source-map' : 'inline-source-map',
+
   devServer: {
-    proxy: {
-      '/api': {
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
+
+    proxy: [
+      {
+        context: ['/api'],
         target: 'http://radar-api:5000',
         pathRewrite: { '^/api': '' }
       },
-      '/admin': {
+      {
+        context: ['/admin'],
         target: 'http://radar-admin:5002'
       }
-    },
-    watchOptions: {
-      poll: true // Or you can set a value in milliseconds.
-    }
+    ],
+
+    watchFiles: ['src/**/*'],
+    hot: true
   },
+
   entry: [
     './src/app/index.js',
     './src/sass/app.scss',
     'bootstrap-sass/assets/javascripts/bootstrap.js'
   ],
+
   output: {
-    path: __dirname + '/dist',
-    filename: 'assets/bundle.[hash].js'
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'assets/bundle.[contenthash].js',
+    clean: true
   },
+
   module: {
-    preLoaders: [
-      {
-        test: /\.handlebars$/,
-        loaders: ['extract', 'html?minimize=false']
-      }
-    ],
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015']
-        }
-      },
-      {
-        test: /\.html$/,
-        loaders: ['ngtemplate?relativeTo=' + __dirname + '/', 'html']
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', ['css?sourceMap', 'sass?sourceMap'], { publicPath: '../' })
-      },
-      {
-        test: /\.(woff2?|ttf|eot|svg|png|jpg)(\?.*)?$/,
-        loader: 'file',
-        query: {
-          name: 'assets/[name].[hash].[ext]'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
         }
       },
 
+      {
+        test: /\.html$/,
+        use: 'html-loader'
+      },
+
+      {
+        test: /\.scss$/,
+        use: [
+          production ? MiniCssExtractPlugin.loader : 'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              api: 'modern-compiler',        // fixes: legacy JS API warning
+              sassOptions: {
+                quietDeps: true,             // silences warnings from node_modules (bootstrap-sass)
+                silenceDeprecations: ['import', 'global-builtin'], // suppress until migration is complete
+              },
+            },
+          },
+        ]
+      },
+
+      {
+        test: /\.(woff2?|ttf|eot|svg|png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/[name].[contenthash][ext]'
+        }
+      }
     ]
   },
+
   plugins: [
     new HtmlWebpackPlugin({
-      template: 'handlebars!src/index.handlebars',
-      inject: false,
+      template: 'src/index.html',
+      inject: 'body',
       favicon: './src/favicon.ico'
     }),
+
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery'
     }),
-    new ExtractTextPlugin('assets/bundle.[contentHash].css')
+
+    ...(production
+      ? [
+        new MiniCssExtractPlugin({
+          filename: 'assets/bundle.[contenthash].css'
+        })
+      ]
+      : [])
   ]
-}
-
-if (production) {
-  var uglify = new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    }
-  });
-
-  config.plugins.push(uglify);
-}
-
-module.exports = config;
+};

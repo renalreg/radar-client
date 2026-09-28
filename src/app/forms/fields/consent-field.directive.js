@@ -7,7 +7,7 @@ function frmConsentField() {
       model: '='
     },
     transclude: true,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

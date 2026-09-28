@@ -10,7 +10,7 @@ import templateUrl from './observations.html';
 function config($stateProvider) {
   $stateProvider.state('observations', {
     url: '/observations',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

@@ -66,7 +66,7 @@ function currentMedicationsComponent(CurrentMedicationsController) {
       patient: '='
     },
     controller: CurrentMedicationsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

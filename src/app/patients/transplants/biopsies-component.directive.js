@@ -31,7 +31,7 @@ function transplantBiopsiesComponent(TransplantBiopsiesController) {
       parent: '=transplant'
     },
     controller: TransplantBiopsiesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

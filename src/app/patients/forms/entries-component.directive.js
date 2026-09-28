@@ -86,7 +86,7 @@ function entriesComponent(EntriesController) {
       form: '='
     },
     controller: EntriesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

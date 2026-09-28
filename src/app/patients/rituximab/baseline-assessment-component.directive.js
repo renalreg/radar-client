@@ -83,7 +83,7 @@ function rituximabBaselineAssessmentComponent(RituximabBaselineAssessmentControl
       patient: '='
     },
     controller: RituximabBaselineAssessmentController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

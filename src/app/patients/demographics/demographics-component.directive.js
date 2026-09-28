@@ -42,9 +42,9 @@ function patientDemographicsControllerFactory(
     });
 
     $scope.emailreasons = [
-      { id: "no_email", label: "Patient does not have an email address" },
-      { id: "refused", label: "Patient does not wish to be contacted by email" },
-      ];
+      { id: 'no_email', label: 'Patient does not have an email address' },
+      { id: 'refused', label: 'Patient does not wish to be contacted by email' },
+    ];
 
     $scope.getEmailReasonLabel = function (id) {
       var match = ($scope.emailreasons || []).find(function (r) {
@@ -112,7 +112,7 @@ function patientDemographicsComponent(PatientDemographicsController) {
       patient: '=',
     },
     controller: PatientDemographicsController,
-    templateUrl: templateUrl,
+    template: templateUrl,
   };
 }
 

@@ -13,7 +13,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.fetalAnomalyScans', {
     url: '/fetal-anomaly-scans',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

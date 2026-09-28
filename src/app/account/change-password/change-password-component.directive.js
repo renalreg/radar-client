@@ -54,7 +54,7 @@ function changePasswordComponent(ChangePasswordController) {
       user: '='
     },
     controller: ChangePasswordController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

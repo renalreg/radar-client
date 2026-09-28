@@ -13,7 +13,7 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.dialysis', {
     url: '/dialysis',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

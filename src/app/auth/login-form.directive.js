@@ -6,7 +6,7 @@ function loginFormDirective(
   return {
     restrict: 'A',
     scope: {},
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       var credentials = {
         username: '',

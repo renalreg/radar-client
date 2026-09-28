@@ -8,7 +8,7 @@ function cohortNavigation() {
       cohort: '=',
       patient: '='
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.items = getLinks(scope.cohort, scope.patient);
     }

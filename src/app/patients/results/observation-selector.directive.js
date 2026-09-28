@@ -11,7 +11,7 @@ import templateUrl from './observation-selector.html';
 function observationSelector(store) {
   return {
     require: 'ngModel',
-    templateUrl: templateUrl,
+    template: templateUrl,
     scope: {
       'patient': '='
     },

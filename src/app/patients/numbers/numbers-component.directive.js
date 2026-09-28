@@ -107,7 +107,7 @@ function patientNumbersComponent(PatientNumbersController) {
       patient: '='
     },
     controller: PatientNumbersController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

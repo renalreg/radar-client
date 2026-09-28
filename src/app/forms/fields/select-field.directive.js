@@ -10,7 +10,7 @@ function frmSelectField(toSelectModel, toSelectView, wrapSelectOptions) {
       optionsId: '@',
       optionsLabel: '@',
     },
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope) {
       scope.data = {};
 

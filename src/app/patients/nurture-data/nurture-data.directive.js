@@ -70,7 +70,7 @@ function patientNurtureDataComponent(PatientNurtureDataController) {
       patient: '=',
     },
     controller: PatientNurtureDataController,
-    templateUrl: templateUrl,
+    template: templateUrl,
   };
 }
 

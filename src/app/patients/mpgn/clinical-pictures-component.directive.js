@@ -49,7 +49,7 @@ function mpgnClinicalPicturesComponent(MpgnClinicalPicturesController) {
       patient: '='
     },
     controller: MpgnClinicalPicturesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

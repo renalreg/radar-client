@@ -26,12 +26,12 @@ function config($stateProvider, storeProvider) {
 
   $stateProvider.state('patient.diagnoses', {
     url: '/comorbidities',
-    templateUrl: diagnosesTemplateUrl
+    template: diagnosesTemplateUrl
   });
 
   $stateProvider.state('patient.primaryDiagnosis', {
     url: '/primary-diagnosis/:cohortId',
-    templateUrl: primaryDiagnosisTemplateUrl,
+    template: primaryDiagnosisTemplateUrl,
     controller: ['$scope', 'cohort', function($scope, cohort) {
       $scope.cohort = cohort;
     }],

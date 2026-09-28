@@ -5,7 +5,7 @@ function submitButton() {
     require: ['^form', '?^submitIfValid'],
     scope: {},
     transclude: true,
-    templateUrl: templateUrl,
+    template: templateUrl,
     link: function(scope, element, attrs, ctrls) {
       var formCtrl = ctrls[0];
       var submitIfValidCtrl = ctrls[1];

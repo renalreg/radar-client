@@ -67,7 +67,7 @@ function userComponent(UserController) {
       user: '='
     },
     controller: UserController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

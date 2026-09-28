@@ -56,7 +56,7 @@ function patientMetadataControllerFactory(
       .catch(function(error) {
         // Handle any errors from either load or findMany
         console.error('Error loading patient data or demographics:', error);
-      })
+      });
 
     // Modify the save function to only save patientDemographics if the user is an admin
     self.save = function() {
@@ -105,7 +105,7 @@ function patientMetadataComponent(PatientMetadataController) {
       patient: '=',
     },
     controller: PatientMetadataController,
-    templateUrl: templateUrl,
+    template: templateUrl,
   };
 }
 

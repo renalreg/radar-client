@@ -11,7 +11,7 @@ import templateUrl from './clinical-pictures.html';
 function config($stateProvider) {
   $stateProvider.state('patient.alportClinicalPictures', {
     url: '/alport-clinical-pictures',
-    templateUrl: templateUrl
+    template: templateUrl
   });
 }
 

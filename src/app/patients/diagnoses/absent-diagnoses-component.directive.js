@@ -37,7 +37,7 @@ function absentDiagnosesComponent(AbsentDiagnosesController) {
       patient: '='
     },
     controller: AbsentDiagnosesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

@@ -56,7 +56,7 @@ function alportClinicalPicturesComponent(AlportClinicalPicturesController) {
       patient: '='
     },
     controller: AlportClinicalPicturesController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

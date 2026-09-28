@@ -7,7 +7,7 @@ function frmEmailField() {
       required: '&',
       model: '='
     },
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 

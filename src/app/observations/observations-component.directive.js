@@ -31,7 +31,7 @@ observationsControllerFactory.$inject = [
 function observationsComponent(ObservationsController) {
   return {
     controller: ObservationsController,
-    templateUrl: templateUrl
+    template: templateUrl
   };
 }
 
