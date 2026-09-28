@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/renalreg/radar-client/compare/v3.0.1...v3.0.2) (2026-09-28)
+
+
+### Bug Fixes
+
+* **ui:** ng-if instead of ng-show, caused user session to load after render and lead to errors ([b803565](https://github.com/renalreg/radar-client/commit/b8035656911410059e162545c228e8cf87b81e9d))
+
 ## [3.0.1](https://github.com/renalreg/radar-client/compare/v3.0.0...v3.0.1) (2026-09-28)
 
 
