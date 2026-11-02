@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.3](https://github.com/renalreg/radar-client/compare/v3.0.2...v3.0.3) (2026-11-02)
+
+
+### Bug Fixes
+
+* **list-helper:** infinite digest in list-helper by sorting a copy with deterministic reverse order ([06ca2f3](https://github.com/renalreg/radar-client/commit/06ca2f37310d922f488619e439434bc5a5635ed1))
+
 ## [3.0.2](https://github.com/renalreg/radar-client/compare/v3.0.1...v3.0.2) (2026-09-28)
 
 
