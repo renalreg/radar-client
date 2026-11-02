@@ -21,7 +21,7 @@
     "angular-ui-router": "^0.4.0",
     "bootstrap-sass": "^3.4.1",
     "font-awesome": "^4.7.0",
-    "highcharts": "^11.4.0",
+    "highcharts": "^11.4.9",
     "jquery": "^3.7.1",
     "jquery-ui": "^1.13.2",
     "lodash": "^4.17.21",
