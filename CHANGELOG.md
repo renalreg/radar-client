@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.4](https://github.com/renalreg/radar-client/compare/v3.0.3...v3.0.4) (2026-11-10)
+
+
+### Bug Fixes
+
+* **ITSM-1824:** fixed broken link ([b5f8252](https://github.com/renalreg/radar-client/commit/b5f8252f8981221b2b29a8088d038404fe106f06))
+
 ## [3.0.3](https://github.com/renalreg/radar-client/compare/v3.0.2...v3.0.3) (2026-11-02)
 
 
