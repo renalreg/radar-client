@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.5](https://github.com/renalreg/radar-client/compare/v3.0.4...v3.0.5) (2026-11-16)
+
+
+### Bug Fixes
+
+* **ITSM-1830:** fetal identifiers not saving ([#80](https://github.com/renalreg/radar-client/issues/80)) ([986008d](https://github.com/renalreg/radar-client/commit/986008db930e209a5b308961c891a83ff765f12e))
+
 ## [3.0.4](https://github.com/renalreg/radar-client/compare/v3.0.3...v3.0.4) (2026-11-10)
 
 
